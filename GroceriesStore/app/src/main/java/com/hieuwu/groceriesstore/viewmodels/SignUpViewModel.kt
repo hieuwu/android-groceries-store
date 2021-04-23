@@ -4,4 +4,5 @@ import android.arch.lifecycle.ViewModel
 
 class SignUpViewModel: ViewModel() {
 
+
 }

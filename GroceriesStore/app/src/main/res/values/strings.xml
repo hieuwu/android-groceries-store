@@ -9,4 +9,6 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
     <string name="email">Email</string>
+    <string name="sign_up">Sign up</string>
+    <string name="name">Name</string>
 </resources>

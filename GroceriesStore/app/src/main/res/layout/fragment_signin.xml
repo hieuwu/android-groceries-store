@@ -32,6 +32,7 @@
             android:paddingTop="32dp">
 
             <TextView
+                android:id="@+id/singin_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
@@ -42,12 +43,14 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/email_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:hint="@string/email" />
 
             <EditText
+                android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
@@ -55,6 +58,7 @@
                 android:inputType="textPassword" />
 
             <Button
+                android:id="@+id/signin_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
