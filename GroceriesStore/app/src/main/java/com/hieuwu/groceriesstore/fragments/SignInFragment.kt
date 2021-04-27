@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.hieuwu.groceriesstore.R
+import com.hieuwu.groceriesstore.databinding.FragmentSigninBinding
 
 /**
  * An example full-screen fragment that shows and hides the system UI (i.e.
@@ -15,21 +16,20 @@ import com.hieuwu.groceriesstore.R
  */
 class SignInFragment : Fragment() {
 
-    private lateinit var bindingUtil: DataBindingUtil
-
-
+    private lateinit var binding: FragmentSigninBinding;
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewRoot =
-            LayoutInflater.from(context).inflate(R.layout.fragment_signin, container, false)
-        var binding: ViewDataBinding? = DataBindingUtil.bind(viewRoot)
-        binding.apply {
-            binding.signinButton.Text = "123";
+        binding = DataBindingUtil.inflate<FragmentSigninBinding>(
+            inflater, R.layout.fragment_signin, container, false
+        )
+
+        binding.signUpTextview.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
-        return viewRoot;
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -3,12 +3,10 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="get_started">Get Started</string>
-    <string name="sign_in">Sign in</string>
     <string name="password">Password</string>
     <string name="sign_in">Sign in</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
     <string name="email">Email</string>
-    <string name="sign_up">Sign up</string>
     <string name="name">Name</string>
 </resources>

@@ -6,12 +6,6 @@
     android:background="@drawable/onboarding_background"
     tools:context=".fragments.OnboardingFragment">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,9 +46,10 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/get_started_button"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="120dp"
-                android:background="@color/primary_button"
+                android:background="@drawable/primary_button"
                 android:text="Get Started"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white" />
