@@ -29,6 +29,9 @@ class SignInFragment : Fragment() {
         binding.signUpTextview.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
+        binding.signinButton.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_signInFragment_to_shopFragment)
+        }
         return binding.root
     }
 

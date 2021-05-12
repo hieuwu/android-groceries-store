@@ -4,6 +4,18 @@ import androidx.lifecycle.ViewModel
 
 
 class SignInViewModel : ViewModel() {
-    private val _email: String? = "";
-    private var _password: String? = "";
+
+
+    private var _email: String? = null
+    public val Email: String?
+        get() {
+            return _email
+        }
+
+    private var _password: String? = null
+    public val Password: String?
+        get() {
+            return _password
+        }
+
 }
