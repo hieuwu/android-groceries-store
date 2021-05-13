@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/shopFragment"
-        android:icon="@android:drawable/ic_menu_manage"
+        android:icon="@drawable/ic_baseline_store_36"
         android:title="@string/shop" />
     <item
         android:id="@+id/exploreFragment"
@@ -10,14 +10,14 @@
         android:title="@string/explore" />
     <item
         android:id="@+id/cartFragment"
-        android:icon="@android:drawable/ic_menu_camera"
+        android:icon="@drawable/ic_baseline_shopping_cart_36"
         android:title="@string/cart" />
     <item
         android:id="@+id/favouriteFragment"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/ic_baseline_favorite_36"
         android:title="@string/favourite" />
     <item
         android:id="@+id/accountFragment"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@drawable/ic_baseline_person_36"
         android:title="@string/profile" />
 </menu>
