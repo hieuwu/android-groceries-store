@@ -9,16 +9,8 @@ import androidx.fragment.app.Fragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSignUpBinding
 
-/**
- * An example full-screen fragment that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
 class SignUpFragment : Fragment() {
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
+
     private lateinit var binding: FragmentSignUpBinding;
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,24 +22,5 @@ class SignUpFragment : Fragment() {
         )
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 
 }

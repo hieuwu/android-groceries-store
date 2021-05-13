@@ -10,13 +10,11 @@ import androidx.navigation.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSigninBinding
 
-/**
- * An example full-screen fragment that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
+
 class SignInFragment : Fragment() {
 
-    private lateinit var binding: FragmentSigninBinding;
+    private lateinit var binding: FragmentSigninBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,26 +31,6 @@ class SignInFragment : Fragment() {
             view?.findNavController()?.navigate(R.id.action_signInFragment_to_shopFragment)
         }
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
     }
 
 }
