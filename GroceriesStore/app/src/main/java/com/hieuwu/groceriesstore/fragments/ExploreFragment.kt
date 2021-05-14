@@ -16,6 +16,7 @@ import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 
 
 class ExploreFragment : Fragment() {
+
     private lateinit var binding: FragmentExploreBinding
 
     override fun onCreateView(
@@ -26,6 +27,16 @@ class ExploreFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentExploreBinding>(
             inflater, R.layout.fragment_explore, container, false
         )
+
+        var navController = NavHostFragment.findNavController(this)
+        var bottomNavView = binding.bottomNavView
+        bottomNavView.setupWithNavController(navController)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         var dataSet: ArrayList<String> = ArrayList()
         dataSet.add("a")
         dataSet.add("b")
@@ -38,19 +49,11 @@ class ExploreFragment : Fragment() {
         dataSet.add("a")
         dataSet.add("b")
 
-        var navController = NavHostFragment.findNavController(this)
-        var bottomNavView = binding.bottomNavView
-
-        bottomNavView.setupWithNavController(navController)
-
         setUpRecyclerView(dataSet)
-        return binding.root
     }
 
     private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-
         val adapter = GridListItemAdapter(dataSet)
-        binding.productRecyclerview.layoutManager = GridLayoutManager(this.context, 2)
         binding.productRecyclerview.adapter = adapter
     }
 }
