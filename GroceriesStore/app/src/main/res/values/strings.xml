@@ -16,4 +16,8 @@
     <string name="cart">Cart</string>
     <string name="favourite">Favourite</string>
     <string name="profile">Profile</string>
+    <string name="add_to_basket">Add to Basket</string>
+    <string name="nutritions">Nutritions</string>
+    <string name="description">Description</string>
+    <string name="reviews">Reviews</string>
 </resources>
