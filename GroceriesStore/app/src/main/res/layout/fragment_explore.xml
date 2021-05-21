@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.ExploreFragment">
+        tools:context=".presentation.fragments.ExploreFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="14dp">
+                android:paddingHorizontal="@dimen/horizontal_margin">
 
                 <SearchView
                     android:layout_width="0dp"
@@ -34,17 +34,17 @@
                     android:background="@drawable/rounded_text" />
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_small"
+                    android:layout_height="@dimen/icon_small"
                     android:src="@drawable/ic_baseline_filter_list_36" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
                 android:id="@+id/product_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
         </LinearLayout>
 
 

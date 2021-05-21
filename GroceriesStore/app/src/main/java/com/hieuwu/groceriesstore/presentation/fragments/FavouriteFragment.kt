@@ -1,35 +1,32 @@
-package com.hieuwu.groceriesstore.fragments
+package com.hieuwu.groceriesstore.presentation.fragments
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.adapters.GridListItemAdapter
-import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
+import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
+import com.hieuwu.groceriesstore.databinding.FragmentFavouriteBinding
 
+class FavouriteFragment : Fragment() {
 
-class ExploreFragment : Fragment() {
-
-    private lateinit var binding: FragmentExploreBinding
+    private lateinit var binding: FragmentFavouriteBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        binding = DataBindingUtil.inflate<FragmentExploreBinding>(
-            inflater, R.layout.fragment_explore, container, false
+        binding = DataBindingUtil.inflate<FragmentFavouriteBinding>(
+            inflater, R.layout.fragment_favourite, container, false
         )
 
         var navController = NavHostFragment.findNavController(this)
         var bottomNavView = binding.bottomNavView
         bottomNavView.setupWithNavController(navController)
-
         return binding.root
     }
 
@@ -51,7 +48,11 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-        val adapter = GridListItemAdapter(dataSet)
-        binding.productRecyclerview.adapter = adapter
+        val adapter =
+            LineListItemAdapter(
+                dataSet
+            )
+        binding.favouriteRecyclerview.adapter = adapter
+        binding.favouriteRecyclerview.layoutManager = LinearLayoutManager(context)
     }
 }

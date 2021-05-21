@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.fragments
+package com.hieuwu.groceriesstore.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

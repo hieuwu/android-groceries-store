@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        tools:context=".fragments.SignUpFragment">
+        tools:context=".presentation.fragments.SignUpFragment">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:background="@drawable/rounded_background"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:paddingHorizontal="16dp"
+                android:paddingHorizontal="@dimen/horizontal_margin"
                 android:paddingTop="32dp">
 
                 <TextView
@@ -32,7 +32,7 @@
                     android:fontFamily="monospace"
                     android:text="@string/sign_up"
                     android:textColor="@android:color/black"
-                    android:textSize="26sp"
+                    android:textSize="@dimen/text_big_bold"
                     android:textStyle="bold" />
 
                 <EditText
@@ -57,16 +57,17 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="15dp"
+                    android:layout_marginVertical="@dimen/vertical_margin"
                     android:background="@drawable/primary_button"
-                    android:text="Sign up"
+                    android:text="@string/sign_up"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="120dp">
+                    android:layout_marginBottom="120dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"

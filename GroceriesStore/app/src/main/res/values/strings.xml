@@ -20,4 +20,10 @@
     <string name="nutritions">Nutritions</string>
     <string name="description">Description</string>
     <string name="reviews">Reviews</string>
+    <string name="welcome_prompt">Hello, new grocery and gourmet foods just arrived !</string>
+    <string name="exclusive_offer">Exclusive Offer</string>
+    <string name="see_all">See all</string>
+    <string name="best_selling">Best Selling</string>
+    <string name="recommended">Recommended</string>
+    <string name="add_to_cart">Add to Cart</string>
 </resources>

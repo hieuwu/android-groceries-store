@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.ProductDetailFragment">
+    tools:context=".presentation.fragments.ProductDetailFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,8 +29,8 @@
                 android:text="Natural Orange" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
                 android:src="@drawable/ic_baseline_favorite_36" />
         </LinearLayout>
 
@@ -58,7 +58,7 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="5dp"
                 android:text="0"
-                android:textSize="24sp" />
+                android:textSize="@dimen/text_big_bold" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -69,9 +69,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginVertical="@dimen/vertical_margin"
             android:background="@android:color/darker_gray" />
 
         <RelativeLayout
@@ -85,8 +84,8 @@
                 android:text="@string/description" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="end"
                 android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />
@@ -100,9 +99,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginVertical="@dimen/vertical_margin"
             android:background="@android:color/darker_gray" />
 
         <RelativeLayout
@@ -116,8 +114,8 @@
                 android:text="@string/nutritions" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="end"
                 android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />
@@ -132,9 +130,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginVertical="@dimen/vertical_margin"
             android:background="@android:color/darker_gray" />
 
         <RelativeLayout
@@ -148,8 +145,8 @@
                 android:text="@string/reviews" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="end"
                 android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />

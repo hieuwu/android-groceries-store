@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.adapters
+package com.hieuwu.groceriesstore.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

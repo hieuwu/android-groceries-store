@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.viewmodels
+package com.hieuwu.groceriesstore.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 
