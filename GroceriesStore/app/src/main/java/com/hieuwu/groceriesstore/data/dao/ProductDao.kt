@@ -15,6 +15,9 @@ interface ProductDao {
     @Update
     fun update(product: Product)
 
+    @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE} WHERE id = :id")
+    fun getById(id:String): Product
+
     @Query("DELETE FROM ${DataConstant.PRODUCT_TABLE}")
     fun clear()
 }
