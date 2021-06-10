@@ -56,7 +56,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
-                    android:hint="@string/email" />
+                    android:hint="@string/email"
+                    android:text="@={signInViewModel.email}"/>
 
                 <EditText
                     android:id="@+id/password_edit_text"
@@ -64,7 +65,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:hint="@string/password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:text="@={signInViewModel.password}"/>
 
                 <Button
                     android:id="@+id/signin_button"
