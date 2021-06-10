@@ -1,29 +1,43 @@
 package com.hieuwu.groceriesstore.presentation.viewmodels
 
-import androidx.lifecycle.ViewModel
+import androidx.databinding.Bindable
+import com.hieuwu.groceriesstore.BR
+import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 
+class SignUpViewModel : ObservableViewModel() {
 
-class SignUpViewModel : ViewModel() {
-
-
-
-    private var _password: String? = null
-    public val Password: String?
-        get() {
-            return _password
-        }
-
-    private var _name: String? = null
-    public val Name: String?
-        get() {
-            return _name
-        }
-
+    //region properties
     private var _email: String? = null
-    public val Email: String?
+    var email: String?
+        @Bindable
         get() {
             return _email
         }
+        set(value) {
+            _email = value
+            notifyPropertyChanged(BR.email)
+        }
 
+    private var _password: String? = null
+    var password: String?
+        @Bindable
+        get() {
+            return _password
+        }
+        set(value) {
+            _password = value
+            notifyPropertyChanged(BR.password)
+        }
 
+    private var _name: String? = null
+    var name: String?
+        @Bindable
+        get() {
+            return _name
+        }
+        set(value) {
+            _name = value
+            notifyPropertyChanged(BR.name)
+        }
+    //endregion
 }

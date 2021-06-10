@@ -44,20 +44,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
-                    android:hint="@string/name" />
+                    android:hint="@string/name"
+                    android:text="@={signUpViewModel.name}"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
-                    android:hint="@string/email" />
+                    android:hint="@string/email"
+                    android:text="@={signUpViewModel.email}"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:hint="@string/password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:text="@={signUpViewModel.password}"/>
 
                 <Button
                     android:layout_width="match_parent"
