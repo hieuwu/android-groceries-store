@@ -7,9 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.LayoutLineListItemBinding
 
-class LineListItemAdapter(private val dataSet: ArrayList<String>) :
+class LineListItemAdapter:
     RecyclerView.Adapter<LineListItemAdapter.LineListItemHolder>() {
-
+    var dataSet = ArrayList<String>()
+        set(value) {
+            field = dataSet
+            notifyDataSetChanged()
+        }
     override fun onBindViewHolder(holder: LineListItemHolder, position: Int) {
         holder.bind(dataSet[position])
     }
