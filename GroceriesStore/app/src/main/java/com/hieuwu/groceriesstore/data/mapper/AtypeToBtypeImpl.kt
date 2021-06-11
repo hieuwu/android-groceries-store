@@ -1,4 +1,11 @@
 package com.hieuwu.groceriesstore.data.mapper
 
-class AtypeToBtypeImpl {
+import com.hieuwu.groceriesstore.domain.mapper.AtypeToBtype
+import com.hieuwu.groceriesstore.domain.models.Order
+import com.hieuwu.groceriesstore.domain.models.Product
+
+class AtypeToBtypeImpl @Inject constructor() : AtypeToBtype {
+    override fun map(from: Product): Order {
+        TODO("Not yet implemented")
+    }
 }
