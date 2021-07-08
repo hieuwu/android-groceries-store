@@ -41,6 +41,8 @@ android {
 
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     def room_version = "2.3.0"
     def nav_version = "2.3.5"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
