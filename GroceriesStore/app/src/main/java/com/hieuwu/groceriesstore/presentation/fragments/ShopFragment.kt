@@ -49,18 +49,18 @@ class ShopFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-        val adapter =
-            GridListItemAdapter(
-                dataSet
-            )
-        binding.exclusiveOfferRecyclerview.adapter = adapter
-        binding.exclusiveOfferRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-
-        binding.bestSellingRecyclerview.adapter = adapter
-        binding.bestSellingRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-
-        binding.recommendedRecyclerview.adapter = adapter
-        binding.recommendedRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+//        val adapter =
+//            GridListItemAdapter(
+//                dataSet
+//            )
+//        binding.exclusiveOfferRecyclerview.adapter = adapter
+//        binding.exclusiveOfferRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+//
+//        binding.bestSellingRecyclerview.adapter = adapter
+//        binding.bestSellingRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+//
+//        binding.recommendedRecyclerview.adapter = adapter
+//        binding.recommendedRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
     }
 
 

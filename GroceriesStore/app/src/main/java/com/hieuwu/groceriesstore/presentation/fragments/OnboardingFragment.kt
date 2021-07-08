@@ -23,7 +23,7 @@ class OnboardingFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_onboarding, container, false)
         val button: Button = view.findViewById(R.id.get_started_button)
         button.setOnClickListener() {
-            view.findNavController().navigate(R.id.action_onboardingFragment_to_signInFragment)
+//            view.findNavController().navigate(R.id.action_onboardingFragment_to_signInFragment)
         }
         return view
     }

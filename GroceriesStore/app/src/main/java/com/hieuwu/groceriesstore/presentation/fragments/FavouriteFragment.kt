@@ -49,11 +49,11 @@ class FavouriteFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-        val adapter =
-            LineListItemAdapter(
-                dataSet
-            )
-        binding.favouriteRecyclerview.adapter = adapter
-        binding.favouriteRecyclerview.layoutManager = LinearLayoutManager(context)
+//        val adapter =
+//            LineListItemAdapter(
+//                dataSet
+//            )
+//        binding.favouriteRecyclerview.adapter = adapter
+//        binding.favouriteRecyclerview.layoutManager = LinearLayoutManager(context)
     }
 }

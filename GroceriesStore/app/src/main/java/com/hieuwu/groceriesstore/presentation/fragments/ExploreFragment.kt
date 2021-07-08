@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 
 
@@ -51,10 +50,10 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-        val adapter =
-            GridListItemAdapter(
-                dataSet
-            )
-        binding.productRecyclerview.adapter = adapter
+//        val adapter =
+//            GridListItemAdapter(
+//                dataSet
+//            )
+//        binding.productRecyclerview.adapter = adapter
     }
 }
