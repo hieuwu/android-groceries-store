@@ -8,29 +8,7 @@
         android:id="@+id/onboardingFragment"
         android:name="com.hieuwu.groceriesstore.presentation.fragments.OnboardingFragment"
         android:label="fragment_onboarding"
-        tools:layout="@layout/fragment_onboarding" >
-        <action
-            android:id="@+id/action_onboardingFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:enterAnim="@anim/fragment_fade_enter" />
-    </fragment>
-    <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.hieuwu.groceriesstore.presentation.fragments.SignInFragment"
-        android:label="SignInFragment"
-        tools:layout="@layout/fragment_signin">
-        <action
-            android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_shopFragment"
-            app:destination="@id/shopFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.hieuwu.groceriesstore.presentation.fragments.SignUpFragment"
-        android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up"/>
+        tools:layout="@layout/fragment_onboarding" />
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.hieuwu.groceriesstore.presentation.fragments.AccountFragment"
