@@ -70,7 +70,6 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/exclusive_offer_recyclerview"
                             android:layout_width="wrap_content"
-
                             android:layout_height="wrap_content"
                             app:reverseLayout="true" />
                     </LinearLayout>
