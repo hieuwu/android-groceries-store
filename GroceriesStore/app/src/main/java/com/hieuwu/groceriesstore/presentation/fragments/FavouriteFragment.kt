@@ -6,11 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.databinding.FragmentFavouriteBinding
 
 class FavouriteFragment : Fragment() {
@@ -25,9 +21,6 @@ class FavouriteFragment : Fragment() {
             inflater, R.layout.fragment_favourite, container, false
         )
 
-        var navController = NavHostFragment.findNavController(this)
-        var bottomNavView = binding.bottomNavView
-        bottomNavView.setupWithNavController(navController)
         return binding.root
     }
 

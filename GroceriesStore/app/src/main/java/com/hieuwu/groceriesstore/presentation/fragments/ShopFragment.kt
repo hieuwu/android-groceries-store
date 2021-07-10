@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
+import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 
 class ShopFragment : Fragment() {
     private lateinit var binding: FragmentShopBinding
@@ -23,9 +23,6 @@ class ShopFragment : Fragment() {
             inflater, R.layout.fragment_shop, container, false
         )
 
-        var navController = NavHostFragment.findNavController(this)
-        var bottomNavView = binding.bottomNavView
-        bottomNavView.setupWithNavController(navController)
         return binding.root
     }
 
@@ -47,18 +44,18 @@ class ShopFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-//        val adapter =
-//            GridListItemAdapter(
-//                dataSet
-//            )
-//        binding.exclusiveOfferRecyclerview.adapter = adapter
-//        binding.exclusiveOfferRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-//
-//        binding.bestSellingRecyclerview.adapter = adapter
-//        binding.bestSellingRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-//
-//        binding.recommendedRecyclerview.adapter = adapter
-//        binding.recommendedRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+        val adapter =
+            GridListItemAdapter(
+                dataSet
+            )
+        binding.exclusiveOfferRecyclerview.adapter = adapter
+        binding.exclusiveOfferRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+
+        binding.bestSellingRecyclerview.adapter = adapter
+        binding.bestSellingRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+
+        binding.recommendedRecyclerview.adapter = adapter
+        binding.recommendedRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
     }
 
 

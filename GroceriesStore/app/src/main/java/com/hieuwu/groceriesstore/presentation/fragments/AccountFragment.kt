@@ -23,9 +23,6 @@ class AccountFragment : Fragment() {
             inflater, R.layout.fragment_account, container, false
         )
 
-        var navController = NavHostFragment.findNavController(this)
-        var bottomNavView = binding.bottomNavView
-        bottomNavView.setupWithNavController(navController)
         return binding.root
     }
 

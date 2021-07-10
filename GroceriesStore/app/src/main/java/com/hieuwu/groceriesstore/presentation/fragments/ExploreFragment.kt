@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
+import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 
 
 class ExploreFragment : Fragment() {
@@ -24,11 +24,6 @@ class ExploreFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentExploreBinding>(
             inflater, R.layout.fragment_explore, container, false
         )
-
-        var navController = NavHostFragment.findNavController(this)
-        var bottomNavView = binding.bottomNavView
-        bottomNavView.setupWithNavController(navController)
-
         return binding.root
     }
 
@@ -50,10 +45,10 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-//        val adapter =
-//            GridListItemAdapter(
-//                dataSet
-//            )
-//        binding.productRecyclerview.adapter = adapter
+        val adapter =
+            GridListItemAdapter(
+                dataSet
+            )
+        binding.productRecyclerview.adapter = adapter
     }
 }
