@@ -7,7 +7,6 @@ import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 
 class SignInViewModel : ObservableViewModel() {
 
-    //region properties
     private var _email: String? = null
     var email: String?
         @Bindable
@@ -29,5 +28,4 @@ class SignInViewModel : ObservableViewModel() {
             _password = value
             notifyPropertyChanged(BR.password)
         }
-    //endregion
 }
