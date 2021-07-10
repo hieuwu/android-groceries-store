@@ -13,7 +13,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shop">Shop</string>
     <string name="explore">Explore</string>
-    <string name="cart">Cart</string>
     <string name="favourite">Favourite</string>
     <string name="profile">Profile</string>
     <string name="add_to_basket">Add to Basket</string>
@@ -26,4 +25,5 @@
     <string name="best_selling">Best Selling</string>
     <string name="recommended">Recommended</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="cart">Cart</string>
 </resources>
