@@ -7,13 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.LayoutGridListItemBinding
 
-class GridListItemAdapter :
+class GridListItemAdapter(private val dataSet: ArrayList<String>) :
     RecyclerView.Adapter<GridListItemAdapter.GridListItemHolder>() {
-    var dataSet = ArrayList<String>()
-        set(value) {
-            field = dataSet
-            notifyDataSetChanged()
-        }
 
     override fun onBindViewHolder(holder: GridListItemHolder, position: Int) {
         holder.bind(dataSet[position])
