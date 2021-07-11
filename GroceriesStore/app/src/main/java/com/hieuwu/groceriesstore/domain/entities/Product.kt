@@ -8,14 +8,14 @@ import com.hieuwu.groceriesstore.data.utils.DataConstant
 @Entity(tableName=DataConstant.PRODUCT_TABLE)
 data class Product(
     @PrimaryKey
-    val id:String,
+    val id:String?,
 
     @ColumnInfo(name = "name")
-    var name: String,
+    var name: String?,
 
     @ColumnInfo(name = "description")
-    var description: String,
+    var description: String?,
 
     @ColumnInfo(name = "price")
-    var price: Double
+    var price: Double?
 )
