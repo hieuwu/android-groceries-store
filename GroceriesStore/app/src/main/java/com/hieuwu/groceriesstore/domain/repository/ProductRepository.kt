@@ -1,4 +1,7 @@
 package com.hieuwu.groceriesstore.domain.repository
 
-interface ProductRepository {
+import com.hieuwu.groceriesstore.data.repository.Repository
+
+interface ProductRepository : Repository {
+
 }
