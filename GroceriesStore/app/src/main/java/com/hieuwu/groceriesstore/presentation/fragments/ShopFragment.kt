@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hieuwu.groceriesstore.R
+import com.hieuwu.groceriesstore.data.mapper.ProductModelToEntityImpl
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
+import com.hieuwu.groceriesstore.di.ProductMapper
 import com.hieuwu.groceriesstore.domain.mapper.ProductModelToEntity
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
@@ -23,8 +25,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ShopFragment : Fragment() {
     private lateinit var binding: FragmentShopBinding
-    @Inject
-    lateinit var productModelToEntity: ProductModelToEntity
+
+    @ProductMapper
+    @Inject lateinit var productModelToEntity: ProductModelToEntity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,8 +44,10 @@ class ShopFragment : Fragment() {
         var products: List<ProductModel> = gson.fromJson(jsonFileString, listPersonType)
 
         products.forEachIndexed { idx, product ->
-            productModelToEntity.map(product)
+            var pro = productModelToEntity.map(product)
             Log.i("data", "> Item $idx:\n$product")
+            Log.i("data x", "> Item $idx:\n$pro")
+
         }
         return binding.root
     }
