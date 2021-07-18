@@ -1,3 +1,3 @@
 package com.hieuwu.groceriesstore.domain.mapper.entitymapper
 
-interface ModelEntityMapper<From, To> : EntityMapper<From, To>
+interface EntityModelMapper<From, To> : EntityMapper<From, To>
