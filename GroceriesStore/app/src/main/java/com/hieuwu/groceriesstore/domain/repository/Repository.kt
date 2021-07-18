@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.data.repository
+package com.hieuwu.groceriesstore.domain.repository
 
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.models.ProductModel
