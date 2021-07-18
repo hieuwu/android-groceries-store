@@ -1,9 +1,10 @@
 package com.hieuwu.groceriesstore.data.repository
 
 import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 
 interface Repository {
-    suspend fun saveAll(products: List<Product>): Boolean
+    fun saveAll(products: List<ProductModel>): Boolean
     suspend fun getAll(products: List<Product>): List<Product>
     suspend fun getById(id: List<Product>): Product
 }
