@@ -1,6 +1,6 @@
-package com.hieuwu.groceriesstore.domain.mapper
+package com.hieuwu.groceriesstore.domain.mapper.networkmapper
 
 interface NetworkMapper <From,To> {
-    fun mapFromEntity(from: From): To
-    fun mapToEntity(from: To): From
+    fun mapFromNetwork(from: From): To
+    fun mapToNetwork(from: To): From
 }
