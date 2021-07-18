@@ -1,8 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,24 +8,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.data.mapper.ProductModelToEntityImpl
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
-import com.hieuwu.groceriesstore.di.ProductMapper
-import com.hieuwu.groceriesstore.domain.mapper.ProductModelToEntity
-import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.di.ProductRepo
+import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.viewmodels.ShopViewModel
-import com.hieuwu.groceriesstore.presentation.viewmodels.SignUpViewModel
+import com.hieuwu.groceriesstore.presentation.viewmodels.factory.ShopViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.IOException
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ShopFragment : Fragment() {
     private lateinit var binding: FragmentShopBinding
+
+    @ProductRepo
+    @Inject lateinit var productRepository: ProductRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +34,10 @@ class ShopFragment : Fragment() {
             inflater, R.layout.fragment_shop, container, false
         )
 
-        val shopViewModel = ViewModelProvider(this)
+        val viewModelFactory = ShopViewModelFactory(productRepository)
+        val shopViewModel = ViewModelProvider(this, viewModelFactory)
             .get(ShopViewModel::class.java)
+
         shopViewModel.getJsonDataFromAsset(this.requireContext(),"SampleData.json")
 
         binding.lifecycleOwner = this
