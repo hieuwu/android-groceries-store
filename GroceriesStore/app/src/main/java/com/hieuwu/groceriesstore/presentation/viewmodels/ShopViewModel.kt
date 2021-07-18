@@ -1,39 +1,25 @@
 package com.hieuwu.groceriesstore.presentation.viewmodels
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.hieuwu.groceriesstore.di.ProductMapper
-import com.hieuwu.groceriesstore.domain.mapper.ProductModelToEntity
 import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import java.io.IOException
 import javax.inject.Inject
 
-class ShopViewModel : ViewModel() {
+class ShopViewModel @Inject constructor(
+    private val productRepository: ProductRepository
+) : ViewModel() {
 
-    @ProductMapper
-    @Inject
-    lateinit var productModelToEntity: ProductModelToEntity
-
-    lateinit var jsonFileString: String
-    lateinit var products: List<ProductModel>
+    var jsonFileString: String
 
     init {
-        val gson = Gson()
-        val listPersonType = object : TypeToken<List<ProductModel>>() {}.type
-        var products: List<ProductModel> = gson.fromJson(jsonFileString, listPersonType)
+        jsonFileString = ""
     }
 
-    fun saveProducts() {
-        products.forEachIndexed { idx, product ->
-            var pro = productModelToEntity.map(product)
-            Log.i("data", "> Item $idx:\n$product")
-            Log.i("data x", "> Item $idx:\n$pro")
-        }
-    }
-
+    lateinit var products: List<ProductModel>
 
     fun getJsonDataFromAsset(context: Context, fileName: String) {
         val jsonString: String
@@ -43,7 +29,12 @@ class ShopViewModel : ViewModel() {
             ioException.printStackTrace()
             return
         }
+
         jsonFileString = jsonString
+        val gson = Gson()
+        val listPersonType = object : TypeToken<List<ProductModel>>() {}.type
+        products = gson.fromJson(jsonFileString, listPersonType)
+        productRepository.saveAll(products)
     }
 
 }
