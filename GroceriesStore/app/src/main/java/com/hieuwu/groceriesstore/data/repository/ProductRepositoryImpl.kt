@@ -1,10 +1,9 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import android.util.Log
 import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.di.ProductMapper
+import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.Product
-import com.hieuwu.groceriesstore.domain.mapper.ProductModelToEntity
+import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import java.util.concurrent.ExecutorService
@@ -18,14 +17,14 @@ class ProductRepositoryImpl @Inject constructor(
 ) : ProductRepository {
     private val executorService: ExecutorService = Executors.newFixedThreadPool(4)
 
-    @ProductMapper
+    @EntityModelProductMapper
     @Inject
-    lateinit var productMapper: ProductModelToEntity
+    lateinit var productModelEntityMapper: ProductEntityModelMapper
 
     override fun saveAll(products: List<ProductModel>): Boolean {
-        products.forEachIndexed { idx, product ->
-            val pro = productMapper.map(product)
-            saveProduct(pro)
+        for(item in products) {
+            val product = productModelEntityMapper.mapToEntity(item)
+            saveProduct(product)
         }
         return true
     }
