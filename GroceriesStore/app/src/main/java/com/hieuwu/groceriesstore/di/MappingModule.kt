@@ -1,7 +1,7 @@
 package com.hieuwu.groceriesstore.di
 
-import com.hieuwu.groceriesstore.data.mapper.ProductModelToEntityImpl
-import com.hieuwu.groceriesstore.domain.mapper.ProductModelToEntity
+import com.hieuwu.groceriesstore.data.mapper.ProductEntityModelMapperImpl
+import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -10,14 +10,14 @@ import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Qualifier
-annotation class ProductMapper
+annotation class EntityModelProductMapper
 
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class ProductMapperModule {
 
-    @ProductMapper
+    @EntityModelProductMapper
     @Singleton
     @Binds
-    abstract fun bindMapper(impl: ProductModelToEntityImpl): ProductModelToEntity
+    abstract fun bindMapper(impl: ProductEntityModelMapperImpl): ProductEntityModelMapper
 }
