@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
+import timber.log.Timber
 
 
 class ExploreFragment : Fragment() {
@@ -45,10 +46,9 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-        val adapter =
-            GridListItemAdapter(
-                dataSet
-            )
-        binding.productRecyclerview.adapter = adapter
+        binding.productRecyclerview.adapter =
+            GridListItemAdapter(GridListItemAdapter.OnClickListener {
+                Timber.d("on item clicked")
+            })
     }
 }
