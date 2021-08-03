@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class ProductEntityModelMapperImpl @Inject constructor(): ProductEntityModelMapper {
     override fun mapFromEntity(from: Product): ProductModel {
-        return ProductModel(from.id, from.name,from.price,null)
+        return ProductModel(from.id, from.name,from.price,"0")
     }
 
     override fun mapToEntity(from: ProductModel): Product {
