@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
@@ -25,27 +26,12 @@ class ExploreFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentExploreBinding>(
             inflater, R.layout.fragment_explore, container, false
         )
+        setUpRecyclerView()
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var dataSet: ArrayList<String> = ArrayList()
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-
-        setUpRecyclerView(dataSet)
-    }
-
-    private fun setUpRecyclerView(dataSet: ArrayList<String>) {
+    private fun setUpRecyclerView() {
         binding.productRecyclerview.adapter =
             GridListItemAdapter(GridListItemAdapter.OnClickListener {
                 Timber.d("on item clicked")
