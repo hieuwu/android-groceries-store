@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutGridListItemBinding
+import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 
 class GridListItemAdapter(val onClickListener: OnClickListener) :
-    ListAdapter<ProductModel, GridListItemAdapter.ProductGridViewHolder>(DiffCallback) {
+    ListAdapter<Product, GridListItemAdapter.ProductGridViewHolder>(DiffCallback) {
     class ProductGridViewHolder(private var binding: LayoutGridListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(productModel: ProductModel) {
+        fun bind(productModel: Product) {
             binding.product = productModel
             binding.executePendingBindings()
         }
@@ -31,17 +32,17 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
         return ProductGridViewHolder(LayoutGridListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ProductModel>() {
-        override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
-            return oldItem.productId == newItem.productId
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem.id == newItem.id
         }
     }
 
-    class OnClickListener(val clickListener: (product: ProductModel) -> Unit) {
-        fun onClick(product: ProductModel) = clickListener(product)
+    class OnClickListener(val clickListener: (product: Product) -> Unit) {
+        fun onClick(product: Product) = clickListener(product)
     }
 }
