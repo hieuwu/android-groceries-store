@@ -39,11 +39,11 @@ class ShopFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ShopViewModel::class.java)
         binding.viewModel = viewModel
+        setUpRecyclerView()
 
         viewModel.getJsonDataFromAsset(this.requireContext(),"SampleData.json")
 
         binding.lifecycleOwner = this
-        setUpRecyclerView()
 
         return binding.root
     }
