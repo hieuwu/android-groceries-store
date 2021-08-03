@@ -1,11 +1,15 @@
 package com.hieuwu.groceriesstore.data.repository
 
+import androidx.lifecycle.LiveData
+import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
 import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.inject.Inject
@@ -22,7 +26,7 @@ class ProductRepositoryImpl @Inject constructor(
     lateinit var productModelEntityMapper: ProductEntityModelMapper
 
     override fun saveAll(products: List<ProductModel>): Boolean {
-        for(item in products) {
+        for (item in products) {
             val product = productModelEntityMapper.mapToEntity(item)
             saveProduct(product)
         }
@@ -36,8 +40,18 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getAll(products: List<Product>): List<Product> {
-        TODO("Not yet implemented")
+    override suspend fun getAll():  List<ProductModel>? {
+        var products = mutableListOf<Product>()
+        var productModelList = mutableListOf<ProductModel>()
+        executorService.execute {
+            products = productDao.getAll().toMutableList()
+            productModelList = mutableListOf<ProductModel>()
+            for (item in products) {
+                val product = productModelEntityMapper.mapFromEntity(item)
+                productModelList.add(product)
+            }
+        }
+        return productModelList
     }
 
     override suspend fun getById(id: List<Product>): Product {
