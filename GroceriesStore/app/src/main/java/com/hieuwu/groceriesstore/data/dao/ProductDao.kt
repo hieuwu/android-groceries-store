@@ -1,10 +1,9 @@
 package com.hieuwu.groceriesstore.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
 import com.hieuwu.groceriesstore.domain.entities.Product
-import com.hieuwu.groceriesstore.domain.models.ProductModel
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
@@ -20,7 +19,7 @@ interface ProductDao {
     @Query("DELETE FROM ${DataConstant.PRODUCT_TABLE}")
     fun clear()
 
-    @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE}")
-    fun getAll(): List<Product>
+    @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE} LIMIT 10")
+    fun getAll(): Flow<List<Product>>
 
 }
