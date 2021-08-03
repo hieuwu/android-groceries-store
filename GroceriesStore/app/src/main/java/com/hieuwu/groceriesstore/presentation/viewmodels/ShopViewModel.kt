@@ -7,15 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import timber.log.Timber
+import kotlinx.coroutines.*
 import java.io.IOException
+import androidx.lifecycle.asLiveData
+import com.hieuwu.groceriesstore.domain.entities.Product
+
 import javax.inject.Inject
 
 class ShopViewModel @Inject constructor(
@@ -32,6 +30,7 @@ class ShopViewModel @Inject constructor(
         viewModelScope.launch {
             getMarsRealEstateProperties()
         }
+
     }
 
     lateinit var products: List<ProductModel>
@@ -52,12 +51,14 @@ class ShopViewModel @Inject constructor(
         productRepository.saveAll(products)
     }
 
-    private val _productList = MutableLiveData<List<ProductModel>>()
-    val productList: LiveData<List<ProductModel>>
+    private var _productList = MutableLiveData<List<Product>>()
+    val productList: LiveData<List<Product>>
         get() = _productList
 
     private suspend fun getMarsRealEstateProperties() {
-        val result: List<ProductModel>? = productRepository.getAll()
-        if (result!!.isNotEmpty()) _productList.value = result
+        withContext(Dispatchers.IO) {
+            _productList =
+                productRepository.getAllProducts().asLiveData() as MutableLiveData<List<Product>>
+        }
     }
 }
