@@ -16,6 +16,7 @@ import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.viewmodels.ShopViewModel
 import com.hieuwu.groceriesstore.presentation.viewmodels.factory.ShopViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,49 +36,32 @@ class ShopFragment : Fragment() {
         )
 
         val viewModelFactory = ShopViewModelFactory(productRepository)
-        val shopViewModel = ViewModelProvider(this, viewModelFactory)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ShopViewModel::class.java)
+        binding.viewModel = viewModel
 
-        shopViewModel.getJsonDataFromAsset(this.requireContext(),"SampleData.json")
+        viewModel.getJsonDataFromAsset(this.requireContext(),"SampleData.json")
 
         binding.lifecycleOwner = this
+        setUpRecyclerView()
+
         return binding.root
     }
+    private fun setUpRecyclerView() {
+        binding.exclusiveOfferRecyclerview.adapter = GridListItemAdapter(GridListItemAdapter.OnClickListener {
+            Timber.d("on item clicked")
+        })
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var dataSet: ArrayList<String> = ArrayList()
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-
-        setUpRecyclerView(dataSet)
-    }
-
-
-    private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-        val adapter =
-            GridListItemAdapter(
-                dataSet
-            )
-        binding.exclusiveOfferRecyclerview.adapter = adapter
         binding.exclusiveOfferRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
 
-        binding.bestSellingRecyclerview.adapter = adapter
-        binding.bestSellingRecyclerview.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-
-        binding.recommendedRecyclerview.adapter = adapter
-        binding.recommendedRecyclerview.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+//        binding.bestSellingRecyclerview.adapter = adapter
+//        binding.bestSellingRecyclerview.layoutManager =
+//            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+//
+//        binding.recommendedRecyclerview.adapter = adapter
+//        binding.recommendedRecyclerview.layoutManager =
+//            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
     }
 
 
