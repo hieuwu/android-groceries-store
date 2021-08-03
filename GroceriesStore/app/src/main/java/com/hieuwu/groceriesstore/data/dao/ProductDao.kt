@@ -1,15 +1,14 @@
 package com.hieuwu.groceriesstore.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
 import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 
 @Dao
 interface ProductDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(product: Product)
 
     @Update
@@ -20,4 +19,8 @@ interface ProductDao {
 
     @Query("DELETE FROM ${DataConstant.PRODUCT_TABLE}")
     fun clear()
+
+    @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE}")
+    fun getAll(): List<Product>
+
 }
