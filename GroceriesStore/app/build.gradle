@@ -45,6 +45,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     def room_version = "2.3.0"
     def nav_version = "2.3.5"
+    def lifecycle_version = "2.3.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     // Room
     implementation "androidx.room:room-runtime:$room_version"
@@ -63,6 +64,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.jakewharton.timber:timber:4.7.1'
-
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
 }
