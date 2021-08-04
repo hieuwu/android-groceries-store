@@ -8,6 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.app
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
@@ -23,13 +27,17 @@ import javax.inject.Inject
 class ShopFragment : Fragment() {
     private lateinit var binding: FragmentShopBinding
 
+
     @ProductRepo
-    @Inject lateinit var productRepository: ProductRepository
+    @Inject
+    lateinit var productRepository: ProductRepository
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
 
         binding = DataBindingUtil.inflate<FragmentShopBinding>(
             inflater, R.layout.fragment_shop, container, false
@@ -41,16 +49,18 @@ class ShopFragment : Fragment() {
         binding.viewModel = viewModel
         setUpRecyclerView()
 
-        viewModel.getJsonDataFromAsset(this.requireContext(),"SampleData.json")
+        viewModel.getJsonDataFromAsset(this.requireContext(), "SampleData.json")
 
         binding.lifecycleOwner = this
 
         return binding.root
     }
+
     private fun setUpRecyclerView() {
-        binding.exclusiveOfferRecyclerview.adapter = GridListItemAdapter(GridListItemAdapter.OnClickListener {
-            Timber.d("on item clicked")
-        })
+        binding.exclusiveOfferRecyclerview.adapter =
+            GridListItemAdapter(GridListItemAdapter.OnClickListener {
+                Timber.d("on item clicked")
+            })
 
         binding.exclusiveOfferRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
