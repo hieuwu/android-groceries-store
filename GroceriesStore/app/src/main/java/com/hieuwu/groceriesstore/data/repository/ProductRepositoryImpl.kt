@@ -1,18 +1,15 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.inject.Inject
@@ -20,9 +17,24 @@ import javax.inject.Singleton
 
 @Singleton
 class ProductRepositoryImpl @Inject constructor(
-    private val productDao: ProductDao
+    private val productDao: ProductDao, private var fireStore: FirebaseFirestore
 ) : ProductRepository {
     private val executorService: ExecutorService = Executors.newFixedThreadPool(4)
+
+
+    init {
+        fireStore = Firebase.firestore
+        fireStore.collection("products").get().addOnSuccessListener { result ->
+            for (document in result) {
+                Timber.d("${document.id} => ${document.data}")
+            }
+        }
+            .addOnFailureListener { exception ->
+                Timber.w("Error getting documents.${exception}")
+            }
+    }
+
+
 
     @EntityModelProductMapper
     @Inject
@@ -35,7 +47,6 @@ class ProductRepositoryImpl @Inject constructor(
         }
         return true
     }
-
     private fun saveProduct(product: Product) {
         executorService.execute {
             productDao.insert(product)
