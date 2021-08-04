@@ -6,11 +6,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.hieuwu.groceriesstore.data.utils.DataConstant
 
-@Entity(tableName=DataConstant.PRODUCT_TABLE)
+@Entity(tableName = DataConstant.PRODUCT_TABLE)
 data class Product(
     @PrimaryKey
     @NonNull
-    val id:String,
+    val id: String,
 
     @ColumnInfo(name = "name")
     var name: String?,
@@ -19,5 +19,9 @@ data class Product(
     var description: String?,
 
     @ColumnInfo(name = "price")
-    var price: Double?
-)
+    var price: Double?,
+
+    @ColumnInfo(name = "image")
+    var image: String?,
+
+    )
