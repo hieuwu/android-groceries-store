@@ -12,16 +12,19 @@ import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import kotlinx.coroutines.*
 import java.io.IOException
 import androidx.lifecycle.asLiveData
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.domain.entities.Product
+import timber.log.Timber
 
 import javax.inject.Inject
 
 class ShopViewModel @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
-
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     var jsonFileString: String
 
@@ -32,6 +35,7 @@ class ShopViewModel @Inject constructor(
         }
 
     }
+
 
     lateinit var products: List<ProductModel>
 
@@ -51,9 +55,11 @@ class ShopViewModel @Inject constructor(
         productRepository.saveAll(products)
     }
 
+
     private var _productList = MutableLiveData<List<Product>>()
     val productList: LiveData<List<Product>>
         get() = _productList
+
 
     private suspend fun getMarsRealEstateProperties() {
         withContext(Dispatchers.IO) {
