@@ -13,6 +13,6 @@ class ProductEntityModelMapperImpl @Inject constructor(): ProductEntityModelMapp
     }
 
     override fun mapToEntity(from: ProductModel): Product {
-        return Product(from.productId!!, from.productName, from.productName, from.productPrice)
+        return Product(from.productId!!, from.productName, from.productName, from.productPrice, "")
     }
 }
