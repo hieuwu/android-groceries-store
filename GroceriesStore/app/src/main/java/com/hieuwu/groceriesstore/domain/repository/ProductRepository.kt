@@ -9,4 +9,5 @@ interface ProductRepository {
     suspend fun getAll(): List<ProductModel>?
     suspend fun getById(id: List<Product>): Product
     fun getAllProducts(): Flow<List<Product>>
+    suspend fun getFromServer()
 }
