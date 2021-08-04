@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import kotlinx.coroutines.*
@@ -32,6 +31,7 @@ class ShopViewModel @Inject constructor(
         jsonFileString = ""
         viewModelScope.launch {
             getMarsRealEstateProperties()
+            getProductFromServer()
         }
 
     }
@@ -40,19 +40,7 @@ class ShopViewModel @Inject constructor(
     lateinit var products: List<ProductModel>
 
     fun getJsonDataFromAsset(context: Context, fileName: String) {
-        val jsonString: String
-        try {
-            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            return
-        }
 
-        jsonFileString = jsonString
-        val gson = Gson()
-        val listPersonType = object : TypeToken<List<ProductModel>>() {}.type
-        products = gson.fromJson(jsonFileString, listPersonType)
-        productRepository.saveAll(products)
     }
 
 
@@ -65,6 +53,13 @@ class ShopViewModel @Inject constructor(
         withContext(Dispatchers.IO) {
             _productList =
                 productRepository.getAllProducts().asLiveData() as MutableLiveData<List<Product>>
+        }
+    }
+
+    private suspend fun getProductFromServer() {
+        withContext(Dispatchers.IO) {
+            productRepository.getFromServer()
+
         }
     }
 }
