@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -7,24 +8,23 @@
             type="com.hieuwu.groceriesstore.domain.entities.Product" />
     </data>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
         android:background="@drawable/rounded_border_grid_item"
         android:orientation="vertical"
         android:padding="12dp">
 
         <ImageView
             android:id="@+id/product_image"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="150dp"
             android:background="@drawable/rounded_bottom_left_right"
             android:scaleType="fitXY"
-            android:src="@drawable/orange" />
+            app:imageUrl="@{product.image}"/>
 
         <TextView
             android:id="@+id/product_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{product.name}"
             android:textColor="@android:color/black"
@@ -33,8 +33,10 @@
 
         <TextView
             android:id="@+id/product_description"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:text="@{product.description}" />
 
         <LinearLayout
@@ -45,7 +47,7 @@
 
             <TextView
                 android:id="@+id/product_price"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@{product.price.toString()}"

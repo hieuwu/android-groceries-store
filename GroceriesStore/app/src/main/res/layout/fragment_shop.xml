@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.hieuwu.groceriesstore.presentation.viewmodels.ShopViewModel" />
     </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,7 +54,7 @@
                         android:orientation="vertical">
 
                         <RelativeLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
                             <TextView
@@ -74,10 +76,10 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/exclusive_offer_recyclerview"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:listData="@{viewModel.productList}"
-                            app:reverseLayout="true" />
+                            android:clipToPadding="false"
+                            app:listData="@{viewModel.productList}" />
                     </LinearLayout>
 
                     <LinearLayout
