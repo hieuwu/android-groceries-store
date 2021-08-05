@@ -32,33 +32,28 @@ class ProductRepositoryImpl @Inject constructor(
 
     override suspend fun getFromServer() {
         var fireStore = Firebase.firestore
-
         fireStore.collection("products").get().addOnSuccessListener { result ->
             for (document in result) {
-                var id = document.id
-                var name: String = document.data["name"] as String
-                var description: String = document.data["description"] as String
-                var price: Number = document.data["price"] as Number
-                var image: String = document.data["image"] as String
+                val id = document.id
+                val name: String = document.data["name"] as String
+                val description: String = document.data["description"] as String
+                val price: Number = document.data["price"] as Number
+                val image: String = document.data["image"] as String
                 executorService.execute {
                     productDao.insert(Product(id, name, description, price.toDouble(), image))
                 }
-                Timber.d("${document.id} => ${document.data}")
             }
         }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.${exception}")
             }
-
-
     }
 
-
-
-    override fun getAllProducts() = productDao.getAll()
-
-
-    override suspend fun getById(id: List<Product>): Product {
-        TODO("Not yet implemented")
+    override suspend fun hasProduct(): Boolean {
+        val product = productDao.hasProduct()
+        return product != null
     }
+
+    override suspend fun getAllProducts() = productDao.getAll()
+    override suspend fun getById(id: String) = productDao.getById(id)
 }
