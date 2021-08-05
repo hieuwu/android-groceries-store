@@ -24,24 +24,33 @@ import javax.inject.Inject
 class ShopViewModel @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
+    private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    var jsonFileString: String
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 
     init {
-        jsonFileString = ""
-        viewModelScope.launch {
-            getMarsRealEstateProperties()
+        fetchProductsFromServer()
+        getProductsFromDatabase()
+    }
+
+    private fun fetchProductsFromServer() {
+        uiScope.launch {
             getProductFromServer()
         }
-
     }
 
+    private fun getProductsFromDatabase() {
+        uiScope.launch {
+            getProductFromLocal()
+        }
+    }
 
     lateinit var products: List<ProductModel>
-
-    fun getJsonDataFromAsset(context: Context, fileName: String) {
-
-    }
 
 
     private var _productList = MutableLiveData<List<Product>>()
@@ -49,17 +58,15 @@ class ShopViewModel @Inject constructor(
         get() = _productList
 
 
-    private suspend fun getMarsRealEstateProperties() {
-        withContext(Dispatchers.IO) {
-            _productList =
-                productRepository.getAllProducts().asLiveData() as MutableLiveData<List<Product>>
+    private suspend fun getProductFromLocal(){
+        return withContext(Dispatchers.IO) {
+            _productList = productRepository.getAllProducts().asLiveData() as MutableLiveData<List<Product>>
         }
     }
 
     private suspend fun getProductFromServer() {
-        withContext(Dispatchers.IO) {
+        return withContext(Dispatchers.IO) {
             productRepository.getFromServer()
-
         }
     }
 }
