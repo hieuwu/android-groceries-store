@@ -49,7 +49,6 @@ class ShopFragment : Fragment() {
         binding.viewModel = viewModel
         setUpRecyclerView()
 
-        viewModel.getJsonDataFromAsset(this.requireContext(), "SampleData.json")
 
         binding.lifecycleOwner = this
 
