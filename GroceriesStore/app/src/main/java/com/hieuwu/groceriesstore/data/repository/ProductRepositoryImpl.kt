@@ -29,23 +29,9 @@ class ProductRepositoryImpl @Inject constructor(
     @Inject
     lateinit var productModelEntityMapper: ProductEntityModelMapper
 
-    override fun saveAll(products: List<ProductModel>): Boolean {
-//        for (item in products) {
-//            val product = productModelEntityMapper.mapToEntity(item)
-//            saveProduct(product)
-//        }
-        return true
-    }
-
-    private fun saveProduct(product: Product) {
-        executorService.execute {
-            productDao.insert(product)
-        }
-    }
 
     override suspend fun getFromServer() {
         var fireStore = Firebase.firestore
-        var products = mutableListOf<Product>()
 
         fireStore.collection("products").get().addOnSuccessListener { result ->
             for (document in result) {
@@ -68,16 +54,6 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getAll(): List<ProductModel>? {
-        var products = mutableListOf<Product>()
-        var productModelList = mutableListOf<ProductModel>()
-//        products = productDao.getAll().toMutableList()
-//        for (item in products) {
-//            val product = productModelEntityMapper.mapFromEntity(item)
-//            productModelList.add(product)
-//        }
-        return productModelList
-    }
 
     override fun getAllProducts() = productDao.getAll()
 
