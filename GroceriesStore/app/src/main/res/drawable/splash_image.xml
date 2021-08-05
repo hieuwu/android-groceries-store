@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-</selector>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/colorPrimary" />
+    <item
+        android:drawable="@drawable/ic_carot_icon"
+        android:gravity="center"
+        android:width="128dp"
+        android:height="128dp"/>
+</layer-list>
