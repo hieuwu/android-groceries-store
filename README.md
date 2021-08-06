@@ -10,3 +10,10 @@ Application Architecture folows Clean Architecture:
 - [Timber](https://github.com/JakeWharton/timber) - Logging.
 - [Retrofit2](https://github.com/square/retrofit) - Construct the REST APIs and paging network data.
 - [Moshi](https://github.com/square/moshi/) - A modern JSON library for Kotlin and Java.
+- [Hilt](https://dagger.dev/hilt/) for dependency injection.
+- JetPack
+  - Lifecycle - dispose of observing data when lifecycle state changes.
+  - ViewModel - UI related data holder, lifecycle aware.
+  - Room Persistence - construct a database using the abstract layer.
+- Architecture
+  - MVVM Architecture (View - DataBinding - ViewModel - Model)
