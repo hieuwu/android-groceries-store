@@ -112,9 +112,8 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/best_selling_recyclerview"
                             android:layout_width="wrap_content"
-
                             android:layout_height="wrap_content"
-                            app:reverseLayout="true" />
+                            app:listData="@{viewModel.productList}" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -148,12 +147,10 @@
                             android:id="@+id/recommended_recyclerview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:reverseLayout="true" />
+                            app:listData="@{viewModel.productList}" />
                     </LinearLayout>
-
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
-
     </FrameLayout>
 </layout>
