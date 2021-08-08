@@ -1,11 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.domain.entities.Product
-import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -22,21 +18,18 @@ class ShopViewModel @Inject constructor(
 
 
     init {
-        hasProduct()
-        if (hasProduct) {
-            getProductsFromDatabase()
-        } else
-            fetchProductsFromServer()
+        fetchProductsFromServer()
+        getProductsFromDatabase()
     }
 
     private fun fetchProductsFromServer() {
-        uiScope.launch {
+        viewModelScope.launch {
             getProductFromServer()
         }
     }
 
     private fun hasProduct() {
-        uiScope.launch {
+        viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 hasProduct = productRepository.hasProduct()
             }
@@ -44,7 +37,7 @@ class ShopViewModel @Inject constructor(
     }
 
     private fun getProductsFromDatabase() {
-        uiScope.launch {
+        viewModelScope.launch {
             getProductFromLocal()
         }
     }
