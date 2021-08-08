@@ -8,10 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
@@ -62,16 +58,20 @@ class ShopFragment : Fragment() {
             })
 
         binding.exclusiveOfferRecyclerview.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-//        binding.bestSellingRecyclerview.adapter = adapter
-//        binding.bestSellingRecyclerview.layoutManager =
-//            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-//
-//        binding.recommendedRecyclerview.adapter = adapter
-//        binding.recommendedRecyclerview.layoutManager =
-//            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+        binding.bestSellingRecyclerview.adapter = GridListItemAdapter(GridListItemAdapter.OnClickListener {
+            Timber.d("on item clicked")
+        })
+
+        binding.bestSellingRecyclerview.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        binding.recommendedRecyclerview.adapter = GridListItemAdapter(GridListItemAdapter.OnClickListener {
+            Timber.d("on item clicked")
+        })
+
+        binding.recommendedRecyclerview.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
-
-
 }
