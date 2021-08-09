@@ -28,7 +28,11 @@
         android:id="@+id/shopFragment"
         android:name="com.hieuwu.groceriesstore.presentation.fragments.ShopFragment"
         android:label="fragment_shop"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.hieuwu.groceriesstore.presentation.fragments.MainFragment"
@@ -39,4 +43,9 @@
         android:name="com.hieuwu.groceriesstore.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.hieuwu.groceriesstore.presentation.fragments.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
 </navigation>
