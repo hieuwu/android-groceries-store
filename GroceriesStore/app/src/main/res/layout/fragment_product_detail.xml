@@ -1,171 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.fragments.ProductDetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="14dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.fragments.ProductDetailFragment">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@drawable/rounded_bottom_left_right"
-            android:scaleType="fitXY"
-            android:src="@drawable/orange" />
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:paddingHorizontal="14dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Natural Orange" />
+                android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="@dimen/icon_small"
-                android:layout_height="@dimen/icon_small"
-                android:src="@drawable/ic_baseline_favorite_36" />
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/rounded_bottom_left_right"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/orange" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1 Kg, Price" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Natural Orange" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_remove_36" />
+                    <ImageView
+                        android:layout_width="@dimen/icon_small"
+                        android:layout_height="@dimen/icon_small"
+                        android:src="@drawable/ic_baseline_favorite_36" />
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:background="@drawable/border_textview"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="5dp"
-                android:text="0"
-                android:textSize="@dimen/text_big_bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 Kg, Price" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_add_36" />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center">
 
-        <View
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_remove_36" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:background="@drawable/border_textview"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="5dp"
+                        android:text="0"
+                        android:textSize="@dimen/text_big_bold" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_add_36" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/horizontal_margin"
+                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:background="@android:color/darker_gray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/description" />
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_small"
+                        android:layout_height="@dimen/icon_small"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. " />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/horizontal_margin"
+                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:background="@android:color/darker_gray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nutritions" />
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_small"
+                        android:layout_height="@dimen/icon_small"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem Ipsum printer took a galley of type and scrambled it to make a type specimen book. " />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/horizontal_margin"
+                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:background="@android:color/darker_gray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reviews" />
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_small"
+                        android:layout_height="@dimen/icon_small"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />
+                </RelativeLayout>
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="4" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="@dimen/horizontal_margin"
-            android:layout_marginVertical="@dimen/vertical_margin"
-            android:background="@android:color/darker_gray" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/primary_button"
+            android:text="@string/add_to_basket"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/description" />
-
-            <ImageView
-                android:layout_width="@dimen/icon_small"
-                android:layout_height="@dimen/icon_small"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. " />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="@dimen/horizontal_margin"
-            android:layout_marginVertical="@dimen/vertical_margin"
-            android:background="@android:color/darker_gray" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nutritions" />
-
-            <ImageView
-                android:layout_width="@dimen/icon_small"
-                android:layout_height="@dimen/icon_small"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lorem Ipsum printer took a galley of type and scrambled it to make a type specimen book. " />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="@dimen/horizontal_margin"
-            android:layout_marginVertical="@dimen/vertical_margin"
-            android:background="@android:color/darker_gray" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reviews" />
-
-            <ImageView
-                android:layout_width="@dimen/icon_small"
-                android:layout_height="@dimen/icon_small"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_baseline_keyboard_arrow_down_36" />
-        </RelativeLayout>
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="4" />
-    </ScrollView>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="14dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/primary_button"
-        android:text="@string/add_to_basket"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white" />
-</LinearLayout>
+    </LinearLayout>
+</layout>
