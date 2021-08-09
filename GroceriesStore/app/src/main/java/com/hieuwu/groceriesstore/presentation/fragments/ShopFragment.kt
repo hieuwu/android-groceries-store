@@ -1,12 +1,15 @@
 package com.hieuwu.groceriesstore.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
@@ -43,19 +46,27 @@ class ShopFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ShopViewModel::class.java)
         binding.viewModel = viewModel
-        setUpRecyclerView()
-
-
         binding.lifecycleOwner = this
+
+        setUpRecyclerView()
+        binding.exclusiveOfferRecyclerview.adapter =
+            GridListItemAdapter(GridListItemAdapter.OnClickListener {
+                viewModel.displayPropertyDetails(it)
+            })
+
+        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, Observer {
+            if ( null != it ) {
+                this.findNavController().navigate(R.id.action_shopFragment_to_productDetailFragment)
+                viewModel.displayPropertyDetailsComplete()
+            }
+        })
+
 
         return binding.root
     }
 
     private fun setUpRecyclerView() {
-        binding.exclusiveOfferRecyclerview.adapter =
-            GridListItemAdapter(GridListItemAdapter.OnClickListener {
-                Timber.d("on item clicked")
-            })
+
 
         binding.exclusiveOfferRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
