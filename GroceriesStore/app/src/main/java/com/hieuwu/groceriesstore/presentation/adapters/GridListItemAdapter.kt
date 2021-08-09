@@ -11,6 +11,7 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 
 class GridListItemAdapter(val onClickListener: OnClickListener) :
     ListAdapter<Product, GridListItemAdapter.ProductGridViewHolder>(DiffCallback) {
+
     class ProductGridViewHolder(private var binding: LayoutGridListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(productModel: Product) {
@@ -22,10 +23,11 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: ProductGridViewHolder, position: Int) {
         val product = getItem(position)
-        holder.bind(product)
         holder.itemView.setOnClickListener {
-            onClickListener
+            onClickListener.onClick(product)
         }
+        holder.bind(product)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductGridViewHolder {
