@@ -59,4 +59,16 @@ class ShopViewModel @Inject constructor(
         super.onCleared()
         viewModelJob.cancel()
     }
+
+    private val _navigateToSelectedProperty = MutableLiveData<Product?>()
+    val navigateToSelectedProperty: LiveData<Product?>
+        get() = _navigateToSelectedProperty
+    fun displayPropertyDetails(marsProperty: Product) {
+        _navigateToSelectedProperty.value = marsProperty
+    }
+
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
+    }
+
 }
