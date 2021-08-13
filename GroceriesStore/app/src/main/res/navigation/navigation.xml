@@ -47,5 +47,9 @@
         android:id="@+id/productDetailFragment"
         android:name="com.hieuwu.groceriesstore.presentation.fragments.ProductDetailFragment"
         android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>
