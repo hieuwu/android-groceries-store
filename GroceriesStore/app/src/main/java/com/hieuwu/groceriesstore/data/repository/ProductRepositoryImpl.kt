@@ -9,10 +9,7 @@ import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
-import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -55,5 +52,7 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAllProducts() = productDao.getAll()
-    override suspend fun getById(id: String) = productDao.getById(id)
+
+    override fun getById(id: String) = productDao.getById(id)
+
 }
