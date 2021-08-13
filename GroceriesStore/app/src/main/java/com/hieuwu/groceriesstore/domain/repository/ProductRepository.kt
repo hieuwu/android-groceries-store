@@ -5,7 +5,7 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
-    suspend fun getById(id: String): Product
+    fun getById(id: String): Flow<Product>
     suspend fun getAllProducts(): Flow<List<Product>>
     suspend fun getFromServer()
     suspend fun hasProduct(): Boolean
