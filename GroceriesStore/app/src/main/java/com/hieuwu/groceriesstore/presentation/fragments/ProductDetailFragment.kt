@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.R
@@ -32,13 +31,14 @@ class ProductDetailFragment : Fragment() {
     ): View? {
         val args = ProductDetailFragmentArgs.fromBundle(arguments as Bundle)
 
+        val viewModelFactory = ProductDetailViewModelFactory( args.id,productRepository)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(ProductDetailViewModel::class.java)
+
         binding = DataBindingUtil.inflate<FragmentProductDetailBinding>(
             inflater, R.layout.fragment_product_detail, container, false
         )
 
-        val viewModelFactory = ProductDetailViewModelFactory( args.id,productRepository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(ProductDetailViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
