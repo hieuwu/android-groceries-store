@@ -10,7 +10,6 @@ class ShopViewModel @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
     private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private var hasProduct: Boolean = false
     private var _productList = MutableLiveData<List<Product>>()
     val productList: LiveData<List<Product>>
