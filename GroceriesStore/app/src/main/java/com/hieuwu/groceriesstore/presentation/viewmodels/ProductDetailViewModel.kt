@@ -3,12 +3,9 @@ package com.hieuwu.groceriesstore.presentation.viewmodels
 import androidx.databinding.Bindable
 import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.BR
-import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 import javax.inject.Inject
 
 class ProductDetailViewModel @Inject constructor(
@@ -29,12 +26,20 @@ class ProductDetailViewModel @Inject constructor(
             notifyPropertyChanged(BR.qty)
         }
 
+    fun addToCart() {
+
+    }
+
+    fun removeFromCart() {
+
+    }
 
     fun increaseQty() {
         qty++
     }
 
     fun decreaseQty() {
+        if (qty <= 0) return
         qty--
     }
 
