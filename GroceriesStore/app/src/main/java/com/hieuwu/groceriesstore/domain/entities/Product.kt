@@ -10,6 +10,7 @@ import com.hieuwu.groceriesstore.data.utils.DataConstant
 data class Product(
     @PrimaryKey
     @NonNull
+    @ColumnInfo(name = "productId")
     val id: String,
 
     @ColumnInfo(name = "name")
