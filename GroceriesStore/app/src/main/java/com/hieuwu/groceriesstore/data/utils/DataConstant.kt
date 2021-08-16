@@ -6,6 +6,6 @@ class DataConstant {
         const val CATEGORY_TABLE = "category"
         const val PROFILE_TABLE = "profile"
         const val ORDER_TABLE = "order"
-        const val ORDER_ITEM_TABLE = "order_item"
+        const val LINE_ITEM_TABLE = "line_item"
     }
 }
