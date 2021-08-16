@@ -1,8 +1,13 @@
 package com.hieuwu.groceriesstore.domain.entities
 
-import androidx.room.PrimaryKey
+import androidx.room.Embedded
+import androidx.room.Relation
 
-data class ProductWithLineItem(
-    @PrimaryKey val lineItemId: Long,
-    val productId: String
+data class ProductAndLineItem(
+    @Embedded val product: Product,
+    @Relation(
+        parentColumn = "productId",
+        entityColumn = "userId"
+    )
+    val lineItem: LineItem
 )
