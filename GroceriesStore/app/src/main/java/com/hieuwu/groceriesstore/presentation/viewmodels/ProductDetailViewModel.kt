@@ -3,6 +3,7 @@ package com.hieuwu.groceriesstore.presentation.viewmodels
 import androidx.databinding.Bindable
 import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.BR
+import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 
@@ -27,10 +28,13 @@ class ProductDetailViewModel @Inject constructor(
         }
 
     fun addToCart() {
+        val subtotal = product.value?.price?.times(qty)
+//        var lineItem = LineItem(1, "sdf", qty, subtotal!!)
 
     }
 
     fun removeFromCart() {
+
 
     }
 
