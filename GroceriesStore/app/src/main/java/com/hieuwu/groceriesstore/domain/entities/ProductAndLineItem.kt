@@ -7,7 +7,8 @@ data class ProductAndLineItem(
     @Embedded val product: Product,
     @Relation(
         parentColumn = "productId",
-        entityColumn = "userId"
+        entityColumn = "productId"
     )
-    val lineItem: LineItem
+    val lineItem: LineItem?
+
 )
