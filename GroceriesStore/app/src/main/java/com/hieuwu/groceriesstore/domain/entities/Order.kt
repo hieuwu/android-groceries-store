@@ -9,10 +9,11 @@ import com.hieuwu.groceriesstore.data.utils.DataConstant
 @Entity(tableName = DataConstant.ORDER_TABLE)
 data class Order(
     @PrimaryKey
+    @ColumnInfo(name = "orderId")
     val id: String,
 
     @ColumnInfo(name = "status")
-    var status: String,
+    var status: String
 
-    @Embedded val productId: String
+
 )
