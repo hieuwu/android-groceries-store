@@ -14,6 +14,4 @@ data class Order(
 
     @ColumnInfo(name = "status")
     var status: String
-
-
 )
