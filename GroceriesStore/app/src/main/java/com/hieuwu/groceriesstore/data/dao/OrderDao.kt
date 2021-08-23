@@ -20,5 +20,8 @@ interface OrderDao {
     fun getOrderWithLineItems(): Flow<List<OrderWithLineItems>>
 
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE orderId = :id")
-    fun getById(id:String): Flow<OrderWithLineItems>
+    fun getById(id: String): Flow<OrderWithLineItems>
+
+    @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status")
+    fun gtyByStatus(status: String): Flow<Order>
 }
