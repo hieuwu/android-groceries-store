@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
+import com.hieuwu.groceriesstore.data.dao.OrderDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
 import dagger.Module
 import dagger.Provides
@@ -35,5 +36,10 @@ object DatabaseModule {
     @Provides
     fun provideLineItemDao(database: GroceriesStoreDatabase): LineItemDao {
         return database.lineItemDao()
+    }
+
+    @Provides
+    fun provideOrderDao(database: GroceriesStoreDatabase): OrderDao {
+        return database.orderDao()
     }
 }
