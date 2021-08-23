@@ -29,7 +29,7 @@ class ProductDetailViewModel @Inject constructor(
 
     fun addToCart() {
         val subtotal = product.value?.price?.times(qty)
-//        var lineItem = LineItem(1, "sdf", qty, subtotal!!)
+
 
     }
 
