@@ -1,6 +1,8 @@
 package com.hieuwu.groceriesstore.di
 
+import com.hieuwu.groceriesstore.data.repository.OrderRepositoryImpl
 import com.hieuwu.groceriesstore.data.repository.ProductRepositoryImpl
+import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import dagger.Binds
 import dagger.Module
@@ -14,10 +16,14 @@ annotation class ProductRepo
 
 @InstallIn(SingletonComponent::class)
 @Module
-abstract class ProductRepositoryModule {
+abstract class RepositoryModule {
 
     @ProductRepo
     @Singleton
     @Binds
     abstract fun bindRepository(impl: ProductRepositoryImpl): ProductRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindOrderRepository(impl: OrderRepositoryImpl): OrderRepository
 }
