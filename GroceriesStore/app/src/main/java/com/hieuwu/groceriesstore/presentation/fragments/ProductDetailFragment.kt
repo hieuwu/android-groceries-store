@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductDetailBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
+import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.viewmodels.ProductDetailViewModel
 import com.hieuwu.groceriesstore.presentation.viewmodels.factory.ProductDetailViewModelFactory
@@ -25,13 +26,16 @@ class ProductDetailFragment : Fragment() {
     @Inject
     lateinit var productRepository: ProductRepository
 
+    @Inject
+    lateinit var orderRepository: OrderRepository
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val args = ProductDetailFragmentArgs.fromBundle(arguments as Bundle)
 
-        val viewModelFactory = ProductDetailViewModelFactory( args.id,productRepository)
+        val viewModelFactory = ProductDetailViewModelFactory( args.id,productRepository,orderRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductDetailViewModel::class.java)
 
