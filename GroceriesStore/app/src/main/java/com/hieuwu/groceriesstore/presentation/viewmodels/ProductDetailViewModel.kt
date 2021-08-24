@@ -21,6 +21,7 @@ class ProductDetailViewModel @Inject constructor(
 ) : ObservableViewModel() {
 
     val product = productRepository.getById(id).asLiveData()
+    val hasCart = orderRepository.hasCart()?.asLiveData()
 
     private var _qty: Int = 0
     var qty: Int
@@ -35,23 +36,20 @@ class ProductDetailViewModel @Inject constructor(
 
     fun addToCart() {
         val subtotal = product.value?.price?.times(qty)
-        val hasCart = orderRepository.hasCart().asLiveData()
-        if (hasCart.value!!) {
+        if (hasCart?.value != null) {
             //Add to cart
-            val currentCart = orderRepository.getOrderById()
-            var lineItem = LineItem(product.value!!.id, currentCart!!.id, _qty, subtotal!!)
+            val currentCart = orderRepository.getOrderInCart(OrderStatus.IN_CART).asLiveData()
             viewModelScope.launch {
+                var lineItem =
+                    LineItem(product.value!!.id, currentCart.value!!.id, _qty, subtotal!!)
                 orderRepository.addLineItem(lineItem)
             }
-
         } else {
-            var id = UUID.randomUUID().toString()
-            var newOrder = Order(id, OrderStatus.IN_CART.value)
+            val id = UUID.randomUUID().toString()
+            val newOrder = Order(id, OrderStatus.IN_CART.value)
             viewModelScope.launch {
                 orderRepository.insert(newOrder)
-            }
-            var lineItem = LineItem(product.value!!.id, newOrder.id, _qty, subtotal!!)
-            viewModelScope.launch {
+                var lineItem = LineItem(product.value!!.id, newOrder.id, _qty, subtotal!!)
                 orderRepository.addLineItem(lineItem)
             }
         }
