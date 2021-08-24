@@ -9,3 +9,5 @@ class DataConstant {
         const val LINE_ITEM_TABLE = "lineItem"
     }
 }
+
+enum class OrderStatus(val value: String) { IN_CART("cart"), COMPLETED("completed") }
