@@ -2,7 +2,6 @@ package com.hieuwu.groceriesstore.data.dao
 
 import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
-import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +12,7 @@ interface OrderDao {
     fun insert(order: Order)
 
     @Update
-    fun update(product: Order)
+    fun update(order: Order)
 
     @Transaction
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}`")
@@ -22,6 +21,10 @@ interface OrderDao {
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE orderId = :id")
     fun getById(id: String): Flow<OrderWithLineItems>
 
-    @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status")
-    fun gtyByStatus(status: String): Flow<Order>
+    @Query("SELECT EXISTS(SELECT 1 FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status LIMIT 1)")
+    fun isCartExisted(status: String): Flow<Boolean>
+
+    @Transaction
+    @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status LIMIT 1")
+    fun getOrderInCart(status: String): Flow<Order>
 }
