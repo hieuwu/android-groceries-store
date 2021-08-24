@@ -9,6 +9,7 @@ import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.OrderDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
+import com.hieuwu.groceriesstore.data.utils.OrderStatus
 import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.Product
@@ -81,7 +82,7 @@ class GroceriesStoreDatabaseTest {
         val firstProduct = Product("1", "First Product", "Test", 12.0, "empty")
         val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty")
 
-        val order = Order("12", "Cart")
+        val order = Order("12", OrderStatus.IN_CART)
 
         val firstLineItem = LineItem(1, firstProduct.id, "12", 4, 5.6)
         val secondLineItem = LineItem(2, secondProduct.id, "12", 5, 7.0)
@@ -92,7 +93,7 @@ class GroceriesStoreDatabaseTest {
 
         var completedOrder = orderDao.getById("12").asLiveData()
 
-        assertEquals(completedOrder.getOrAwaitValue().order.status, "Cart")
+        assertEquals(completedOrder.getOrAwaitValue().order.status, OrderStatus.IN_CART)
         assertEquals(completedOrder.getOrAwaitValue().order.id, "12")
         assertEquals(completedOrder.getOrAwaitValue().lineItemList.size, 2)
     }
