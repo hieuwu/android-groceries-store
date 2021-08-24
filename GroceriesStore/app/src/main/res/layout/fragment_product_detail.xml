@@ -184,6 +184,7 @@
             android:layout_marginHorizontal="14dp"
             android:background="@drawable/primary_button"
             android:text="@string/add_to_basket"
+            android:onClick="@{() -> viewModel.addToCart()}"
             android:textAllCaps="false"
             android:textColor="@android:color/white" />
     </RelativeLayout>
