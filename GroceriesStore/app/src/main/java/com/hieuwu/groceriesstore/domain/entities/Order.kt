@@ -5,6 +5,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.hieuwu.groceriesstore.data.utils.DataConstant
+import com.hieuwu.groceriesstore.data.utils.OrderStatus
 
 @Entity(tableName = DataConstant.ORDER_TABLE)
 data class Order(

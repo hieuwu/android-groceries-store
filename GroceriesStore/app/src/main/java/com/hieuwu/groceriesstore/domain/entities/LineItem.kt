@@ -8,8 +8,7 @@ import com.hieuwu.groceriesstore.data.utils.DataConstant
 
 @Entity(tableName = DataConstant.LINE_ITEM_TABLE)
 data class LineItem(
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "lineItemId")
     val id: Long,
 
@@ -21,4 +20,14 @@ data class LineItem(
 
     val quantity: Int,
     val subtotal: Double
-)
+) {
+
+    constructor(productId: String, orderId: String, quantity: Int, subtotal: Double) : this(
+        0,
+        productId,
+        orderId,
+        quantity,
+        subtotal
+    )
+
+}
