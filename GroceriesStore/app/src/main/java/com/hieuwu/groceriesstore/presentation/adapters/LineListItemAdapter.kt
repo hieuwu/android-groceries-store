@@ -2,48 +2,52 @@ package com.hieuwu.groceriesstore.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.LayoutLineListItemBinding
+import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 
-class LineListItemAdapter:
-    RecyclerView.Adapter<LineListItemAdapter.LineListItemHolder>() {
-    var dataSet = ArrayList<String>()
-        set(value) {
-            field = dataSet
-            notifyDataSetChanged()
-        }
-    override fun onBindViewHolder(holder: LineListItemHolder, position: Int) {
-        holder.bind(dataSet[position])
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineListItemHolder {
-        return LineListItemHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.layout_line_list_item,
-                parent,
-                false
-            )
-        )
-    }
-
-
-    class LineListItemHolder(
-        private val binding: LayoutLineListItemBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: String) {
-            binding.apply {
-                binding.productName.text = item
-                binding.productDescription.text = item
-                binding.productPrice.text = item
-                executePendingBindings()
-            }
+class LineListItemAdapter(val onClickListener: OnClickListener) :
+    ListAdapter<ProductAndLineItem, LineListItemAdapter.LineItemViewHolder>(DiffCallback) {
+    class LineItemViewHolder(private var binding: LayoutLineListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(lineItemModel: ProductAndLineItem) {
+            binding.lineItem = lineItemModel
+            binding.executePendingBindings()
         }
     }
 
-    override fun getItemCount() = dataSet.size
+    override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
+        val lineItem = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(lineItem)
+        }
+        holder.bind(lineItem)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineItemViewHolder {
+        return LineItemViewHolder(LayoutLineListItemBinding.inflate(LayoutInflater.from(parent.context)))
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<ProductAndLineItem>() {
+        override fun areItemsTheSame(
+            oldItem: ProductAndLineItem,
+            newItem: ProductAndLineItem
+        ): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: ProductAndLineItem,
+            newItem: ProductAndLineItem
+        ): Boolean {
+            return oldItem.product.id == newItem.product.id
+        }
+    }
+
+    class OnClickListener(val clickListener: (lineItem: ProductAndLineItem) -> Unit) {
+        fun onClick(lineItemModel: ProductAndLineItem) = clickListener(lineItemModel)
+    }
 
 }
