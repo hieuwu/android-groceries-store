@@ -15,7 +15,7 @@ interface ProductDao {
     fun update(product: Product)
 
     @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE} WHERE productId = :id")
-    fun getById(id:String): Flow<Product>
+    fun getById(id: String): Flow<Product>
 
     @Query("DELETE FROM ${DataConstant.PRODUCT_TABLE}")
     fun clear()
@@ -28,7 +28,7 @@ interface ProductDao {
 
     @Transaction
     @Query("SELECT* FROM ${DataConstant.PRODUCT_TABLE}")
-    fun getProductAndLineItem(): List<ProductAndLineItem>
+    fun getProductAndLineItem(): Flow<List<ProductAndLineItem>>
 
 
 }
