@@ -6,12 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
+import com.hieuwu.groceriesstore.di.ProductRepo
+import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
+import com.hieuwu.groceriesstore.presentation.viewmodels.CartViewModel
+import com.hieuwu.groceriesstore.presentation.viewmodels.factory.CartViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
+
+    @ProductRepo
+    @Inject
+    lateinit var productRepository: ProductRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,9 +32,19 @@ class CartFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentCartBinding>(
             inflater, R.layout.fragment_cart, container, false
         )
-        return binding.root
 
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        val viewModelFactory = CartViewModelFactory(productRepository)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(CartViewModel::class.java)
+        binding.viewModel = viewModel
+
+        binding.cartDetailRecyclerview.adapter =
+            LineListItemAdapter(LineListItemAdapter.OnClickListener {
+                viewModel.displayPropertyDetails(it)
+            })
+
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
 }
