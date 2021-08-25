@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductDetailBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
@@ -35,7 +37,8 @@ class ProductDetailFragment : Fragment() {
     ): View? {
         val args = ProductDetailFragmentArgs.fromBundle(arguments as Bundle)
 
-        val viewModelFactory = ProductDetailViewModelFactory( args.id,productRepository,orderRepository)
+        val viewModelFactory =
+            ProductDetailViewModelFactory(args.id, productRepository, orderRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductDetailViewModel::class.java)
 
@@ -46,6 +49,21 @@ class ProductDetailFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
+
+        viewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
+            if (it == true) { // Observed state is true.
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    viewModel.qty.toString() + "  x  " +
+                            viewModel.product.value?.name + " is added",
+                    Snackbar.LENGTH_SHORT // How long to display the message.
+                ).show()
+                // Reset state to make sure the snackbar is only shown once, even if the device
+                // has a configuration change.
+                viewModel.doneShowingSnackbar()
+            }
+        })
+
         return binding.root
     }
 
