@@ -5,8 +5,10 @@ import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -47,6 +49,9 @@ class ProductRepositoryImpl @Inject constructor(
         val product = productDao.hasProduct()
         return product != null
     }
+
+    override suspend fun getProductAndLineItem ()= productDao.getProductAndLineItem()
+
 
     override suspend fun getAllProducts() = productDao.getAll()
 
