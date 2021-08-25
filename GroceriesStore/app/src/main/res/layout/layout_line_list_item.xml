@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="lineItem"
+            type="com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem" />
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,30 +20,31 @@
             android:paddingHorizontal="@dimen/horizontal_margin">
 
             <ImageView
-                android:id="@+id/product_image"
+                android:id="@+id/image"
                 android:layout_width="@dimen/icon_medium"
+                android:contentDescription="@string/line_item_image"
                 android:layout_height="@dimen/icon_medium"
-                android:src="@drawable/colorful_carrot" />
+                app:imageUrl="@{lineItem.product.image}" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginStart="@dimen/horizontal_margin"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/product_name"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product title"
+                    android:text="@{lineItem.product.name}"
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
                 <TextView
-                    android:id="@+id/product_description"
+                    android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product Description"
+                    android:text="@{String.valueOf(lineItem.lineItem.quantity)}"
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
             </LinearLayout>
 
@@ -45,22 +53,14 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/product_price"
+                    android:id="@+id/subtotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/horizontal_margin"
-                    android:layout_toLeftOf="@id/arrow_icon"
-                    android:text="$35"
-                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
-
-                <ImageView
-                    android:id="@+id/arrow_icon"
-                    android:layout_width="@dimen/icon_small"
-                    android:layout_height="@dimen/icon_small"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_36" />
+                    android:layout_marginEnd="@dimen/horizontal_margin"
+                    android:text="@{String.valueOf(lineItem.lineItem.subtotal)}"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
             </RelativeLayout>
         </LinearLayout>
 
