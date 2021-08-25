@@ -27,11 +27,9 @@ import javax.inject.Inject
 class ShopFragment : Fragment() {
     private lateinit var binding: FragmentShopBinding
 
-
     @ProductRepo
     @Inject
     lateinit var productRepository: ProductRepository
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
