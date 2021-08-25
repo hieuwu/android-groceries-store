@@ -23,7 +23,7 @@ class ProductDetailViewModel @Inject constructor(
     val product = productRepository.getById(id).asLiveData()
     val hasCart = orderRepository.hasCart()?.asLiveData()
 
-    private var _qty: Int = 0
+    private var _qty: Int = 1
     var qty: Int
         @Bindable
         get() {
@@ -33,6 +33,10 @@ class ProductDetailViewModel @Inject constructor(
             _qty = value
             notifyPropertyChanged(BR.qty)
         }
+
+    private var _showSnackbarEvent = MutableLiveData<Boolean>()
+    val showSnackBarEvent: LiveData<Boolean>
+        get() = _showSnackbarEvent
 
     fun addToCart() {
         val subtotal = product.value?.price?.times(qty)
@@ -53,6 +57,7 @@ class ProductDetailViewModel @Inject constructor(
                 orderRepository.addLineItem(lineItem)
             }
         }
+        _showSnackbarEvent.value = true
     }
 
     fun removeFromCart() {
@@ -67,6 +72,10 @@ class ProductDetailViewModel @Inject constructor(
     fun decreaseQty() {
         if (qty <= 0) return
         qty--
+    }
+
+    fun doneShowingSnackbar() {
+        _showSnackbarEvent.value = false
     }
 
 }
