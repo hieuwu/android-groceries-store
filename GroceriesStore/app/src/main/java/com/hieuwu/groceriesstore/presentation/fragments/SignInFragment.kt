@@ -45,7 +45,6 @@ class SignInFragment : Fragment() {
         }
 
         binding.signinButton.setOnClickListener{
-            Log.d("SIGNIN", "${signInViewModel.email} - ${signInViewModel.password}")
             var i = Intent(this.context, MainActivity::class.java)
             startActivity(i)
         }
