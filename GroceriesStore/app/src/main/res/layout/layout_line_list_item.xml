@@ -37,6 +37,7 @@
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
                     android:text="@{lineItem.product.name}"
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
@@ -44,6 +45,7 @@
                     android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
                     android:text="@{String.valueOf(lineItem.lineItem.quantity)}"
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
             </LinearLayout>
@@ -59,7 +61,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/horizontal_margin"
-                    android:text="@{String.valueOf(lineItem.lineItem.subtotal)}"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:text="@{String.valueOf(lineItem.lineItem.subtotal) + ` $`}"
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
             </RelativeLayout>
         </LinearLayout>
