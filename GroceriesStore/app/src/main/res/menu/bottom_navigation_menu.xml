@@ -9,8 +9,7 @@
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/explore" />
     <item
-        android:id="@+id/cartFragment"
-        android:icon="@drawable/ic_baseline_shopping_cart_36"
+        android:id="@+id/placeholder"
         android:title="@string/cart" />
     <item
         android:id="@+id/favouriteFragment"
