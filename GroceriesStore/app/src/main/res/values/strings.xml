@@ -27,4 +27,5 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="cart">Cart</string>
     <string name="line_item_image">Line Item image</string>
+    <string name="fab">Fab</string>
 </resources>
