@@ -11,25 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:layout_marginVertical="16dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
             android:paddingHorizontal="@dimen/horizontal_margin">
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="@dimen/icon_medium"
-                android:contentDescription="@string/line_item_image"
                 android:layout_height="@dimen/icon_medium"
+                android:contentDescription="@string/line_item_image"
                 app:imageUrl="@{lineItem.product.image}" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_weight="1.0"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
@@ -37,41 +40,41 @@
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
                     android:text="@{lineItem.product.name}"
-                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                    android:textColor="@android:color/black" />
 
-                <TextView
-                    android:id="@+id/quantity"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:text="@{String.valueOf(lineItem.lineItem.quantity)}"
-                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(lineItem.lineItem.quantity) + ` x ` + String.valueOf(lineItem.product.price) + ` $`}"
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/subtotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/horizontal_margin"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:text="@{String.valueOf(lineItem.lineItem.subtotal) + ` $`}"
-                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/subtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@{String.valueOf(lineItem.lineItem.subtotal) + ` $`}"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginVertical="@dimen/vertical_margin"
             android:background="@android:color/darker_gray" />
 
     </LinearLayout>
