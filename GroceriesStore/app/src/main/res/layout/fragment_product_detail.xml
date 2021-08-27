@@ -87,6 +87,7 @@
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="5dp"
                         android:text="@{Converter.intToString(viewModel.qty)}"
+                        android:textColor="@android:color/black"
                         android:textSize="@dimen/text_big_bold" />
 
                     <ImageView
@@ -167,6 +168,15 @@
 
                 </RelativeLayout>
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="14dp"
+                    android:background="@drawable/primary_button"
+                    android:onClick="@{() -> viewModel.addToCart()}"
+                    android:text="@string/add_to_basket"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
                 <RatingBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -174,19 +184,13 @@
                     android:numStars="5"
                     android:progressTint="@color/primary_button"
                     android:rating="5" />
+
             </LinearLayout>
+
+
         </ScrollView>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginHorizontal="14dp"
-            android:background="@drawable/primary_button"
-            android:text="@string/add_to_basket"
-            android:onClick="@{() -> viewModel.addToCart()}"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+
     </RelativeLayout>
 
 </layout>
