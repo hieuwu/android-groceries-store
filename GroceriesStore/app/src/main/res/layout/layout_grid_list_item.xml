@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@{product.price.toString() + ` $`}"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
