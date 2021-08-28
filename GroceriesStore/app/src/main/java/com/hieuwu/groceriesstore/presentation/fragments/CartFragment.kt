@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
@@ -43,6 +45,14 @@ class CartFragment : BottomSheetDialogFragment() {
             LineListItemAdapter(LineListItemAdapter.OnClickListener {
                 viewModel.displayPropertyDetails(it)
             })
+
+
+        viewModel.lineItemList.observe(this.viewLifecycleOwner, Observer {
+
+            if (null != it) {
+                viewModel.sumPrice()
+            }
+        })
 
         binding.lifecycleOwner = this
         return binding.root
