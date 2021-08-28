@@ -2,11 +2,11 @@ package com.hieuwu.groceriesstore
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.hieuwu.groceriesstore.presentation.fragments.CartFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,9 +28,13 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.menu.getItem(2).isEnabled = false
 
         val fabButton = findViewById<FloatingActionButton>(R.id.fabButton)
+
+
+        val bottomSheetDialogFragment = CartFragment()
         fabButton.setOnClickListener {
-            navController.navigate(R.id.cartFragment)
+            bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
         }
+
         bottomNavigationView.setupWithNavController(navController)
 
     }
