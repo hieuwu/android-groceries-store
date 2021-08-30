@@ -27,4 +27,7 @@
         <item name="android:background">@drawable/rounded_background</item>
     </style>
 
+    <style name="TextAppearance.Sunflower.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
 </resources>
