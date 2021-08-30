@@ -209,10 +209,8 @@
             android:layout_width="match_parent"
             android:layout_height="278dp"
             android:animateLayoutChanges="true"
-            android:background="?attr/colorSurface"
             android:fitsSystemWindows="true"
-            android:stateListAnimator="@animator/show_toolbar"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:stateListAnimator="@animator/show_toolbar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -236,7 +234,15 @@
                     app:imageUrl="@{viewModel.product.image}"
                     app:layout_collapseMode="parallax" />
 
-
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    app:titleTextColor="?attr/colorOnSurface"
+                    app:layout_collapseMode="pin"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:navigationIcon="@drawable/ic_detail_back" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -254,7 +260,7 @@
                 android:layout_margin="@dimen/vertical_margin">
 
                 <TextView
-                    android:id="@+id/plant_detail_name"
+                    android:id="@+id/product_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/vertical_margin"
@@ -263,6 +269,7 @@
                     android:focusable="true"
                     android:gravity="center_horizontal"
                     android:text="@{viewModel.product.name}"
+                    android:textColor="@android:color/black"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -281,12 +288,13 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_detail_name" />
+                    app:layout_constraintTop_toBottomOf="@id/product_name" />
 
                 <LinearLayout
+                    android:id="@+id/qtyLayout"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/product_name"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center">
@@ -315,22 +323,26 @@
                         android:src="@drawable/ic_baseline_add_36" />
                 </LinearLayout>
 
+                <TextView
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/vertical_margin"
+                    android:layout_marginEnd="@dimen/vertical_margin"
+                    android:text="@{viewModel.product.description}"
+                    android:textIsSelectable="true"
+                    android:textColor="@android:color/black"
 
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/product_name"
+                    app:layout_anchorGravity="bottom|center"
+                    tools:text="Details about the plant" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            style="?android:attr/textAppearanceMedium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/vertical_margin"
-            android:layout_marginEnd="@dimen/vertical_margin"
-            android:text="@{viewModel.product.description}"
-            android:textIsSelectable="true"
-            app:layout_anchor="@+id/appbar"
-            app:layout_anchorGravity="bottom|center"
-            tools:text="Details about the plant" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
