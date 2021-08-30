@@ -13,64 +13,282 @@
     </data>
 
 
-    <RelativeLayout
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical"-->
+    <!--        tools:context=".presentation.fragments.ProductDetailFragment">-->
+
+
+    <!--        <ScrollView-->
+    <!--            android:id="@+id/detail_scrollview"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content">-->
+
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/product_image"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="250dp"-->
+    <!--                android:background="@drawable/rounded_bottom_left_right"-->
+    <!--                android:scaleType="fitXY"-->
+    <!--                app:imageUrl="@{viewModel.product.image}" />-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginHorizontal="14dp"-->
+    <!--                android:layout_marginBottom="48dp"-->
+    <!--                android:orientation="vertical">-->
+
+
+    <!--                <RelativeLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content">-->
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:text="@{viewModel.product.name}"-->
+    <!--                        android:textSize="@dimen/text_big_bold"-->
+    <!--                        android:textStyle="bold" />-->
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_alignParentRight="true"-->
+    <!--                        android:text="@{viewModel.product.price.toString() + ' ' + '$'}"-->
+    <!--                        android:textColor="@android:color/black"-->
+    <!--                        android:textSize="@dimen/text_big_bold"-->
+    <!--                        android:textStyle="bold" />-->
+    <!--                </RelativeLayout>-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="1 Kg/Unit" />-->
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginTop="8dp"-->
+    <!--                    android:gravity="center">-->
+
+    <!--                    <ImageView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:onClick="@{() -> viewModel.decreaseQty()}"-->
+    <!--                        android:src="@drawable/ic_baseline_remove_36" />-->
+
+    <!--                    <EditText-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginHorizontal="8dp"-->
+    <!--                        android:background="@drawable/border_textview"-->
+    <!--                        android:paddingHorizontal="8dp"-->
+    <!--                        android:paddingVertical="5dp"-->
+    <!--                        android:text="@{Converter.intToString(viewModel.qty)}"-->
+    <!--                        android:textColor="@android:color/black"-->
+    <!--                        android:textSize="@dimen/text_big_bold" />-->
+
+    <!--                    <ImageView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:onClick="@{() -> viewModel.increaseQty()}"-->
+    <!--                        android:src="@drawable/ic_baseline_add_36" />-->
+    <!--                </LinearLayout>-->
+
+    <!--                <View-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="1dp"-->
+    <!--                    android:layout_marginVertical="@dimen/vertical_margin"-->
+    <!--                    android:background="@android:color/darker_gray" />-->
+
+    <!--                <RelativeLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:gravity="center_vertical">-->
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/description"-->
+    <!--                        android:textSize="@dimen/text_big_bold"-->
+    <!--                        android:textStyle="bold" />-->
+
+    <!--                </RelativeLayout>-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="@{viewModel.product.description}" />-->
+
+    <!--                <View-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="1dp"-->
+    <!--                    android:layout_marginVertical="@dimen/vertical_margin"-->
+    <!--                    android:background="@android:color/darker_gray" />-->
+
+    <!--                <RelativeLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:gravity="center_vertical">-->
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/nutritions"-->
+    <!--                        android:textSize="@dimen/text_big_bold"-->
+    <!--                        android:textStyle="bold" />-->
+
+    <!--                </RelativeLayout>-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="Lorem Ipsum printer took a galley of type and scrambled it to make a type specimen book. " />-->
+
+
+    <!--                <View-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="1dp"-->
+    <!--                    android:layout_marginVertical="@dimen/vertical_margin"-->
+    <!--                    android:background="@android:color/darker_gray" />-->
+
+    <!--                <RelativeLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:gravity="center_vertical">-->
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/reviews"-->
+    <!--                        android:textSize="@dimen/text_big_bold"-->
+    <!--                        android:textStyle="bold" />-->
+
+    <!--                </RelativeLayout>-->
+
+    <!--                <Button-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginHorizontal="14dp"-->
+    <!--                    android:background="@drawable/primary_button"-->
+    <!--                    android:onClick="@{() -> viewModel.addToCart()}"-->
+    <!--                    android:text="@string/add_to_basket"-->
+    <!--                    android:textAllCaps="false"-->
+    <!--                    android:textColor="@android:color/white" />-->
+    <!--                <RatingBar-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginBottom="64dp"-->
+    <!--                    android:numStars="5"-->
+    <!--                    android:progressTint="@color/primary_button"-->
+    <!--                    android:rating="5" />-->
+
+    <!--            </LinearLayout>-->
+
+
+    <!--        </ScrollView>-->
+
+
+    <!--    </RelativeLayout>-->
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".presentation.fragments.ProductDetailFragment">
+        android:background="?attr/colorSurface"
+        android:fitsSystemWindows="true"
+        tools:context="com.google.samples.apps.sunflower.GardenActivity"
+        tools:ignore="MergeRootFrame">
 
-        <ImageView
-            android:id="@+id/product_image"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@drawable/rounded_bottom_left_right"
-            android:scaleType="fitXY"
-            app:imageUrl="@{viewModel.product.image}" />
+            android:layout_height="278dp"
+            android:animateLayoutChanges="true"
+            android:background="?attr/colorSurface"
+            android:fitsSystemWindows="true"
+            android:stateListAnimator="@animator/show_toolbar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/product_image">
-
-            <LinearLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="14dp"
-                android:layout_marginBottom="48dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleGravity="center"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.Sunflower.Toolbar.Text"
+                app:contentScrim="?attr/colorSurface"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="?attr/colorSurface"
+                app:title="@{viewModel.product.name}"
+                app:titleEnabled="false">
 
-
-                <RelativeLayout
+                <ImageView
+                    android:id="@+id/product_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="250dp"
+                    android:background="@drawable/rounded_bottom_left_right"
+                    android:scaleType="fitXY"
+                    app:imageUrl="@{viewModel.product.image}"
+                    app:layout_collapseMode="parallax" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@{viewModel.product.name}"
-                        android:textSize="@dimen/text_big_bold"
-                        android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text="@{viewModel.product.price.toString() + ' ' + '$'}"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_big_bold"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/plant_detail_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/vertical_margin">
 
                 <TextView
+                    android:id="@+id/plant_detail_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1 Kg/Unit" />
+                    android:layout_marginStart="@dimen/vertical_margin"
+                    android:layout_marginEnd="@dimen/vertical_margin"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_horizontal"
+                    android:text="@{viewModel.product.name}"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Apple" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/vertical_margin"
+                    android:layout_marginTop="@dimen/vertical_margin"
+                    android:layout_marginEnd="@dimen/vertical_margin"
+                    android:gravity="center_horizontal"
+                    android:text="Need"
+                    android:textColor="?attr/colorAccent"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/plant_detail_name" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center">
 
                     <ImageView
@@ -97,100 +315,24 @@
                         android:src="@drawable/ic_baseline_add_36" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="@dimen/vertical_margin"
-                    android:background="@android:color/darker_gray" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/description"
-                        android:textSize="@dimen/text_big_bold"
-                        android:textStyle="bold" />
+        </androidx.core.widget.NestedScrollView>
 
-                </RelativeLayout>
+        <TextView
+            style="?android:attr/textAppearanceMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/vertical_margin"
+            android:layout_marginEnd="@dimen/vertical_margin"
+            android:text="@{viewModel.product.description}"
+            android:textIsSelectable="true"
+            app:layout_anchor="@+id/appbar"
+            app:layout_anchorGravity="bottom|center"
+            tools:text="Details about the plant" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.product.description}" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="@dimen/vertical_margin"
-                    android:background="@android:color/darker_gray" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/nutritions"
-                        android:textSize="@dimen/text_big_bold"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Lorem Ipsum printer took a galley of type and scrambled it to make a type specimen book. " />
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="@dimen/vertical_margin"
-                    android:background="@android:color/darker_gray" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/reviews"
-                        android:textSize="@dimen/text_big_bold"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="14dp"
-                    android:background="@drawable/primary_button"
-                    android:onClick="@{() -> viewModel.addToCart()}"
-                    android:text="@string/add_to_basket"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="64dp"
-                    android:numStars="5"
-                    android:progressTint="@color/primary_button"
-                    android:rating="5" />
-
-            </LinearLayout>
-
-
-        </ScrollView>
-
-
-    </RelativeLayout>
 
 </layout>
