@@ -50,6 +50,8 @@ class ProductDetailFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
+
+
         viewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
@@ -63,6 +65,7 @@ class ProductDetailFragment : Fragment() {
                 viewModel.doneShowingSnackbar()
             }
         })
+
 
         return binding.root
     }
