@@ -48,9 +48,9 @@ class CartFragment : BottomSheetDialogFragment() {
 
 
         viewModel.lineItemList.observe(this.viewLifecycleOwner, Observer {
-
             if (null != it) {
                 viewModel.sumPrice()
+                binding.total.text = viewModel.totalPrice.toString()
             }
         })
 
