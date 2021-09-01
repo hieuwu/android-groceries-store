@@ -54,8 +54,8 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
         var sum = 0.0
         if (_lineItemList.value != null) {
             for (item in _lineItemList.value!!) {
-                val subtotal = item.lineItem?.quantity?.times(item?.product.price!!)
-                sum = sum.plus(subtotal as Double)
+                val subtotal = item.lineItem?.quantity?.times(item?.product.price!!) ?: 0.0
+                sum = sum.plus(subtotal)
             }
         }
         _totalPrice.value = sum
