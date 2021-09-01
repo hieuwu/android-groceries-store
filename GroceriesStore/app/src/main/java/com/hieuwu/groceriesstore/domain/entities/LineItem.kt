@@ -18,7 +18,10 @@ data class LineItem(
     @ColumnInfo(name = "orderId")
     val orderId: String,
 
+    @ColumnInfo(name = "quantity")
     val quantity: Int,
+
+    @ColumnInfo(name = "subtotal")
     val subtotal: Double
 ) {
 
