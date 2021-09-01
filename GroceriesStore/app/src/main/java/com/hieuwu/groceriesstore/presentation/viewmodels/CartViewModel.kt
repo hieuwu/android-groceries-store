@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.viewmodels
 
+import androidx.databinding.Bindable
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
@@ -18,14 +19,17 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
     val lineItemList: LiveData<List<ProductAndLineItem>>
         get() = _lineItemList
 
+//    private var _totalPrice = MutableLiveData<Double>()
+//    val totalPrice: LiveData<Double>
+//        @Bindable
+//        get() = _totalPrice
+
     private var _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double>
         get() = _totalPrice
 
-
     init {
         getLineItemFromDatabase()
-        sumPrice()
     }
 
     private fun getLineItemFromDatabase() {
@@ -46,15 +50,16 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
 
     }
 
-    public fun sumPrice() {
+    fun sumPrice(): Double {
         var sum = 0.0
-        if (_lineItemList?.value != null) {
+        if (_lineItemList.value != null) {
             for (item in _lineItemList.value!!) {
-                sum = sum?.plus(1.0)
+                val subtotal = item.lineItem?.quantity?.times(item?.product.price!!)
+                sum = sum.plus(subtotal as Double)
             }
         }
         _totalPrice.value = sum
-
+        return 5.0
     }
 
 }
