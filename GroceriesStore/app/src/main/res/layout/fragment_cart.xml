@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.hieuwu.groceriesstore.presentation.utils.Converter" />
-
         <variable
             name="viewModel"
             type="com.hieuwu.groceriesstore.presentation.viewmodels.CartViewModel" />
@@ -39,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:padding="@dimen/vertical_margin"
-                android:text="@{String.valueOf(viewModel.totalPrice)}"
+                android:text="@{String.valueOf(viewModel.totalPrice) + ` $`}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_big_bold"
                 android:textStyle="bold" />
