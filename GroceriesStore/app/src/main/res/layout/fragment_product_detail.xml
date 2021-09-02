@@ -16,7 +16,9 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.fragments.ProductDetailFragment">
+        android:fitsSystemWindows="true"
+        tools:context=".presentation.fragments.ProductDetailFragment"
+        tools:ignore="MergeRootFrame">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -49,14 +51,31 @@
                     app:imageUrl="@{viewModel.product.image}"
                     app:layout_collapseMode="parallax" />
 
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:layout_collapseMode="pin"
+                    app:menu="@menu/product_detail_menu"
+                    app:navigationIcon="@drawable/ic_detail_back"
+                    app:title="@{viewModel.product.name}"
+                    app:titleTextColor="?attr/colorOnSurface"
+                    app:toolbarId="@id/toolbar" />
+
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/product_detail_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="80dp"
+            android:clipToPadding="false"
+            android:paddingBottom="72dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -178,6 +197,7 @@
                     app:layout_constraintTop_toBottomOf="@id/view2" />
 
                 <Button
+                    android:id="@+id/add_to_basket_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -189,6 +209,13 @@
                     android:textColor="@android:color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/nutritions" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="700dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_to_basket_btn" />
 
                 <!--                <View-->
                 <!--                    android:layout_width="match_parent"-->
