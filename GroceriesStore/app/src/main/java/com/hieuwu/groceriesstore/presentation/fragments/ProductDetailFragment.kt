@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.viewmodels.ProductDetailViewModel
 import com.hieuwu.groceriesstore.presentation.viewmodels.factory.ProductDetailViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,6 +37,11 @@ class ProductDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = DataBindingUtil.inflate<FragmentProductDetailBinding>(
+            inflater, R.layout.fragment_product_detail, container, false
+        )
+        Timber.d("Cool")
         val args = ProductDetailFragmentArgs.fromBundle(arguments as Bundle)
 
         val viewModelFactory =
@@ -42,16 +49,9 @@ class ProductDetailFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductDetailViewModel::class.java)
 
-        binding = DataBindingUtil.inflate<FragmentProductDetailBinding>(
-            inflater, R.layout.fragment_product_detail, container, false
-        )
 
         binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
-
-
-
         viewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
@@ -65,6 +65,12 @@ class ProductDetailFragment : Fragment() {
                 viewModel.doneShowingSnackbar()
             }
         })
+
+        binding.productDetailScrollview.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+                Timber.d("$scrollY")
+            })
+
 
 
         return binding.root
