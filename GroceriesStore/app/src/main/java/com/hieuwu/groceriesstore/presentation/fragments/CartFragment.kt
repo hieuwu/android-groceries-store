@@ -40,21 +40,23 @@ class CartFragment : BottomSheetDialogFragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(CartViewModel::class.java)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         binding.cartDetailRecyclerview.adapter =
             LineListItemAdapter(LineListItemAdapter.OnClickListener {
                 viewModel.displayPropertyDetails(it)
             })
 
+        viewModel.totalPrice.observe(viewLifecycleOwner, Observer {
+            binding.total.text = it.toString()
+        })
 
-        viewModel.lineItemList.observe(this.viewLifecycleOwner, Observer {
-            if (null != it) {
+        viewModel.lineItemList.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
                 viewModel.sumPrice()
-                binding.total.text = viewModel.totalPrice.toString()
             }
         })
 
-        binding.lifecycleOwner = this
         return binding.root
     }
 
