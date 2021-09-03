@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutLineListItemBinding
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
+import kotlinx.android.synthetic.main.layout_line_list_item.view.*
 
 class LineListItemAdapter(val onClickListener: OnClickListener) :
     ListAdapter<ProductAndLineItem, LineListItemAdapter.LineItemViewHolder>(DiffCallback) {
@@ -20,9 +21,14 @@ class LineListItemAdapter(val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
         val lineItem = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(lineItem)
+        holder.itemView.plus_btn.setOnClickListener {
+            onClickListener.onPlusClick()
         }
+
+        holder.itemView.minus_btn.setOnClickListener {
+            onClickListener.onMinusClick()
+        }
+
         holder.bind(lineItem)
     }
 
@@ -46,8 +52,14 @@ class LineListItemAdapter(val onClickListener: OnClickListener) :
         }
     }
 
-    class OnClickListener(val clickListener: (lineItem: ProductAndLineItem) -> Unit) {
-        fun onClick(lineItemModel: ProductAndLineItem) = clickListener(lineItemModel)
-    }
+    class OnClickListener constructor(
+        var minusListener: () -> Unit,
+        var plusListener: () -> Unit
+    ) {
 
+        //        fun onClick(lineItemModel: ProductAndLineItem) = clickListener(lineItemModel)
+        fun onMinusClick() = minusListener()
+        fun onPlusClick() = plusListener()
+
+    }
 }
