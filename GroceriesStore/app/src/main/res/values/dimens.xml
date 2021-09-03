@@ -6,5 +6,7 @@
     <dimen name="text_big_bold">22sp</dimen>
     <dimen name="icon_small">36dp</dimen>
     <dimen name="icon_medium">64dp</dimen>
-
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
 </resources>
