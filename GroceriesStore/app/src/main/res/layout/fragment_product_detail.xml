@@ -22,13 +22,13 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
+            style="@style/AppModalTitleBar"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:animateLayoutChanges="true"
             android:background="?attr/colorSurface"
             android:fitsSystemWindows="true"
-            android:stateListAnimator="@animator/show_toolbar"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:stateListAnimator="@animator/show_toolbar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -40,6 +40,7 @@
                 app:contentScrim="?attr/colorSurface"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:statusBarScrim="?attr/colorSurface"
+                app:title="@{viewModel.product.name}"
                 app:titleEnabled="false">
 
                 <ImageView
@@ -60,7 +61,6 @@
                     app:layout_collapseMode="pin"
                     app:menu="@menu/product_detail_menu"
                     app:navigationIcon="@drawable/ic_detail_back"
-                    app:title="@{viewModel.product.name}"
                     app:titleTextColor="?attr/colorOnSurface"
                     app:toolbarId="@id/toolbar" />
 
