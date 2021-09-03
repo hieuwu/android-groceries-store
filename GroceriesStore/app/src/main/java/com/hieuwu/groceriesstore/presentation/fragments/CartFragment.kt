@@ -12,11 +12,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
+import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.presentation.viewmodels.CartViewModel
 import com.hieuwu.groceriesstore.presentation.viewmodels.factory.CartViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,10 +44,14 @@ class CartFragment : BottomSheetDialogFragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        var onClickListener = LineListItemAdapter.OnClickListener(minusListener = { minusClick() },
+            plusListener = { plusClick() })
+        onClickListener.minusListener = { minusClick() }
+        onClickListener.plusListener = { plusClick() }
+
         binding.cartDetailRecyclerview.adapter =
-            LineListItemAdapter(LineListItemAdapter.OnClickListener {
-                viewModel.displayPropertyDetails(it)
-            })
+            LineListItemAdapter(onClickListener)
+
 
         viewModel.totalPrice.observe(viewLifecycleOwner, Observer {
             binding.total.text = it.toString()
@@ -57,6 +64,14 @@ class CartFragment : BottomSheetDialogFragment() {
         })
 
         return binding.root
+    }
+
+    private fun minusClick() {
+        Timber.d("Minus Clicked")
+    }
+
+    private fun plusClick() {
+        Timber.d("Plus Clicked")
     }
 
 }
