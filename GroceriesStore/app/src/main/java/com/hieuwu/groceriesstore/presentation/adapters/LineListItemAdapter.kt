@@ -48,7 +48,7 @@ class LineListItemAdapter(val onClickListener: OnClickListener) :
             oldItem: ProductAndLineItem,
             newItem: ProductAndLineItem
         ): Boolean {
-            return (oldItem.lineItem == newItem.lineItem)
+            return (oldItem == newItem)
         }
     }
 
