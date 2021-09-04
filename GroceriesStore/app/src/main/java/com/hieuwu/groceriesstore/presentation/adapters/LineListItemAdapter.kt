@@ -48,8 +48,7 @@ class LineListItemAdapter(val onClickListener: OnClickListener) :
             oldItem: ProductAndLineItem,
             newItem: ProductAndLineItem
         ): Boolean {
-            return (oldItem.product.id == newItem.product.id
-                    && oldItem.lineItem?.quantity == newItem.lineItem?.quantity)
+            return (oldItem.lineItem == newItem.lineItem)
         }
     }
 
@@ -58,7 +57,6 @@ class LineListItemAdapter(val onClickListener: OnClickListener) :
         var plusListener: (lineItemModel: ProductAndLineItem) -> Unit
     ) {
 
-        //        fun onClick(lineItemModel: ProductAndLineItem) = clickListener(lineItemModel)
         fun onMinusClick(lineItemModel: ProductAndLineItem) = minusListener(lineItemModel)
         fun onPlusClick(lineItemModel: ProductAndLineItem) = plusListener(lineItemModel)
 
