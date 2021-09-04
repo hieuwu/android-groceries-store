@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.hieuwu.groceriesstore.data.utils.OrderStatus
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
+import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +15,10 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
-class CartViewModel @Inject constructor(private val productRepository: ProductRepository) :
+class CartViewModel @Inject constructor(
+    private val productRepository: ProductRepository,
+    private val orderRepository: OrderRepository
+) :
     ObservableViewModel() {
     private var _lineItemList = MutableLiveData<List<ProductAndLineItem>>()
     val lineItemList: LiveData<List<ProductAndLineItem>>
@@ -37,7 +42,7 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
     private suspend fun getLineItemFromLocal() {
         return withContext(Dispatchers.IO) {
             _lineItemList =
-                productRepository.getProductAndLineItem()
+                orderRepository.getOrderInCart(OrderStatus.IN_CART)
                     .asLiveData() as MutableLiveData<List<ProductAndLineItem>>
         }
     }
