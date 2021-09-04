@@ -22,11 +22,11 @@ class LineListItemAdapter(val onClickListener: OnClickListener) :
     override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
         val lineItem = getItem(position)
         holder.itemView.plus_btn.setOnClickListener {
-            onClickListener.onPlusClick()
+            onClickListener.onPlusClick(lineItem)
         }
 
         holder.itemView.minus_btn.setOnClickListener {
-            onClickListener.onMinusClick()
+            onClickListener.onMinusClick(lineItem)
         }
 
         holder.bind(lineItem)
@@ -48,18 +48,19 @@ class LineListItemAdapter(val onClickListener: OnClickListener) :
             oldItem: ProductAndLineItem,
             newItem: ProductAndLineItem
         ): Boolean {
-            return oldItem.product.id == newItem.product.id
+            return (oldItem.product.id == newItem.product.id
+                    && oldItem.lineItem?.quantity == newItem.lineItem?.quantity)
         }
     }
 
     class OnClickListener constructor(
-        var minusListener: () -> Unit,
-        var plusListener: () -> Unit
+        var minusListener: (lineItemModel: ProductAndLineItem) -> Unit,
+        var plusListener: (lineItemModel: ProductAndLineItem) -> Unit
     ) {
 
         //        fun onClick(lineItemModel: ProductAndLineItem) = clickListener(lineItemModel)
-        fun onMinusClick() = minusListener()
-        fun onPlusClick() = plusListener()
+        fun onMinusClick(lineItemModel: ProductAndLineItem) = minusListener(lineItemModel)
+        fun onPlusClick(lineItemModel: ProductAndLineItem) = plusListener(lineItemModel)
 
     }
 }
