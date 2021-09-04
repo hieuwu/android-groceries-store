@@ -4,10 +4,10 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class OrderWithLineItems(
-    @Embedded val order:Order,
+    @Embedded var order: Order?,
     @Relation(
         parentColumn = "orderId",
-        entityColumn = "orderId"
+        entityColumn = "orderId", entity = LineItem::class
     )
-    val lineItemList: List<LineItem>
+    val lineItemList: List<LineItem>?
 )

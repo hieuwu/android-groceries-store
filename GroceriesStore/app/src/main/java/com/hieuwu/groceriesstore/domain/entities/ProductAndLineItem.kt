@@ -10,5 +10,4 @@ data class ProductAndLineItem(
         entityColumn = "productId"
     )
     val lineItem: LineItem?
-
 )

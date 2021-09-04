@@ -1,12 +1,21 @@
 package com.hieuwu.groceriesstore.domain.entities
 
-import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
 
-@Entity(tableName = DataConstant.LINE_ITEM_TABLE)
+@Entity(
+    tableName = DataConstant.LINE_ITEM_TABLE
+//    , foreignKeys = [
+//        ForeignKey(
+//            entity = Order::class,
+//            parentColumns = arrayOf("lineItemId"),
+//            childColumns = arrayOf("orderId"),
+//            onDelete = ForeignKey.CASCADE
+//        )], indices = [
+//        Index(value = arrayOf("orderId")),
+//        Index(value = arrayOf("lineItemId"), unique = true)
+//    ]
+)
 data class LineItem(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "lineItemId")
