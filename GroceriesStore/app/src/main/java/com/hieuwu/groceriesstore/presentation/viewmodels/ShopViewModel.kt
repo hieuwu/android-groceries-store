@@ -17,7 +17,7 @@ class ShopViewModel @Inject constructor(
 
 
     init {
-//        fetchProductsFromServer()
+        fetchProductsFromServer()
         getProductsFromDatabase()
     }
 
