@@ -57,7 +57,6 @@ class ProductRepositoryImpl @Inject constructor(
         return product != null
     }
 
-    override suspend fun getProductAndLineItem() = productDao.getProductAndLineItem()
 
 
     override suspend fun getAllProducts() = productDao.getAll()
