@@ -9,7 +9,9 @@ import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 import javax.inject.Inject
@@ -34,18 +36,26 @@ class ProductDetailViewModel @Inject constructor(
             notifyPropertyChanged(BR.qty)
         }
 
+
+    init {
+
+        viewModelScope.launch {
+
+        }
+    }
+
     private var _showSnackbarEvent = MutableLiveData<Boolean>()
     val showSnackBarEvent: LiveData<Boolean>
         get() = _showSnackbarEvent
 
     fun addToCart() {
-        val subtotal = product.value?.price?.times(qty)
+        val subtotal = product.value?.price?.times(qty) ?: 0.0
+
         if (hasCart?.value != null) {
             //Add to cart
             val currentCart = orderRepository.getOrderInCart(OrderStatus.IN_CART).asLiveData()
             viewModelScope.launch {
-                var lineItem =
-                    LineItem(product.value!!.id, currentCart.value!!.id, _qty, subtotal!!)
+                val lineItem = LineItem(product.value!!.id, currentCart.value?.id!!, _qty, subtotal)
                 orderRepository.addLineItem(lineItem)
             }
         } else {
@@ -53,7 +63,7 @@ class ProductDetailViewModel @Inject constructor(
             val newOrder = Order(id, OrderStatus.IN_CART.value)
             viewModelScope.launch {
                 orderRepository.insert(newOrder)
-                var lineItem = LineItem(product.value!!.id, newOrder.id, _qty, subtotal!!)
+                var lineItem = LineItem(product.value!!.id, newOrder.id, _qty, subtotal)
                 orderRepository.addLineItem(lineItem)
             }
         }
@@ -78,4 +88,9 @@ class ProductDetailViewModel @Inject constructor(
         _showSnackbarEvent.value = false
     }
 
+    suspend fun getCurrentCart() {
+        return withContext(Dispatchers.IO) {
+            orderRepository.getOrderInCart(OrderStatus.IN_CART)
+        }
+    }
 }
