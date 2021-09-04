@@ -22,7 +22,7 @@ data class LineItem(
     var quantity: Int,
 
     @ColumnInfo(name = "subtotal")
-    val subtotal: Double
+    var subtotal: Double
 ) {
 
     constructor(productId: String, orderId: String, quantity: Int, subtotal: Double) : this(
