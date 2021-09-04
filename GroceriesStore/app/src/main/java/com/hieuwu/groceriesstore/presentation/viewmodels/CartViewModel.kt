@@ -59,9 +59,10 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
         val qty = lineItemModel.lineItem?.quantity?.minus(1)
         if (qty != null) {
             lineItemModel.lineItem.quantity = qty
+            lineItemModel.lineItem.subtotal = qty * (lineItemModel.product?.price ?: 1.0)
         }
         viewModelScope.launch {
-            productRepository.updateProductAndLineItem(lineItemModel)
+            updateCurrentLineItem(lineItemModel)
         }
     }
 
@@ -70,11 +71,18 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
         val qty = lineItemModel.lineItem?.quantity?.plus(1)
         if (qty != null) {
             lineItemModel.lineItem.quantity = qty
+            lineItemModel.lineItem.subtotal = qty * (lineItemModel.product?.price ?: 1.0)
         }
-
         viewModelScope.launch {
+            updateCurrentLineItem(lineItemModel)
+        }
+    }
+
+    private suspend fun updateCurrentLineItem(lineItemModel: ProductAndLineItem) {
+        withContext(Dispatchers.IO) {
             productRepository.updateProductAndLineItem(lineItemModel)
         }
     }
+
 
 }
