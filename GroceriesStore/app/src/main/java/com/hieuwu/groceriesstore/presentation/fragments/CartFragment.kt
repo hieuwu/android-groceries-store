@@ -43,14 +43,14 @@ class CartFragment : BottomSheetDialogFragment() {
             .get(CartViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        val adapter = LineListItemAdapter(
+            LineListItemAdapter.OnClickListener(
+                minusListener = { viewModel.decreaseQty(it) },
+                plusListener = { viewModel.increaseQty(it) }
+            )
+        )
 
-        var onClickListener = LineListItemAdapter.OnClickListener(minusListener = { minusClick() },
-            plusListener = { plusClick() })
-        onClickListener.minusListener = { minusClick() }
-        onClickListener.plusListener = { plusClick() }
-
-        binding.cartDetailRecyclerview.adapter =
-            LineListItemAdapter(onClickListener)
+        binding.cartDetailRecyclerview.adapter = adapter
 
 
         viewModel.totalPrice.observe(viewLifecycleOwner, Observer {
@@ -61,17 +61,12 @@ class CartFragment : BottomSheetDialogFragment() {
             if (it != null) {
                 viewModel.sumPrice()
             }
+            it?.let {
+                adapter.submitList(it)
+            }
         })
 
         return binding.root
-    }
-
-    private fun minusClick() {
-        Timber.d("Minus Clicked")
-    }
-
-    private fun plusClick() {
-        Timber.d("Plus Clicked")
     }
 
 }
