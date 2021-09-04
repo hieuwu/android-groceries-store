@@ -19,7 +19,7 @@ data class LineItem(
     val orderId: String,
 
     @ColumnInfo(name = "quantity")
-    val quantity: Int,
+    var quantity: Int,
 
     @ColumnInfo(name = "subtotal")
     val subtotal: Double
