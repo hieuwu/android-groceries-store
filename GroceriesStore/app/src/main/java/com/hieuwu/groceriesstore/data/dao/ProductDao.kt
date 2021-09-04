@@ -2,6 +2,7 @@ package com.hieuwu.groceriesstore.data.dao
 
 import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
+import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import kotlinx.coroutines.flow.Flow
@@ -30,5 +31,7 @@ interface ProductDao {
     @Query("SELECT* FROM ${DataConstant.PRODUCT_TABLE}")
     fun getProductAndLineItem(): Flow<List<ProductAndLineItem>>
 
-
+    @Transaction
+    @Update
+    fun updateProductAndLineItem(lineItem: ProductAndLineItem)
 }
