@@ -27,8 +27,5 @@ interface ProductDao {
     @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE} LIMIT 1")
     fun hasProduct(): Product?
 
-//    @Transaction
-//    @Query("SELECT* FROM ${DataConstant.PRODUCT_TABLE}")
-//    fun getProductAndLineItem(): Flow<List<ProductAndLineItem>>
 
 }
