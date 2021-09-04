@@ -57,9 +57,6 @@ class CartFragment : BottomSheetDialogFragment() {
             if (it != null) {
                 viewModel.sumPrice()
             }
-            it?.let {
-                adapter.submitList(it)
-            }
         })
 
         return binding.root
