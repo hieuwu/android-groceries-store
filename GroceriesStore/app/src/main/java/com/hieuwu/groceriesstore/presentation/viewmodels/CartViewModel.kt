@@ -10,6 +10,7 @@ import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class CartViewModel @Inject constructor(private val productRepository: ProductRepository) :
@@ -40,11 +41,6 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
                     .asLiveData() as MutableLiveData<List<ProductAndLineItem>>
         }
     }
-
-    fun displayPropertyDetails(it: ProductAndLineItem) {
-
-    }
-
     fun sumPrice() {
         var sum = 0.0
         if (_lineItemList.value != null) {
@@ -54,6 +50,23 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
             }
         }
         _totalPrice.value = sum
+    }
+
+
+    fun decreaseQty(lineItemModel: ProductAndLineItem) {
+        Timber.d("Minus Clicked")
+        val qty = lineItemModel.lineItem?.quantity?.minus(1)
+        if (qty != null) {
+            lineItemModel.lineItem.quantity = qty
+        }
+    }
+
+    fun increaseQty(lineItemModel: ProductAndLineItem) {
+        Timber.d("Plus Clicked")
+        val qty = lineItemModel.lineItem?.quantity?.plus(1)
+        if (qty != null) {
+            lineItemModel.lineItem.quantity = qty
+        }
     }
 
 }
