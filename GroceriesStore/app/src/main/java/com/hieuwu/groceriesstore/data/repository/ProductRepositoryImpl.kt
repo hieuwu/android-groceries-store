@@ -4,6 +4,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
+import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
@@ -43,6 +44,10 @@ class ProductRepositoryImpl @Inject constructor(
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.${exception}")
             }
+    }
+
+    override suspend fun updateProductAndLineItem(lineItem: LineItem) {
+        productDao.updateProductAndLineItem(lineItem)
     }
 
     override suspend fun hasProduct(): Boolean {
