@@ -49,5 +49,4 @@ class OrderRepositoryImpl @Inject constructor(
     override fun getOrderInCart(status: OrderStatus): Flow<Order> {
         return orderDao.getOrderInCart(status.value)
     }
-
 }
