@@ -11,6 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
+import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.presentation.viewmodels.CartViewModel
@@ -26,6 +27,9 @@ class CartFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var productRepository: ProductRepository
 
+    @Inject
+    lateinit var orderRepository: OrderRepository
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +38,7 @@ class CartFragment : BottomSheetDialogFragment() {
             inflater, R.layout.fragment_cart, container, false
         )
 
-        val viewModelFactory = CartViewModelFactory(productRepository)
+        val viewModelFactory = CartViewModelFactory(productRepository, orderRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(CartViewModel::class.java)
         binding.viewModel = viewModel
