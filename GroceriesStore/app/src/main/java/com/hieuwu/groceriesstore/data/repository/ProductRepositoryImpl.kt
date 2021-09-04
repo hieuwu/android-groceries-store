@@ -2,6 +2,7 @@ package com.hieuwu.groceriesstore.data.repository
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.LineItem
@@ -18,7 +19,8 @@ import javax.inject.Singleton
 
 @Singleton
 class ProductRepositoryImpl @Inject constructor(
-    private val productDao: ProductDao
+    private val productDao: ProductDao,
+    private val lineItemDao: LineItemDao
 ) : ProductRepository {
     private val executorService: ExecutorService = Executors.newFixedThreadPool(4)
 
@@ -46,7 +48,7 @@ class ProductRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun updateProductAndLineItem(lineItem: LineItem) {
+    override suspend fun updateProductAndLineItem(lineItem: ProductAndLineItem) {
         productDao.updateProductAndLineItem(lineItem)
     }
 
@@ -55,7 +57,7 @@ class ProductRepositoryImpl @Inject constructor(
         return product != null
     }
 
-    override suspend fun getProductAndLineItem ()= productDao.getProductAndLineItem()
+    override suspend fun getProductAndLineItem() = productDao.getProductAndLineItem()
 
 
     override suspend fun getAllProducts() = productDao.getAll()
