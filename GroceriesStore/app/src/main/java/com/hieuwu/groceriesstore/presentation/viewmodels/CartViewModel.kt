@@ -41,6 +41,7 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
                     .asLiveData() as MutableLiveData<List<ProductAndLineItem>>
         }
     }
+
     fun sumPrice() {
         var sum = 0.0
         if (_lineItemList.value != null) {
@@ -59,6 +60,9 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
         if (qty != null) {
             lineItemModel.lineItem.quantity = qty
         }
+        viewModelScope.launch {
+            productRepository.updateProductAndLineItem(lineItemModel)
+        }
     }
 
     fun increaseQty(lineItemModel: ProductAndLineItem) {
@@ -66,6 +70,10 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
         val qty = lineItemModel.lineItem?.quantity?.plus(1)
         if (qty != null) {
             lineItemModel.lineItem.quantity = qty
+        }
+
+        viewModelScope.launch {
+            productRepository.updateProductAndLineItem(lineItemModel)
         }
     }
 
