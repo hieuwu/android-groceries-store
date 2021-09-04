@@ -1,9 +1,6 @@
 package com.hieuwu.groceriesstore.domain.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
 import com.hieuwu.groceriesstore.data.utils.OrderStatus
 
