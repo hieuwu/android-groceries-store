@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutLineListItemBinding
+import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import kotlinx.android.synthetic.main.layout_line_list_item.view.*
 
