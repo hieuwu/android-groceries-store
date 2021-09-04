@@ -49,7 +49,7 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateProductAndLineItem(lineItem: ProductAndLineItem) {
-        productDao.updateProductAndLineItem(lineItem)
+        lineItemDao.update(lineItem.lineItem)
     }
 
     override suspend fun hasProduct(): Boolean {
