@@ -31,7 +31,4 @@ interface ProductDao {
     @Query("SELECT* FROM ${DataConstant.PRODUCT_TABLE}")
     fun getProductAndLineItem(): Flow<List<ProductAndLineItem>>
 
-    @Transaction
-    @Update
-    fun updateProductAndLineItem(lineItem: ProductAndLineItem)
 }
