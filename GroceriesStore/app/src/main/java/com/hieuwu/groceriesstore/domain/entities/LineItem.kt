@@ -31,9 +31,11 @@ data class LineItem(
     var quantity: Int,
 
     @ColumnInfo(name = "subtotal")
-    var subtotal: Double
-) {
+    var subtotal: Double,
 
+
+
+) {
     constructor(productId: String, orderId: String, quantity: Int, subtotal: Double) : this(
         0,
         productId,
