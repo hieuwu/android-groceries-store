@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.utils.OrderStatus
+import com.hieuwu.groceriesstore.domain.entities.Order
+import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
@@ -20,6 +22,11 @@ class CartViewModel @Inject constructor(
     private val orderRepository: OrderRepository
 ) :
     ObservableViewModel() {
+
+    private var _order = MutableLiveData<Order>()
+    val order: LiveData<Order>
+        get() = order
+
     private var _lineItemList = MutableLiveData<List<ProductAndLineItem>>()
     val lineItemList: LiveData<List<ProductAndLineItem>>
         get() = _lineItemList
@@ -30,6 +37,9 @@ class CartViewModel @Inject constructor(
 
     init {
         getLineItemFromDatabase()
+        var ab = orderRepository.getOrderWithLineItems()
+
+
         sumPrice()
     }
 
@@ -41,9 +51,12 @@ class CartViewModel @Inject constructor(
 
     private suspend fun getLineItemFromLocal() {
         return withContext(Dispatchers.IO) {
-            _lineItemList =
-                orderRepository.getOrderInCart(OrderStatus.IN_CART)
-                    .asLiveData() as MutableLiveData<List<ProductAndLineItem>>
+//            _lineItemList =
+//                orderRepository.getOrderInCart(OrderStatus.IN_CART)
+//                    .asLiveData() as MutableLiveData<List<ProductAndLineItem>>
+            _order = orderRepository.getOrderById("da0bce0d-628e-4b77-86db-a70d6ddf7050")
+                .asLiveData() as MutableLiveData<Order>
+            var a = _order.value?.id
         }
     }
 
