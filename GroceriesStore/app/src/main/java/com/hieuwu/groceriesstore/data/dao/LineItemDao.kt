@@ -18,4 +18,7 @@ interface LineItemDao {
     @Update
     fun update(lineItem: LineItem?)
 
+    @Transaction
+    @Query("SELECT * FROM ${DataConstant.LINE_ITEM_TABLE} ")
+    fun getAll(): Flow<List<ProductAndLineItem>>
 }
