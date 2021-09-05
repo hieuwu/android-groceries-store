@@ -12,4 +12,5 @@ interface OrderRepository {
     suspend fun addLineItem(lineItem: LineItem)
     fun getOrderById(id: String): Flow<OrderWithLineItems>
     fun getOrderInCart(status: OrderStatus): Flow<Order>
+    fun getOrderWithLineItems(): List<OrderWithLineItems>
 }
