@@ -18,11 +18,11 @@ interface OrderDao {
 
     @Transaction
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}`")
-    fun getOrderWithLineItems(): List<OrderWithLineItems>
+    fun getOrderWithLineItems(): Flow<List<OrderWithLineItems>>
 
     @Transaction
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE orderId = :id")
-    fun getById(id: String): Flow<OrderWithLineItems>
+    fun getById(id: String): OrderWithLineItems
 
     @Query("SELECT EXISTS(SELECT 1 FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status LIMIT 1)")
     fun isCartExisted(status: String): Flow<Boolean>
