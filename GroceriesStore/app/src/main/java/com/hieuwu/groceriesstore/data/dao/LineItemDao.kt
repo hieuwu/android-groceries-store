@@ -3,7 +3,6 @@ package com.hieuwu.groceriesstore.data.dao
 import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
 import com.hieuwu.groceriesstore.domain.entities.LineItem
-import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import kotlinx.coroutines.flow.Flow
 
@@ -21,4 +20,9 @@ interface LineItemDao {
     @Transaction
     @Query("SELECT * FROM ${DataConstant.LINE_ITEM_TABLE} ")
     fun getAll(): Flow<List<ProductAndLineItem>>
+
+
+    @Transaction
+    @Query("SELECT * FROM ${DataConstant.LINE_ITEM_TABLE} WHERE orderId = :orderId")
+    fun getLineItemInOrder(orderId:String): Flow<List<ProductAndLineItem>>
 }
