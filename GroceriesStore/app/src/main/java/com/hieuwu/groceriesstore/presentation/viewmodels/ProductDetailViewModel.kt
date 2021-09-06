@@ -53,9 +53,9 @@ class ProductDetailViewModel @Inject constructor(
 
         if (hasCart?.value != null) {
             //Add to cart
-            val currentCart = orderRepository.getOrderInCart(OrderStatus.IN_CART).asLiveData()
+            val currentCart = orderRepository.getOrderInCart(OrderStatus.IN_CART)
             viewModelScope.launch {
-                val lineItem = LineItem(product.value!!.id, currentCart.value?.id!!, _qty, subtotal)
+                val lineItem = LineItem(product.value!!.id,"da0bce0d-628e-4b77-86db-a70d6ddf7050", _qty, subtotal)
                 orderRepository.addLineItem(lineItem)
             }
         } else {
@@ -63,7 +63,7 @@ class ProductDetailViewModel @Inject constructor(
             val newOrder = Order(id, OrderStatus.IN_CART.value)
             viewModelScope.launch {
                 orderRepository.insert(newOrder)
-                var lineItem = LineItem(product.value!!.id, newOrder.id, _qty, subtotal)
+                var lineItem = LineItem(product.value!!.id,"da0bce0d-628e-4b77-86db-a70d6ddf7050", _qty, subtotal)
                 orderRepository.addLineItem(lineItem)
             }
         }
