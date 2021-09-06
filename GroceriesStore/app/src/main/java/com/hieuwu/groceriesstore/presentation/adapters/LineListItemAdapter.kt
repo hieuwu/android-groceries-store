@@ -22,13 +22,13 @@ class LineListItemAdapter(val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
         val lineItem = getItem(position)
-//        holder.itemView.plus_btn.setOnClickListener {
-//            onClickListener.onPlusClick(lineItem)
-//        }
-//
-//        holder.itemView.minus_btn.setOnClickListener {
-//            onClickListener.onMinusClick(lineItem)
-//        }
+        holder.itemView.plus_btn.setOnClickListener {
+            onClickListener.onPlusClick(lineItem)
+        }
+
+        holder.itemView.minus_btn.setOnClickListener {
+            onClickListener.onMinusClick(lineItem)
+        }
 
         holder.bind(lineItem)
     }
