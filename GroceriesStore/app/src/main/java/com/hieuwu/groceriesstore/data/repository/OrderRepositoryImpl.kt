@@ -46,10 +46,7 @@ class OrderRepositoryImpl @Inject constructor(
         return orderDao.getById(id)
     }
 
-    override fun getOrderInCart(status: OrderStatus): Flow<Order> {
-
-        return orderDao.getOrderInCart(status.value)
-    }
+    override fun getOrderInCart(status: OrderStatus) = orderDao.getOrderInCart(status.value)
 
     override fun getOrderWithLineItems(): List<OrderWithLineItems> {
         var a: List<OrderWithLineItems> = listOf<OrderWithLineItems>()
@@ -58,4 +55,7 @@ class OrderRepositoryImpl @Inject constructor(
         }
         return a
     }
+
+
+    override fun getCurrentCartId(status: OrderStatus) = orderDao.getCurrentCartId(status.value)
 }
