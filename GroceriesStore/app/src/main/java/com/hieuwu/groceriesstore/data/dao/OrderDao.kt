@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
 import com.hieuwu.groceriesstore.domain.entities.Order
@@ -27,6 +28,8 @@ interface OrderDao {
     fun isCartExisted(status: String): Flow<Boolean>
 
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status LIMIT 1")
-    fun getOrderInCart(status: String): Flow<Order>
+    fun getOrderInCart(status: String): Order
 
+    @Query("SELECT orderId FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status LIMIT 1")
+    fun getCurrentCartId(status: String): LiveData<String>
 }
