@@ -28,7 +28,7 @@ interface OrderDao {
     fun isCartExisted(status: String): Flow<Boolean>
 
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status LIMIT 1")
-    fun getOrderInCart(status: String): Order
+    fun getOrderInCart(status: String): Flow<Order>
 
     @Query("SELECT orderId FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status LIMIT 1")
     fun getCurrentCartId(status: String): LiveData<String>
