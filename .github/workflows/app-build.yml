@@ -47,4 +47,4 @@ jobs:
         uses: gradle/wrapper-validation-action@v1.0.4
         
       - name: Build the app
-        run: ./gradlew assembleDebug
+        run: cd ..
