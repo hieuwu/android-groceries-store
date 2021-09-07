@@ -63,7 +63,7 @@ class ProductDetailViewModel @Inject constructor(
             val newOrder = Order(id, OrderStatus.IN_CART.value)
             viewModelScope.launch {
                 orderRepository.insert(newOrder)
-                var lineItem = LineItem(
+                val lineItem = LineItem(
                     product.value!!.id,
                     "da0bce0d-628e-4b77-86db-a70d6ddf7050",
                     _qty,
