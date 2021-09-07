@@ -13,7 +13,7 @@ interface OrderRepository {
     suspend fun insert(order: Order)
     suspend fun addLineItem(lineItem: LineItem)
     fun getOrderById(id: String): OrderWithLineItems
-    fun getOrderInCart(status: OrderStatus): Order
+    fun getOrderInCart(status: OrderStatus): Flow<Order>
     fun getOrderWithLineItems(): Flow<List<OrderWithLineItems>>
     fun getCurrentCartId(status: OrderStatus): LiveData<String>
 }
