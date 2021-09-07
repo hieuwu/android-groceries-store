@@ -46,5 +46,8 @@ jobs:
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v1.0.4
         
+#       - name: Build project
+#         run: .github/scripts/gradlew_recursive.sh assembleDebug
+        
       - name: Build the app
-        run: cd  GroceriesStore;./gradlew assembleDebug --warning-mode all
+        run: cd  GroceriesStore;./gradlew assembleDebug --no-parallel 
