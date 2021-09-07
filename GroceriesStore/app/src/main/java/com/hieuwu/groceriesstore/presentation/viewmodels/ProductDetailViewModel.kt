@@ -25,6 +25,9 @@ class ProductDetailViewModel @Inject constructor(
     val product = productRepository.getById(id).asLiveData()
     val hasCart = orderRepository.hasCart()?.asLiveData()
 
+    private var _currentCart: LiveData<Order> =
+        orderRepository.getOrderInCart(OrderStatus.IN_CART).asLiveData()
+
     private var _qty: Int = 1
     var qty: Int
         @Bindable
@@ -36,14 +39,6 @@ class ProductDetailViewModel @Inject constructor(
             notifyPropertyChanged(BR.qty)
         }
 
-
-    init {
-
-        viewModelScope.launch {
-
-        }
-    }
-
     private var _showSnackbarEvent = MutableLiveData<Boolean>()
     val showSnackBarEvent: LiveData<Boolean>
         get() = _showSnackbarEvent
@@ -51,11 +46,16 @@ class ProductDetailViewModel @Inject constructor(
     fun addToCart() {
         val subtotal = product.value?.price?.times(qty) ?: 0.0
 
-        if (hasCart?.value != null) {
+        if (_currentCart.value != null) {
             //Add to cart
-            val currentCart = orderRepository.getOrderInCart(OrderStatus.IN_CART)
+            val currentCart = orderRepository.getCurrentCartId(OrderStatus.IN_CART)
             viewModelScope.launch {
-                val lineItem = LineItem(product.value!!.id,"da0bce0d-628e-4b77-86db-a70d6ddf7050", _qty, subtotal)
+                val lineItem = LineItem(
+                    product.value!!.id,
+                    "da0bce0d-628e-4b77-86db-a70d6ddf7050",
+                    _qty,
+                    subtotal
+                )
                 orderRepository.addLineItem(lineItem)
             }
         } else {
@@ -63,7 +63,12 @@ class ProductDetailViewModel @Inject constructor(
             val newOrder = Order(id, OrderStatus.IN_CART.value)
             viewModelScope.launch {
                 orderRepository.insert(newOrder)
-                var lineItem = LineItem(product.value!!.id,"da0bce0d-628e-4b77-86db-a70d6ddf7050", _qty, subtotal)
+                var lineItem = LineItem(
+                    product.value!!.id,
+                    "da0bce0d-628e-4b77-86db-a70d6ddf7050",
+                    _qty,
+                    subtotal
+                )
                 orderRepository.addLineItem(lineItem)
             }
         }
@@ -80,17 +85,11 @@ class ProductDetailViewModel @Inject constructor(
     }
 
     fun decreaseQty() {
-        if (qty <= 0) return
+        if (qty <= 1) return
         qty--
     }
 
     fun doneShowingSnackbar() {
         _showSnackbarEvent.value = false
-    }
-
-    suspend fun getCurrentCart() {
-        return withContext(Dispatchers.IO) {
-            orderRepository.getOrderInCart(OrderStatus.IN_CART)
-        }
     }
 }
