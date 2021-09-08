@@ -54,7 +54,7 @@ class ProductDetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel._currentCart.observe(viewLifecycleOwner, {})
+        viewModel.CurrentCart.observe(viewLifecycleOwner, {})
         viewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
