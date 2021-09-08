@@ -78,7 +78,7 @@ class GroceriesStoreDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetOrder() {
+    fun insertAndGetOrderWithItems() {
         val firstProduct = Product("1", "First Product", "Test", 12.0, "empty")
         val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty")
         productDao.insert(firstProduct)
@@ -95,5 +95,16 @@ class GroceriesStoreDatabaseTest {
         var completedOrder = orderDao.getOrderWithLineItems().asLiveData()
         var a = completedOrder.getOrAwaitValue()
         assertEquals(completedOrder, null)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertAndGetCurrentCart() {
+        val order = Order("12", OrderStatus.IN_CART.value)
+        orderDao.insert(order)
+
+        var cart = orderDao.getCart(OrderStatus.IN_CART.value).asLiveData()
+        var a = cart.getOrAwaitValue()
+        assertEquals(cart.getOrAwaitValue().status, true)
     }
 }
