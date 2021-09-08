@@ -4,8 +4,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
+import com.hieuwu.groceriesstore.data.utils.OrderStatus
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.LineItem
+import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
@@ -65,5 +67,6 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun getAllLineItem() = lineItemDao.getAll()
 
     override suspend fun getLineItemInOrder(orderId: String) = lineItemDao.getLineItemInOrder(orderId)
+
 
 }
