@@ -6,6 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.utils.OrderStatus
 import com.hieuwu.groceriesstore.domain.entities.Order
+import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
@@ -14,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.nio.channels.MulticastChannel
 import javax.inject.Inject
 
 class CartViewModel @Inject constructor(
@@ -21,11 +23,9 @@ class CartViewModel @Inject constructor(
     private val orderRepository: OrderRepository
 ) : ObservableViewModel() {
 
-    private var orderId = orderRepository.getCurrentCartId(OrderStatus.IN_CART)
-
-    private var _lineItemList = MutableLiveData<List<ProductAndLineItem>>()
-    val lineItemList: LiveData<List<ProductAndLineItem>>
-        get() = _lineItemList
+    private var _order = MutableLiveData<OrderWithLineItems>()
+    val order: LiveData<OrderWithLineItems>
+        get() = _order
 
     private var _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double>
@@ -44,16 +44,14 @@ class CartViewModel @Inject constructor(
 
     private suspend fun getLineItemFromLocal() {
         return withContext(Dispatchers.IO) {
-            _lineItemList =
-                productRepository.getLineItemInOrder("da0bce0d-628e-4b77-86db-a70d6ddf7050")
-                    .asLiveData() as MutableLiveData<List<ProductAndLineItem>>
+            _order = orderRepository.getCartWithLineItems(OrderStatus.IN_CART).asLiveData() as MutableLiveData<OrderWithLineItems>
         }
     }
 
     fun sumPrice() {
         var sum = 0.0
-        if (_lineItemList.value != null) {
-            for (item in _lineItemList.value!!) {
+        if (_order.value?.lineItemList != null) {
+            for (item in _order.value?.lineItemList!!) {
                 val sub = item.lineItem?.subtotal ?: 0.0
                 sum = sum.plus(sub)
             }
