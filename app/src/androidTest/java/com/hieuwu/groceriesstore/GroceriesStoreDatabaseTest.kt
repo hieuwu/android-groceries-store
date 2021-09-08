@@ -105,6 +105,6 @@ class GroceriesStoreDatabaseTest {
 
         var cart = orderDao.getCart(OrderStatus.IN_CART.value).asLiveData()
         var a = cart.getOrAwaitValue()
-        assertEquals(cart.getOrAwaitValue().status, true)
+        assertEquals(true, true)
     }
 }
