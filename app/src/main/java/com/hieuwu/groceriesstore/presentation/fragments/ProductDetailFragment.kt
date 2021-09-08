@@ -42,7 +42,6 @@ class ProductDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentProductDetailBinding>(
             inflater, R.layout.fragment_product_detail, container, false
         )
-        Timber.d("Cool")
         val args = ProductDetailFragmentArgs.fromBundle(arguments as Bundle)
 
         val viewModelFactory =
@@ -54,6 +53,7 @@ class ProductDetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        //Todo: Thí code is a trick for the live data in VM, should be removed
         viewModel.CurrentCart.observe(viewLifecycleOwner, {})
         viewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
