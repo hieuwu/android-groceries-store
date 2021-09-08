@@ -29,4 +29,5 @@
     <string name="line_item_image">Line Item image</string>
     <string name="fab">Fab</string>
     <string name="my_basket">My Basket</string>
+    <string name="check_out">Check out</string>
 </resources>
