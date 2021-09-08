@@ -52,12 +52,11 @@ class CartFragment : BottomSheetDialogFragment() {
 
         binding.cartDetailRecyclerview.adapter = adapter
 
-
-        viewModel.totalPrice.observe(viewLifecycleOwner, Observer {
+        viewModel.totalPrice.observe(viewLifecycleOwner,  {
             binding.total.text = it.toString()
         })
 
-        viewModel.lineItemList.observe(viewLifecycleOwner, Observer {
+        viewModel.order.observe(viewLifecycleOwner,  {
             if (it != null) {
                 viewModel.sumPrice()
             }
