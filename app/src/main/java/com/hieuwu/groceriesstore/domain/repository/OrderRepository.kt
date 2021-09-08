@@ -16,4 +16,5 @@ interface OrderRepository {
     fun getOrderInCart(status: OrderStatus): Flow<Order>
     fun getOrderWithLineItems(): Flow<List<OrderWithLineItems>>
     fun getCurrentCartId(status: OrderStatus): LiveData<String>
+    fun getCart(status: OrderStatus): Flow<Order>
 }
