@@ -51,4 +51,6 @@ class OrderRepositoryImpl @Inject constructor(
     override fun getOrderWithLineItems() = orderDao.getOrderWithLineItems()
 
     override fun getCurrentCartId(status: OrderStatus) = orderDao.getCurrentCartId(status.value)
+
+    override fun getCart(status: OrderStatus) = orderDao.getCart(status.value)
 }
