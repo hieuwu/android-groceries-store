@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,94 +9,96 @@
             type="com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem" />
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp">
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true">
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="@dimen/icon_medium"
-            android:layout_height="@dimen/icon_medium"
-            android:contentDescription="@string/line_item_image"
-            app:imageUrl="@{lineItem.product.image}" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/image"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/icon_medium"
+                android:layout_height="@dimen/icon_medium"
+                android:contentDescription="@string/line_item_image"
+                app:imageUrl="@{lineItem.product.image}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/image"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{lineItem.product.name}"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(lineItem.product.price) + ` $`}"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                    android:textColor="@android:color/darker_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/quantity_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <ImageView
+                        android:id="@+id/minus_btn"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_remove_36" />
+
+                    <EditText
+                        android:id="@+id/qty_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_toRightOf="@id/minus_btn"
+                        android:background="@drawable/border_textview"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="5dp"
+                        android:text="@{String.valueOf(lineItem.lineItem.quantity)}"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_big_bold" />
+
+                    <ImageView
+                        android:id="@+id/plus_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/qty_text"
+                        android:layout_toRightOf="@id/qty_text"
+                        android:src="@drawable/ic_baseline_add_36" />
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/name"
-                android:layout_width="250dp"
+                android:id="@+id/subtotal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="@{lineItem.product.name}"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:text="@{String.valueOf(lineItem.lineItem.subtotal) + ` $`}"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{String.valueOf(lineItem.product.price) + ` $`}"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:textColor="@android:color/darker_gray" />
-
-            <RelativeLayout
-                android:id="@+id/quantity_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/minus_btn"
-                    android:layout_width="36dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_remove_36" />
-
-                <EditText
-                    android:id="@+id/qty_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_toRightOf="@id/minus_btn"
-                    android:background="@drawable/border_textview"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="5dp"
-                    android:text="@{String.valueOf(lineItem.lineItem.quantity)}"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/text_big_bold" />
-
-                <ImageView
-                    android:id="@+id/plus_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/qty_text"
-                    android:layout_toRightOf="@id/qty_text"
-                    android:src="@drawable/ic_baseline_add_36" />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/subtotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:text="@{String.valueOf(lineItem.lineItem.subtotal) + ` $`}"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginVertical="5dp"
-            android:background="@android:color/darker_gray" />
-    </RelativeLayout>
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
