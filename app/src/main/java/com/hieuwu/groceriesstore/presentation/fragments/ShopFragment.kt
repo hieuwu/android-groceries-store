@@ -51,7 +51,7 @@ class ShopFragment : Fragment() {
                 viewModel.displayPropertyDetails(it)
             })
 
-        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, Observer {
+        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
 
             if (null != it) {
                 val direction =
