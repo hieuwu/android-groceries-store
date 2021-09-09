@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.utils.OrderStatus
-import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
@@ -15,7 +14,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.nio.channels.MulticastChannel
 import javax.inject.Inject
 
 class CartViewModel @Inject constructor(
@@ -62,6 +60,7 @@ class CartViewModel @Inject constructor(
 
     fun decreaseQty(lineItemModel: ProductAndLineItem) {
         Timber.d("Minus Clicked")
+        if( lineItemModel.lineItem?.quantity == 1) return
         val qty = lineItemModel.lineItem?.quantity?.minus(1)
         if (qty != null) {
             lineItemModel.lineItem.quantity = qty
@@ -74,6 +73,7 @@ class CartViewModel @Inject constructor(
 
     fun increaseQty(lineItemModel: ProductAndLineItem) {
         Timber.d("Plus Clicked")
+        if( lineItemModel.lineItem?.quantity == 1) return
         val qty = lineItemModel.lineItem?.quantity?.plus(1)
         if (qty != null) {
             lineItemModel.lineItem.quantity = qty
