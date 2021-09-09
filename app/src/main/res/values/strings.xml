@@ -30,4 +30,7 @@
     <string name="fab">Fab</string>
     <string name="my_basket">My Basket</string>
     <string name="check_out">Go to Check Out</string>
+    <string name="delivery">Delivery</string>
+    <string name="edit">Edit</string>
+    <string name="payment_method">Payment method</string>
 </resources>
