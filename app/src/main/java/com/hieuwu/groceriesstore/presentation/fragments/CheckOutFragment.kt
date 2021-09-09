@@ -5,56 +5,58 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.R
+import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
+import com.hieuwu.groceriesstore.domain.repository.OrderRepository
+import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
+import com.hieuwu.groceriesstore.presentation.viewmodels.CheckOutViewModel
+import com.hieuwu.groceriesstore.presentation.viewmodels.factory.CheckOutViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CheckOutFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class CheckOutFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentCheckOutBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    @Inject
+    lateinit var orderRepository: OrderRepository
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_check_out, container, false)
-    }
+    ): View {
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CheckOutFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CheckOutFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        binding = DataBindingUtil.inflate<FragmentCheckOutBinding>(
+            inflater,
+            R.layout.fragment_check_out,
+            container,
+            false
+        )
+        val args = CheckOutFragmentArgs.fromBundle(arguments as Bundle)
+
+        val viewModelFactory =
+            CheckOutViewModelFactory(args.orderId, orderRepository)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(CheckOutViewModel::class.java)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        val adapter = LineListItemAdapter(
+            LineListItemAdapter.OnClickListener(
+                minusListener = { (_) -> },
+                plusListener = { (_) -> }
+            )
+        )
+        binding.cartDetailRecyclerview.adapter = adapter
+
+        viewModel.order.observe(viewLifecycleOwner, {
+
+        })
+
+        return binding.root
     }
 }
