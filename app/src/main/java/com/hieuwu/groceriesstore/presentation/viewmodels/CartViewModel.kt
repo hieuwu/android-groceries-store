@@ -73,7 +73,6 @@ class CartViewModel @Inject constructor(
 
     fun increaseQty(lineItemModel: ProductAndLineItem) {
         Timber.d("Plus Clicked")
-        if( lineItemModel.lineItem?.quantity == 1) return
         val qty = lineItemModel.lineItem?.quantity?.plus(1)
         if (qty != null) {
             lineItemModel.lineItem.quantity = qty
