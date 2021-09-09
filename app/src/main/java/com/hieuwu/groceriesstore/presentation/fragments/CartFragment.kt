@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
+import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
@@ -52,16 +53,23 @@ class CartFragment : BottomSheetDialogFragment() {
 
         binding.cartDetailRecyclerview.adapter = adapter
 
-        viewModel.totalPrice.observe(viewLifecycleOwner,  {
+        viewModel.totalPrice.observe(viewLifecycleOwner, {
             binding.total.text = it.toString()
         })
 
-        viewModel.order.observe(viewLifecycleOwner,  {
+        viewModel.order.observe(viewLifecycleOwner, {
             if (it != null) {
                 viewModel.sumPrice()
             }
         })
 
+        binding.checkoutButton.setOnClickListener {
+            val direction =
+                ShopFragmentDirections.actionShopFragmentToCheckOutFragment2(
+                    viewModel.order.value?.order?.id as String
+                )
+            this.findNavController().navigate(direction)
+        }
         return binding.root
     }
 
