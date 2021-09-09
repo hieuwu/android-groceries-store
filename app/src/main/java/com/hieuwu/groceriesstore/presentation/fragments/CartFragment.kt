@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
@@ -69,6 +70,7 @@ class CartFragment : BottomSheetDialogFragment() {
                     viewModel.order.value?.order?.id as String
                 )
             this.findNavController().navigate(direction)
+            dismiss();
         }
         return binding.root
     }
