@@ -1,21 +1,18 @@
-package com.hieuwu.groceriesstore.presentation.fragments
+package com.hieuwu.groceriesstore.presentation.cart
 
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
-import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
-import com.hieuwu.groceriesstore.presentation.viewmodels.CartViewModel
-import com.hieuwu.groceriesstore.presentation.viewmodels.factory.CartViewModelFactory
+import com.hieuwu.groceriesstore.presentation.fragments.ShopFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
