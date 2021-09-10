@@ -32,7 +32,7 @@ class CheckOutFragment : Fragment() {
             container,
             false
         )
-        val args = com.hieuwu.groceriesstore.presentation.fragments.CheckOutFragmentArgs.fromBundle(
+        val args = CheckOutFragmentArgs.fromBundle(
             arguments as Bundle
         )
 
