@@ -26,7 +26,7 @@ class SwipeToDeleteCallback constructor(val adapter: LineListItemAdapter) :
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.adapterPosition;
-        adapter.deleteItemAt(position);
+        adapter.removeItemAt(position)
     }
 
     override fun onChildDraw(
