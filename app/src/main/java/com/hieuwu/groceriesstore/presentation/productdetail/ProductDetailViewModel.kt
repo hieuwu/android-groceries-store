@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.viewmodels
+package com.hieuwu.groceriesstore.presentation.productdetail
 
 import androidx.databinding.Bindable
 import androidx.lifecycle.*
