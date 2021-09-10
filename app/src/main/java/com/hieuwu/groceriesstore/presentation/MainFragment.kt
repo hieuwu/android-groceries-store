@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.fragments
+package com.hieuwu.groceriesstore.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
