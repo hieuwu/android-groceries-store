@@ -65,8 +65,10 @@ class ProductRepositoryImpl @Inject constructor(
     override fun getById(id: String) = productDao.getById(id)
 
     override suspend fun getAllLineItem() = lineItemDao.getAll()
+    override suspend fun removeProductAndLineItem(lineItem: LineItem) {
+        lineItemDao.removeCurrentItem(lineItem)
+    }
 
-    override suspend fun getLineItemInOrder(orderId: String) = lineItemDao.getLineItemInOrder(orderId)
-
-
+    override suspend fun getLineItemInOrder(orderId: String) =
+        lineItemDao.getLineItemInOrder(orderId)
 }
