@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hieuwu.groceriesstore.presentation.viewmodels.CartViewModel" />
+            type="com.hieuwu.groceriesstore.presentation.cart.CartViewModel" />
     </data>
 
 
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:elevation="5dp"
         android:orientation="vertical"
-        tools:context=".presentation.fragments.CartFragment">
+        tools:context=".presentation.cart.CartFragment">
 
 
         <RelativeLayout
