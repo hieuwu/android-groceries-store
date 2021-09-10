@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.hieuwu.groceriesstore.presentation.viewmodels.ShopViewModel" />
+            type="com.hieuwu.groceriesstore.presentation.shop.ShopViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.fragments.ShopFragment">
+        tools:context=".presentation.shop.ShopFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
