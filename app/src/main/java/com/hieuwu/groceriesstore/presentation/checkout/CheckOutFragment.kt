@@ -48,7 +48,8 @@ class CheckOutFragment : Fragment() {
             LineListItemAdapter.OnClickListener(
                 minusListener = { (_) -> },
                 plusListener = { (_) -> }
-            )
+            ),
+            requireContext()
         )
         binding.cartDetailRecyclerview.adapter = adapter
 
