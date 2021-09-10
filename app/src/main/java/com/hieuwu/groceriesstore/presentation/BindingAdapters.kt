@@ -34,7 +34,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 }
 
 @BindingAdapter("lineListData")
-fun bindRecyclerViewLine(recyclerView: RecyclerView, data: List<ProductAndLineItem>?) {
+fun bindRecyclerViewLine(recyclerView: RecyclerView, data: MutableList<ProductAndLineItem>?) {
     val adapter = recyclerView.adapter as LineListItemAdapter
     adapter.submitList(data)
 }
