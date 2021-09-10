@@ -6,7 +6,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.hieuwu.groceriesstore.presentation.fragments.CartFragment
+import com.hieuwu.groceriesstore.presentation.cart.CartFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
