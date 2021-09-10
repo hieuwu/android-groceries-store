@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.fragments
+package com.hieuwu.groceriesstore.presentation.checkout
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
-import com.hieuwu.groceriesstore.presentation.viewmodels.CheckOutViewModel
-import com.hieuwu.groceriesstore.presentation.viewmodels.factory.CheckOutViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,7 +32,9 @@ class CheckOutFragment : Fragment() {
             container,
             false
         )
-        val args = CheckOutFragmentArgs.fromBundle(arguments as Bundle)
+        val args = com.hieuwu.groceriesstore.presentation.fragments.CheckOutFragmentArgs.fromBundle(
+            arguments as Bundle
+        )
 
         val viewModelFactory =
             CheckOutViewModelFactory(args.orderId, orderRepository)
