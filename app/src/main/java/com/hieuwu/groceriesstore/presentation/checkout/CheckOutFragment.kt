@@ -46,9 +46,9 @@ class CheckOutFragment : Fragment() {
 
         val adapter = LineListItemAdapter(
             LineListItemAdapter.OnClickListener(
-                minusListener = { (_) -> },
-                plusListener = { (_) -> }
-            ),
+                minusListener = {},
+                plusListener = {},
+                removeListener = {}),
             requireContext()
         )
         binding.cartDetailRecyclerview.adapter = adapter
