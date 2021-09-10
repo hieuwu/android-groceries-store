@@ -32,14 +32,14 @@
                 android:textSize="@dimen/text_big_bold"
                 android:textStyle="bold" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@id/total"
-                android:backgroundTint="#B31E1E"
-                android:drawableLeft="@drawable/ic_baseline_delete"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white" />
+<!--            <ImageButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_toStartOf="@id/total"-->
+<!--                android:backgroundTint="#B31E1E"-->
+<!--                android:src="@drawable/ic_baseline_delete"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@android:color/white" />-->
 
             <TextView
                 android:id="@+id/total"
