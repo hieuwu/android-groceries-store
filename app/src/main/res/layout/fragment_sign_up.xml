@@ -5,13 +5,13 @@
 
         <variable
             name="signUpViewModel"
-            type="com.hieuwu.groceriesstore.presentation.viewmodels.SignUpViewModel" />
+            type="com.hieuwu.groceriesstore.presentation.authentication.SignUpViewModel" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        tools:context=".presentation.fragments.SignUpFragment">
+        tools:context=".presentation.authentication.SignUpFragment">
 
         <FrameLayout
             android:layout_width="match_parent"
