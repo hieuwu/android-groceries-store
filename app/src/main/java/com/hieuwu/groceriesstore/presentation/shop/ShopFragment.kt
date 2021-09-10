@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.fragments
+package com.hieuwu.groceriesstore.presentation.shop
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +14,6 @@ import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
-import com.hieuwu.groceriesstore.presentation.viewmodels.ShopViewModel
-import com.hieuwu.groceriesstore.presentation.viewmodels.factory.ShopViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -54,8 +51,7 @@ class ShopFragment : Fragment() {
         viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
 
             if (null != it) {
-                val direction =
-                    ShopFragmentDirections.actionShopFragmentToProductDetailFragment(
+                val direction = ShopFragmentDirections.actionShopFragmentToProductDetailFragment(
                         it.id
                     )
                 findNavController().navigate(direction)
