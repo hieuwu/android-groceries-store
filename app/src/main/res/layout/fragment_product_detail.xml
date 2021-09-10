@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hieuwu.groceriesstore.presentation.viewmodels.ProductDetailViewModel" />
+            type="com.hieuwu.groceriesstore.presentation.productdetail.ProductDetailViewModel" />
 
         <import type="com.hieuwu.groceriesstore.presentation.utils.Converter" />
     </data>
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".presentation.fragments.ProductDetailFragment"
+        tools:context=".presentation.productdetail.ProductDetailFragment"
         tools:ignore="MergeRootFrame">
 
         <com.google.android.material.appbar.AppBarLayout
