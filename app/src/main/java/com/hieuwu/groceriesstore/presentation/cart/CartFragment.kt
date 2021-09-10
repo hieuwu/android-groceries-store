@@ -12,7 +12,7 @@ import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
-import com.hieuwu.groceriesstore.presentation.fragments.ShopFragmentDirections
+import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
