@@ -1,9 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -72,7 +70,20 @@ class CartFragment : BottomSheetDialogFragment() {
             this.findNavController().navigate(direction)
             dismiss();
         }
+
+        registerForContextMenu(binding.cartDetailRecyclerview)
         return binding.root
     }
 
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater = MenuInflater(context)
+        inflater.inflate(R.menu.line_item_context_menu, menu)
+
+    }
 }
+
