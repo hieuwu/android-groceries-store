@@ -42,7 +42,8 @@ class CartViewModel @Inject constructor(
 
     private suspend fun getLineItemFromLocal() {
         return withContext(Dispatchers.IO) {
-            _order = orderRepository.getCartWithLineItems(OrderStatus.IN_CART).asLiveData() as MutableLiveData<OrderWithLineItems>
+            _order = orderRepository.getCartWithLineItems(OrderStatus.IN_CART)
+                .asLiveData() as MutableLiveData<OrderWithLineItems>
         }
     }
 
@@ -60,7 +61,7 @@ class CartViewModel @Inject constructor(
 
     fun decreaseQty(lineItemModel: ProductAndLineItem) {
         Timber.d("Minus Clicked")
-        if( lineItemModel.lineItem?.quantity == 1) return
+        if (lineItemModel.lineItem?.quantity == 1) return
         val qty = lineItemModel.lineItem?.quantity?.minus(1)
         if (qty != null) {
             lineItemModel.lineItem.quantity = qty
@@ -83,11 +84,22 @@ class CartViewModel @Inject constructor(
         }
     }
 
+    fun removeItem(lineItemModel: ProductAndLineItem) {
+        viewModelScope.launch {
+            removeCurrentLineItem(lineItemModel)
+        }
+    }
+
     private suspend fun updateCurrentLineItem(lineItemModel: ProductAndLineItem) {
         withContext(Dispatchers.IO) {
             productRepository.updateProductAndLineItem(lineItemModel)
         }
     }
 
+    private suspend fun removeCurrentLineItem(lineItemModel: ProductAndLineItem) {
+        withContext(Dispatchers.IO) {
+            productRepository.removeProductAndLineItem(lineItemModel.lineItem!!)
+        }
+    }
 
 }
