@@ -107,4 +107,29 @@ class GroceriesStoreDatabaseTest {
         var a = cart.getOrAwaitValue()
         assertEquals(true, true)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun removeItem() {
+        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty")
+        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty")
+        productDao.insert(firstProduct)
+        productDao.insert(secondProduct)
+        val order = Order("12", OrderStatus.IN_CART.value)
+
+        val firstLineItem = LineItem(1, firstProduct.id, "12", 4, 5.6)
+        val secondLineItem = LineItem(2, secondProduct.id, "12", 5, 7.0)
+
+        orderDao.insert(order)
+        linetItemDao.insert(firstLineItem)
+        linetItemDao.insert(secondLineItem)
+        var cart = orderDao.getCart(OrderStatus.IN_CART.value).asLiveData()
+
+
+        linetItemDao.removeCurrentItem(firstLineItem)
+
+        var list = linetItemDao.getAll().asLiveData()
+        var data = list.getOrAwaitValue()
+        assertEquals(null, null)
+    }
 }
