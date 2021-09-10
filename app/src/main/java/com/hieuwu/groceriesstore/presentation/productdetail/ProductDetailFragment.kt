@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.fragments
+package com.hieuwu.groceriesstore.presentation.productdetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,8 +16,6 @@ import com.hieuwu.groceriesstore.databinding.FragmentProductDetailBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import com.hieuwu.groceriesstore.presentation.viewmodels.ProductDetailViewModel
-import com.hieuwu.groceriesstore.presentation.viewmodels.factory.ProductDetailViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -42,7 +40,9 @@ class ProductDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentProductDetailBinding>(
             inflater, R.layout.fragment_product_detail, container, false
         )
-        val args = ProductDetailFragmentArgs.fromBundle(arguments as Bundle)
+        val args = ProductDetailFragmentArgs.fromBundle(
+                arguments as Bundle
+            )
 
         val viewModelFactory =
             ProductDetailViewModelFactory(args.id, productRepository, orderRepository)
