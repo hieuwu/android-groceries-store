@@ -14,6 +14,9 @@ interface LineItemDao {
     @Query("SELECT * FROM ${DataConstant.LINE_ITEM_TABLE} WHERE lineItemId = :id")
     fun getById(id: Long): Flow<LineItem>
 
+    @Delete
+    fun removeCurrentItem(lineItem: LineItem)
+
     @Update
     fun update(lineItem: LineItem?)
 
