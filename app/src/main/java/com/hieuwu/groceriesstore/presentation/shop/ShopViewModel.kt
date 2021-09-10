@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.viewmodels
+package com.hieuwu.groceriesstore.presentation.shop
 
 import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.domain.entities.Product
