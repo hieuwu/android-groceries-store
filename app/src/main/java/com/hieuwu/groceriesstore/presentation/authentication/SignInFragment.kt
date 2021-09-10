@@ -1,12 +1,10 @@
-package com.hieuwu.groceriesstore.presentation.fragments
+package com.hieuwu.groceriesstore.presentation.authentication
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,8 +12,6 @@ import androidx.navigation.findNavController
 import com.hieuwu.groceriesstore.MainActivity
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSigninBinding
-import com.hieuwu.groceriesstore.presentation.viewmodels.SignInViewModel
-import com.hieuwu.groceriesstore.presentation.viewmodels.factory.ViewModelFactory
 
 
 class SignInFragment : Fragment() {
