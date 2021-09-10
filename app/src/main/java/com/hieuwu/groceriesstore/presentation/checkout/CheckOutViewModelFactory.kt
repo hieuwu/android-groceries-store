@@ -1,9 +1,8 @@
-package com.hieuwu.groceriesstore.presentation.viewmodels.factory
+package com.hieuwu.groceriesstore.presentation.checkout
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.presentation.checkout.CheckOutViewModel
 
 class CheckOutViewModelFactory(
     private val orderId: String, private val orderRepository: OrderRepository
