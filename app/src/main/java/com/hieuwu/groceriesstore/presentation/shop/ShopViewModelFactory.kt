@@ -1,10 +1,8 @@
-package com.hieuwu.groceriesstore.presentation.viewmodels.factory
+package com.hieuwu.groceriesstore.presentation.shop
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import com.hieuwu.groceriesstore.presentation.viewmodels.ShopViewModel
 
 class ShopViewModelFactory(
     private val repo: ProductRepository
