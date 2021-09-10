@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.viewmodels
+package com.hieuwu.groceriesstore.presentation.authentication
 
 import androidx.databinding.Bindable
 import com.hieuwu.groceriesstore.BR
