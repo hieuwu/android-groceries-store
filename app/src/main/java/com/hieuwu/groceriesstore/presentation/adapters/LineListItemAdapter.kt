@@ -21,8 +21,9 @@ class LineListItemAdapter(val onClickListener: OnClickListener, val context: Con
         }
     }
 
-    fun deleteItemAt(i:Int) {
-        
+    fun removeItemAt(position: Int) {
+        val lineItem = getItem(position)
+        onClickListener.onRemoveItem(lineItem)
     }
 
     override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
@@ -64,9 +65,12 @@ class LineListItemAdapter(val onClickListener: OnClickListener, val context: Con
 
     class OnClickListener constructor(
         var minusListener: (lineItemModel: ProductAndLineItem) -> Unit,
-        var plusListener: (lineItemModel: ProductAndLineItem) -> Unit
+        var plusListener: (lineItemModel: ProductAndLineItem) -> Unit,
+        var removeListener: (lineItemModel: ProductAndLineItem) -> Unit,
     ) {
         fun onMinusClick(lineItemModel: ProductAndLineItem) = minusListener(lineItemModel)
         fun onPlusClick(lineItemModel: ProductAndLineItem) = plusListener(lineItemModel)
+        fun onRemoveItem(lineItemModel: ProductAndLineItem) = removeListener(lineItemModel)
     }
+
 }
