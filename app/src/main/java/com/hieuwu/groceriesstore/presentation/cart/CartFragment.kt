@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
+import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
@@ -47,6 +49,7 @@ class CartFragment : BottomSheetDialogFragment() {
             LineListItemAdapter.OnClickListener(
                 minusListener = { viewModel.decreaseQty(it) },
                 plusListener = { viewModel.increaseQty(it) },
+                removeListener = { viewModel.removeItem(it)}
             ),requireContext()
         )
 
@@ -91,6 +94,13 @@ class CartFragment : BottomSheetDialogFragment() {
 
     }
 
+    fun showSnackBar(lineItemModel: ProductAndLineItem) {
+        Snackbar.make(
+            dialog?.window?.decorView!!,
+            "Removed " + lineItemModel.product?.name,
+            Snackbar.LENGTH_SHORT
+        ).show()
+    }
 
 }
 
