@@ -1,23 +1,28 @@
 package com.hieuwu.groceriesstore.presentation.adapters
 
+import android.content.Context
 import android.view.*
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hieuwu.groceriesstore.MainActivity
-import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.LayoutLineListItemBinding
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import kotlinx.android.synthetic.main.layout_line_list_item.view.*
 
-class LineListItemAdapter(val onClickListener: OnClickListener) :
+class LineListItemAdapter(val onClickListener: OnClickListener, val context: Context) :
     ListAdapter<ProductAndLineItem, LineListItemAdapter.LineItemViewHolder>(DiffCallback) {
+
+
     class LineItemViewHolder(private var binding: LayoutLineListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(lineItemModel: ProductAndLineItem) {
             binding.lineItem = lineItemModel
             binding.executePendingBindings()
         }
+    }
+
+    fun deleteItemAt(i:Int) {
+        
     }
 
     override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
