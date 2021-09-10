@@ -6,14 +6,14 @@
 
         <variable
             name="signInViewModel"
-            type="com.hieuwu.groceriesstore.presentation.viewmodels.SignInViewModel" />
+            type="com.hieuwu.groceriesstore.presentation.authentication.SignInViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        tools:context=".presentation.fragments.SignInFragment">
+        tools:context=".presentation.authentication.SignInFragment">
 
         <FrameLayout
             android:layout_width="match_parent"
