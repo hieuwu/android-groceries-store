@@ -1,11 +1,9 @@
-package com.hieuwu.groceriesstore.presentation.viewmodels.factory
+package com.hieuwu.groceriesstore.presentation.authentication
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
-import com.hieuwu.groceriesstore.presentation.authentication.SignInViewModel
-import com.hieuwu.groceriesstore.presentation.authentication.SignUpViewModel
 
 class ViewModelFactory(
     private val valdataSource: GroceriesStoreDatabase?,
