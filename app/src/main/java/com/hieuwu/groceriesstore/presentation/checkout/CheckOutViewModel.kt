@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.viewmodels
+package com.hieuwu.groceriesstore.presentation.checkout
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
