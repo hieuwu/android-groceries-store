@@ -14,6 +14,7 @@ interface ProductRepository {
     suspend fun getFromServer()
     suspend fun hasProduct(): Boolean
     suspend fun updateProductAndLineItem(lineItem: ProductAndLineItem)
+    suspend fun removeProductAndLineItem(lineItem: LineItem)
     suspend fun getAllLineItem(): Flow<List<ProductAndLineItem>>
     suspend fun getLineItemInOrder(orderId:String): Flow<List<ProductAndLineItem>>
 }
