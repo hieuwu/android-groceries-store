@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.activities
+package com.hieuwu.groceriesstore.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
