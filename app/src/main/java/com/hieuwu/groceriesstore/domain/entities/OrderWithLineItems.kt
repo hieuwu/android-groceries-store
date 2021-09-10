@@ -10,5 +10,5 @@ data class OrderWithLineItems(
         entityColumn = "orderId",
         entity = LineItem::class
     )
-    val lineItemList: List<ProductAndLineItem>
+    val lineItemList: MutableList<ProductAndLineItem>
 )
