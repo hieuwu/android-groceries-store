@@ -41,8 +41,8 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="2"
+                    android:textSize="18dp"
                     android:text="@{lineItem.product.name}"
-                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -55,7 +55,7 @@
 
                 <RelativeLayout
                     android:id="@+id/quantity_layout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp">
 
@@ -85,6 +85,8 @@
                         android:layout_toEndOf="@id/qty_text"
                         android:layout_toRightOf="@id/qty_text"
                         android:src="@drawable/ic_baseline_add_36" />
+
+
                 </RelativeLayout>
 
             </LinearLayout>
@@ -99,6 +101,16 @@
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/options_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subtotal"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/margin_extra_small"
+                android:layout_marginTop="@dimen/margin_extra_small"
+                android:src="@drawable/ic_baseline_more" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </layout>
