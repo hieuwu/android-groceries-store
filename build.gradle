@@ -27,7 +27,7 @@ buildscript {
         googleServicesVersion = "4.3.3"
         buildGradleVersion = "4.0.0"
         rxJavaVersion = "3.1.0"
-
+        lottieVersion = "4.1.0"
     }
 
     repositories {
