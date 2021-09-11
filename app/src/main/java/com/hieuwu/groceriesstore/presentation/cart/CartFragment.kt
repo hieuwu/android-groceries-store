@@ -59,10 +59,7 @@ class CartFragment : BottomSheetDialogFragment() {
         itemTouchHelper.attachToRecyclerView(binding.cartDetailRecyclerview);
         binding.cartDetailRecyclerview.adapter = adapter
 
-
-        viewModel.totalPrice.observe(viewLifecycleOwner, {
-            binding.total.text = it.toString()
-        })
+        viewModel.totalPrice.observe(viewLifecycleOwner, {})
 
         viewModel.order.observe(viewLifecycleOwner, {
             if (it != null) {
