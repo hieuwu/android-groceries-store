@@ -32,15 +32,6 @@
                 android:textSize="@dimen/text_big_bold"
                 android:textStyle="bold" />
 
-<!--            <ImageButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_toStartOf="@id/total"-->
-<!--                android:backgroundTint="#B31E1E"-->
-<!--                android:src="@drawable/ic_baseline_delete"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textColor="@android:color/white" />-->
-
             <TextView
                 android:id="@+id/total"
                 android:layout_width="wrap_content"
@@ -54,28 +45,66 @@
         </RelativeLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cart_detail_recyclerview"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/cart_detail_layout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:lineListData="@{viewModel.order.lineItemList}"
-            tools:layout_editor_absoluteX="-101dp" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/checkout_button"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cart_detail_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="300dp"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:lineListData="@{viewModel.order.lineItemList}"
+                tools:layout_editor_absoluteX="-101dp" />
+
+            <Button
+                android:id="@+id/checkout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginVertical="@dimen/margin_normal"
+                android:background="@drawable/primary_button"
+                android:text="@string/check_out"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="14dp"
-            android:layout_marginVertical="@dimen/margin_normal"
-            android:background="@drawable/primary_button"
-            android:text="@string/check_out"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:id="@+id/cart_empty_layout"
+            android:minHeight="400dp"
+            android:orientation="vertical"
+            android:paddingTop="24dp"
+            android:visibility="gone">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="cart_empty_animation.json"
+                app:lottie_loop="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your cart is empty"
+                android:textAlignment="center"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/text_big_bold"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 </layout>
