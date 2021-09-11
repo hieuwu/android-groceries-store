@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
+import com.hieuwu.groceriesstore.presentation.utils.KeyData
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -32,6 +34,7 @@ class CheckOutFragment : Fragment() {
             container,
             false
         )
+
         val args = CheckOutFragmentArgs.fromBundle(
             arguments as Bundle
         )
@@ -57,6 +60,22 @@ class CheckOutFragment : Fragment() {
 
         })
 
+        binding.deliveryEditBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_checkOutFragment_to_deliveryFragment)
+        }
+        parentFragmentManager.setFragmentResultListener(
+            KeyData.RESULT_KEY,
+            viewLifecycleOwner
+        ) { requestKey, bundle ->
+            val name = bundle.getString(KeyData.NAME_KEY)
+            val phone = bundle.getString(KeyData.PHONE_KEY)
+            val street = bundle.getString(KeyData.STREET_KEY)
+            val ward = bundle.getString(KeyData.WARD_KEY)
+            val city = bundle.getString(KeyData.CITY_KEY)
+            binding.deliveryContent.text = "$name\n$phone\n$street, $ward, $city"
+        }
+
         return binding.root
     }
+
 }
