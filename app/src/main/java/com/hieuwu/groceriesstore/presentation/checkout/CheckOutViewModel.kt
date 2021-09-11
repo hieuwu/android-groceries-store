@@ -24,8 +24,23 @@ class CheckOutViewModel @Inject constructor(
     val order: LiveData<OrderWithLineItems>
         get() = _order
 
+    private var _totalPrice = MutableLiveData<Double>()
+    val totalPrice: LiveData<Double>
+        get() = _totalPrice
+
     init {
         getLineItemFromDatabase()
+    }
+
+    fun sumPrice() {
+        var sum = 0.0
+        if (_order.value?.lineItemList != null) {
+            for (item in _order.value?.lineItemList!!) {
+                val sub = item.lineItem?.subtotal ?: 0.0
+                sum = sum.plus(sub)
+            }
+        }
+        _totalPrice.value = sum
     }
 
     private fun getLineItemFromDatabase() {
@@ -36,7 +51,8 @@ class CheckOutViewModel @Inject constructor(
 
     private suspend fun getLineItemFromLocal() {
         return withContext(Dispatchers.IO) {
-            _order = orderRepository.getCartWithLineItems(OrderStatus.IN_CART).asLiveData() as MutableLiveData<OrderWithLineItems>
+            _order = orderRepository.getCartWithLineItems(OrderStatus.IN_CART)
+                .asLiveData() as MutableLiveData<OrderWithLineItems>
         }
     }
 
