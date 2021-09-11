@@ -18,8 +18,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cart_detail_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="12dp"
+            android:layout_weight="1"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -79,6 +80,59 @@
                 android:textColor="@color/colorPrimary" />
         </RelativeLayout>
 
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shipping_fee"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="12.3"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="@{String.valueOf(viewModel.totalPrice) + `$`}"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/confirm_order_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/vertical_margin"
+            android:layout_marginBottom="64dp"
+            android:background="@drawable/primary_button"
+            android:text="@string/confirm_order"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 </layout>
