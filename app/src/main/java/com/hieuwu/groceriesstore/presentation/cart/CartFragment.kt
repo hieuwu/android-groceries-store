@@ -79,7 +79,7 @@ class CartFragment : BottomSheetDialogFragment() {
 
         binding.checkoutButton.setOnClickListener {
             val direction =
-                ShopFragmentDirections.actionShopFragmentToCheckOutFragment2(
+                ShopFragmentDirections.actionShopFragmentToCheckOutFragment(
                     viewModel.order.value?.order?.id as String
                 )
             this.findNavController().navigate(direction)
