@@ -1,14 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.delivery.DeliveryFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:context=".presentation.delivery.DeliveryFragment">
 
-</FrameLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_detail_back"
+                app:title="Delivery"
+                app:titleTextColor="@android:color/white"
+                app:toolbarId="@id/toolbar" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_small"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:text="@string/receiver"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/receiver_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:ems="10"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/receiver_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:ems="10"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:text="@string/address"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/address_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:ems="10"
+            android:hint="Street"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/address_ward"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+
+            android:layout_marginBottom="@dimen/margin_small"
+            android:ems="10"
+            android:hint="Ward/District"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/address_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:ems="10"
+            android:hint="Province/City"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/darker_gray" />
+
+        <Button
+            android:id="@+id/update_delivery_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/vertical_margin"
+            android:background="@drawable/primary_button"
+            android:text="@string/update"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</layout>
