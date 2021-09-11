@@ -27,6 +27,9 @@
         <argument
             android:name="orderId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_checkOutFragment_to_deliveryFragment"
+            app:destination="@id/deliveryFragment" />
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
@@ -47,7 +50,7 @@
             android:id="@+id/action_shopFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
         <action
-            android:id="@+id/action_shopFragment_to_checkOutFragment2"
+            android:id="@+id/action_shopFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
     </fragment>
     <fragment
@@ -68,6 +71,14 @@
         <argument
             android:name="id"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/deliveryFragment"
+        android:name="com.hieuwu.groceriesstore.presentation.delivery.DeliveryFragment"
+        android:label="DeliveryFragment" >
+        <action
+            android:id="@+id/action_deliveryFragment_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
     </fragment>
 
 </navigation>
