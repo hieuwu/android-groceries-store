@@ -33,4 +33,8 @@
     <string name="delivery">Delivery</string>
     <string name="edit">Edit</string>
     <string name="payment_method">Payment method</string>
+    <string name="receiver">Receiver</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="update">Update</string>
 </resources>
