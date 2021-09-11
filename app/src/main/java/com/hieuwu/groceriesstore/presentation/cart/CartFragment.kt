@@ -49,8 +49,8 @@ class CartFragment : BottomSheetDialogFragment() {
             LineListItemAdapter.OnClickListener(
                 minusListener = { viewModel.decreaseQty(it) },
                 plusListener = { viewModel.increaseQty(it) },
-                removeListener = { viewModel.removeItem(it)}
-            ),requireContext()
+                removeListener = { viewModel.removeItem(it) }
+            ), requireContext()
         )
 
         //Setup recyclerview
@@ -66,6 +66,13 @@ class CartFragment : BottomSheetDialogFragment() {
 
         viewModel.order.observe(viewLifecycleOwner, {
             if (it != null) {
+                if (it.lineItemList.size > 0) {
+                    binding.cartEmptyLayout.visibility = View.GONE
+                    binding.cartDetailLayout.visibility = View.VISIBLE
+                } else {
+                    binding.cartEmptyLayout.visibility = View.VISIBLE
+                    binding.cartDetailLayout.visibility = View.GONE
+                }
                 viewModel.sumPrice()
             }
         })
