@@ -37,4 +37,7 @@
     <string name="address">Address</string>
     <string name="phone_number">Phone number</string>
     <string name="update">Update</string>
+    <string name="confirm_order">Confirm order</string>
+    <string name="total">Total:</string>
+    <string name="shipping_fee">Shipping fee:</string>
 </resources>
