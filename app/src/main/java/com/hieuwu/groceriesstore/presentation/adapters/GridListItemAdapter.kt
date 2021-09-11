@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutGridListItemBinding
 import com.hieuwu.groceriesstore.domain.entities.Product
-import com.hieuwu.groceriesstore.domain.models.ProductModel
 
 class GridListItemAdapter(val onClickListener: OnClickListener) :
     ListAdapter<Product, GridListItemAdapter.ProductGridViewHolder>(DiffCallback) {
