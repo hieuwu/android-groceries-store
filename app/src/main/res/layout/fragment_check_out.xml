@@ -41,6 +41,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/delivery_edit_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -49,6 +50,13 @@
                 android:textColor="@color/colorPrimary" />
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/delivery_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:textSize="16dp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
