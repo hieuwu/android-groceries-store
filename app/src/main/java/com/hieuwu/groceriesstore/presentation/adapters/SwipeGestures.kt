@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.R
 
 class SwipeToDeleteCallback constructor(val adapter: LineListItemAdapter) :
-    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
     private var _icon: Drawable? =
         ContextCompat.getDrawable(adapter.context, R.drawable.ic_baseline_delete)
@@ -46,19 +46,6 @@ class SwipeToDeleteCallback constructor(val adapter: LineListItemAdapter) :
         val iconBottom = iconTop + _icon?.intrinsicHeight!!
 
         when {
-            //Swipe to the right
-            dX > 0 -> {
-                val iconLeft = itemView.left + iconMargin + _icon?.intrinsicWidth!!
-                val iconRight = itemView.left + iconMargin
-                _icon!!.setBounds(iconLeft, iconTop, iconRight, iconBottom);
-
-                _background.setBounds(
-                    itemView.left, itemView.top,
-                    itemView.left + dX.toInt() + backgroundCornerOffset,
-                    itemView.bottom
-                )
-
-            }
             // Swiping to the left
             dX < 0 -> {
                 val iconLeft = itemView.right - iconMargin - _icon?.intrinsicWidth!!
