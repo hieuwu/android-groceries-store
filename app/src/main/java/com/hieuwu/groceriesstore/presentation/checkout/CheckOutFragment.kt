@@ -57,12 +57,20 @@ class CheckOutFragment : Fragment() {
         binding.cartDetailRecyclerview.adapter = adapter
 
         viewModel.order.observe(viewLifecycleOwner, {
-
+            if (it != null) viewModel.sumPrice()
         })
+
+        viewModel.totalPrice.observe(viewLifecycleOwner, {})
 
         binding.deliveryEditBtn.setOnClickListener {
             findNavController().navigate(R.id.action_checkOutFragment_to_deliveryFragment)
         }
+
+        binding.confirmOrderBtn.setOnClickListener {
+            //Handle confirm button
+
+        }
+
         parentFragmentManager.setFragmentResultListener(
             KeyData.RESULT_KEY,
             viewLifecycleOwner
