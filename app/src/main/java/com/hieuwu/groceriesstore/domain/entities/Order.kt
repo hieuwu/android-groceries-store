@@ -11,5 +11,8 @@ data class Order(
     val id: String,
 
     @ColumnInfo(name = "status")
-    var status: String
+    var status: String,
+
+    @ColumnInfo(name = "delivery")
+    var delivery: String?
 )
