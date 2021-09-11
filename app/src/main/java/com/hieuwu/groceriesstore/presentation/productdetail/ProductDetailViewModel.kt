@@ -56,7 +56,7 @@ class ProductDetailViewModel @Inject constructor(
             }
         } else {
             val id = UUID.randomUUID().toString()
-            val newOrder = Order(id, OrderStatus.IN_CART.value)
+            val newOrder = Order(id, OrderStatus.IN_CART.value,null)
             viewModelScope.launch {
                 orderRepository.insert(newOrder)
                 val lineItem = LineItem(
