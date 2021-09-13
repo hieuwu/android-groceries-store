@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutGridListItemBinding
 import com.hieuwu.groceriesstore.domain.entities.Product
+import kotlinx.android.synthetic.main.layout_grid_list_item.view.*
 
 class GridListItemAdapter(val onClickListener: OnClickListener) :
     ListAdapter<Product, GridListItemAdapter.ProductGridViewHolder>(DiffCallback) {
@@ -25,8 +26,12 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
         holder.itemView.setOnClickListener {
             onClickListener.onClick(product)
         }
-        holder.bind(product)
 
+        holder.itemView.product_add_button.setOnClickListener {
+            onClickListener.addToCartListener(product)
+        }
+
+        holder.bind(product)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductGridViewHolder {
@@ -43,7 +48,11 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
         }
     }
 
-    class OnClickListener(val clickListener: (product: Product) -> Unit) {
+    class OnClickListener(
+        val clickListener: (product: Product) -> Unit,
+        val addToCartListener: (product: Product) -> Unit
+    ) {
         fun onClick(product: Product) = clickListener(product)
+        fun onAddButtonClick(product: Product) = addToCartListener(product)
     }
 }
