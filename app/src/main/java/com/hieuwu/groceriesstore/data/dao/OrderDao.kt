@@ -37,7 +37,7 @@ interface OrderDao {
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status  LIMIT 1 ")
     fun getCart(status: String): Flow<Order>
 
-
+    @Transaction
     @Query("SELECT * FROM `${DataConstant.ORDER_TABLE}` WHERE status = :status  LIMIT 1 ")
     fun getCartWithLineItems(status: String): Flow<OrderWithLineItems>
 }
