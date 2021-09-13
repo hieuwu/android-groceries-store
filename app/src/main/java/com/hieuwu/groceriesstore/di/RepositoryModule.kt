@@ -1,7 +1,9 @@
 package com.hieuwu.groceriesstore.di
 
+import com.hieuwu.groceriesstore.data.repository.CategoryRepositoryImpl
 import com.hieuwu.groceriesstore.data.repository.OrderRepositoryImpl
 import com.hieuwu.groceriesstore.data.repository.ProductRepositoryImpl
+import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import dagger.Binds
@@ -26,4 +28,8 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindOrderRepository(impl: OrderRepositoryImpl): OrderRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindCategoryRepository(impl: CategoryRepositoryImpl): CategoryRepository
 }
