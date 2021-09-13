@@ -3,6 +3,7 @@ package com.hieuwu.groceriesstore.di
 import android.content.Context
 import androidx.room.Room
 import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
+import com.hieuwu.groceriesstore.data.dao.CategoryDao
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.OrderDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
@@ -41,5 +42,10 @@ object DatabaseModule {
     @Provides
     fun provideOrderDao(database: GroceriesStoreDatabase): OrderDao {
         return database.orderDao()
+    }
+
+    @Provides
+    fun provideCategoryDao(database: GroceriesStoreDatabase): CategoryDao {
+        return database.categoryDao()
     }
 }
