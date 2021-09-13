@@ -37,14 +37,6 @@ class ShopViewModel @Inject constructor(
         }
     }
 
-    private fun hasProduct() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                hasProduct = productRepository.hasProduct()
-            }
-        }
-    }
-
     private fun getProductsFromDatabase() {
         viewModelScope.launch {
             getProductFromLocal()

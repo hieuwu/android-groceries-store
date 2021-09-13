@@ -59,6 +59,7 @@ class ShopFragment : Fragment() {
             }
         })
 
+        viewModel.CurrentCart.observe(viewLifecycleOwner, {})
 
         return binding.root
     }
