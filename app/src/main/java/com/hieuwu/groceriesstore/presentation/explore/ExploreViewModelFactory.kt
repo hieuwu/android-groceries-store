@@ -1,4 +1,16 @@
 package com.hieuwu.groceriesstore.presentation.explore
 
-class ExploreViewModelFactory {
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
+
+class ExploreViewModelFactory(
+    private val categoryRepository: CategoryRepository
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ExploreViewModel::class.java)) {
+            return ExploreViewModel(categoryRepository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }
