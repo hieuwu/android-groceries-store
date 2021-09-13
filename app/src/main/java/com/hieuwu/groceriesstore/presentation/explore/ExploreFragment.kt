@@ -6,20 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
-import com.hieuwu.groceriesstore.domain.entities.Category
+import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
-import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
-import timber.log.Timber
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ExploreFragment : Fragment() {
 
     private lateinit var binding: FragmentExploreBinding
+
+    @Inject
+    lateinit var categoryRepository: CategoryRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,15 +30,19 @@ class ExploreFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentExploreBinding>(
             inflater, R.layout.fragment_explore, container, false
         )
-        val viewModel = ViewModelProvider(this).get(ExploreViewModel::class.java)
+        val viewModelFactory =
+            ExploreViewModelFactory(categoryRepository)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(ExploreViewModel::class.java)
+        binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
 
-        viewModel.categories.observe(viewLifecycleOwner, {
-        })
+        viewModel.categories.observe(viewLifecycleOwner, {})
 
         binding.categoryRecyclerview.adapter =
             CategoryItemAdapter(CategoryItemAdapter.OnClickListener {})
+
         return binding.root
     }
 
