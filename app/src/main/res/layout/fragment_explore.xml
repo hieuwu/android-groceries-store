@@ -46,14 +46,15 @@
                     android:src="@drawable/ic_baseline_filter_list_36" />
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:categoryListData="@{viewModel.categories}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
+
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/category_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:categoryListData="@{viewModel.categories}"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2" />
     </FrameLayout>
 </layout>
