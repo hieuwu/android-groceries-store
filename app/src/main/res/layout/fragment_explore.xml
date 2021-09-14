@@ -32,6 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:searchIcon="@drawable/ic_baseline_search"
+                    app:closeIcon="@drawable/ic_baseline_close"
                     android:elevation="16dp" />
 
             </com.google.android.material.appbar.AppBarLayout>
