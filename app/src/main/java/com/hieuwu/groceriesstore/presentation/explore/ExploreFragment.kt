@@ -1,9 +1,11 @@
 package com.hieuwu.groceriesstore.presentation.explore
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +32,10 @@ class ExploreFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentExploreBinding>(
             inflater, R.layout.fragment_explore, container, false
         )
+        val searchEditText =
+            binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        searchEditText.setTextColor(Color.WHITE)
+
         val viewModelFactory =
             ExploreViewModelFactory(categoryRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
@@ -42,6 +48,7 @@ class ExploreFragment : Fragment() {
 
         binding.categoryRecyclerview.adapter =
             CategoryItemAdapter(CategoryItemAdapter.OnClickListener {})
+
 
         return binding.root
     }
