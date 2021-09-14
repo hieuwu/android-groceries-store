@@ -2,8 +2,8 @@ package com.hieuwu.groceriesstore.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutCategoryGridItemBinding
 import com.hieuwu.groceriesstore.domain.entities.Category
@@ -17,7 +17,6 @@ class CategoryItemAdapter(val onClickListener: OnClickListener) :
             binding.category = category
             binding.executePendingBindings()
         }
-
     }
 
     override fun onBindViewHolder(holder: CategoryItemViewHolder, position: Int) {
@@ -26,7 +25,6 @@ class CategoryItemAdapter(val onClickListener: OnClickListener) :
             onClickListener.onClick(category)
         }
         holder.bind(category)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryItemViewHolder {
