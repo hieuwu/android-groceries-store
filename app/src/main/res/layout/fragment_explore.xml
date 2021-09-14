@@ -31,9 +31,10 @@
                     android:id="@+id/search_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:searchIcon="@drawable/ic_baseline_search"
+                    android:elevation="16dp"
                     app:closeIcon="@drawable/ic_baseline_close"
-                    android:elevation="16dp" />
+                    app:searchHintIcon="@drawable/ic_baseline_search"
+                    app:searchIcon="@drawable/ic_baseline_search" />
 
             </com.google.android.material.appbar.AppBarLayout>
 
