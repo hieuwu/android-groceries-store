@@ -35,7 +35,11 @@
         android:id="@+id/exploreFragment"
         android:name="com.hieuwu.groceriesstore.presentation.explore.ExploreFragment"
         android:label="fragment_explore"
-        tools:layout="@layout/fragment_explore" />
+        tools:layout="@layout/fragment_explore" >
+        <action
+            android:id="@+id/action_exploreFragment_to_productListFragment"
+            app:destination="@id/productListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.hieuwu.groceriesstore.presentation.favourite.FavouriteFragment"
@@ -79,6 +83,14 @@
         <action
             android:id="@+id/action_deliveryFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.hieuwu.groceriesstore.presentation.productlist.ProductListFragment"
+        android:label="ProductListFragment" >
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
     </fragment>
 
 </navigation>
