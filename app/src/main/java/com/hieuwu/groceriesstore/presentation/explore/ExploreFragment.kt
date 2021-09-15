@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
@@ -47,7 +48,9 @@ class ExploreFragment : Fragment() {
         viewModel.categories.observe(viewLifecycleOwner, {})
 
         binding.categoryRecyclerview.adapter =
-            CategoryItemAdapter(CategoryItemAdapter.OnClickListener {})
+            CategoryItemAdapter(CategoryItemAdapter.OnClickListener {
+                findNavController().navigate(R.id.action_exploreFragment_to_productListFragment)
+            })
 
 
         return binding.root
