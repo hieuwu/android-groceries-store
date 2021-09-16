@@ -52,7 +52,7 @@ class ExploreFragment : Fragment() {
             CategoryItemAdapter(CategoryItemAdapter.OnClickListener {
                 val direction =
                     ExploreFragmentDirections.actionExploreFragmentToProductListFragment(
-                        ProductListMode.CATEGORY.value,
+                        it.name!!,
                         it.id
                     )
                 findNavController().navigate(direction)
