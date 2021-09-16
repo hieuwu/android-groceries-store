@@ -15,6 +15,7 @@ import java.util.*
 import javax.inject.Inject
 
 class ProductListViewModel @Inject constructor(
+    val categoryId: String,
     private val productRepository: ProductRepository,
     private val orderRepository: OrderRepository
 ) : ViewModel() {
@@ -33,16 +34,23 @@ class ProductListViewModel @Inject constructor(
 
     private fun getProductsFromDatabase() {
         viewModelScope.launch {
+
             getProductFromLocal()
         }
     }
 
     private suspend fun getProductFromLocal() {
         return withContext(Dispatchers.IO) {
-            _productList =
-                productRepository.getAllProducts().asLiveData() as MutableLiveData<List<Product>>
+            _productList = if (categoryId == null) {
+                productRepository.getAllProducts()
+                    .asLiveData() as MutableLiveData<List<Product>>
+            } else {
+                productRepository.getAllProductsByCategory(categoryId)
+                    .asLiveData() as MutableLiveData<List<Product>>
+            }
         }
     }
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
