@@ -4,15 +4,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.data.utils.OrderStatus
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.LineItem
-import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -32,7 +29,7 @@ class ProductRepositoryImpl @Inject constructor(
 
 
     override suspend fun getFromServer() {
-        var fireStore = Firebase.firestore
+        val fireStore = Firebase.firestore
         fireStore.collection("products").get().addOnSuccessListener { result ->
             for (document in result) {
                 val id = document.id
@@ -40,8 +37,18 @@ class ProductRepositoryImpl @Inject constructor(
                 val description: String = document.data["description"] as String
                 val price: Number = document.data["price"] as Number
                 val image: String = document.data["image"] as String
+                val category = document.getDocumentReference("category")
                 executorService.execute {
-                    productDao.insert(Product(id, name, description, price.toDouble(), image))
+                    productDao.insert(
+                        Product(
+                            id,
+                            name,
+                            description,
+                            price.toDouble(),
+                            image,
+                            category?.id
+                        )
+                    )
                 }
             }
         }
