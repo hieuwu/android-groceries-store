@@ -42,11 +42,11 @@ class ProductListFragment : Fragment() {
             arguments as Bundle
         )
 
-        val mode = args.mode
+        val categoryName = args.categoryName
         var categoryId = args.categoryId
         val viewModelFactory =
             ProductListViewModelFactory(categoryId, productRepository, orderRepository)
-
+        binding.toolbar.title = categoryName
 
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductListViewModel::class.java)
@@ -64,6 +64,10 @@ class ProductListFragment : Fragment() {
                 viewModel.displayPropertyDetailsComplete()
             }
         })
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
         return binding.root
     }
