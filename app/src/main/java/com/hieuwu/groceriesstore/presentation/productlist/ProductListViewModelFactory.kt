@@ -7,13 +7,14 @@ import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.shop.ShopViewModel
 
 class ProductListViewModelFactory(
+    private val categoryId:String,
     private val productRepo: ProductRepository,
     private val orderRepo: OrderRepository
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProductListViewModel::class.java)) {
-            return ProductListViewModel(productRepo, orderRepo) as T
+            return ProductListViewModel(categoryId,productRepo, orderRepo) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
