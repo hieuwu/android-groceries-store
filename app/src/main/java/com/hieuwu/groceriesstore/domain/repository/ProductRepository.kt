@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface ProductRepository {
     fun getById(id: String): Flow<Product>
     suspend fun getAllProducts(): Flow<List<Product>>
+    suspend fun getAllProductsByCategory(categoryId: String): Flow<List<Product>>
     suspend fun getFromServer()
     suspend fun hasProduct(): Boolean
     suspend fun updateProductAndLineItem(lineItem: ProductAndLineItem)
