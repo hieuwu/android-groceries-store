@@ -24,6 +24,9 @@ interface ProductDao {
     @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE} LIMIT 10")
     fun getAll(): Flow<List<Product>>
 
+    @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE} Where category =:categoryId LIMIT 20")
+    fun getAllByCategory(categoryId: String): Flow<List<Product>>
+
     @Query("SELECT * FROM ${DataConstant.PRODUCT_TABLE} LIMIT 1")
     fun hasProduct(): Product?
 }
