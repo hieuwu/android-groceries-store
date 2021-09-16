@@ -88,6 +88,12 @@
         android:id="@+id/productListFragment"
         android:name="com.hieuwu.groceriesstore.presentation.productlist.ProductListFragment"
         android:label="ProductListFragment" >
+        <argument
+            android:name="mode"
+            app:argType="string" />
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
         <action
             android:id="@+id/action_productListFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
