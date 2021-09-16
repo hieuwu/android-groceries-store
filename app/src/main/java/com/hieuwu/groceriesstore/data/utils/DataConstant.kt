@@ -11,3 +11,4 @@ class DataConstant {
 }
 
 enum class OrderStatus(val value: String) { IN_CART("cart"), COMPLETED("completed") }
+enum class ProductListMode(val value: String) { CATEGORY("category"), DEFAULT("product") }
