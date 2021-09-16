@@ -42,6 +42,11 @@ class DeliveryFragment : Fragment() {
             )
             findNavController().popBackStack()
         }
+
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
         return binding.root
     }
 
