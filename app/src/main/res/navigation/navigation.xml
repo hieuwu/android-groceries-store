@@ -89,7 +89,7 @@
         android:name="com.hieuwu.groceriesstore.presentation.productlist.ProductListFragment"
         android:label="ProductListFragment" >
         <argument
-            android:name="mode"
+            android:name="categoryName"
             app:argType="string" />
         <argument
             android:name="categoryId"
