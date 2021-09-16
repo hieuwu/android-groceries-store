@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
+import com.hieuwu.groceriesstore.data.utils.ProductListMode
 import com.hieuwu.groceriesstore.databinding.FragmentProductListBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
@@ -41,10 +42,12 @@ class ProductListFragment : Fragment() {
             arguments as Bundle
         )
 
-        var mode = args.mode
+        val mode = args.mode
         var categoryId = args.categoryId
+        val viewModelFactory =
+            ProductListViewModelFactory(categoryId, productRepository, orderRepository)
 
-        val viewModelFactory = ProductListViewModelFactory(productRepository, orderRepository)
+
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductListViewModel::class.java)
         binding.viewModel = viewModel
@@ -53,9 +56,10 @@ class ProductListFragment : Fragment() {
         setUpRecyclerView(viewModel)
         viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
             if (null != it) {
-                val direction = ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(
-                    it.id
-                )
+                val direction =
+                    ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(
+                        it.id
+                    )
                 findNavController().navigate(direction)
                 viewModel.displayPropertyDetailsComplete()
             }
