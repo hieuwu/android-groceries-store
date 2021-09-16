@@ -25,4 +25,6 @@ data class Product(
     @ColumnInfo(name = "image")
     var image: String?,
 
-    )
+    @ColumnInfo(name = "category")
+    var category: String?,
+)
