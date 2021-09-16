@@ -15,6 +15,7 @@ import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
+import com.hieuwu.groceriesstore.presentation.productdetail.ProductDetailFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,11 +36,20 @@ class ProductListFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentProductListBinding>(
             inflater, R.layout.fragment_product_list, container, false
         )
+
+        val args = ProductListFragmentArgs.fromBundle(
+            arguments as Bundle
+        )
+
+        var mode = args.mode
+        var categoryId = args.categoryId
+
         val viewModelFactory = ProductListViewModelFactory(productRepository, orderRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductListViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
         setUpRecyclerView(viewModel)
         viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
             if (null != it) {
