@@ -9,9 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
 import com.hieuwu.groceriesstore.databinding.FragmentDeliveryBinding
-import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
 import com.hieuwu.groceriesstore.presentation.utils.KeyData
 
 class DeliveryFragment : Fragment() {
