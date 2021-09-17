@@ -65,6 +65,15 @@ class ProductListFragment : Fragment() {
             }
         })
 
+        viewModel.CurrentCart.observe(viewLifecycleOwner, {})
+
+        viewModel.productList.observe(viewLifecycleOwner, {
+            if (it.isEmpty()) {
+                binding.productRecyclerview.visibility = View.GONE
+                binding.emptyLayout.visibility = View.VISIBLE
+            }
+        })
+
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
