@@ -42,11 +42,17 @@
                         android:text="@string/welcome_prompt"
                         android:textAlignment="center" />
 
-                    <ImageView
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/banner" />
-
+                        android:layout_height="150dp"
+                        android:layout_marginHorizontal="@dimen/margin_normal" />
+                    <LinearLayout
+                        android:id="@+id/slider_dots"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
