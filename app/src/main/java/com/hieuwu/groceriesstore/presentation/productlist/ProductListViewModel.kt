@@ -34,7 +34,6 @@ class ProductListViewModel @Inject constructor(
 
     private fun getProductsFromDatabase() {
         viewModelScope.launch {
-
             getProductFromLocal()
         }
     }
