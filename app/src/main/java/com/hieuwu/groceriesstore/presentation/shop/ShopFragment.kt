@@ -1,14 +1,19 @@
 package com.hieuwu.groceriesstore.presentation.shop
 
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
@@ -16,6 +21,7 @@ import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
+import com.hieuwu.groceriesstore.presentation.adapters.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -58,6 +64,48 @@ class ShopFragment : Fragment() {
                 viewModel.displayPropertyDetailsComplete()
             }
         })
+
+        var nonactiveDot =
+            ContextCompat.getDrawable(requireContext(), R.drawable.non_active_dot_shape)
+        var activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)
+
+        val viewPagerAdapter = ViewPagerAdapter(requireContext())
+        binding.viewPager.adapter = viewPagerAdapter
+
+        val dotCount = viewPagerAdapter.count
+        val sliderDotspanel = binding.sliderDots
+        val dots: Array<ImageView> = Array(dotCount){ ImageView(requireContext())}
+        for (i in 0 until dotCount) {
+            dots[i].setImageDrawable(nonactiveDot)
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+
+            params.setMargins(8, 0, 8, 0);
+
+            sliderDotspanel.addView(dots[i], params);
+        }
+        dots[0].setImageDrawable(activeDot);
+        binding.viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {}
+
+            override fun onPageSelected(position: Int) {
+                for (i in 0 until dotCount) {
+                    dots[i].setImageDrawable(nonactiveDot);
+                }
+                dots[position].setImageDrawable(activeDot);
+
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
+
+
 
         viewModel.CurrentCart.observe(viewLifecycleOwner, {})
 
