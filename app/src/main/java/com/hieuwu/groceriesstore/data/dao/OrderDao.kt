@@ -5,7 +5,6 @@ import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
 import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
-import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao
