@@ -2,7 +2,6 @@ package com.hieuwu.groceriesstore.domain.entities
 
 import androidx.room.*
 import com.hieuwu.groceriesstore.data.utils.DataConstant
-import com.hieuwu.groceriesstore.data.utils.OrderStatus
 
 @Entity(tableName = DataConstant.ORDER_TABLE)
 data class Order(
