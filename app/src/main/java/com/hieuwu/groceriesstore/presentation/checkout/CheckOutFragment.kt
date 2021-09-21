@@ -12,7 +12,6 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
-import com.hieuwu.groceriesstore.presentation.utils.KeyData
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
