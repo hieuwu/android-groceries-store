@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentDeliveryBinding
+import com.hieuwu.groceriesstore.utilities.KeyData
 
 class DeliveryFragment : Fragment() {
     lateinit var binding: FragmentDeliveryBinding
