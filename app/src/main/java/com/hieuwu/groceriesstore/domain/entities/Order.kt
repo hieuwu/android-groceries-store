@@ -1,9 +1,9 @@
 package com.hieuwu.groceriesstore.domain.entities
 
 import androidx.room.*
-import com.hieuwu.groceriesstore.data.utils.DataConstant
+import com.hieuwu.groceriesstore.utilities.ORDER_TABLE
 
-@Entity(tableName = DataConstant.ORDER_TABLE)
+@Entity(tableName = ORDER_TABLE)
 data class Order(
     @PrimaryKey
     @ColumnInfo(name = "orderId")
