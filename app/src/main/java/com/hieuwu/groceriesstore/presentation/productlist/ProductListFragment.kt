@@ -10,13 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.data.utils.ProductListMode
 import com.hieuwu.groceriesstore.databinding.FragmentProductListBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
-import com.hieuwu.groceriesstore.presentation.productdetail.ProductDetailFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
