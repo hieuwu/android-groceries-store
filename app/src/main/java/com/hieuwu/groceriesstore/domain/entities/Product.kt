@@ -4,9 +4,9 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.hieuwu.groceriesstore.data.utils.DataConstant
+import com.hieuwu.groceriesstore.utilities.PRODUCT_TABLE
 
-@Entity(tableName = DataConstant.PRODUCT_TABLE)
+@Entity(tableName = PRODUCT_TABLE)
 data class Product(
     @PrimaryKey
     @NonNull
