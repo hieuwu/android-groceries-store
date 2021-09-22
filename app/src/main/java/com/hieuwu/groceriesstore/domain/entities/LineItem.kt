@@ -1,9 +1,9 @@
 package com.hieuwu.groceriesstore.domain.entities
 
 import androidx.room.*
-import com.hieuwu.groceriesstore.data.utils.DataConstant
+import com.hieuwu.groceriesstore.utilities.LINE_ITEM_TABLE
 
-@Entity(tableName = DataConstant.LINE_ITEM_TABLE)
+@Entity(tableName = LINE_ITEM_TABLE)
 data class LineItem(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "lineItemId")
