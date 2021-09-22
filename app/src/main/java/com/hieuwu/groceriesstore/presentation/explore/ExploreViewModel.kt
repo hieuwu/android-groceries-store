@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.presentation.explore
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.hieuwu.groceriesstore.domain.entities.Category
