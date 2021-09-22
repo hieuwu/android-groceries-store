@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.utils.OrderStatus
 import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import com.hieuwu.groceriesstore.utilities.OrderStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
