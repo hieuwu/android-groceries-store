@@ -50,7 +50,7 @@ dependencies {
     implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorLayoutVersion"
     implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
     implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
-
+    implementation "androidx.work:work-runtime-ktx:$workVersion"
     // Room
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
