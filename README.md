@@ -9,7 +9,6 @@
 ![Github Action](https://img.shields.io/badge/Github%20Actions-424a53.svg?&style=for-the-badge&logo=githubactions&logoColor=white)
 
 # UI Design & Architecture
-The user interface follow this design:
 - [Groceries Store Design](https://www.figma.com/file/exhlJtkLIcHvfxd8SDja3T/Online-Groceries-App-UI-(Community)?node-id=1%3A2)
 
 Next Step is to follow Clearn Architecture:
