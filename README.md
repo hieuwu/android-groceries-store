@@ -17,7 +17,7 @@ Next Step is to follow Clearn Architecture:
 - MVVM Architecture (View - DataBinding - ViewModel - Model)
 
 # Libraries
-- [Glide](https://github.com/bumptech/glide) - loading images.
+- [Glide](https://github.com/bumptech/glide) - Loading images.
 - [Timber](https://github.com/JakeWharton/timber) - Logging.
 - [Retrofit2](https://github.com/square/retrofit) - Construct the REST APIs and paging network data.
 - [Moshi](https://github.com/square/moshi/) - A modern JSON library for Kotlin and Java.
