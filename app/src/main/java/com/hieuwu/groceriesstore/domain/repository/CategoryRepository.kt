@@ -4,6 +4,6 @@ import com.hieuwu.groceriesstore.domain.entities.Category
 import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {
-    fun getFromServer()
+    suspend fun getFromServer()
     fun getFromLocal(): Flow<List<Category>>
 }
