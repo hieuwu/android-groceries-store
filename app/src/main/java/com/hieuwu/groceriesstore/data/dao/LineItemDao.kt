@@ -15,10 +15,10 @@ interface LineItemDao {
     fun getById(id: Long): Flow<LineItem>
 
     @Delete
-    fun removeCurrentItem(lineItem: LineItem)
+    suspend fun remove(lineItem: LineItem)
 
     @Update
-    fun update(lineItem: LineItem?)
+    suspend fun update(lineItem: LineItem)
 
     @Transaction
     @Query("SELECT * FROM $LINE_ITEM_TABLE ")
