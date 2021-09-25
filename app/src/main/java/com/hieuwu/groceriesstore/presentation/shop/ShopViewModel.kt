@@ -17,8 +17,12 @@ class ShopViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private var hasProduct: Boolean = false
-    private var _productList = MutableLiveData<List<Product>>()
+
+    private var _productList:MutableLiveData<List<Product>> = productRepository.getAllProducts().asLiveData()
+            as MutableLiveData<List<Product>>
+
     val productList: LiveData<List<Product>>
         get() = _productList
 
@@ -27,26 +31,12 @@ class ShopViewModel @Inject constructor(
 
     init {
         fetchProductsFromServer()
-        getProductsFromDatabase()
     }
 
 
     private fun fetchProductsFromServer() {
         viewModelScope.launch {
             getProductFromServer()
-        }
-    }
-
-    private fun getProductsFromDatabase() {
-        viewModelScope.launch {
-            getProductFromLocal()
-        }
-    }
-
-    private suspend fun getProductFromLocal() {
-        return withContext(Dispatchers.IO) {
-            _productList =
-                productRepository.getAllProducts().asLiveData() as MutableLiveData<List<Product>>
         }
     }
 
