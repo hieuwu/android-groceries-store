@@ -68,7 +68,7 @@ class CartViewModel @Inject constructor(
             lineItemModel.lineItem.subtotal = qty * (lineItemModel.product?.price ?: 1.0)
         }
         viewModelScope.launch {
-            updateCurrentLineItem(lineItemModel)
+            updateLineItem(lineItemModel)
         }
     }
 
@@ -80,26 +80,25 @@ class CartViewModel @Inject constructor(
             lineItemModel.lineItem.subtotal = qty * (lineItemModel.product?.price ?: 1.0)
         }
         viewModelScope.launch {
-            updateCurrentLineItem(lineItemModel)
+            updateLineItem(lineItemModel)
         }
     }
 
     fun removeItem(lineItemModel: ProductAndLineItem) {
         viewModelScope.launch {
-            removeCurrentLineItem(lineItemModel)
+            removeLineItem(lineItemModel)
         }
     }
 
-    private suspend fun updateCurrentLineItem(lineItemModel: ProductAndLineItem) {
+    private suspend fun updateLineItem(lineItemModel: ProductAndLineItem) {
         withContext(Dispatchers.IO) {
-            productRepository.updateProductAndLineItem(lineItemModel)
+            productRepository.updateLineItem(lineItemModel.lineItem!!)
         }
     }
 
-    private suspend fun removeCurrentLineItem(lineItemModel: ProductAndLineItem) {
+    private suspend fun removeLineItem(lineItemModel: ProductAndLineItem) {
         withContext(Dispatchers.IO) {
-            productRepository.removeProductAndLineItem(lineItemModel.lineItem!!)
+            productRepository.removeLineItem(lineItemModel.lineItem!!)
         }
     }
-
 }
