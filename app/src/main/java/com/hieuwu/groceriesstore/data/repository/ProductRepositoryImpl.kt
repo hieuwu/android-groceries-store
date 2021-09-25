@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.data.repository
 
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
@@ -33,28 +34,26 @@ class ProductRepositoryImpl @Inject constructor(
         val productList = mutableListOf<Product>()
         fireStore.collection("products").get().addOnSuccessListener { result ->
             for (document in result) {
-                val id = document.id
-                val name: String = document.data["name"] as String
-                val description: String = document.data["description"] as String
-                val price: Number = document.data["price"] as Number
-                val image: String = document.data["image"] as String
-                val category = document.getDocumentReference("category")
-                productList.add(Product(
-                    id,
-                    name,
-                    description,
-                    price.toDouble(),
-                    image,
-                    category?.id
-                ))
+                productList.add(getProductEntityFromDocument(document))
             }
         }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.${exception}")
             }
+
         withContext(Dispatchers.IO) {
             productDao.insertAll(productList)
         }
+    }
+
+    private fun getProductEntityFromDocument(document: QueryDocumentSnapshot): Product {
+        val id = document.id
+        val name: String = document.data["name"] as String
+        val description: String = document.data["description"] as String
+        val price: Number = document.data["price"] as Number
+        val image: String = document.data["image"] as String
+        val category = document.getDocumentReference("category")
+        return Product(id, name, description, price.toDouble(), image, category?.id)
     }
 
     override suspend fun updateLineItem(lineItem: LineItem) {
