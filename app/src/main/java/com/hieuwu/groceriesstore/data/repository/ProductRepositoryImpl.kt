@@ -7,9 +7,10 @@ import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Product
-import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -21,7 +22,6 @@ class ProductRepositoryImpl @Inject constructor(
     private val productDao: ProductDao,
     private val lineItemDao: LineItemDao
 ) : ProductRepository {
-    private val executorService: ExecutorService = Executors.newFixedThreadPool(4)
 
     @EntityModelProductMapper
     @Inject
@@ -30,6 +30,7 @@ class ProductRepositoryImpl @Inject constructor(
 
     override suspend fun getFromServer() {
         val fireStore = Firebase.firestore
+        val productList = mutableListOf<Product>()
         fireStore.collection("products").get().addOnSuccessListener { result ->
             for (document in result) {
                 val id = document.id
@@ -38,27 +39,30 @@ class ProductRepositoryImpl @Inject constructor(
                 val price: Number = document.data["price"] as Number
                 val image: String = document.data["image"] as String
                 val category = document.getDocumentReference("category")
-                executorService.execute {
-                    productDao.insert(
-                        Product(
-                            id,
-                            name,
-                            description,
-                            price.toDouble(),
-                            image,
-                            category?.id
-                        )
-                    )
-                }
+                productList.add(Product(
+                    id,
+                    name,
+                    description,
+                    price.toDouble(),
+                    image,
+                    category?.id
+                ))
             }
         }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.${exception}")
             }
+        withContext(Dispatchers.IO) {
+            productDao.insertAll(productList)
+        }
     }
 
-    override suspend fun updateProductAndLineItem(lineItem: ProductAndLineItem) {
-        lineItemDao.update(lineItem.lineItem)
+    override suspend fun updateLineItem(lineItem: LineItem) {
+        lineItemDao.update(lineItem)
+    }
+
+    override suspend fun removeLineItem(lineItem: LineItem) {
+        lineItemDao.remove(lineItem)
     }
 
     override suspend fun hasProduct(): Boolean {
@@ -66,18 +70,11 @@ class ProductRepositoryImpl @Inject constructor(
         return product != null
     }
 
+    override fun getAllProducts() = productDao.getAll()
 
-    override suspend fun getAllProducts() = productDao.getAll()
     override suspend fun getAllProductsByCategory(categoryId: String) =
         productDao.getAllByCategory(categoryId)
 
-    override fun getById(id: String) = productDao.getById(id)
+    override fun getProductById(productId: String) = productDao.getById(productId)
 
-    override suspend fun getAllLineItem() = lineItemDao.getAll()
-    override suspend fun removeProductAndLineItem(lineItem: LineItem) {
-        lineItemDao.removeCurrentItem(lineItem)
-    }
-
-    override suspend fun getLineItemInOrder(orderId: String) =
-        lineItemDao.getLineItemInOrder(orderId)
 }
