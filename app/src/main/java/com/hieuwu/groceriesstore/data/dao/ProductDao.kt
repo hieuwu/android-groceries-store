@@ -8,7 +8,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(product: Product)
+    suspend fun insert(product: Product)
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(products: List<Product>)
 
     @Update
     fun update(product: Product)
