@@ -19,7 +19,7 @@ class ProductDetailViewModel @Inject constructor(
     private val orderRepository: OrderRepository
 ) : ObservableViewModel() {
 
-    val product = productRepository.getById(id).asLiveData()
+    val product = productRepository.getProductById(id).asLiveData()
     val hasCart = orderRepository.hasCart()?.asLiveData()
 
     var CurrentCart: MutableLiveData<Order> =
