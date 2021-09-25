@@ -67,7 +67,7 @@ class ShopViewModel @Inject constructor(
         if (CurrentCart.value != null) {
             //Add to cart
             val cartId = CurrentCart.value!!.id
-            viewModelScope.launch {
+            uiScope.launch {
                 val lineItem = LineItem(
                     product.id, cartId, 1, product.price!!
                 )
@@ -76,7 +76,7 @@ class ShopViewModel @Inject constructor(
         } else {
             val id = UUID.randomUUID().toString()
             val newOrder = Order(id, OrderStatus.IN_CART.value, null)
-            viewModelScope.launch {
+            uiScope.launch {
                 orderRepository.insert(newOrder)
                 val lineItem = LineItem(
                     product.id, id, 1, product.price!!
