@@ -2,13 +2,10 @@ package com.hieuwu.groceriesstore.presentation.explore
 
 import android.graphics.Color
 import android.os.Bundle
-import android.transition.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
-import android.widget.SearchView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -47,9 +44,22 @@ class ExploreFragment : Fragment() {
         )
         val viewModelFactory =
             ExploreViewModelFactory(categoryRepository, productRepository)
+
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ExploreViewModel::class.java)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        viewModel.productList.observe(viewLifecycleOwner,{
+            if (it.isEmpty()) {
+                Timber.d("Empty")
+            }
+            else {
+                binding.animationLayout.visibility = View.GONE
+                binding.productRecyclerview.visibility = View.VISIBLE
+                Timber.d("Has item")
+            }
+        })
+
         val searchEditText =
             binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
         searchEditText.setTextColor(Color.WHITE)
@@ -57,13 +67,14 @@ class ExploreFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                TODO("Not yet implemented")
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Timber.d("Search: $newText")
                 //Query product by name
-                viewModel.searchProductByName(newText!!)
+                viewModel.searchProductByName(query!!)
+                return true            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                Timber.d("Search: $query")
+                //Query product by name
+                viewModel.searchProductByName(query!!)
                 return true
             }
         })
@@ -73,7 +84,7 @@ class ExploreFragment : Fragment() {
             //Hide category list
             //Show search result list with empty list product
             binding.categoryRecyclerview.visibility = View.GONE
-            binding.animationView.visibility = View.VISIBLE
+            binding.animationLayout.visibility = View.VISIBLE
         }
 
         val closeSearchButton =
@@ -85,11 +96,9 @@ class ExploreFragment : Fragment() {
             //Clear search result
             //Hide search result
             binding.categoryRecyclerview.visibility = View.VISIBLE
-            binding.animationView.visibility = View.GONE
+            binding.animationLayout.visibility = View.GONE
 
         }
-
-        binding.lifecycleOwner = this
 
         viewModel.categories.observe(viewLifecycleOwner, {})
 
@@ -113,14 +122,6 @@ class ExploreFragment : Fragment() {
                 )
             )
 
-        viewModel.productList.observe(viewLifecycleOwner, {
-            if (it.isEmpty()) {
-                binding.productRecyclerview.visibility = View.VISIBLE
-            } else {
-                binding.animationView.visibility = View.GONE
-                binding.productRecyclerview.visibility = View.VISIBLE
-            }
-        })
 
         return binding.root
     }
