@@ -24,7 +24,7 @@ interface ProductDao {
     fun clear()
 
     @Query("SELECT * FROM $PRODUCT_TABLE WHERE name =:name LIMIT 10")
-    fun searchProductByName(name: String): Flow<List<Product>>
+    fun searchProductByName(name: String): List<Product>
 
     @Query("SELECT * FROM $PRODUCT_TABLE LIMIT 10")
     fun getAll(): Flow<List<Product>>
