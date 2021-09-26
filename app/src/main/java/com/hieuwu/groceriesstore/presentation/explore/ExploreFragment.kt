@@ -20,6 +20,7 @@ import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
+import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -44,11 +45,17 @@ class ExploreFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentExploreBinding>(
             inflater, R.layout.fragment_explore, container, false
         )
+        val viewModelFactory =
+            ExploreViewModelFactory(categoryRepository, productRepository)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(ExploreViewModel::class.java)
+        binding.viewModel = viewModel
         val searchEditText =
             binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
         searchEditText.setTextColor(Color.WHITE)
 
-        binding.searchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 TODO("Not yet implemented")
             }
@@ -56,6 +63,7 @@ class ExploreFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 Timber.d("Search: $newText")
                 //Query product by name
+                viewModel.searchProductByName(newText!!)
                 return true
             }
         })
@@ -68,8 +76,9 @@ class ExploreFragment : Fragment() {
             binding.animationView.visibility = View.VISIBLE
         }
 
-        val closeSearchButton = binding.searchView.findViewById<AppCompatImageView>(androidx.appcompat.R.id.search_close_btn)
-        closeSearchButton.setOnClickListener{
+        val closeSearchButton =
+            binding.searchView.findViewById<AppCompatImageView>(androidx.appcompat.R.id.search_close_btn)
+        closeSearchButton.setOnClickListener {
             binding.searchView.onActionViewCollapsed()
             Timber.d("Close search focused")
             //Show category list
@@ -79,12 +88,6 @@ class ExploreFragment : Fragment() {
             binding.animationView.visibility = View.GONE
 
         }
-
-        val viewModelFactory =
-            ExploreViewModelFactory(categoryRepository, productRepository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(ExploreViewModel::class.java)
-        binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
 
@@ -100,6 +103,24 @@ class ExploreFragment : Fragment() {
                 findNavController().navigate(direction)
             })
 
+        binding.productRecyclerview.adapter =
+            GridListItemAdapter(
+                GridListItemAdapter.OnClickListener(
+                    clickListener = {
+                    },
+                    addToCartListener = {
+                    },
+                )
+            )
+
+        viewModel.productList.observe(viewLifecycleOwner, {
+            if (it.isEmpty()) {
+                binding.productRecyclerview.visibility = View.VISIBLE
+            } else {
+                binding.animationView.visibility = View.GONE
+                binding.productRecyclerview.visibility = View.VISIBLE
+            }
+        })
 
         return binding.root
     }
