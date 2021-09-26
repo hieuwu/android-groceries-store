@@ -13,5 +13,5 @@ interface ProductRepository {
     suspend fun hasProduct(): Boolean
     suspend fun updateLineItem(lineItem: LineItem)
     suspend fun removeLineItem(lineItem: LineItem)
-    suspend fun searchProductsListByName(name: String) : Flow<List<Product>>
+    suspend fun searchProductsListByName(name: String) : List<Product>
 }
