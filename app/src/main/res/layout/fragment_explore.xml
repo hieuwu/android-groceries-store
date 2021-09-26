@@ -48,8 +48,8 @@
                 app:spanCount="2" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
                 android:id="@+id/product_recyclerview"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -58,19 +58,20 @@
                 app:spanCount="2" />
 
             <LinearLayout
-                android:id="@+id/animation_view"
+                android:id="@+id/animation_layout"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_gravity="center_horizontal"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                app:lottie_autoPlay="true"
-                app:lottie_fileName="explore_animation.json"
-                app:lottie_loop="true" />
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="explore_animation.json"
+                    app:lottie_loop="true" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
