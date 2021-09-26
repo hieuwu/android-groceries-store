@@ -9,9 +9,7 @@ import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class ExploreViewModel @Inject constructor(
@@ -19,6 +17,8 @@ class ExploreViewModel @Inject constructor(
     private val productRepository: ProductRepository
 ) :
     ObservableViewModel() {
+    private val viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private var _categories: MutableLiveData<List<Category>> =
         categoryRepository.getFromLocal().asLiveData() as MutableLiveData<List<Category>>
 
@@ -32,7 +32,7 @@ class ExploreViewModel @Inject constructor(
 
 
     init {
-        viewModelScope.launch {
+        uiScope.launch {
             getCategories()
         }
     }
@@ -43,16 +43,13 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
-    suspend fun getProductFromDatabase(name: String): MutableLiveData<List<Product>> {
-        return withContext(Dispatchers.IO) {
-            productRepository.searchProductsListByName(name)
-                .asLiveData() as MutableLiveData<List<Product>>
-        }
+    fun searchProductByName(name: String) {
+
     }
 
-    fun searchProductByName(name: String) {
-        viewModelScope.launch {
-            _productList = getProductFromDatabase(name)
+    suspend fun getProduct(name: String): List<Product> {
+        return withContext(Dispatchers.IO) {
+            productRepository.searchProductsListByName(name)
         }
     }
 }
