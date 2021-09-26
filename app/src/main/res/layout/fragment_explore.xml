@@ -46,6 +46,15 @@
                 app:categoryListData="@{viewModel.categories}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:lottie_autoPlay="true"
+                android:visibility="gone"
+                app:lottie_fileName="cart_empty_animation.json"
+                app:lottie_loop="true" />
 
         </LinearLayout>
 
