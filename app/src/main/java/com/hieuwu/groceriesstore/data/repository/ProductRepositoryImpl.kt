@@ -64,6 +64,9 @@ class ProductRepositoryImpl @Inject constructor(
         lineItemDao.remove(lineItem)
     }
 
+    override suspend fun searchProductsListByName(name: String) = productDao.searchProductByName(name)
+
+
     override suspend fun hasProduct(): Boolean {
         val product = productDao.hasProduct()
         return product != null
