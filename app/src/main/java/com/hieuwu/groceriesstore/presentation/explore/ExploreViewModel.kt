@@ -14,8 +14,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class ExploreViewModel @Inject constructor(private val categoryRepository: CategoryRepository,
-                                           private val productRepository: ProductRepository) :
+class ExploreViewModel @Inject constructor(
+    private val categoryRepository: CategoryRepository,
+    private val productRepository: ProductRepository
+) :
     ObservableViewModel() {
     private var _categories: MutableLiveData<List<Category>> =
         categoryRepository.getFromLocal().asLiveData() as MutableLiveData<List<Category>>
@@ -23,8 +25,7 @@ class ExploreViewModel @Inject constructor(private val categoryRepository: Categ
     val categories: MutableLiveData<List<Category>>
         get() = _categories
 
-    private var _productList:MutableLiveData<List<Product>> = productRepository.getAllProducts().asLiveData()
-            as MutableLiveData<List<Product>>
+    private var _productList = MutableLiveData<List<Product>>()
 
     val productList: LiveData<List<Product>>
         get() = _productList
@@ -39,6 +40,19 @@ class ExploreViewModel @Inject constructor(private val categoryRepository: Categ
     private suspend fun getCategories() {
         withContext(Dispatchers.IO) {
             categoryRepository.getFromServer()
+        }
+    }
+
+    suspend fun getProductFromDatabase(name: String): MutableLiveData<List<Product>> {
+        return withContext(Dispatchers.IO) {
+            productRepository.searchProductsListByName(name)
+                .asLiveData() as MutableLiveData<List<Product>>
+        }
+    }
+
+    fun searchProductByName(name: String) {
+        viewModelScope.launch {
+            _productList = getProductFromDatabase(name)
         }
     }
 }
