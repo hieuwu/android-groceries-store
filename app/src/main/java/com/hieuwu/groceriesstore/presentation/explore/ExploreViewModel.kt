@@ -1,15 +1,13 @@
 package com.hieuwu.groceriesstore.presentation.explore
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.domain.entities.Category
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ExploreViewModel @Inject constructor(
@@ -28,7 +26,8 @@ class ExploreViewModel @Inject constructor(
     private var _productList = MutableLiveData<List<Product>>()
 
     val productList: LiveData<List<Product>>
-        get() = _productList
+        get() =  Transformations.switchMap(){ string->
+            repository.getCustomerByName(string)
 
 
     init {
@@ -44,12 +43,14 @@ class ExploreViewModel @Inject constructor(
     }
 
     fun searchProductByName(name: String) {
-
+        uiScope.launch {
+            _productList = getProduct(name) as MutableLiveData
+        }
     }
 
-    suspend fun getProduct(name: String): List<Product> {
+    suspend fun getProduct(name: String): LiveData<List<Product>> {
         return withContext(Dispatchers.IO) {
-            productRepository.searchProductsListByName(name)
+            productRepository.searchProductsListByName(name).asLiveData()
         }
     }
 }
