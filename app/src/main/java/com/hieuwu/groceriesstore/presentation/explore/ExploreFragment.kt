@@ -49,13 +49,24 @@ class ExploreFragment : Fragment() {
             .get(ExploreViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.productList.observe(viewLifecycleOwner,{
+
+        val productListAdapter = GridListItemAdapter(
+            GridListItemAdapter.OnClickListener(
+                clickListener = {
+                },
+                addToCartListener = {
+                },
+            )
+        )
+        binding.productRecyclerview.adapter = productListAdapter
+
+        viewModel.productList.observe(viewLifecycleOwner, {
             if (it.isEmpty()) {
                 Timber.d("Empty")
-            }
-            else {
+            } else {
                 binding.animationLayout.visibility = View.GONE
                 binding.productRecyclerview.visibility = View.VISIBLE
+                productListAdapter.submitList(it)
                 Timber.d("Has item")
             }
         })
@@ -69,12 +80,18 @@ class ExploreFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 //Query product by name
                 viewModel.searchProductByName(query!!)
-                return true            }
+                productListAdapter.notifyDataSetChanged()
+
+                binding.animationLayout.visibility = View.GONE
+                binding.productRecyclerview.visibility = View.VISIBLE
+                return true
+            }
 
             override fun onQueryTextChange(query: String?): Boolean {
                 Timber.d("Search: $query")
                 //Query product by name
                 viewModel.searchProductByName(query!!)
+                productListAdapter.notifyDataSetChanged()
                 return true
             }
         })
@@ -112,15 +129,7 @@ class ExploreFragment : Fragment() {
                 findNavController().navigate(direction)
             })
 
-        binding.productRecyclerview.adapter =
-            GridListItemAdapter(
-                GridListItemAdapter.OnClickListener(
-                    clickListener = {
-                    },
-                    addToCartListener = {
-                    },
-                )
-            )
+
 
 
         return binding.root
