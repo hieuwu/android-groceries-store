@@ -64,7 +64,7 @@ class ProductRepositoryImpl @Inject constructor(
         lineItemDao.remove(lineItem)
     }
 
-    override suspend fun searchProductsListByName(name: String) =
+    override fun searchProductsListByName(name: String) =
         productDao.searchProductByName(name)
 
 
