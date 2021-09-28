@@ -48,9 +48,8 @@ class ExploreFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ExploreViewModel::class.java)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
 
-        val productListAdapter = GridListItemAdapter(
+        binding.productRecyclerview.adapter = GridListItemAdapter(
             GridListItemAdapter.OnClickListener(
                 clickListener = {
                 },
@@ -58,7 +57,6 @@ class ExploreFragment : Fragment() {
                 },
             )
         )
-        binding.productRecyclerview.adapter = productListAdapter
 
         viewModel.productList.observe(viewLifecycleOwner, {
             if (it.isEmpty()) {
@@ -66,8 +64,8 @@ class ExploreFragment : Fragment() {
             } else {
                 binding.animationLayout.visibility = View.GONE
                 binding.productRecyclerview.visibility = View.VISIBLE
-                productListAdapter.submitList(it)
                 Timber.d("Has item")
+
             }
         })
 
@@ -79,9 +77,7 @@ class ExploreFragment : Fragment() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 //Query product by name
-                viewModel.searchProductByName(query!!)
-                productListAdapter.notifyDataSetChanged()
-
+                viewModel.searchNameChanged(query!!)
                 binding.animationLayout.visibility = View.GONE
                 binding.productRecyclerview.visibility = View.VISIBLE
                 return true
@@ -90,8 +86,7 @@ class ExploreFragment : Fragment() {
             override fun onQueryTextChange(query: String?): Boolean {
                 Timber.d("Search: $query")
                 //Query product by name
-                viewModel.searchProductByName(query!!)
-                productListAdapter.notifyDataSetChanged()
+                viewModel.searchNameChanged(query!!)
                 return true
             }
         })
@@ -130,7 +125,7 @@ class ExploreFragment : Fragment() {
             })
 
 
-
+        binding.lifecycleOwner = this
 
         return binding.root
     }
