@@ -23,7 +23,7 @@ interface ProductDao {
     @Query("DELETE FROM $PRODUCT_TABLE")
     fun clear()
 
-    @Query("SELECT * FROM $PRODUCT_TABLE WHERE name =:name LIMIT 10")
+    @Query("SELECT * FROM $PRODUCT_TABLE WHERE name LIKE :name or LOWER(name) like LOWER(:name) LIMIT 10")
     fun searchProductByName(name: String): Flow<List<Product>>
 
     @Query("SELECT * FROM $PRODUCT_TABLE LIMIT 10")
