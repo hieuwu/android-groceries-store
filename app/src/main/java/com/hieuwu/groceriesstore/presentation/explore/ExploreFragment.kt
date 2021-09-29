@@ -52,8 +52,10 @@ class ExploreFragment : Fragment() {
         binding.productRecyclerview.adapter = GridListItemAdapter(
             GridListItemAdapter.OnClickListener(
                 clickListener = {
+                    viewModel.displayPropertyDetails(it)
                 },
                 addToCartListener = {
+                    viewModel.addToCart(it)
                 },
             )
         )
@@ -62,10 +64,9 @@ class ExploreFragment : Fragment() {
             if (it.isEmpty()) {
                 Timber.d("Empty")
             } else {
-                binding.animationLayout.visibility = View.GONE
                 binding.productRecyclerview.visibility = View.VISIBLE
+                binding.animationLayout.visibility = View.GONE
                 Timber.d("Has item")
-
             }
         })
 
@@ -78,8 +79,6 @@ class ExploreFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 //Query product by name
                 viewModel.searchNameChanged(query!!)
-                binding.animationLayout.visibility = View.GONE
-                binding.productRecyclerview.visibility = View.VISIBLE
                 return true
             }
 
