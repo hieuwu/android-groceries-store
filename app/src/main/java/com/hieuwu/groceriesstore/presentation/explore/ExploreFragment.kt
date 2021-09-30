@@ -48,6 +48,7 @@ class ExploreFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ExploreViewModel::class.java)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         binding.productRecyclerview.adapter = GridListItemAdapter(
             GridListItemAdapter.OnClickListener(
@@ -124,7 +125,6 @@ class ExploreFragment : Fragment() {
             })
 
 
-        binding.lifecycleOwner = this
 
         return binding.root
     }
