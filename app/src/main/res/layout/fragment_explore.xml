@@ -2,7 +2,6 @@
 <layout>
 
     <data>
-
         <variable
             name="viewModel"
             type="com.hieuwu.groceriesstore.presentation.explore.ExploreViewModel" />
@@ -38,14 +37,6 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/category_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                app:categoryListData="@{viewModel.categories}"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/product_recyclerview"
@@ -55,6 +46,15 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:listData="@{viewModel.productList}"
                 app:spanCount="2" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:categoryListData="@{viewModel.categories}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
+
 
             <LinearLayout
                 android:id="@+id/animation_layout"
