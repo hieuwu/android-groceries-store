@@ -10,78 +10,164 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <LinearLayout
+            <ImageView
+                android:layout_width="@dimen/image_profile_rounded"
+                android:layout_height="@dimen/image_profile_rounded"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="@dimen/horizontal_margin"
+                android:background="@drawable/rounded_image"
+                android:src="@drawable/ic_baseline_filter_list_36" />
+
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/image_profile_rounded"
-                    android:layout_height="@dimen/image_profile_rounded"
-                    android:layout_marginHorizontal="@dimen/horizontal_margin"
-                    android:background="@drawable/rounded_image"
-                    android:src="@drawable/ic_baseline_filter_list_36" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/horizontal_margin"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Peter Parker"
-                        android:textSize="@dimen/text_big_bold"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="15 points" />
-                </LinearLayout>
-
-            </LinearLayout>
+                android:gravity="center_horizontal"
+                android:text="Peter Parker"
+                android:textSize="@dimen/text_big_bold"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/icon_small"
-                    android:layout_height="@dimen/icon_small"
-                    android:layout_marginHorizontal="@dimen/horizontal_margin"
-                    android:src="@drawable/ic_baseline_phone_24" />
+                android:layout_marginHorizontal="@dimen/margin_normal">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="0989 733 234" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/icon_small"
-                    android:layout_height="@dimen/icon_small"
-                    android:layout_marginHorizontal="@dimen/horizontal_margin"
-                    android:src="@drawable/ic_baseline_email_24" />
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/rounded_border_grid_item"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:text="15 points" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="hieuvu1199@gmail.com" />
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/rounded_border_grid_item"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:text="15 points" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/rounded_border_grid_item"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:text="15 points" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:background="@android:color/darker_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Profile Information"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_small"
+                    android:layout_height="@dimen/icon_small"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_baseline_chevron_right_24" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:background="@android:color/darker_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Order History"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_small"
+                    android:layout_height="@dimen/icon_small"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_baseline_chevron_right_24" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:background="@android:color/darker_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Settings"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_small"
+                    android:layout_height="@dimen/icon_small"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_baseline_chevron_right_24" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:background="@android:color/darker_gray" />
+            <Button
+                android:id="@+id/signout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:layout_marginVertical="@dimen/margin_normal"
+                android:text="@string/sign_out"
+                android:textAllCaps="false"
+                android:background="@drawable/secondary_button"
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
     </FrameLayout>
