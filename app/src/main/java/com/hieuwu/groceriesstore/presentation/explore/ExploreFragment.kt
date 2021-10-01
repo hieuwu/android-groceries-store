@@ -95,8 +95,14 @@ class ExploreFragment : Fragment() {
             Timber.d("Search focused")
             //Hide category list
             //Show search result list with empty list product
-            binding.categoryRecyclerview.visibility = View.GONE
+
+
             binding.animationLayout.visibility = View.VISIBLE
+            if (!viewModel.productList.value?.isEmpty()!!) {
+                binding.animationLayout.visibility = View.GONE
+            } else binding.categoryRecyclerview.visibility = View.GONE
+
+
         }
 
         val closeSearchButton =
