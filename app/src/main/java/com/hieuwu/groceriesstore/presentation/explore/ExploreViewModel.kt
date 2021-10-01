@@ -24,17 +24,15 @@ class ExploreViewModel @Inject constructor(
     val categories: MutableLiveData<List<Category>>
         get() = _categories
 
-    private val searchString: MutableLiveData<String> = MutableLiveData<String>("wagu beef")
+    private val searchString: MutableLiveData<String> = MutableLiveData<String>("")
 
     fun searchNameChanged(name: String) {
         searchString.value = name
     }
 
-    val productList: LiveData<List<Product>> = productRepository.getAllProducts().asLiveData()
-
-//        get() = Transformations.switchMap(searchString) { string ->
-//            productRepository.searchProductsListByName(string).asLiveData()
-//        }
+    val productList: LiveData<List<Product>> = Transformations.switchMap(searchString) { string ->
+        productRepository.searchProductsListByName(string).asLiveData()
+    }
 
     init {
         viewModelScope.launch {
