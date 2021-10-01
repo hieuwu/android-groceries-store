@@ -40,4 +40,5 @@
     <string name="confirm_order">Confirm order</string>
     <string name="total">Total:</string>
     <string name="shipping_fee">Shipping fee:</string>
+    <string name="sign_out">Sign out</string>
 </resources>
