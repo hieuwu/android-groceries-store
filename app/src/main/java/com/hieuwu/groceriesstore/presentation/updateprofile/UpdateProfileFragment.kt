@@ -29,7 +29,7 @@ class UpdateProfileFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        
+
         return binding.root
     }
 
