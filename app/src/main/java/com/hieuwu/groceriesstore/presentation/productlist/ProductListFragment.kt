@@ -15,6 +15,7 @@ import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
+import com.hieuwu.groceriesstore.presentation.cart.CartFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -76,7 +77,27 @@ class ProductListFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_filter -> {
+                    showFilterDialog()
+                    val bottomSheetDialogFragment = FilterFragment()
+                    bottomSheetDialogFragment.show(
+                        activity?.supportFragmentManager!!,
+                        bottomSheetDialogFragment.tag
+                    )
+                    true
+                }
+                else -> false
+            }
+        }
+
+
         return binding.root
+    }
+
+    private fun showFilterDialog() {
+
     }
 
     private fun setUpRecyclerView(viewModel: ProductListViewModel) {
