@@ -28,6 +28,7 @@
                 app:contentInsetStartWithNavigation="0dp"
                 app:navigationIcon="@drawable/ic_detail_back"
                 app:title="Delivery"
+                app:menu="@menu/product_list_filter_menu"
                 app:titleTextColor="@android:color/white"
                 app:toolbarId="@id/toolbar" />
         </com.google.android.material.appbar.AppBarLayout>
