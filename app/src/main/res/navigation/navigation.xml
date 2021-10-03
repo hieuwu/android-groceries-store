@@ -8,7 +8,11 @@
         android:id="@+id/accountFragment"
         android:name="com.hieuwu.groceriesstore.presentation.account.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_updateProfileFragment"
+            app:destination="@id/updateProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.hieuwu.groceriesstore.presentation.cart.CartFragment"
@@ -98,5 +102,9 @@
             android:id="@+id/action_productListFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/updateProfileFragment"
+        android:name="com.hieuwu.groceriesstore.presentation.updateprofile.UpdateProfileFragment"
+        android:label="UpdateProfileFragment" />
 
 </navigation>
