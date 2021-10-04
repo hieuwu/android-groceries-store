@@ -2,6 +2,7 @@ package com.hieuwu.groceriesstore.data.dao
 
 import androidx.room.*
 import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.utilities.FilterOrder
 import com.hieuwu.groceriesstore.utilities.PRODUCT_TABLE
 import kotlinx.coroutines.flow.Flow
 
@@ -23,8 +24,9 @@ interface ProductDao {
     @Query("DELETE FROM $PRODUCT_TABLE")
     fun clear()
 
-    @Query("SELECT * FROM $PRODUCT_TABLE WHERE name LIKE :name or LOWER(name) like LOWER(:name) LIMIT 10")
-    fun searchProductByName(name: String): Flow<List<Product>>
+    @Query("SELECT * FROM $PRODUCT_TABLE WHERE name LIKE '%' || :name || '%'")
+    fun searchProductByName(name: String?): Flow<List<Product>>
+
 
     @Query("SELECT * FROM $PRODUCT_TABLE LIMIT 10")
     fun getAll(): Flow<List<Product>>
@@ -34,4 +36,7 @@ interface ProductDao {
 
     @Query("SELECT * FROM $PRODUCT_TABLE LIMIT 1")
     fun hasProduct(): Product?
+
+    @Query("SELECT * FROM $PRODUCT_TABLE ORDER BY price asc")
+    fun getProductListOrderByPrice(): Flow<List<Product>>
 }
