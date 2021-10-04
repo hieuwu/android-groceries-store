@@ -15,11 +15,6 @@ class ShopViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val orderRepository: OrderRepository
 ) : ViewModel() {
-
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private var hasProduct: Boolean = false
-
     private var _productList:MutableLiveData<List<Product>> = productRepository.getAllProducts().asLiveData()
             as MutableLiveData<List<Product>>
 
@@ -46,11 +41,6 @@ class ShopViewModel @Inject constructor(
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
     private val _navigateToSelectedProperty = MutableLiveData<Product?>()
     val navigateToSelectedProperty: LiveData<Product?>
         get() = _navigateToSelectedProperty
@@ -67,7 +57,7 @@ class ShopViewModel @Inject constructor(
         if (CurrentCart.value != null) {
             //Add to cart
             val cartId = CurrentCart.value!!.id
-            uiScope.launch {
+            viewModelScope.launch {
                 val lineItem = LineItem(
                     product.id, cartId, 1, product.price!!
                 )
@@ -76,7 +66,7 @@ class ShopViewModel @Inject constructor(
         } else {
             val id = UUID.randomUUID().toString()
             val newOrder = Order(id, OrderStatus.IN_CART.value, null)
-            uiScope.launch {
+            viewModelScope.launch {
                 orderRepository.insert(newOrder)
                 val lineItem = LineItem(
                     product.id, id, 1, product.price!!
