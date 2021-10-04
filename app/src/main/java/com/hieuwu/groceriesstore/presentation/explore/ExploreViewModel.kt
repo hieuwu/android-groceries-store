@@ -6,6 +6,7 @@ import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
+import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 class ExploreViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val orderRepository: OrderRepository,
 ) :
     ObservableViewModel() {
     private var _categories: MutableLiveData<List<Category>> =
@@ -31,8 +33,14 @@ class ExploreViewModel @Inject constructor(
     }
 
     val productList: LiveData<List<Product>> = Transformations.switchMap(searchString) { string ->
-        productRepository.searchProductsListByName(string).asLiveData()
+        if (string.isNotEmpty()) productRepository.searchProductsListByName(string).asLiveData()
+        else MutableLiveData<List<Product>>()
     }
+
+    private val _navigateToSelectedProperty = MutableLiveData<Product?>()
+    val navigateToSelectedProperty: LiveData<Product?>
+        get() = _navigateToSelectedProperty
+
 
     init {
         viewModelScope.launch {
@@ -47,29 +55,38 @@ class ExploreViewModel @Inject constructor(
     }
 
     fun displayPropertyDetails(marsProperty: Product) {
+        _navigateToSelectedProperty.value = marsProperty
     }
 
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
+    }
+
+    private var _currentCart: MutableLiveData<Order> =
+        orderRepository.getCart(OrderStatus.IN_CART).asLiveData() as MutableLiveData<Order>
+
     fun addToCart(product: Product) {
-//        if (CurrentCart.value != null) {
-//            //Add to cart
-//            val cartId = CurrentCart.value!!.id
-//            uiScope.launch {
-//                val lineItem = LineItem(
-//                    product.id, cartId, 1, product.price!!
-//                )
-//                orderRepository.addLineItem(lineItem)
-//            }
-//        } else {
-//            val id = UUID.randomUUID().toString()
-//            val newOrder = Order(id, OrderStatus.IN_CART.value, null)
-//            uiScope.launch {
-//                orderRepository.insert(newOrder)
-//                val lineItem = LineItem(
-//                    product.id, id, 1, product.price!!
-//                )
-//                orderRepository.addLineItem(lineItem)
-//            }
-//        }
+        if (_currentCart.value != null) {
+            //Add to cart
+            val cartId = _currentCart.value!!.id
+            viewModelScope.launch {
+                val lineItem = LineItem(
+                    product.id, cartId, 1, product.price!!
+                )
+                orderRepository.addLineItem(lineItem)
+            }
+        } else {
+            val id = UUID.randomUUID().toString()
+            val newOrder = Order(id, OrderStatus.IN_CART.value, null)
+            viewModelScope.launch {
+                orderRepository.insert(newOrder)
+                val lineItem = LineItem(
+                    product.id, id, 1, product.price!!
+                )
+                orderRepository.addLineItem(lineItem)
+            }
+        }
+
     }
 
 }
