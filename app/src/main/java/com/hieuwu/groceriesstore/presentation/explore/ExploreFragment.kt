@@ -15,9 +15,11 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
+import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
+import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -34,6 +36,9 @@ class ExploreFragment : Fragment() {
     @Inject
     lateinit var categoryRepository: CategoryRepository
 
+    @Inject
+    lateinit var orderRepository: OrderRepository
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +48,7 @@ class ExploreFragment : Fragment() {
             inflater, R.layout.fragment_explore, container, false
         )
         val viewModelFactory =
-            ExploreViewModelFactory(categoryRepository, productRepository)
+            ExploreViewModelFactory(categoryRepository, productRepository, orderRepository)
 
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ExploreViewModel::class.java)
@@ -54,12 +59,25 @@ class ExploreFragment : Fragment() {
             GridListItemAdapter.OnClickListener(
                 clickListener = {
                     viewModel.displayPropertyDetails(it)
+                    viewModel.displayPropertyDetailsComplete()
+
                 },
                 addToCartListener = {
                     viewModel.addToCart(it)
                 },
             )
         )
+
+        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
+            if (null != it) {
+                val direction =
+                    ExploreFragmentDirections.actionExploreFragmentToProductDetailFragment(
+                        it.id
+                    )
+                findNavController().navigate(direction)
+            }
+        })
+
 
         viewModel.productList.observe(viewLifecycleOwner, {
             if (it.isEmpty()) {
@@ -96,12 +114,7 @@ class ExploreFragment : Fragment() {
             //Hide category list
             //Show search result list with empty list product
 
-
-            binding.animationLayout.visibility = View.VISIBLE
-            if (!viewModel.productList.value?.isEmpty()!!) {
-                binding.animationLayout.visibility = View.GONE
-            } else binding.categoryRecyclerview.visibility = View.GONE
-
+            binding.categoryRecyclerview.visibility = View.GONE
 
         }
 
@@ -113,6 +126,7 @@ class ExploreFragment : Fragment() {
             //Show category list
             //Clear search result
             //Hide search result
+            binding.productRecyclerview.visibility = View.GONE
             binding.categoryRecyclerview.visibility = View.VISIBLE
             binding.animationLayout.visibility = View.GONE
 
