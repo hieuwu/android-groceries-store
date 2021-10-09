@@ -47,6 +47,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "com.google.firebase:firebase-firestore-ktx:${fireStoreVersion}"
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorLayoutVersion"
     implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
     implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
