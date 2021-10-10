@@ -47,7 +47,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "com.google.firebase:firebase-firestore-ktx:${fireStoreVersion}"
-    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorLayoutVersion"
     implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
     implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
@@ -73,6 +72,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
     implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
     implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
+    implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
