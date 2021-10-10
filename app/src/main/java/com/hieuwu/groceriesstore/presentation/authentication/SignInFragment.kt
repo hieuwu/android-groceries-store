@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSigninBinding
 import timber.log.Timber
@@ -31,7 +29,7 @@ class SignInFragment : Fragment() {
             inflater, R.layout.fragment_signin, container, false
         )
 
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance()
 
         val viewModelFactory = ViewModelFactory(null, null)
         val signInViewModel = ViewModelProvider(this, viewModelFactory)
@@ -68,7 +66,7 @@ class SignInFragment : Fragment() {
                         Toast.LENGTH_LONG).show()
                 }
 
-            }
+            }.addOnFailureListener { Exception -> Timber.d(Exception) }
 
     }
 
