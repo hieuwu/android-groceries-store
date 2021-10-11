@@ -18,8 +18,7 @@ class ExploreViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val productRepository: ProductRepository,
     private val orderRepository: OrderRepository,
-) :
-    ObservableViewModel() {
+) : ObservableViewModel() {
     private var _categories: MutableLiveData<List<Category>> =
         categoryRepository.getFromLocal().asLiveData() as MutableLiveData<List<Category>>
 
