@@ -1,14 +1,17 @@
 package com.hieuwu.groceriesstore.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.asLiveData
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.di.EntityModelProductMapper
 import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Product
-import com.hieuwu.groceriesstore.domain.mapper.ProductEntityModelMapper
+import com.hieuwu.groceriesstore.domain.entities.asDomainModel
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -22,10 +25,11 @@ class ProductRepositoryImpl @Inject constructor(
     private val lineItemDao: LineItemDao
 ) : ProductRepository {
 
-    @EntityModelProductMapper
-    @Inject
-    lateinit var productModelEntityMapper: ProductEntityModelMapper
 
+    override val products: LiveData<List<ProductModel>> =
+        Transformations.map(productDao.getAll().asLiveData()) {
+            it.asDomainModel()
+        }
 
     override suspend fun getFromServer() {
         val fireStore = Firebase.firestore
