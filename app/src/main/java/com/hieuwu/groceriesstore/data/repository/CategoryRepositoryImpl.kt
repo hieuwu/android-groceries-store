@@ -17,7 +17,7 @@ class CategoryRepositoryImpl @Inject constructor(private val categoryDao: Catego
     CategoryRepository {
 
     override suspend fun getFromServer() {
-        val categoriesList = mutableListOf<Category>();
+        val categoriesList = mutableListOf<Category>()
         val fireStore = Firebase.firestore
         fireStore.collection("categories").get().addOnSuccessListener { result ->
             for (document in result) {
