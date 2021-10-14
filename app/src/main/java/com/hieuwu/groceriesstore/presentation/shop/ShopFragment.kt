@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.presentation.shop
 
-import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -65,9 +64,9 @@ class ShopFragment : Fragment() {
             }
         })
 
-        var nonactiveDot =
+        val nonactiveDot =
             ContextCompat.getDrawable(requireContext(), R.drawable.non_active_dot_shape)
-        var activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)
+        val activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)
 
         val viewPagerAdapter = ViewPagerAdapter(requireContext())
         binding.viewPager.adapter = viewPagerAdapter
@@ -125,10 +124,10 @@ class ShopFragment : Fragment() {
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
                     clickListener = {
-                        viewModel.displayPropertyDetails(it)
+//                        viewModel.displayPropertyDetails(it)
                     },
                     addToCartListener = {
-                        viewModel.addToCart(it)
+//                        viewModel.addToCart(it)
                         showSnackBar(it.name)
                     },
                 )
@@ -142,7 +141,7 @@ class ShopFragment : Fragment() {
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
                     addToCartListener = {
-                        viewModel.addToCart(it)
+//                        viewModel.addToCart(it)
                         showSnackBar(it.name)
                     },
                 )
@@ -156,7 +155,7 @@ class ShopFragment : Fragment() {
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
                     addToCartListener = {
-                        viewModel.addToCart(it)
+//                        viewModel.addToCart(it)
                         showSnackBar(it.name)
                     },
                 )
