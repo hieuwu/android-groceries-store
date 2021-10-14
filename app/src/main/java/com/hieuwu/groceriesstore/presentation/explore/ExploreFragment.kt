@@ -18,8 +18,6 @@ import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
-import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
-import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -55,18 +53,18 @@ class ExploreFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.productRecyclerview.adapter = GridListItemAdapter(
-            GridListItemAdapter.OnClickListener(
-                clickListener = {
-                    viewModel.displayPropertyDetails(it)
-                    viewModel.displayPropertyDetailsComplete()
-
-                },
-                addToCartListener = {
-                    viewModel.addToCart(it)
-                },
-            )
-        )
+//        binding.productRecyclerview.adapter = GridListItemAdapter(
+//            GridListItemAdapter.OnClickListener(
+//                clickListener = {
+//                    viewModel.displayPropertyDetails(it)
+//                    viewModel.displayPropertyDetailsComplete()
+//
+//                },
+//                addToCartListener = {
+//                    viewModel.addToCart(it)
+//                },
+//            )
+//        )
 
         viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
             if (null != it) {
@@ -83,7 +81,7 @@ class ExploreFragment : Fragment() {
             if (it.isEmpty()) {
                 Timber.d("Empty")
             } else {
-                binding.productRecyclerview.visibility = View.VISIBLE
+//                binding.productRecyclerview.visibility = View.VISIBLE
                 binding.animationLayout.visibility = View.GONE
                 Timber.d("Has item")
             }
@@ -126,7 +124,7 @@ class ExploreFragment : Fragment() {
             //Show category list
             //Clear search result
             //Hide search result
-            binding.productRecyclerview.visibility = View.GONE
+//            binding.productRecyclerview.visibility = View.GONE
             binding.categoryRecyclerview.visibility = View.VISIBLE
             binding.animationLayout.visibility = View.GONE
 
