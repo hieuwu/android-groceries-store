@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutGridListItemBinding
-import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 import kotlinx.android.synthetic.main.layout_grid_list_item.view.*
 
 class GridListItemAdapter(val onClickListener: OnClickListener) :
-    ListAdapter<Product, GridListItemAdapter.ProductGridViewHolder>(DiffCallback) {
+    ListAdapter<ProductModel, GridListItemAdapter.ProductGridViewHolder>(DiffCallback) {
 
     class ProductGridViewHolder(private var binding: LayoutGridListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(productModel: Product) {
+        fun bind(productModel: ProductModel) {
             binding.product = productModel
             binding.executePendingBindings()
         }
@@ -38,21 +38,21 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
         return ProductGridViewHolder(LayoutGridListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<ProductModel>() {
+        override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
             return oldItem.id == newItem.id
         }
     }
 
     class OnClickListener(
-        val clickListener: (product: Product) -> Unit,
-        val addToCartListener: (product: Product) -> Unit
+        val clickListener: (product: ProductModel) -> Unit,
+        val addToCartListener: (product: ProductModel) -> Unit
     ) {
-        fun onClick(product: Product) = clickListener(product)
-        fun onAddButtonClick(product: Product) = addToCartListener(product)
+        fun onClick(product: ProductModel) = clickListener(product)
+        fun onAddButtonClick(product: ProductModel) = addToCartListener(product)
     }
 }
