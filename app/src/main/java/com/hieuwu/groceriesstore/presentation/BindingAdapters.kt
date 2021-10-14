@@ -8,15 +8,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.entities.Category
-import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Product>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<ProductModel>?) {
     val adapter = recyclerView.adapter as GridListItemAdapter
     adapter.submitList(data)
 }
