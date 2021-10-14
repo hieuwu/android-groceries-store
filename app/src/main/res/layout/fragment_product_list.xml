@@ -32,14 +32,14 @@
                 app:toolbarId="@id/toolbar" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/product_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:listData="@{viewModel.productList}"
-            app:spanCount="2" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/product_recyclerview"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
+<!--            app:listData="@{viewModel.productList}"-->
+<!--            app:spanCount="2" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
