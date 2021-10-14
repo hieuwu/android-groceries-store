@@ -4,6 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.utilities.PRODUCT_TABLE
 
 @Entity(tableName = PRODUCT_TABLE)
@@ -28,3 +29,15 @@ data class Product(
     @ColumnInfo(name = "category")
     var category: String?,
 )
+
+fun List<Product>.asDomainModel(): List<ProductModel> {
+    return map {
+        ProductModel(
+            id = it.id,
+            name = it.name,
+            description = it.description,
+            price = it.price,
+            image = it.image
+        )
+    }
+}
