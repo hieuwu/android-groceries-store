@@ -6,7 +6,7 @@
 
         <variable
             name="product"
-            type="com.hieuwu.groceriesstore.domain.entities.Product" />
+            type="com.hieuwu.groceriesstore.domain.models.ProductModel" />
     </data>
 
 
