@@ -68,7 +68,7 @@ class ProductListFragment : Fragment() {
 
         viewModel.productList.observe(viewLifecycleOwner, {
             if (it.isEmpty()) {
-                binding.productRecyclerview.visibility = View.GONE
+//                binding.productRecyclerview.visibility = View.GONE
                 binding.emptyLayout.visibility = View.VISIBLE
             }
         })
@@ -101,18 +101,18 @@ class ProductListFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(viewModel: ProductListViewModel) {
-        binding.productRecyclerview.adapter =
-            GridListItemAdapter(
-                GridListItemAdapter.OnClickListener(
-                    clickListener = {
-                        viewModel.displayPropertyDetails(it)
-                    },
-                    addToCartListener = {
-                        viewModel.addToCart(it)
-                        showSnackBar(it.name)
-                    },
-                )
-            )
+//        binding.productRecyclerview.adapter =
+//            GridListItemAdapter(
+//                GridListItemAdapter.OnClickListener(
+//                    clickListener = {
+//                        viewModel.displayPropertyDetails(it)
+//                    },
+//                    addToCartListener = {
+//                        viewModel.addToCart(it)
+//                        showSnackBar(it.name)
+//                    },
+//                )
+//            )
     }
 
     private fun showSnackBar(productName: String?) {
