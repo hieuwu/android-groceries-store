@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.utilities.OrderStatus
@@ -21,8 +22,8 @@ class ProductListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var viewModelJob = Job()
-    private var _productList = MutableLiveData<List<Product>>()
-    val productList: LiveData<List<Product>>
+    private var _productList = MutableLiveData<List<ProductModel>>()
+    val productList: LiveData<List<ProductModel>>
         get() = _productList
 
     var CurrentCart: MutableLiveData<Order> =
@@ -42,10 +43,10 @@ class ProductListViewModel @Inject constructor(
         return withContext(Dispatchers.IO) {
             _productList = if (categoryId == null) {
                 productRepository.getAllProducts()
-                    .asLiveData() as MutableLiveData<List<Product>>
+                        as MutableLiveData<List<ProductModel>>
             } else {
                 productRepository.getAllProductsByCategory(categoryId)
-                    .asLiveData() as MutableLiveData<List<Product>>
+                        as MutableLiveData<List<ProductModel>>
             }
         }
     }
@@ -55,11 +56,11 @@ class ProductListViewModel @Inject constructor(
         viewModelJob.cancel()
     }
 
-    private val _navigateToSelectedProperty = MutableLiveData<Product?>()
-    val navigateToSelectedProperty: LiveData<Product?>
+    private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
+    val navigateToSelectedProperty: LiveData<ProductModel?>
         get() = _navigateToSelectedProperty
 
-    fun displayPropertyDetails(marsProperty: Product) {
+    fun displayPropertyDetails(marsProperty: ProductModel) {
         _navigateToSelectedProperty.value = marsProperty
     }
 
@@ -67,7 +68,7 @@ class ProductListViewModel @Inject constructor(
         _navigateToSelectedProperty.value = null
     }
 
-    fun addToCart(product: Product) {
+    fun addToCart(product: ProductModel) {
         if (CurrentCart.value != null) {
             //Add to cart
             val cartId = CurrentCart.value!!.id
