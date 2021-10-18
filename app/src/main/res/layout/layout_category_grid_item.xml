@@ -6,7 +6,7 @@
 
         <variable
             name="category"
-            type="com.hieuwu.groceriesstore.domain.entities.Category" />
+            type="com.hieuwu.groceriesstore.domain.models.CategoryModel" />
     </data>
 
     <androidx.cardview.widget.CardView
