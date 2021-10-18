@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutCategoryGridItemBinding
 import com.hieuwu.groceriesstore.domain.entities.Category
+import com.hieuwu.groceriesstore.domain.models.CategoryModel
 
 class CategoryItemAdapter(val onClickListener: OnClickListener) :
-    ListAdapter<Category, CategoryItemAdapter.CategoryItemViewHolder>(DiffCallback) {
+    ListAdapter<CategoryModel, CategoryItemAdapter.CategoryItemViewHolder>(DiffCallback) {
 
     class CategoryItemViewHolder(private var binding: LayoutCategoryGridItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: Category) {
+        fun bind(category: CategoryModel) {
             binding.category = category
             binding.executePendingBindings()
         }
@@ -37,17 +38,17 @@ class CategoryItemAdapter(val onClickListener: OnClickListener) :
         )
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Category>() {
-        override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<CategoryModel>() {
+        override fun areItemsTheSame(oldItem: CategoryModel, newItem: CategoryModel): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
+        override fun areContentsTheSame(oldItem: CategoryModel, newItem: CategoryModel): Boolean {
             return oldItem.id == newItem.id
         }
     }
 
-    class OnClickListener(val clickListener: (category: Category) -> Unit) {
-        fun onClick(category: Category) = clickListener(category)
+    class OnClickListener(val clickListener: (category: CategoryModel) -> Unit) {
+        fun onClick(category: CategoryModel) = clickListener(category)
     }
 }
