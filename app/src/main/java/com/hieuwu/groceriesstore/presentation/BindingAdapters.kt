@@ -9,6 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.entities.Category
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
+import com.hieuwu.groceriesstore.domain.models.CategoryModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
@@ -43,7 +44,7 @@ fun bindRecyclerViewLine(recyclerView: RecyclerView, data: MutableList<ProductAn
 
 
 @BindingAdapter("categoryListData")
-fun bindRecyclerViewCategory(recyclerView: RecyclerView, data: MutableList<Category>?) {
+fun bindRecyclerViewCategory(recyclerView: RecyclerView, data: MutableList<CategoryModel>?) {
     val adapter = recyclerView.adapter as CategoryItemAdapter
     adapter.submitList(data)
 }
