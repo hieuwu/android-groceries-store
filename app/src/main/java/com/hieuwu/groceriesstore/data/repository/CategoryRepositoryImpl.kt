@@ -1,10 +1,14 @@
 package com.hieuwu.groceriesstore.data.repository
 
+import android.view.animation.Transformation
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.asLiveData
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.CategoryDao
 import com.hieuwu.groceriesstore.domain.entities.Category
+import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,8 +28,8 @@ class CategoryRepositoryImpl @Inject constructor(private val categoryDao: Catego
                 categoriesList.add(getCategoryEntityFromDocument(document))
             }
         }.addOnFailureListener { exception ->
-                Timber.w("Error getting documents.${exception}")
-            }
+            Timber.w("Error getting documents.${exception}")
+        }
         withContext(Dispatchers.IO) {
             categoryDao.insertAll(categoriesList)
         }
@@ -38,5 +42,8 @@ class CategoryRepositoryImpl @Inject constructor(private val categoryDao: Catego
         return Category(id, name, image)
     }
 
-    override fun getFromLocal() = categoryDao.getAll()
+
+    override fun getFromLocal() = Transformations
+        .map(categoryDao.getAll().asLiveData()) { it.asDomainModel()
+    }
 }
