@@ -124,10 +124,10 @@ class ShopFragment : Fragment() {
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
                     clickListener = {
-//                        viewModel.displayPropertyDetails(it)
+                        viewModel.displayPropertyDetails(it)
                     },
                     addToCartListener = {
-//                        viewModel.addToCart(it)
+                        viewModel.addToCart(it)
                         showSnackBar(it.name)
                     },
                 )
@@ -141,7 +141,7 @@ class ShopFragment : Fragment() {
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
                     addToCartListener = {
-//                        viewModel.addToCart(it)
+                        viewModel.addToCart(it)
                         showSnackBar(it.name)
                     },
                 )
@@ -155,7 +155,7 @@ class ShopFragment : Fragment() {
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
                     addToCartListener = {
-//                        viewModel.addToCart(it)
+                        viewModel.addToCart(it)
                         showSnackBar(it.name)
                     },
                 )
