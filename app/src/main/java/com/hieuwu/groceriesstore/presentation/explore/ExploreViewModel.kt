@@ -1,16 +1,18 @@
 package com.hieuwu.groceriesstore.presentation.explore
 
 import androidx.lifecycle.*
-import com.hieuwu.groceriesstore.domain.entities.Category
 import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Order
-import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.domain.models.CategoryModel
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 
@@ -19,10 +21,9 @@ class ExploreViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val orderRepository: OrderRepository,
 ) : ObservableViewModel() {
-    private var _categories: MutableLiveData<List<Category>> =
-        categoryRepository.getFromLocal().asLiveData() as MutableLiveData<List<Category>>
-
-    val categories: MutableLiveData<List<Category>>
+    private var _categories =
+        categoryRepository.getFromLocal() as MutableLiveData<List<CategoryModel>>
+    val categories: MutableLiveData<List<CategoryModel>>
         get() = _categories
 
     private val searchString: MutableLiveData<String> = MutableLiveData<String>("")
@@ -31,13 +32,14 @@ class ExploreViewModel @Inject constructor(
         searchString.value = name
     }
 
-    val productList: LiveData<List<Product>> = Transformations.switchMap(searchString) { string ->
-        if (string.isNotEmpty()) productRepository.searchProductsListByName(string).asLiveData()
-        else MutableLiveData<List<Product>>()
-    }
+    val productList: LiveData<List<ProductModel>> =
+        Transformations.switchMap(searchString) { string ->
+            if (string.isNotEmpty()) productRepository.searchProductsListByName(string)
+            else MutableLiveData()
+        }
 
-    private val _navigateToSelectedProperty = MutableLiveData<Product?>()
-    val navigateToSelectedProperty: LiveData<Product?>
+    private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
+    val navigateToSelectedProperty: LiveData<ProductModel?>
         get() = _navigateToSelectedProperty
 
 
@@ -53,7 +55,7 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
-    fun displayPropertyDetails(marsProperty: Product) {
+    fun displayPropertyDetails(marsProperty: ProductModel) {
         _navigateToSelectedProperty.value = marsProperty
     }
 
@@ -64,7 +66,7 @@ class ExploreViewModel @Inject constructor(
     private var _currentCart: MutableLiveData<Order> =
         orderRepository.getCart(OrderStatus.IN_CART).asLiveData() as MutableLiveData<Order>
 
-    fun addToCart(product: Product) {
+    fun addToCart(product: ProductModel) {
         if (_currentCart.value != null) {
             //Add to cart
             val cartId = _currentCart.value!!.id
