@@ -67,18 +67,23 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
     override fun searchProductsListByName(name: String?) =
-        productDao.searchProductByName(name)
-
+        Transformations.map(productDao.searchProductByName(name).asLiveData()) {
+            it.asDomainModel()
+        }
 
     override suspend fun hasProduct(): Boolean {
         val product = productDao.hasProduct()
         return product != null
     }
 
-    override fun getAllProducts() = productDao.getAll()
+    override fun getAllProducts() = Transformations.map(productDao.getAll().asLiveData()) {
+        it.asDomainModel()
+    }
 
     override suspend fun getAllProductsByCategory(categoryId: String) =
-        productDao.getAllByCategory(categoryId)
+        Transformations.map(productDao.getAllByCategory(categoryId).asLiveData()) {
+            it.asDomainModel()
+        }
 
     override fun getProductById(productId: String) = productDao.getById(productId)
 
