@@ -3,7 +3,6 @@ package com.hieuwu.groceriesstore.presentation.shop
 import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Order
-import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
@@ -41,19 +40,19 @@ class ShopViewModel @Inject constructor(
         }
     }
 
-    private val _navigateToSelectedProperty = MutableLiveData<Product?>()
-    val navigateToSelectedProperty: LiveData<Product?>
+    private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
+    val navigateToSelectedProperty: LiveData<ProductModel?>
         get() = _navigateToSelectedProperty
 
     fun displayPropertyDetails(marsProperty: ProductModel) {
-//        _navigateToSelectedProperty.value = marsProperty
+        _navigateToSelectedProperty.value = marsProperty
     }
 
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProperty.value = null
     }
 
-    fun addToCart(product: Product) {
+    fun addToCart(product: ProductModel) {
         if (CurrentCart.value != null) {
             //Add to cart
             val cartId = CurrentCart.value!!.id
