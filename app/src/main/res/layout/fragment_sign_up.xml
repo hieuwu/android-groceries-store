@@ -65,6 +65,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/signup_btn"
                     android:layout_marginVertical="@dimen/vertical_margin"
                     android:background="@drawable/primary_button"
                     android:text="@string/sign_up"
