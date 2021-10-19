@@ -44,7 +44,7 @@ class SignInFragment : Fragment() {
 
         binding.signinButton.setOnClickListener {
             //If sign in successful, go back
-            createAccount(signInViewModel.email!!, signInViewModel.password!!)
+            signIn(signInViewModel.email!!, signInViewModel.password!!)
 //            val i = Intent(this.context, MainActivity::class.java)
 //            startActivity(i)
         }
@@ -52,12 +52,11 @@ class SignInFragment : Fragment() {
         return binding.root
     }
 
-    private fun createAccount(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password)
+    private fun signIn(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 Timber.d(task.exception)
                 if (task.isSuccessful) {
-
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                 } else {
@@ -67,7 +66,7 @@ class SignInFragment : Fragment() {
                 }
 
             }.addOnFailureListener { Exception -> Timber.d(Exception) }
-
     }
+
 
 }
