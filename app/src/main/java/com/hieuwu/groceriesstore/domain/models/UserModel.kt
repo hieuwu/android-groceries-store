@@ -1,4 +1,6 @@
 package com.hieuwu.groceriesstore.domain.models
 
-class UserModel {
-}
+import com.google.firebase.firestore.IgnoreExtraProperties
+
+@IgnoreExtraProperties
+data class UserModel(val name: String? = null)
