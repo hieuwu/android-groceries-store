@@ -16,7 +16,6 @@ import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.LoadingDialog
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSignUpBinding
-import com.hieuwu.groceriesstore.domain.models.UserModel
 import timber.log.Timber
 
 class SignUpFragment : Fragment() {
@@ -63,7 +62,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun createAccount(email: String, password: String, name: String) {
-        loadingDialog.showLoadingDialog()
+        loadingDialog.show()
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 Timber.d(task.exception)
@@ -87,10 +86,10 @@ class SignUpFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 }
+                loadingDialog.dismiss()
 
             }.addOnFailureListener { Exception -> Timber.d(Exception) }
 
-        loadingDialog.dismissLoadingDialog()
     }
 
 }
