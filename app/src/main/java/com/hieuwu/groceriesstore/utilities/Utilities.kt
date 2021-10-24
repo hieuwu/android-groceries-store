@@ -7,7 +7,7 @@ enum class FilterOrder (val value: String) { ASC("asc"), DESC("desc") }
 
 const val PRODUCT_TABLE = "product"
 const val CATEGORY_TABLE = "category"
-const val PROFILE_TABLE = "profile"
+const val USER_TABLE = "user"
 const val ORDER_TABLE = "order"
 const val LINE_ITEM_TABLE = "lineItem"
 const val DATABASE_NAME = ""
