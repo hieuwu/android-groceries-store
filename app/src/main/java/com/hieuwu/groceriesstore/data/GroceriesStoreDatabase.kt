@@ -2,17 +2,11 @@ package com.hieuwu.groceriesstore.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.hieuwu.groceriesstore.data.dao.CategoryDao
-import com.hieuwu.groceriesstore.data.dao.LineItemDao
-import com.hieuwu.groceriesstore.data.dao.OrderDao
-import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.domain.entities.Category
-import com.hieuwu.groceriesstore.domain.entities.LineItem
-import com.hieuwu.groceriesstore.domain.entities.Order
-import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.data.dao.*
+import com.hieuwu.groceriesstore.domain.entities.*
 
 @Database(
-    entities = [Product::class, LineItem::class, Order::class, Category::class],
+    entities = [Product::class, LineItem::class, Order::class, Category::class, User::class],
     version = 1,
     exportSchema = false
 )
@@ -21,4 +15,6 @@ abstract class GroceriesStoreDatabase : RoomDatabase() {
     abstract fun lineItemDao(): LineItemDao
     abstract fun orderDao(): OrderDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun userDao(): UserDao
+
 }
