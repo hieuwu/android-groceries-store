@@ -52,9 +52,6 @@ class SignUpFragment : Fragment() {
                 signUpViewModel.password!!,
                 signUpViewModel.name!!
             )
-
-//            val i = Intent(this.context, MainActivity::class.java)
-//            startActivity(i)
         }
 
 
@@ -69,6 +66,7 @@ class SignUpFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Create account success, update UI with the signed-in user's information
                     val userId = auth.currentUser!!.uid
+
                     val newUser = hashMapOf(
                         "name" to name,
                         "email" to email,
@@ -76,17 +74,24 @@ class SignUpFragment : Fragment() {
                     val db = Firebase.firestore
                     db.collection("users").document(userId)
                         .set(newUser)
-                        .addOnSuccessListener { Timber.d("DocumentSnapshot successfully written!") }
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                context, "Authentication successfully.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                         .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
-
+                    //Save user information to database
+                    loadingDialog.dismiss()
+                    activity?.finish()
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(
                         context, "Authentication failed.",
                         Toast.LENGTH_LONG
                     ).show()
+                    loadingDialog.dismiss()
                 }
-                loadingDialog.dismiss()
 
             }.addOnFailureListener { Exception -> Timber.d(Exception) }
 
