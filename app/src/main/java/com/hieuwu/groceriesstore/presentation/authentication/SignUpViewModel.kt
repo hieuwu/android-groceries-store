@@ -1,7 +1,11 @@
 package com.hieuwu.groceriesstore.presentation.authentication
 
 import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.hieuwu.groceriesstore.BR
+import com.hieuwu.groceriesstore.domain.entities.User
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 
 class SignUpViewModel : ObservableViewModel() {
@@ -38,4 +42,10 @@ class SignUpViewModel : ObservableViewModel() {
             _name = value
             notifyPropertyChanged(BR.name)
         }
+
+    //Declare user as live data, set it when create success fully
+    //In fragment observe it
+    val productList: LiveData<User>? = null
+
+
 }
