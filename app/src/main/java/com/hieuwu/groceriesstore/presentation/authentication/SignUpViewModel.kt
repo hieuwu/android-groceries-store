@@ -45,7 +45,7 @@ class SignUpViewModel : ObservableViewModel() {
 
     //Declare user as live data, set it when create success fully
     //In fragment observe it
-    val productList: LiveData<User>? = null
+    val user: LiveData<User>? = null
 
 
 }

@@ -42,6 +42,15 @@ class SignUpFragment : Fragment() {
         val signUpViewModel = ViewModelProvider(this, viewModelFactory)
             .get(SignUpViewModel::class.java)
         binding.signUpViewModel = signUpViewModel
+        signUpViewModel.user?.observe(viewLifecycleOwner) {
+            if (it != null) {
+                
+            }
+            else {
+
+            }
+
+        }
 
         binding.lifecycleOwner = this
 
