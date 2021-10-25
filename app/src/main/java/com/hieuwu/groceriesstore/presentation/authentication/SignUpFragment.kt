@@ -44,10 +44,16 @@ class SignUpFragment : Fragment() {
         binding.signUpViewModel = signUpViewModel
         signUpViewModel.user?.observe(viewLifecycleOwner) {
             if (it != null) {
-                
-            }
-            else {
-
+                Toast.makeText(
+                    context, "Authentication successfully.",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                Toast.makeText(
+                    context, "Authentication failed.",
+                    Toast.LENGTH_LONG
+                ).show()
+                loadingDialog.dismiss()
             }
 
         }
