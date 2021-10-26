@@ -1,13 +1,11 @@
 package com.hieuwu.groceriesstore.presentation.authentication
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
+import com.hieuwu.groceriesstore.data.repository.UserRepositoryImpl
 
 class ViewModelFactory(
-    private val valdataSource: GroceriesStoreDatabase?,
-    private val application: Application?
+    private val userRepositoryImpl: UserRepositoryImpl?
 ) : ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
@@ -17,7 +15,7 @@ class ViewModelFactory(
         }
 
         if (modelClass.isAssignableFrom(SignUpViewModel::class.java)) {
-            return SignUpViewModel() as T
+            return SignUpViewModel(userRepositoryImpl) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
