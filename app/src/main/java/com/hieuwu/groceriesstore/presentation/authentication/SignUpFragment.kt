@@ -15,8 +15,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.LoadingDialog
 import com.hieuwu.groceriesstore.R
+import com.hieuwu.groceriesstore.data.repository.UserRepositoryImpl
 import com.hieuwu.groceriesstore.databinding.FragmentSignUpBinding
 import timber.log.Timber
+import javax.inject.Inject
 
 class SignUpFragment : Fragment() {
 
@@ -24,6 +26,9 @@ class SignUpFragment : Fragment() {
     private lateinit var loadingDialog: LoadingDialog
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var database: DatabaseReference
+
+    @Inject
+    lateinit var userRepositoryImpl: UserRepositoryImpl
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,17 +43,18 @@ class SignUpFragment : Fragment() {
         )
         loadingDialog = LoadingDialog(requireActivity())
 
-        val viewModelFactory = ViewModelFactory(null, null)
+        val viewModelFactory = ViewModelFactory(userRepositoryImpl)
         val signUpViewModel = ViewModelProvider(this, viewModelFactory)
             .get(SignUpViewModel::class.java)
         binding.signUpViewModel = signUpViewModel
-        signUpViewModel.user?.observe(viewLifecycleOwner) {
-            if (it != null) {
+        signUpViewModel.isSignUpSuccessful?.observe(viewLifecycleOwner) {
+            if (it == true) {
                 Toast.makeText(
                     context, "Authentication successfully.",
                     Toast.LENGTH_LONG
                 ).show()
-            } else {
+            }
+            else {
                 Toast.makeText(
                     context, "Authentication failed.",
                     Toast.LENGTH_LONG
@@ -62,11 +68,7 @@ class SignUpFragment : Fragment() {
 
         binding.signupBtn.setOnClickListener {
             //If sign in successful, go back
-            createAccount(
-                signUpViewModel.email!!,
-                signUpViewModel.password!!,
-                signUpViewModel.name!!
-            )
+            signUpViewModel.createAccount()
         }
 
 
