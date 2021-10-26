@@ -15,11 +15,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.LoadingDialog
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.data.repository.UserRepositoryImpl
 import com.hieuwu.groceriesstore.databinding.FragmentSignUpBinding
+import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
@@ -28,7 +30,7 @@ class SignUpFragment : Fragment() {
     private lateinit var database: DatabaseReference
 
     @Inject
-    lateinit var userRepositoryImpl: UserRepositoryImpl
+    lateinit var userRepository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,24 +45,26 @@ class SignUpFragment : Fragment() {
         )
         loadingDialog = LoadingDialog(requireActivity())
 
-        val viewModelFactory = ViewModelFactory(userRepositoryImpl)
+        val viewModelFactory = ViewModelFactory(userRepository)
         val signUpViewModel = ViewModelProvider(this, viewModelFactory)
             .get(SignUpViewModel::class.java)
         binding.signUpViewModel = signUpViewModel
         signUpViewModel.isSignUpSuccessful?.observe(viewLifecycleOwner) {
-            if (it == true) {
-                Toast.makeText(
-                    context, "Authentication successfully.",
-                    Toast.LENGTH_LONG
-                ).show()
+            if (it != null) {
+                if (it == true) {
+                    Toast.makeText(
+                        context, "Authentication successfully.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        context, "Authentication failed.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    loadingDialog.dismiss()
+                }
             }
-            else {
-                Toast.makeText(
-                    context, "Authentication failed.",
-                    Toast.LENGTH_LONG
-                ).show()
-                loadingDialog.dismiss()
-            }
+
 
         }
 
