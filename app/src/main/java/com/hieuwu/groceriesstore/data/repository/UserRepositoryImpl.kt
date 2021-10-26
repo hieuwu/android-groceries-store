@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.UserDao
 import com.hieuwu.groceriesstore.domain.entities.User
 import com.hieuwu.groceriesstore.domain.entities.asDomainModel
+import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -15,14 +16,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) {
+class UserRepositoryImpl @Inject constructor(private val userDao: UserDao): UserRepository {
     private lateinit var auth: FirebaseAuth
 
-    fun getUser(id: String) = Transformations.map(userDao.getById(id).asLiveData()) {
-        it.asDomainModel()
-    }
 
-    suspend fun createAccount(email: String, password: String, name: String): Boolean {
+    override suspend fun createAccount(email: String, password: String, name: String): Boolean {
         var dbUser: User? = null
         var isSucess = false
         auth.createUserWithEmailAndPassword(email, password)
