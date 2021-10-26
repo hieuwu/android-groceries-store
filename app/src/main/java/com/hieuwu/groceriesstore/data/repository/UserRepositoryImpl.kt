@@ -22,8 +22,9 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) {
         it.asDomainModel()
     }
 
-    suspend fun createAccount(email: String, password: String, name: String):Boolean {
+    suspend fun createAccount(email: String, password: String, name: String): Boolean {
         var dbUser: User? = null
+        var isSucess = false
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 Timber.d(task.exception)
@@ -40,17 +41,20 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) {
                         .set(newUser)
                         .addOnSuccessListener {
                             //Handle success
+                            isSucess = true
                         }
                         .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
                     //Save user information to database
                 } else {
-                    return false
                 }
 
             }.addOnFailureListener { Exception -> Timber.d(Exception) }
-        withContext(Dispatchers.IO) {
-            userDao.insert(dbUser!!)
-        }
+        if (isSucess) {
+
+            withContext(Dispatchers.IO) {
+                userDao.insert(dbUser!!)
+            }
+        } else return false
         return true
     }
 }
