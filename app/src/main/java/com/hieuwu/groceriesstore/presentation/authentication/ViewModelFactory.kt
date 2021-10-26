@@ -2,10 +2,10 @@ package com.hieuwu.groceriesstore.presentation.authentication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hieuwu.groceriesstore.data.repository.UserRepositoryImpl
+import com.hieuwu.groceriesstore.domain.repository.UserRepository
 
 class ViewModelFactory(
-    private val userRepositoryImpl: UserRepositoryImpl?
+    private val userRepositoryImpl: UserRepository
 ) : ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
