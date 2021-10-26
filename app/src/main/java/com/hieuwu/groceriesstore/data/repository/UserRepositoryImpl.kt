@@ -16,9 +16,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserRepositoryImpl @Inject constructor(private val userDao: UserDao): UserRepository {
-    private lateinit var auth: FirebaseAuth
-
+class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : UserRepository {
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override suspend fun createAccount(email: String, password: String, name: String): Boolean {
         var dbUser: User? = null
