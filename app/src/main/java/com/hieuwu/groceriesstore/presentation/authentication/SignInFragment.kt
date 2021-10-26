@@ -31,7 +31,7 @@ class SignInFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        val viewModelFactory = ViewModelFactory(null, null)
+        val viewModelFactory = ViewModelFactory(null)
         val signInViewModel = ViewModelProvider(this, viewModelFactory)
             .get(SignInViewModel::class.java)
         binding.signInViewModel = signInViewModel
