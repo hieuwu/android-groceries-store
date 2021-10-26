@@ -3,12 +3,14 @@ package com.hieuwu.groceriesstore.presentation.authentication
 import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
-import com.hieuwu.groceriesstore.domain.entities.User
-import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.data.repository.UserRepositoryImpl
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpViewModel : ObservableViewModel() {
+class SignUpViewModel @Inject constructor(private val userRepositoryImpl: UserRepositoryImpl?) : ObservableViewModel() {
 
     private var _email: String? = null
     var email: String?
@@ -45,7 +47,12 @@ class SignUpViewModel : ObservableViewModel() {
 
     //Declare user as live data, set it when create success fully
     //In fragment observe it
-    val user: LiveData<User>? = null
+    lateinit var isSignUpSuccessful: MutableLiveData<Boolean>
 
+    fun createAccount() {
+        viewModelScope.launch {
+            isSignUpSuccessful.value = userRepositoryImpl!!.createAccount(_email!!, _password!!, _name!!)
+        }
+    }
 
 }
