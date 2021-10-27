@@ -32,6 +32,8 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
                         "name" to name,
                         "email" to email,
                     )
+                    isSucess = true
+
                     dbUser = User(userId, name, email, null, null)
                     val db = Firebase.firestore
                     db.collection("users").document(userId)
@@ -47,10 +49,10 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
 
             }.addOnFailureListener { Exception -> Timber.d(Exception) }
         if (isSucess) {
-
             withContext(Dispatchers.IO) {
                 userDao.insert(dbUser!!)
             }
+            return true
         } else return false
         return true
     }
