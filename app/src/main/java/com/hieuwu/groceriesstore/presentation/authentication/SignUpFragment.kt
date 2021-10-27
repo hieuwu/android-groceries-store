@@ -11,14 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.LoadingDialog
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSignUpBinding
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,6 +48,7 @@ class SignUpFragment : Fragment() {
             .get(SignUpViewModel::class.java)
         binding.signUpViewModel = signUpViewModel
         signUpViewModel.isSignUpSuccessful?.observe(viewLifecycleOwner) {
+            loadingDialog.show()
             if (it != null) {
                 if (it == true) {
                     Toast.makeText(
@@ -69,53 +68,12 @@ class SignUpFragment : Fragment() {
         }
 
         binding.lifecycleOwner = this
-
         binding.signupBtn.setOnClickListener {
             //If sign in successful, go back
             signUpViewModel.createAccount()
         }
 
-
         return binding.root
-    }
-
-    private fun createAccount(email: String, password: String, name: String) {
-        loadingDialog.show()
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                Timber.d(task.exception)
-                if (task.isSuccessful) {
-                    // Create account success, update UI with the signed-in user's information
-                    val userId = auth.currentUser!!.uid
-
-                    val newUser = hashMapOf(
-                        "name" to name,
-                        "email" to email,
-                    )
-                    val db = Firebase.firestore
-                    db.collection("users").document(userId)
-                        .set(newUser)
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                context, "Authentication successfully.",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                        .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
-                    //Save user information to database
-                    loadingDialog.dismiss()
-                    activity?.finish()
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(
-                        context, "Authentication failed.",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    loadingDialog.dismiss()
-                }
-
-            }.addOnFailureListener { Exception -> Timber.d(Exception) }
-
     }
 
 }
