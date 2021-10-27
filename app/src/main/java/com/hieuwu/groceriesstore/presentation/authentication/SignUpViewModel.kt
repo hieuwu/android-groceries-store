@@ -51,17 +51,12 @@ class SignUpViewModel @Inject constructor(private val userRepository: UserReposi
     private val _isSignUpSuccessful = MutableLiveData<Boolean?>()
     val isSignUpSuccessful: LiveData<Boolean?>
         get() = _isSignUpSuccessful
-    init {
-        _isSignUpSuccessful.value = false
-    }
 
 
     fun createAccount() {
-        var res = false
         viewModelScope.launch {
-            res = userRepository!!.createAccount(_email!!, _password!!, _name!!)
+            _isSignUpSuccessful.value = userRepository!!.createAccount(_email!!, _password!!, _name!!)
         }
-        _isSignUpSuccessful.value = res
     }
 
 }
