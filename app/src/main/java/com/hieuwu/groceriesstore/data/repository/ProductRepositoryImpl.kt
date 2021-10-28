@@ -14,6 +14,7 @@ import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
@@ -38,10 +39,9 @@ class ProductRepositoryImpl @Inject constructor(
             for (document in result) {
                 productList.add(getProductEntityFromDocument(document))
             }
-        }
-            .addOnFailureListener { exception ->
+        }.addOnFailureListener { exception ->
                 Timber.w("Error getting documents.${exception}")
-            }
+            }.await()
 
         withContext(Dispatchers.IO) {
             productDao.insertAll(productList)
