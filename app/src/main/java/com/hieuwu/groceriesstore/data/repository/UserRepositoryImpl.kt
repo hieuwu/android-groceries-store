@@ -10,6 +10,7 @@ import com.hieuwu.groceriesstore.domain.entities.User
 import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
@@ -43,11 +44,9 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
                             isSucess = true
                         }
                         .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
-                    //Save user information to database
-                } else {
                 }
-
             }.addOnFailureListener { Exception -> Timber.d(Exception) }
+            .await()
         if (isSucess) {
             withContext(Dispatchers.IO) {
                 userDao.insert(dbUser!!)
