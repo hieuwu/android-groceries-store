@@ -60,8 +60,9 @@ class SignUpFragment : Fragment() {
                         context, "Authentication failed.",
                         Toast.LENGTH_LONG
                     ).show()
-                    loadingDialog.dismiss()
                 }
+                loadingDialog.dismiss()
+
             }
 
 
