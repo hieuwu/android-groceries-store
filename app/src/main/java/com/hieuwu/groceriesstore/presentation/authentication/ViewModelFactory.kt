@@ -11,7 +11,7 @@ class ViewModelFactory(
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SignInViewModel::class.java)) {
-            return SignInViewModel() as T
+            return SignInViewModel(userRepositoryImpl) as T
         }
 
         if (modelClass.isAssignableFrom(SignUpViewModel::class.java)) {
