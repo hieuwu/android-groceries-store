@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +13,6 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSigninBinding
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,30 +47,18 @@ class SignInFragment : Fragment() {
             view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
+        signInViewModel.isSignUpSuccessful.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (it == true) activity?.finish()
+            }
+        }
+
         binding.signinButton.setOnClickListener {
-            //If sign in successful, go back
-            signIn(signInViewModel.email!!, signInViewModel.password!!)
-//            val i = Intent(this.context, MainActivity::class.java)
-//            startActivity(i)
+            signInViewModel.signIn(signInViewModel.email!!, signInViewModel.password!!)
+
         }
 
         return binding.root
-    }
-
-    private fun signIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                Timber.d(task.exception)
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(context, "Authentication failed.",
-                        Toast.LENGTH_LONG).show()
-                }
-
-            }.addOnFailureListener { Exception -> Timber.d(Exception) }
     }
 
 
