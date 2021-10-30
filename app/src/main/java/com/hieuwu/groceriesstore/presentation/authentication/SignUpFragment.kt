@@ -8,10 +8,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.LoadingDialog
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSignUpBinding
@@ -22,10 +18,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
-    private lateinit var auth: FirebaseAuth
     private lateinit var loadingDialog: LoadingDialog
     private lateinit var binding: FragmentSignUpBinding
-    private lateinit var database: DatabaseReference
 
     @Inject
     lateinit var userRepository: UserRepository
@@ -35,9 +29,6 @@ class SignUpFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        auth = FirebaseAuth.getInstance()
-        database = Firebase.database.reference
-
         binding = DataBindingUtil.inflate<FragmentSignUpBinding>(
             inflater, R.layout.fragment_sign_up, container, false
         )
