@@ -1,38 +1,72 @@
 package com.hieuwu.groceriesstore.presentation.onboarding
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.MainActivity
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
+import com.hieuwu.groceriesstore.di.ProductRepo
+import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
+import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
     lateinit var binding: ActivityOnboardingBinding
 
+    @Inject
+    lateinit var categoryRepository: CategoryRepository
+
+    @ProductRepo
+    @Inject
+    lateinit var productRepository: ProductRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
-        binding.viewModel = ViewModelProvider(this).get(OnboardingViewModel::class.java)
+        val sharedPrefs = getSharedPreferences(getString(R.string.sync_status_pref_name),Context.MODE_PRIVATE)
 
-        binding.viewModel.productSyncStatus.observe(this) {
+        val productSynced = sharedPrefs.getBoolean(getString(R.string.product_sync_success), false)
+        val categorySynced = sharedPrefs.getBoolean(getString(R.string.category_sync_success), false)
+
+        if (productSynced && categorySynced) {
+            val intent = Intent(this.applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
+        val viewModelFactory = OnboardingViewModelFactory(productRepository, categoryRepository)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(OnboardingViewModel::class.java)
+        binding.viewModel = viewModel
+
+        viewModel.productSyncStatus.observe(this) {
             if (it!!) {
                 //Handle sync product successful
-            }
-            else {
-               //Handle sync product failed
+
+                with(sharedPrefs.edit()) {
+                    putBoolean(getString(R.string.product_sync_success), true)
+                    apply()
+                }
+            } else {
+                //Handle sync product failed
             }
         }
 
-        binding.viewModel.categorySyncStatus.observe(this) {
+        viewModel.categorySyncStatus.observe(this) {
             if (it!!) {
                 //Handle sync category successful
-            }
-            else {
+                with(sharedPrefs.edit()) {
+                    putBoolean(getString(R.string.category_sync_success), true)
+                    apply()
+                }
+            } else {
                 //Handle sync category failed
             }
         }
