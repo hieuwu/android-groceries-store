@@ -23,17 +23,6 @@ class ShopViewModel @Inject constructor(
     var CurrentCart: MutableLiveData<Order> =
         orderRepository.getCart(OrderStatus.IN_CART).asLiveData() as MutableLiveData<Order>
 
-    init {
-        fetchProductsFromServer()
-    }
-
-
-    private fun fetchProductsFromServer() {
-        viewModelScope.launch {
-            getProductFromServer()
-        }
-    }
-
     private suspend fun getProductFromServer() {
         return withContext(Dispatchers.IO) {
             productRepository.getFromServer()
