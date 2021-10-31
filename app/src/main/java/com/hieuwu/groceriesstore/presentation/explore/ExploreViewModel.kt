@@ -10,9 +10,7 @@ import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 
@@ -41,19 +39,6 @@ class ExploreViewModel @Inject constructor(
     private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
     val navigateToSelectedProperty: LiveData<ProductModel?>
         get() = _navigateToSelectedProperty
-
-
-    init {
-        viewModelScope.launch {
-            getCategories()
-        }
-    }
-
-    private suspend fun getCategories() {
-        withContext(Dispatchers.IO) {
-            categoryRepository.getFromServer()
-        }
-    }
 
     fun displayPropertyDetails(marsProperty: ProductModel) {
         _navigateToSelectedProperty.value = marsProperty
