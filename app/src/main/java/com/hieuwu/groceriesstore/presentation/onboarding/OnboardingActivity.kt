@@ -5,13 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.MainActivity
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,39 +32,38 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPrefs = getSharedPreferences(getString(R.string.sync_status_pref_name),Context.MODE_PRIVATE)
+        val sharedPrefs =
+            getSharedPreferences(getString(R.string.sync_status_pref_name), Context.MODE_PRIVATE)
 
         val productSynced = sharedPrefs.getBoolean(getString(R.string.product_sync_success), false)
-        val categorySynced = sharedPrefs.getBoolean(getString(R.string.category_sync_success), false)
+        val categorySynced =
+            sharedPrefs.getBoolean(getString(R.string.category_sync_success), false)
 
         if (productSynced && categorySynced) {
             val intent = Intent(this.applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
 
-
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
         val viewModelFactory = OnboardingViewModelFactory(productRepository, categoryRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(OnboardingViewModel::class.java)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-        viewModel.productSyncStatus.observe(this) {
+        viewModel.productSyncStatus.observe(this, {
             if (it!!) {
-                //Handle sync product successful
-
                 with(sharedPrefs.edit()) {
                     putBoolean(getString(R.string.product_sync_success), true)
                     apply()
                 }
-            } else {
-                //Handle sync product failed
+
             }
-        }
+        })
+
 
         viewModel.categorySyncStatus.observe(this) {
-            if (it!!) {
+            if (it) {
                 //Handle sync category successful
                 with(sharedPrefs.edit()) {
                     putBoolean(getString(R.string.category_sync_success), true)
@@ -71,8 +74,10 @@ class OnboardingActivity : AppCompatActivity() {
             }
         }
         binding.getStartedButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+            viewModel.updateSyncStatus(true)
+
         }
     }
 }
