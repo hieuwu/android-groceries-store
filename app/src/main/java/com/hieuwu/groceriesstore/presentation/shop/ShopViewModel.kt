@@ -23,12 +23,6 @@ class ShopViewModel @Inject constructor(
     var CurrentCart: MutableLiveData<Order> =
         orderRepository.getCart(OrderStatus.IN_CART).asLiveData() as MutableLiveData<Order>
 
-    private suspend fun getProductFromServer() {
-        return withContext(Dispatchers.IO) {
-            productRepository.getFromServer()
-        }
-    }
-
     private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
     val navigateToSelectedProperty: LiveData<ProductModel?>
         get() = _navigateToSelectedProperty
