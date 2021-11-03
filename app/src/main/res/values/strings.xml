@@ -41,8 +41,7 @@
     <string name="total">Total:</string>
     <string name="shipping_fee">Shipping fee:</string>
     <string name="sign_out">Sign out</string>
-    <string name="product_sync_success">PRODUCT_SYNC_SUCCESS</string>
-    <string name="category_sync_success">CATEGORY_SYNC_SUCCESS</string>
+    <string name="sync_success">PRODUCT_SYNC_SUCCESS</string>
     <string name="sync_status_pref_name">SYNC_PREF_NAME</string>
 
 </resources>
