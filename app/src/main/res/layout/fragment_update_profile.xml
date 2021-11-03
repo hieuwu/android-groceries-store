@@ -38,6 +38,7 @@
             android:layout_marginHorizontal="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_small"
             android:ems="10"
+            android:text="@={viewModel.name}"
             android:hint="@string/name"
             android:inputType="textPersonName"
             android:textColor="@android:color/darker_gray" />
@@ -49,19 +50,20 @@
             android:layout_marginHorizontal="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_small"
             android:ems="10"
+            android:text="@={viewModel.phoneNumber}"
             android:hint="@string/phone_number"
             android:inputType="phone"
             android:textColor="@android:color/darker_gray" />
 
         <EditText
-            android:id="@+id/address"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_small"
             android:ems="10"
-            android:hint="@string/address"
-            android:inputType="phone"
+            android:hint="@string/email"
+            android:text="@={viewModel.email}"
             android:textColor="@android:color/darker_gray" />
     </LinearLayout>
 </layout>
