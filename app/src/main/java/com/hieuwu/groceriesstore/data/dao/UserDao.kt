@@ -16,4 +16,8 @@ interface UserDao {
 
     @Query("SELECT * FROM $USER_TABLE WHERE id = :id")
     fun getById(id: String): Flow<User>
+
+
+    @Query("SELECT * FROM $USER_TABLE LIMIT 1")
+    fun getCurrentUser(): Flow<User>
 }
