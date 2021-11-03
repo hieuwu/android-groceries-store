@@ -35,11 +35,9 @@ class OnboardingActivity : AppCompatActivity() {
         val sharedPrefs =
             getSharedPreferences(getString(R.string.sync_status_pref_name), Context.MODE_PRIVATE)
 
-        val productSynced = sharedPrefs.getBoolean(getString(R.string.product_sync_success), false)
-        val categorySynced =
-            sharedPrefs.getBoolean(getString(R.string.category_sync_success), false)
+        val isSyncedSuccessful = sharedPrefs.getBoolean(getString(R.string.sync_success), false)
 
-        if (productSynced && categorySynced) {
+        if (isSyncedSuccessful) {
             val intent = Intent(this.applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
@@ -51,10 +49,10 @@ class OnboardingActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.productSyncStatus.observe(this, {
+        viewModel.IsSyncedSuccessful.observe(this, {
             if (it!!) {
                 with(sharedPrefs.edit()) {
-                    putBoolean(getString(R.string.product_sync_success), true)
+                    putBoolean(getString(R.string.sync_success), true)
                     apply()
                 }
 
@@ -62,22 +60,9 @@ class OnboardingActivity : AppCompatActivity() {
         })
 
 
-        viewModel.categorySyncStatus.observe(this) {
-            if (it) {
-                //Handle sync category successful
-                with(sharedPrefs.edit()) {
-                    putBoolean(getString(R.string.category_sync_success), true)
-                    apply()
-                }
-            } else {
-                //Handle sync category failed
-            }
-        }
         binding.getStartedButton.setOnClickListener {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-            viewModel.updateSyncStatus(true)
-
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
