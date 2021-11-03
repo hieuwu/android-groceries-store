@@ -1,6 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.updateprofile
 
 import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.models.UserModel
@@ -10,10 +11,10 @@ import javax.inject.Inject
 
 class UpdateProfileViewModel @Inject constructor(userRepository: UserRepository) :
     ObservableViewModel() {
-
-    var user: MutableLiveData<UserModel> =
+    private val _user =
         userRepository.getCurrentUser() as MutableLiveData<UserModel>
-
+    val user: LiveData<UserModel?>
+        get() = _user
     private var _name: String? = null
     var name: String?
         @Bindable
@@ -36,10 +37,17 @@ class UpdateProfileViewModel @Inject constructor(userRepository: UserRepository)
             notifyPropertyChanged(BR.email)
         }
 
-    init {
-        name = user.value?.name
-        email = user.value?.email
-    }
+    private var _phoneNumber: String? = null
+    var phoneNumber: String?
+        @Bindable
+        get() {
+            return _phoneNumber
+        }
+        set(value) {
+            _phoneNumber = value
+            notifyPropertyChanged(BR.phoneNumber)
+        }
+
 
 
 }
