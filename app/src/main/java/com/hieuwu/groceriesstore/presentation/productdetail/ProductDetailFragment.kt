@@ -54,8 +54,8 @@ class ProductDetailFragment : Fragment() {
         binding.lifecycleOwner = this
 
         //Todo: Thí code is a trick for the live data in VM, should be removed
-        viewModel.CurrentCart.observe(viewLifecycleOwner, {})
-        viewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.currentCart.observe(viewLifecycleOwner, {})
+        viewModel.showSnackBarEvent.observe(viewLifecycleOwner, {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
