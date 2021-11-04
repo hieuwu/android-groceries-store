@@ -41,7 +41,7 @@
             android:text="@={viewModel.name}"
             android:hint="@string/name"
             android:inputType="textPersonName"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/receiver_phone"
@@ -53,7 +53,7 @@
             android:text="@={viewModel.phoneNumber}"
             android:hint="@string/phone_number"
             android:inputType="phone"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/email"
@@ -64,6 +64,6 @@
             android:ems="10"
             android:hint="@string/email"
             android:text="@={viewModel.email}"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/black" />
     </LinearLayout>
 </layout>
