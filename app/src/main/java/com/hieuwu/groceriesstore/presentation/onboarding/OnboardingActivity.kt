@@ -32,6 +32,8 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
+
         val sharedPrefs =
             getSharedPreferences(getString(R.string.sync_status_pref_name), Context.MODE_PRIVATE)
 
