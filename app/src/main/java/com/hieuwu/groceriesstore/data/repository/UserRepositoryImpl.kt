@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -9,7 +8,6 @@ import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.UserDao
 import com.hieuwu.groceriesstore.domain.entities.User
 import com.hieuwu.groceriesstore.domain.entities.asDomainModel
-import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -68,9 +66,31 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         return isSucess
     }
 
+    override suspend fun updateUserProfile(userId: String, name: String, email: String, phone: String) {
+        val db = Firebase.firestore
+        var dbUser = User(userId, name, email, null, null)
+        val newUser = hashMapOf(
+            "name" to name,
+            "email" to email,
+        )
+        var isSuccess = false
+        db.collection("users").document(userId)
+            .set(newUser)
+            .addOnSuccessListener {
+                isSuccess = true
+            }
+            .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }.await()
+        if (isSuccess) {
+            withContext(Dispatchers.IO) {
+                userDao.insert(dbUser)
+            }
+        }
+    }
+
     override fun getCurrentUser() =
         Transformations.map(userDao.getCurrentUser().asLiveData()) {
             it.asDomainModel()
         }
+
 
 }
