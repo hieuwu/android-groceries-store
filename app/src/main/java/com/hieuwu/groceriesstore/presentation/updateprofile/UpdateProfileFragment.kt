@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentUpdateProfileBinding
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
@@ -44,12 +45,42 @@ class UpdateProfileFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        viewModel.user.observe(viewLifecycleOwner, Observer {
+        viewModel.isDoneUpdate.observe(viewLifecycleOwner, {
+            if (it != null) {
+                if (it == true) {
+                    Snackbar.make(
+                        requireActivity().findViewById(android.R.id.content),
+                        "Update profile successfully!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                else {
+                    Snackbar.make(
+                        requireActivity().findViewById(android.R.id.content),
+                        "Update profile failed!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
+
+        viewModel.user.observe(viewLifecycleOwner, {
             if (it != null) {
                 viewModel.email = it.email
                 viewModel.name = it.name
             }
         })
+
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_save -> {
+                    //Update user data to backend
+                    viewModel.updateUserProfile()
+                    true
+                }
+                else -> false
+            }
+        }
 
         return binding.root
     }
