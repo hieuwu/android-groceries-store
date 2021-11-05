@@ -43,5 +43,7 @@
     <string name="sign_out">Sign out</string>
     <string name="sync_success">PRODUCT_SYNC_SUCCESS</string>
     <string name="sync_status_pref_name">SYNC_PREF_NAME</string>
+    <string name="profile_information">Profile Information</string>
+    <string name="order_history">Order History</string>
 
 </resources>
