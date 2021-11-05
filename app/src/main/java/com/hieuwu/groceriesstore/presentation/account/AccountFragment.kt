@@ -9,10 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentAccountBinding
+import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import javax.inject.Inject
 
 class AccountFragment : Fragment() {
 
     private lateinit var binding: FragmentAccountBinding
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +31,8 @@ class AccountFragment : Fragment() {
         binding.profileLayout.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_updateProfileFragment)
         }
+
+
 
         return binding.root
     }
