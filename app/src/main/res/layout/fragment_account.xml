@@ -2,7 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+<data>
+    <variable
+        name="viewModel"
+        type="com.hieuwu.groceriesstore.presentation.account.AccountViewModel" />
+</data>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/margin_normal"
-                        android:text="Peter Parker"
+                        android:text="@{viewModel.user.name}"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_big_bold"
                         android:textStyle="bold" />
@@ -103,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="Profile Information"
+                        android:text="@string/profile_information"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -127,7 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="Order History"
+                        android:text="@string/order_history"
                         android:textStyle="bold" />
 
                     <ImageView
