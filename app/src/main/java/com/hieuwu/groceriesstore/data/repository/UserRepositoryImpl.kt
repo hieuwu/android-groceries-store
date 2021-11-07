@@ -87,6 +87,10 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         }
     }
 
+    override suspend fun clearUser() {
+        TODO("Not yet implemented")
+    }
+
     override fun getCurrentUser() =
         Transformations.map(userDao.getCurrentUser().asLiveData()) {
             it.asDomainModel()
