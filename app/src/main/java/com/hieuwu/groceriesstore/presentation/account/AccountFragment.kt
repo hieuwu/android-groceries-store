@@ -44,7 +44,7 @@ class AccountFragment : Fragment() {
         binding.signoutButton.setOnClickListener {
             viewModel.signOut()
         }
-        
+
         return binding.root
     }
 
