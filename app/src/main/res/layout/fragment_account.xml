@@ -2,11 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<data>
-    <variable
-        name="viewModel"
-        type="com.hieuwu.groceriesstore.presentation.account.AccountViewModel" />
-</data>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hieuwu.groceriesstore.presentation.account.AccountViewModel" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,43 +50,20 @@
                         android:textSize="@dimen/text_big_bold"
                         android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="Order Created:"
-                            android:textColor="@android:color/white" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.user.email}"
+                        android:textColor="@android:color/white" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_small"
-                            android:text="12"
-                            android:textColor="@android:color/white" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_normal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.user.phone}"
+                        android:textColor="@android:color/white" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="Money Spent:"
-                                android:textColor="@android:color/white" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin_small"
-                                android:text="12"
-                                android:textColor="@android:color/white" />
-                        </LinearLayout>
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
