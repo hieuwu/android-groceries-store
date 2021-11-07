@@ -8,5 +8,5 @@ interface UserRepository {
     suspend fun authenticate(email: String, password: String): Boolean
     fun getCurrentUser(): LiveData<UserModel>
     suspend fun updateUserProfile(userId: String, name: String, email: String, phone: String)
-
+    suspend fun clearUser()
 }
