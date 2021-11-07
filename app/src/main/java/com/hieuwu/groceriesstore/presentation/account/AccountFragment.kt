@@ -12,8 +12,10 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentAccountBinding
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.presentation.updateprofile.UpdateProfileViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class AccountFragment : Fragment() {
 
     private lateinit var binding: FragmentAccountBinding
@@ -39,8 +41,10 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.action_accountFragment_to_updateProfileFragment)
         }
 
-
-
+        binding.signoutButton.setOnClickListener {
+            viewModel.signOut()
+        }
+        
         return binding.root
     }
 
