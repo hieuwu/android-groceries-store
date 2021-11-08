@@ -83,7 +83,6 @@ class CheckOutFragment : Fragment() {
                 val i = Intent(context, AuthActivity::class.java)
                 startActivity(i)
             }
-            //else force login
         }
 
         parentFragmentManager.setFragmentResultListener(
