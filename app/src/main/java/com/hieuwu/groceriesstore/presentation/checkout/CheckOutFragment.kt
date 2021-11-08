@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
+import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.presentation.AuthActivity
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.utilities.KeyData
@@ -25,6 +26,10 @@ class CheckOutFragment : Fragment() {
 
     @Inject
     lateinit var orderRepository: OrderRepository
+
+    @Inject
+    lateinit var userRepository: UserRepository
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +47,7 @@ class CheckOutFragment : Fragment() {
         )
 
         val viewModelFactory =
-            CheckOutViewModelFactory(args.orderId, orderRepository)
+            CheckOutViewModelFactory(args.orderId, orderRepository, userRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(CheckOutViewModel::class.java)
 
@@ -71,10 +76,14 @@ class CheckOutFragment : Fragment() {
         binding.confirmOrderBtn.setOnClickListener {
             //Handle confirm button
             //If logged in, send data to server
+            if (viewModel.user != null) {
 
+            }
+            else {
+                val i = Intent(context, AuthActivity::class.java)
+                startActivity(i)
+            }
             //else force login
-            val i = Intent(context, AuthActivity::class.java)
-            startActivity(i)
         }
 
         parentFragmentManager.setFragmentResultListener(
