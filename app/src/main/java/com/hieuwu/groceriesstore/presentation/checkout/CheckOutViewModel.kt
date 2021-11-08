@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
+import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
+import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +18,16 @@ import javax.inject.Inject
 
 class CheckOutViewModel @Inject constructor(
     private val orderId: String,
-    val orderRepository: OrderRepository
+    val orderRepository: OrderRepository,
+    val userRepository: UserRepository
 ) :
     ObservableViewModel() {
+
+
+    private val _user =
+        userRepository.getCurrentUser() as MutableLiveData<UserModel>
+    val user: LiveData<UserModel?>
+        get() = _user
 
     private var _order = MutableLiveData<OrderWithLineItems>()
     val order: LiveData<OrderWithLineItems>
