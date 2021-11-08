@@ -50,7 +50,11 @@
                         android:textSize="@dimen/text_big_bold"
                         android:textStyle="bold" />
 
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.user.address}"
+                        android:textColor="@android:color/white" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
