@@ -51,6 +51,17 @@ class UpdateProfileViewModel @Inject constructor(private val userRepository: Use
             notifyPropertyChanged(BR.phoneNumber)
         }
 
+    private var _address: String? = null
+    var address: String?
+        @Bindable
+        get() {
+            return _address
+        }
+        set(value) {
+            _address = value
+            notifyPropertyChanged(BR.address)
+        }
+
     private val _isDoneUpdate = MutableLiveData<Boolean>(null)
     val isDoneUpdate: LiveData<Boolean?>
         get() = _isDoneUpdate
@@ -59,7 +70,7 @@ class UpdateProfileViewModel @Inject constructor(private val userRepository: Use
         var id = _user.value!!.id
         try {
             viewModelScope.launch {
-                userRepository.updateUserProfile(id, _name!!, email!!, email!!)
+                userRepository.updateUserProfile(id, _name!!, _email!!, _phoneNumber!!, _address!!)
             }
             _isDoneUpdate.value = true
         } catch (e: Exception) {
