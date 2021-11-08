@@ -33,6 +33,10 @@ class CheckOutViewModel @Inject constructor(
     val order: LiveData<OrderWithLineItems>
         get() = _order
 
+    private var _address = MutableLiveData<Double>()
+    val address: LiveData<Double>
+        get() = _address
+
     private var _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double>
         get() = _totalPrice
