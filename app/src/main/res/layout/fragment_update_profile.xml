@@ -65,5 +65,16 @@
             android:hint="@string/email"
             android:text="@={viewModel.email}"
             android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:ems="10"
+            android:hint="@string/address"
+            android:text="@={viewModel.address}"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 </layout>
