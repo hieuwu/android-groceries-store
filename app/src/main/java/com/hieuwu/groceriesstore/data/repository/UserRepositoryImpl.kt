@@ -66,12 +66,14 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         return isSucess
     }
 
-    override suspend fun updateUserProfile(userId: String, name: String, email: String, phone: String) {
+    override suspend fun updateUserProfile(userId: String, name: String, email: String, phone: String, address: String) {
         val db = Firebase.firestore
-        var dbUser = User(userId, name, email, null, null)
+        var dbUser = User(userId, name, email, address, phone)
         val newUser = hashMapOf(
             "name" to name,
             "email" to email,
+            "phone" to phone,
+            "address" to address,
         )
         var isSuccess = false
         db.collection("users").document(userId)
