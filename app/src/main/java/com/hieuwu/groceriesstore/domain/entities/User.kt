@@ -29,6 +29,7 @@ fun User.asDomainModel(): UserModel {
         id = this.id,
         name = this.name,
         phone = this.phone ?: "",
-        email = this.email
+        email = this.email,
+        address = this.address ?: ""
     )
 }
