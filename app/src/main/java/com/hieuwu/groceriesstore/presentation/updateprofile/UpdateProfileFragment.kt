@@ -68,6 +68,8 @@ class UpdateProfileFragment : Fragment() {
             if (it != null) {
                 viewModel.email = it.email
                 viewModel.name = it.name
+                viewModel.phoneNumber = it.phone
+                viewModel.address = it.address
             }
         })
 
