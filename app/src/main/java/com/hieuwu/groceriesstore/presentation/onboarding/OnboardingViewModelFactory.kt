@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import com.hieuwu.groceriesstore.presentation.cart.CartViewModel
 
 class OnboardingViewModelFactory(
     private val productRepository: ProductRepository, private val categoryRepository: CategoryRepository
