@@ -85,7 +85,7 @@ class ShopFragment : Fragment() {
 
             sliderDotspanel.addView(dots[i], params);
         }
-        dots[0].setImageDrawable(activeDot);
+        dots[0].setImageDrawable(activeDot)
         binding.viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
                 position: Int,
