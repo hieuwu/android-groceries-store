@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import com.hieuwu.groceriesstore.presentation.shop.ShopViewModel
 
 class ProductListViewModelFactory(
     private val categoryId:String,
