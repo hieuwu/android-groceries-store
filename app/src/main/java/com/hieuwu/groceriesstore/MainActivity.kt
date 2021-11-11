@@ -2,6 +2,8 @@ package com.hieuwu.groceriesstore
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,13 +33,12 @@ class MainActivity : AppCompatActivity() {
 
         val fabButton = findViewById<FloatingActionButton>(R.id.fabButton)
 
-
         val bottomSheetDialogFragment = CartFragment()
         fabButton.setOnClickListener {
             bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
         }
 
         bottomNavigationView.setupWithNavController(navController)
-
+        
     }
 }
