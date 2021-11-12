@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutCategoryGridItemBinding
-import com.hieuwu.groceriesstore.domain.entities.Category
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
 
 class CategoryItemAdapter(val onClickListener: OnClickListener) :
