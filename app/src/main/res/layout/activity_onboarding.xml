@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/horizontal_margin"
                 android:layout_marginBottom="120dp"
+                android:enabled="@{viewModel.isSyncedSuccessful}"
                 android:background="@drawable/primary_button"
                 android:text="Get Started"
                 android:textAllCaps="false"
