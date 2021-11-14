@@ -16,8 +16,8 @@ class OnboardingViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) : ObservableViewModel() {
 
-    private val _isSyncedSuccessful = MutableLiveData<Boolean?>(false)
-    val IsSyncedSuccessful: LiveData<Boolean?>
+    private val _isSyncedSuccessful = MutableLiveData(false)
+    val isSyncedSuccessful: LiveData<Boolean?>
         get() = _isSyncedSuccessful
 
     init {
@@ -26,12 +26,13 @@ class OnboardingViewModel @Inject constructor(
                 getCategories()
                 productRepository.getFromServer()
             }
-        } catch(e: Exception) {
             updateSyncStatus(true)
+        } catch(e: Exception) {
+            updateSyncStatus(false)
         }
     }
 
-    fun updateSyncStatus(status: Boolean) {
+    private fun updateSyncStatus(status: Boolean) {
         _isSyncedSuccessful.value = status
     }
 
