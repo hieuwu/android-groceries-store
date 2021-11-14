@@ -47,7 +47,7 @@ class OnboardingActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.IsSyncedSuccessful.observe(this, {
+        viewModel.isSyncedSuccessful.observe(this, {
             if (it!!) {
                 with(sharedPrefs.edit()) {
                     putBoolean(getString(R.string.sync_success), true)
