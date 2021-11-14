@@ -19,5 +19,9 @@ interface UserDao {
 
 
     @Query("SELECT * FROM $USER_TABLE LIMIT 1")
-    fun getCurrentUser(): Flow<User>
+    fun getCurrentUser(): Flow<User?>
+
+    @Query("DELETE FROM  $USER_TABLE")
+    suspend fun clear()
+
 }
