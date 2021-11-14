@@ -37,6 +37,11 @@ class AccountFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
+        viewModel.user.observe(viewLifecycleOwner, {
+            if (it == null) {
+
+            }
+        })
         binding.profileLayout.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_updateProfileFragment)
         }
