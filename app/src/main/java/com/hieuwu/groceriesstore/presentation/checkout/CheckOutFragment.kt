@@ -76,7 +76,7 @@ class CheckOutFragment : Fragment() {
         binding.confirmOrderBtn.setOnClickListener {
             //Handle confirm button
             //If logged in, send data to server
-            if (viewModel.user != null) {
+            if (viewModel.user.value != null) {
 
             }
             else {
