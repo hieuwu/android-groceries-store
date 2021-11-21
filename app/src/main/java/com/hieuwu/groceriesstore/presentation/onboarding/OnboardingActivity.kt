@@ -12,6 +12,7 @@ import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
 import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -21,6 +22,9 @@ class OnboardingActivity : AppCompatActivity() {
 
     @Inject
     lateinit var categoryRepository: CategoryRepository
+
+    @Inject
+    lateinit var recipeRepository: RecipeRepository
 
     @ProductRepo
     @Inject
@@ -41,7 +45,7 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
-        val viewModelFactory = OnboardingViewModelFactory(productRepository, categoryRepository)
+        val viewModelFactory = OnboardingViewModelFactory(productRepository, categoryRepository, recipeRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(OnboardingViewModel::class.java)
         binding.viewModel = viewModel
