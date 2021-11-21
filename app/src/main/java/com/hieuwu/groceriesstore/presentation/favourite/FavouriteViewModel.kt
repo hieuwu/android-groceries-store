@@ -1,4 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.favourite
 
-class FavouriteViewModel {
+import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+
+class FavouriteViewModel: ObservableViewModel {
+
 }
