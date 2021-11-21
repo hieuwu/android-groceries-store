@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.data.network
 
-import com.hieuwu.groceriesstore.domain.dto.Recipe
 import com.hieuwu.groceriesstore.domain.dto.RecipeListResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
