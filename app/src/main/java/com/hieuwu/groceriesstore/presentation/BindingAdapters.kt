@@ -10,9 +10,11 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.domain.models.RecipeModel
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
+import com.hieuwu.groceriesstore.presentation.adapters.RecipeItemAdapter
 
 
 @BindingAdapter("listData")
@@ -45,5 +47,11 @@ fun bindRecyclerViewLine(recyclerView: RecyclerView, data: MutableList<ProductAn
 @BindingAdapter("categoryListData")
 fun bindRecyclerViewCategory(recyclerView: RecyclerView, data: MutableList<CategoryModel>?) {
     val adapter = recyclerView.adapter as CategoryItemAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("recipeListData")
+fun bindRecyclerViewRecipe(recyclerView: RecyclerView, data: MutableList<RecipeModel>?) {
+    val adapter = recyclerView.adapter as RecipeItemAdapter
     adapter.submitList(data)
 }
