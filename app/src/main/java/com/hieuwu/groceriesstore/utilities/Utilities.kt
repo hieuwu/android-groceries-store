@@ -10,6 +10,8 @@ const val CATEGORY_TABLE = "category"
 const val USER_TABLE = "user"
 const val ORDER_TABLE = "order"
 const val LINE_ITEM_TABLE = "lineItem"
+const val RECIPE_TABLE = "recipe"
+
 const val DATABASE_NAME = ""
 
 object KeyData {
