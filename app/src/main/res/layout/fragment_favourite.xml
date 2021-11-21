@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,17 +8,17 @@
             type="com.hieuwu.groceriesstore.presentation.favourite.FavouriteViewModel" />
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.favourite.FavouriteFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/favourite_recyclerview"
+            android:id="@+id/recipes_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-    </RelativeLayout>
+            android:layout_height="match_parent"
+            app:recipeListData="@{viewModel.recipesList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
 </layout>
