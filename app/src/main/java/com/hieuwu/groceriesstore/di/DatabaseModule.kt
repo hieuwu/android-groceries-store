@@ -50,4 +50,9 @@ object DatabaseModule {
     fun provideUserdao(database: GroceriesStoreDatabase): UserDao {
         return database.userDao()
     }
+
+    @Provides
+    fun provideRecipeDao(database: GroceriesStoreDatabase): RecipeDao {
+        return database.recipeDao()
+    }
 }
