@@ -23,30 +23,4 @@ class FavouriteFragment : Fragment() {
 
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var dataSet: ArrayList<String> = ArrayList()
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-        dataSet.add("a")
-        dataSet.add("b")
-
-        setUpRecyclerView(dataSet)
-    }
-
-    private fun setUpRecyclerView(dataSet: ArrayList<String>) {
-//        val adapter =
-//            LineListItemAdapter(
-//                dataSet
-//            )
-//        binding.favouriteRecyclerview.adapter = adapter
-//        binding.favouriteRecyclerview.layoutManager = LinearLayoutManager(context)
-    }
 }
