@@ -1,6 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.shop
 
 import androidx.lifecycle.*
+import com.hieuwu.groceriesstore.data.network.Api
 import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.models.ProductModel
@@ -8,6 +9,7 @@ import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import kotlinx.coroutines.*
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -56,6 +58,21 @@ class ShopViewModel @Inject constructor(
                 orderRepository.addLineItem(lineItem)
             }
         }
+    }
+
+    private fun getRecipes() {
+        viewModelScope.launch {
+            val getRecipeDeferred = Api.retrofitService.getRecipesList()
+            try {
+                var listResult = getRecipeDeferred.await().recipesList
+            } catch (t: Throwable) {
+                var message = t.message
+            }
+        }
+    }
+
+    init{
+        getRecipes()
     }
 
 }
