@@ -142,9 +142,6 @@ class ExploreFragment : Fragment() {
                     )
                 findNavController().navigate(direction)
             })
-
-
-
         return binding.root
     }
 
