@@ -1,4 +1,7 @@
 package com.hieuwu.groceriesstore.domain.models
 
-class RecipeModel {
-}
+data class RecipeModel(
+    val id: String,
+    val image: String,
+    val name: String,
+)
