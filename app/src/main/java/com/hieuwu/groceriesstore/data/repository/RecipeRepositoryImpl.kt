@@ -1,27 +1,32 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.asLiveData
+import com.hieuwu.groceriesstore.data.dao.RecipeDao
 import com.hieuwu.groceriesstore.data.network.Api
-import com.hieuwu.groceriesstore.domain.models.CategoryModel
+import com.hieuwu.groceriesstore.domain.dto.asEntity
+import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RecipeRepositoryImpl : RecipeRepository {
+class RecipeRepositoryImpl @Inject constructor(
+    private val recipeDao: RecipeDao
+) : RecipeRepository {
     override suspend fun refreshDatabase() {
         withContext(Dispatchers.IO) {
             val getRecipeDeferred = Api.retrofitService.getRecipesList()
             try {
-                var listResult = getRecipeDeferred.await().recipesList
+                val listResult = getRecipeDeferred.await().recipesList.asEntity()
+                recipeDao.insertAll(listResult)
             } catch (t: Throwable) {
                 var message = t.message
             }
         }
     }
 
-    override fun getFromLocal(): LiveData<List<CategoryModel>> {
-        //TODO NOT
+    override fun getFromLocal() = Transformations.map(recipeDao.getAll().asLiveData()) {
+        it.asDomainModel()
     }
 }
