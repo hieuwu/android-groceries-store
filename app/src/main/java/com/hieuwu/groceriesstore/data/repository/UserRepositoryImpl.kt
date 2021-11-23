@@ -57,21 +57,34 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
     }
 
     override suspend fun authenticate(email: String, password: String): Boolean {
-        var isSucess = false
+        var isSuccess = false
         val db = Firebase.firestore
-
+        var id: String? = null
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 Timber.d(task.exception)
-                isSucess = task.isSuccessful
-                db.collection("users").document(auth.currentUser?.uid!!).get()
-                    .addOnSuccessListener {
-
-                    }
-                    .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
+                isSuccess = task.isSuccessful
+                id = auth.currentUser?.uid!!
 
             }.addOnFailureListener { Exception -> Timber.d(Exception) }.await()
-        return isSucess
+
+        var user: User? = null
+        db.collection("users").document(auth.currentUser?.uid!!).get()
+            .addOnSuccessListener {
+                if (it != null) {
+                    val name: String = it?.data?.get("name")!! as String
+                    val phone: String = it?.data!!["phone"]!! as String
+                    val address: String = it?.data!!["address"]!! as String
+                    val email: String = it?.data!!["email"]!! as String
+                    user = User(id!!, name, email, address, phone)
+                }
+            }
+            .addOnFailureListener { e -> Timber.d(e) }.await()
+
+        withContext(Dispatchers.IO) {
+            userDao.insert(user!!)
+        }
+        return isSuccess
     }
 
     override suspend fun updateUserProfile(
