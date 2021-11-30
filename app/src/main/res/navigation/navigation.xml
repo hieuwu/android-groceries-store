@@ -82,6 +82,12 @@
         <argument
             android:name="id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
     </fragment>
     <fragment
         android:id="@+id/deliveryFragment"
