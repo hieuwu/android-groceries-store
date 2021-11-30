@@ -7,9 +7,9 @@ import com.hieuwu.groceriesstore.data.dao.OrderDao
 import com.hieuwu.groceriesstore.domain.entities.LineItem
 import com.hieuwu.groceriesstore.domain.entities.Order
 import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
-import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
@@ -77,27 +77,7 @@ class OrderRepositoryImpl @Inject constructor(
         return isSuccess
     }
 
-    private fun convertItemEntityToDocument(lineItem: ProductAndLineItem): HashMap<String, Any> {
-        val document = HashMap<String, Any>()
-        document["quantity"] = lineItem.lineItem!!.quantity
-        document["subtotal"] = lineItem.lineItem.subtotal
-        document["product"] = "products/${lineItem.lineItem.productId}"
-        return document
-    }
 
-    private fun convertOrderEntityToDocument(order: OrderWithLineItems): HashMap<String, Any> {
-        val document = HashMap<String, Any>()
-        val lineOrderList = mutableListOf<HashMap<String, Any>>()
-        var total = 0.0
-        for (item in order.lineItemList) {
-            lineOrderList.add(convertItemEntityToDocument(item))
-            total += item.lineItem?.subtotal ?: 0.0
-        }
 
-        document["address"] = order.order.address
-        document["lineItems"] = lineOrderList
-        document["total"] = total
-        return document
 
-    }
 }

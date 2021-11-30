@@ -2,13 +2,13 @@ package com.hieuwu.groceriesstore.data.repository
 
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.CategoryDao
 import com.hieuwu.groceriesstore.domain.entities.Category
 import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
+import com.hieuwu.groceriesstore.utilities.convertCategoryDocumentToEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -25,7 +25,7 @@ class CategoryRepositoryImpl @Inject constructor(private val categoryDao: Catego
         val fireStore = Firebase.firestore
         fireStore.collection("categories").get().addOnSuccessListener { result ->
             for (document in result) {
-                categoriesList.add(getCategoryEntityFromDocument(document))
+                categoriesList.add(convertCategoryDocumentToEntity(document))
             }
         }.addOnFailureListener { exception ->
             Timber.w("Error getting documents.${exception}")
@@ -35,13 +35,6 @@ class CategoryRepositoryImpl @Inject constructor(private val categoryDao: Catego
             categoryDao.insertAll(categoriesList)
         }
     }
-    private fun getCategoryEntityFromDocument(document: QueryDocumentSnapshot): Category {
-        val id = document.id
-        val name: String = document.data["name"] as String
-        val image: String = document.data["image"] as String
-        return Category(id, name, image)
-    }
-
 
     override fun getFromLocal() = Transformations
         .map(categoryDao.getAll().asLiveData()) { it.asDomainModel()

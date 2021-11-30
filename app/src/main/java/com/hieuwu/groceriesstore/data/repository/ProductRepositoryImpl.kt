@@ -13,6 +13,7 @@ import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.utilities.convertProductDocumentToEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -37,7 +38,7 @@ class ProductRepositoryImpl @Inject constructor(
         val productList = mutableListOf<Product>()
         fireStore.collection("products").get().addOnSuccessListener { result ->
             for (document in result) {
-                productList.add(getProductEntityFromDocument(document))
+                productList.add(convertProductDocumentToEntity(document))
             }
         }.addOnFailureListener { exception ->
                 Timber.w("Error getting documents.${exception}")
@@ -47,18 +48,7 @@ class ProductRepositoryImpl @Inject constructor(
             productDao.insertAll(productList)
         }
     }
-
-    private fun getProductEntityFromDocument(document: QueryDocumentSnapshot): Product {
-        val id = document.id
-        val name: String = document.data["name"] as String
-        val description: String = document.data["description"] as String
-        val price: Number = document.data["price"] as Number
-        val image: String = document.data["image"] as String
-        val nutrition: String = document.data["nutrition"] as String
-        val category = document.getDocumentReference("category")
-
-        return Product(id, name, description, price.toDouble(), image, category?.id, nutrition)
-    }
+    
 
     override suspend fun updateLineItem(lineItem: LineItem) {
         lineItemDao.update(lineItem)
