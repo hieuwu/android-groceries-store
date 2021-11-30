@@ -54,8 +54,10 @@ class ProductRepositoryImpl @Inject constructor(
         val description: String = document.data["description"] as String
         val price: Number = document.data["price"] as Number
         val image: String = document.data["image"] as String
+        val nutrition: String = document.data["nutrition"] as String
         val category = document.getDocumentReference("category")
-        return Product(id, name, description, price.toDouble(), image, category?.id)
+
+        return Product(id, name, description, price.toDouble(), image, category?.id, nutrition)
     }
 
     override suspend fun updateLineItem(lineItem: LineItem) {
