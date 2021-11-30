@@ -28,6 +28,9 @@ data class Product(
 
     @ColumnInfo(name = "category")
     var category: String?,
+
+    @ColumnInfo(name = "nutrition")
+    var nutrition: String?,
 )
 
 fun List<Product>.asDomainModel(): List<ProductModel> {
@@ -37,7 +40,8 @@ fun List<Product>.asDomainModel(): List<ProductModel> {
             name = it.name,
             description = it.description,
             price = it.price,
-            image = it.image
+            image = it.image,
+            nutrition = it.nutrition
         )
     }
 }
