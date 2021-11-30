@@ -9,6 +9,9 @@ import com.hieuwu.groceriesstore.data.dao.UserDao
 import com.hieuwu.groceriesstore.domain.entities.User
 import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.utilities.CollectionNames
+import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
+import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -37,7 +40,7 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
 
                     dbUser = User(userId, name, email, null, null)
                     val db = Firebase.firestore
-                    db.collection("users").document(userId)
+                    db.collection(CollectionNames.users).document(userId)
                         .set(newUser)
                         .addOnSuccessListener {
                             //Handle success
@@ -69,14 +72,10 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
             }.addOnFailureListener { Exception -> Timber.d(Exception) }.await()
 
         var user: User? = null
-        db.collection("users").document(auth.currentUser?.uid!!).get()
+        db.collection(CollectionNames.users).document(auth.currentUser?.uid!!).get()
             .addOnSuccessListener {
                 if (it != null) {
-                    val name: String = it?.data?.get("name")!! as String
-                    val phone: String = it?.data!!["phone"]!! as String
-                    val address: String = it?.data!!["address"]!! as String
-                    val email: String = it?.data!!["email"]!! as String
-                    user = User(id!!, name, email, address, phone)
+                    user = convertUserDocumentToEntity(id!!, it)
                 }
             }
             .addOnFailureListener { e -> Timber.d(e) }.await()
@@ -95,15 +94,10 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         address: String
     ) {
         val db = Firebase.firestore
-        var dbUser = User(userId, name, email, address, phone)
-        val newUser = hashMapOf(
-            "name" to name,
-            "email" to email,
-            "phone" to phone,
-            "address" to address,
-        )
+        val dbUser = User(userId, name, email, address, phone)
+        val newUser = convertUserEntityToDocument(dbUser)
         var isSuccess = false
-        db.collection("users").document(userId)
+        db.collection(CollectionNames.users).document(userId)
             .set(newUser)
             .addOnSuccessListener {
                 isSuccess = true
