@@ -8,6 +8,7 @@ import com.hieuwu.groceriesstore.data.dao.CategoryDao
 import com.hieuwu.groceriesstore.domain.entities.Category
 import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
+import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertCategoryDocumentToEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -23,7 +24,7 @@ class CategoryRepositoryImpl @Inject constructor(private val categoryDao: Catego
     override suspend fun getFromServer() {
         val categoriesList = mutableListOf<Category>()
         val fireStore = Firebase.firestore
-        fireStore.collection("categories").get().addOnSuccessListener { result ->
+        fireStore.collection(CollectionNames.categories).get().addOnSuccessListener { result ->
             for (document in result) {
                 categoriesList.add(convertCategoryDocumentToEntity(document))
             }
