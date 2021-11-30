@@ -41,6 +41,11 @@ class CheckOutViewModel @Inject constructor(
     val totalPrice: LiveData<Double>
         get() = _totalPrice
 
+
+    private var _isOrderSentSuccessful = MutableLiveData<Boolean>()
+    val isOrderSentSuccessful: LiveData<Boolean>
+        get() = _isOrderSentSuccessful
+
     init {
         getLineItemFromDatabase()
     }
@@ -74,9 +79,11 @@ class CheckOutViewModel @Inject constructor(
     }
 
     private suspend fun sendOrderToServer() {
+        var res = false
         withContext(Dispatchers.IO) {
-            orderRepository.sendOrderToServer(order.value!!)
+            res = orderRepository.sendOrderToServer(order.value!!)
         }
+        _isOrderSentSuccessful.value = res
     }
 
     fun sendOrder() {
