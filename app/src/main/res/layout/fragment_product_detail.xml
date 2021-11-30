@@ -196,6 +196,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view2" />
 
+                <TextView
+                    android:id="@+id/product_nutrition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.product.nutrition}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/nutritions" />
                 <Button
                     android:id="@+id/add_to_basket_btn"
                     android:layout_width="match_parent"
@@ -208,98 +215,14 @@
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/nutritions" />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="700dp"
-                    android:background="@color/colorPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/add_to_basket_btn" />
-
-                <!--                <View-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    android:layout_marginVertical="@dimen/vertical_margin"-->
-                <!--                    android:background="@android:color/darker_gray" />-->
-
-                <!--                <RelativeLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:gravity="center_vertical">-->
-
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:text="@string/nutritions"-->
-                <!--                        android:textSize="@dimen/text_big_bold"-->
-                <!--                        android:textStyle="bold" />-->
-
-                <!--                </RelativeLayout>-->
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/textView"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="Lorem Ipsum printer took a galley of type and scrambled it to make a type specimen book. " />-->
+                    app:layout_constraintTop_toBottomOf="@id/product_nutrition" />
 
 
-                <!--                <View-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    android:layout_marginVertical="@dimen/vertical_margin"-->
-                <!--                    android:background="@android:color/darker_gray" />-->
-
-                <!--                <RelativeLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:gravity="center_vertical">-->
-
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:text="@string/reviews"-->
-                <!--                        android:textSize="@dimen/text_big_bold"-->
-                <!--                        android:textStyle="bold" />-->
-
-                <!--                </RelativeLayout>-->
-
-                <!--                <Button-->
-                <!--                    android:id="@+id/button"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginHorizontal="14dp"-->
-                <!--                    android:background="@drawable/primary_button"-->
-                <!--                    android:onClick="@{() -> viewModel.addToCart()}"-->
-                <!--                    android:text="@string/add_to_basket"-->
-                <!--                    android:textAllCaps="false"-->
-                <!--                    android:textColor="@android:color/white"-->
-                <!--                    tools:layout_editor_absoluteX="14dp" />-->
-
-                <!--                <RatingBar-->
-                <!--                    android:id="@+id/ratingBar"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:numStars="5"-->
-                <!--                    android:progressTint="@color/primary_button"-->
-                <!--                    android:rating="5" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.core.widget.NestedScrollView>
-
-        <!--        <Button-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_alignParentBottom="true"-->
-        <!--            android:layout_marginHorizontal="14dp"-->
-        <!--            android:background="@drawable/primary_button"-->
-        <!--            android:text="@string/add_to_basket"-->
-        <!--            android:onClick="@{() -> viewModel.addToCart()}"-->
-        <!--            android:textAllCaps="false"-->
-        <!--            android:textColor="@android:color/white" />-->
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
