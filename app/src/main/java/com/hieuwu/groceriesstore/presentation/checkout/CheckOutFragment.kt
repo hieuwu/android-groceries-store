@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
@@ -88,6 +90,25 @@ class CheckOutFragment : Fragment() {
             }
         }
 
+        viewModel.isOrderSentSuccessful.observe(viewLifecycleOwner, {
+            if (it) {
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    "Order created successfully !",
+                    Snackbar.LENGTH_LONG
+                ).show()
+
+                findNavController().navigateUp()
+            }
+            else {
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    "Order created failed :(",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        })
+
         parentFragmentManager.setFragmentResultListener(
             KeyData.RESULT_KEY,
             viewLifecycleOwner
@@ -102,5 +123,6 @@ class CheckOutFragment : Fragment() {
 
         return binding.root
     }
+
 
 }
