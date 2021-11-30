@@ -3,7 +3,6 @@ package com.hieuwu.groceriesstore.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
@@ -13,6 +12,7 @@ import com.hieuwu.groceriesstore.domain.entities.Product
 import com.hieuwu.groceriesstore.domain.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertProductDocumentToEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -36,7 +36,7 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun getFromServer() {
         val fireStore = Firebase.firestore
         val productList = mutableListOf<Product>()
-        fireStore.collection("products").get().addOnSuccessListener { result ->
+        fireStore.collection(CollectionNames.products).get().addOnSuccessListener { result ->
             for (document in result) {
                 productList.add(convertProductDocumentToEntity(document))
             }
@@ -48,7 +48,7 @@ class ProductRepositoryImpl @Inject constructor(
             productDao.insertAll(productList)
         }
     }
-    
+
 
     override suspend fun updateLineItem(lineItem: LineItem) {
         lineItemDao.update(lineItem)
