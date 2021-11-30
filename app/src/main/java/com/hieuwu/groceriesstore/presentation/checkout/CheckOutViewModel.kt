@@ -69,4 +69,21 @@ class CheckOutViewModel @Inject constructor(
         }
     }
 
+    private fun setOrderAddress() {
+        _order.value?.order?.address = user.value?.address ?: ""
+    }
+
+    private suspend fun sendOrderToServer() {
+        withContext(Dispatchers.IO) {
+            orderRepository.sendOrderToServer(order.value!!)
+        }
+    }
+
+    fun sendOrder() {
+        setOrderAddress()
+        viewModelScope.launch {
+            sendOrderToServer()
+        }
+    }
+
 }
