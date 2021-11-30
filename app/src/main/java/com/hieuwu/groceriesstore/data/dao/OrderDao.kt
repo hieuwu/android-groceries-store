@@ -15,6 +15,9 @@ interface OrderDao {
     @Update
     fun update(order: Order)
 
+    @Query("DELETE FROM `$ORDER_TABLE`")
+    suspend fun clear()
+
     @Transaction
     @Query("SELECT * FROM `$ORDER_TABLE`")
     fun getOrderWithLineItems(): Flow<List<OrderWithLineItems>>
