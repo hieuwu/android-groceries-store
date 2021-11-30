@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
@@ -17,6 +18,8 @@ import com.hieuwu.groceriesstore.presentation.AuthActivity
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.utilities.KeyData
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -77,7 +80,7 @@ class CheckOutFragment : Fragment() {
             //Handle confirm button
             //If logged in, send data to server
             if (viewModel.user.value != null) {
-
+                viewModel.sendOrder()
             }
             else {
                 val i = Intent(context, AuthActivity::class.java)
