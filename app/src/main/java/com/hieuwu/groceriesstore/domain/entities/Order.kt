@@ -12,6 +12,6 @@ data class Order(
     @ColumnInfo(name = "status")
     var status: String,
 
-    @ColumnInfo(name = "delivery")
-    var delivery: String?
+    @ColumnInfo(name = "address")
+    var address: String
 )
