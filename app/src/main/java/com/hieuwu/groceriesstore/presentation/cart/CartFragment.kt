@@ -72,6 +72,10 @@ class CartFragment : BottomSheetDialogFragment() {
                 }
                 viewModel.sumPrice()
             }
+            else {
+                binding.cartEmptyLayout.visibility = View.VISIBLE
+                binding.cartDetailLayout.visibility = View.GONE
+            }
         })
 
         binding.checkoutButton.setOnClickListener {
