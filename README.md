@@ -1,4 +1,5 @@
-# android-groceries-store
+![Groceries Store](https://i.imgur.com/Wn6ZcZl.jpeg)
+
 [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
 
 [![Kotlin](https://img.shields.io/badge/kotlin-%23FF5722.svg?&style=for-the-badge&logo=kotlin&logoColor=white)](https://github.com/hieuwu/android-groceries-store)
@@ -10,6 +11,7 @@
 
 # UI Design & Architecture
 - [Groceries Store Design](https://www.figma.com/file/exhlJtkLIcHvfxd8SDja3T/Online-Groceries-App-UI-(Community)?node-id=1%3A2)
+- <a href='https://www.freepik.com/vectors/background'>Background vector created by freepik - www.freepik.com</a>
 
 Next Step is to follow Clean Architecture:
 - [Use Case](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
