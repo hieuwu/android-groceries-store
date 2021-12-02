@@ -46,6 +46,11 @@
         <action
             android:id="@+id/action_exploreFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
+
+        <action
+            android:id="@+id/action_shopFragment_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
@@ -110,6 +115,10 @@
         <action
             android:id="@+id/action_productListFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
+
+        <action
+            android:id="@+id/action_shopFragment_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateProfileFragment"
