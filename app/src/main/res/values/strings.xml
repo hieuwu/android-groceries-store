@@ -16,7 +16,7 @@
     <string name="favourite">Favourite</string>
     <string name="profile">Profile</string>
     <string name="add_to_basket">Add to Basket</string>
-    <string name="nutritions">Nutritions</string>
+    <string name="nutritions">Nutrition</string>
     <string name="description">Description</string>
     <string name="reviews">Reviews</string>
     <string name="welcome_prompt">Hello, new grocery and gourmet foods just arrived !</string>
@@ -45,5 +45,7 @@
     <string name="sync_status_pref_name">SYNC_PREF_NAME</string>
     <string name="profile_information">Profile Information</string>
     <string name="order_history">Order History</string>
+    <string name="order_is_created_successfully">Order is created successfully !</string>
+    <string name="continue_shopping">Continue Shopping</string>
 
 </resources>
