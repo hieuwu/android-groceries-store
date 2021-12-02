@@ -39,7 +39,12 @@ class AccountFragment : Fragment() {
         binding.lifecycleOwner = this
         viewModel.user.observe(viewLifecycleOwner, {
             if (it == null) {
+                binding.profileLayout.visibility = View.GONE
+                binding.signoutButton.visibility = View.GONE
+                binding.animationView.visibility = View.VISIBLE
 
+            }else {
+                binding.animationView.visibility = View.GONE
             }
         })
         binding.profileLayout.setOnClickListener {
