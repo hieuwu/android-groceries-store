@@ -1,5 +1,8 @@
-# android-groceries-store
 [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
+
+![Groceries Store](https://i.imgur.com/Wn6ZcZl.jpeg)
+
+
 
 [![Kotlin](https://img.shields.io/badge/kotlin-%23FF5722.svg?&style=for-the-badge&logo=kotlin&logoColor=white)](https://github.com/hieuwu/android-groceries-store)
 [![Android](https://img.shields.io/badge/android-teal.svg?&style=for-the-badge&logo=android&logoColor=white")](https://github.com/hieuwu/android-groceries-store)
@@ -10,11 +13,16 @@
 
 # UI Design & Architecture
 - [Groceries Store Design](https://www.figma.com/file/exhlJtkLIcHvfxd8SDja3T/Online-Groceries-App-UI-(Community)?node-id=1%3A2)
+- <a href='https://www.freepik.com/vectors/background'>Background vector created by freepik - www.freepik.com</a>
 
 Next Step is to follow Clean Architecture:
 - [Use Case](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
 - [Clean Architecture](https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029)
 - MVVM Architecture (View - DataBinding - ViewModel - Model)
+
+# MAD Scorecard:
+
+![Caption](https://i.imgur.com/omCNl7x.png)
 
 # Libraries
 - [Glide](https://github.com/bumptech/glide) - Loading images.
@@ -26,4 +34,3 @@ Next Step is to follow Clean Architecture:
   - Lifecycle - dispose of observing data when lifecycle state changes.
   - ViewModel - UI related data holder, lifecycle aware.
   - Room Persistence - construct a database using the abstract layer.
-
