@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="dialogTheme">@style/DialogFragmentTheme</item>
 
     </style>
 
@@ -24,6 +25,13 @@
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_background</item>
+    </style>
+
+    <style name="DialogFragmentTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/rounded_border_grid_item</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="AppModalTitleBar" parent="Widget.Design.AppBarLayout">
