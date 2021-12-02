@@ -1,3 +1,4 @@
+# android-groceries-store
 [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
 
 ![Groceries Store](https://i.imgur.com/Wn6ZcZl.jpeg)
