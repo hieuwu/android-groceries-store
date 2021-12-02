@@ -79,8 +79,7 @@ class CheckOutFragment : Fragment() {
             //If logged in, send data to server
             if (viewModel.user.value != null) {
                 viewModel.sendOrder()
-            }
-            else {
+            } else {
                 val i = Intent(context, AuthActivity::class.java)
                 startActivity(i)
             }
@@ -88,15 +87,9 @@ class CheckOutFragment : Fragment() {
 
         viewModel.isOrderSentSuccessful.observe(viewLifecycleOwner, {
             if (it) {
-                Snackbar.make(
-                    requireActivity().findViewById(android.R.id.content),
-                    "Order created successfully !",
-                    Snackbar.LENGTH_LONG
-                ).show()
-
-                findNavController().navigateUp()
-            }
-            else {
+                val dialog = CheckOutSuccess()
+                dialog.show(requireActivity().supportFragmentManager, "SUCCESS_DIALOG")
+            } else {
                 Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
                     "Order created failed :(",
