@@ -15,6 +15,7 @@
 # UI Design & Architecture
 - [Groceries Store Design](https://www.figma.com/file/exhlJtkLIcHvfxd8SDja3T/Online-Groceries-App-UI-(Community)?node-id=1%3A2)
 - <a href='https://www.freepik.com/vectors/background'>Background vector created by freepik - www.freepik.com</a>
+- <a href='https://www.freepik.com/vectors/food'>Food vector created by terdpongvector - www.freepik.com</a>
 
 Next Step is to follow Clean Architecture:
 - [Use Case](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
