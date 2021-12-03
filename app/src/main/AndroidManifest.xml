@@ -18,10 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.AuthActivity"></activity>
+        <activity android:name=".presentation.AuthActivity" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustNothing"></activity>
+            android:windowSoftInputMode="adjustNothing" />
     </application>
 
 </manifest>
