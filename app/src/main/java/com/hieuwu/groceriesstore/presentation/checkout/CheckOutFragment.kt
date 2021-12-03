@@ -88,6 +88,7 @@ class CheckOutFragment : Fragment() {
         viewModel.isOrderSentSuccessful.observe(viewLifecycleOwner, {
             if (it) {
                 val dialog = CheckOutSuccess()
+                dialog.setOnDismissListener { findNavController().navigateUp() }
                 dialog.show(requireActivity().supportFragmentManager, "SUCCESS_DIALOG")
             } else {
                 Snackbar.make(
