@@ -45,7 +45,8 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
-        val viewModelFactory = OnboardingViewModelFactory(productRepository, categoryRepository, recipeRepository)
+        val viewModelFactory =
+            OnboardingViewModelFactory(productRepository, categoryRepository, recipeRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(OnboardingViewModel::class.java)
         binding.viewModel = viewModel
@@ -53,11 +54,14 @@ class OnboardingActivity : AppCompatActivity() {
 
         viewModel.isSyncedSuccessful.observe(this, {
             if (it!!) {
-                with(sharedPrefs.edit()) {
-                    putBoolean(getString(R.string.sync_success), true)
-                    apply()
-                }
+                if (it == true) {
 
+                    with(sharedPrefs.edit()) {
+                        putBoolean(getString(R.string.sync_success), true)
+                        apply()
+                    }
+                    binding.getStartedButton.isEnabled = true
+                }
             }
         })
 
