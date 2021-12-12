@@ -12,6 +12,10 @@
         <action
             android:id="@+id/action_accountFragment_to_updateProfileFragment"
             app:destination="@id/updateProfileFragment" />
+
+        <action
+            android:id="@+id/action_shopFragment_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
