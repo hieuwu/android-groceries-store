@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.hieuwu.groceriesstore.MainActivity
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
@@ -14,6 +16,7 @@ import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -52,6 +55,17 @@ class OnboardingActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.d("Fetching FCM registration token failed" + task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+            Timber.d(token)
+        })
+
         viewModel.isSyncedSuccessful.observe(this, {
             if (it!!) {
                 if (it == true) {
@@ -64,6 +78,7 @@ class OnboardingActivity : AppCompatActivity() {
                 }
             }
         })
+
 
 
         binding.getStartedButton.setOnClickListener {
