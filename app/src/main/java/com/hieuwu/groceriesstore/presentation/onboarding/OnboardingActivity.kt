@@ -43,7 +43,9 @@ class OnboardingActivity : AppCompatActivity() {
         val isSyncedSuccessful = sharedPrefs.getBoolean(getString(R.string.sync_success), false)
 
         if (isSyncedSuccessful) {
-            val intent = Intent(this.applicationContext, MainActivity::class.java)
+            val intent = Intent(this.applicationContext, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
             startActivity(intent)
         }
 
@@ -69,7 +71,6 @@ class OnboardingActivity : AppCompatActivity() {
         viewModel.isSyncedSuccessful.observe(this, {
             if (it!!) {
                 if (it == true) {
-
                     with(sharedPrefs.edit()) {
                         putBoolean(getString(R.string.sync_success), true)
                         apply()
@@ -85,5 +86,20 @@ class OnboardingActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onPause() {
+        Timber.d("On Pause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Timber.d("On Stop")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.d("On Destroy")
     }
 }

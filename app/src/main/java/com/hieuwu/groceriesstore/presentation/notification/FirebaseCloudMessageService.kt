@@ -23,7 +23,7 @@ class FirebaseCloudMessageService : FirebaseMessagingService() {
 
     }
 
-    fun showNotification(
+    private fun showNotification(
         title: String,
         message: String
     ) {
