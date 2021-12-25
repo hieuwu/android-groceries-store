@@ -15,8 +15,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,21 +23,19 @@ class OrderRepositoryImpl @Inject constructor(
     private val orderDao: OrderDao,
     private val lineItemDao: LineItemDao
 ) : OrderRepository {
-    private val executorService: ExecutorService = Executors.newFixedThreadPool(4)
-
 
     override fun hasCart(): Flow<Boolean> {
         return orderDao.isCartExisted(OrderStatus.IN_CART.value)
     }
 
     override suspend fun insert(order: Order) {
-        executorService.execute {
+        withContext(Dispatchers.IO) {
             orderDao.insert(order)
         }
     }
 
     override suspend fun addLineItem(lineItem: LineItem) {
-        executorService.execute {
+        withContext(Dispatchers.IO) {
             lineItemDao.insert(lineItem)
         }
     }
