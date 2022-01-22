@@ -3,7 +3,7 @@ package com.hieuwu.groceriesstore.data
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.hieuwu.groceriesstore.data.dao.*
-import com.hieuwu.groceriesstore.domain.entities.*
+import com.hieuwu.groceriesstore.data.entities.*
 
 @Database(
     entities = [Product::class, LineItem::class, Order::class, Category::class, User::class, Recipe::class],
