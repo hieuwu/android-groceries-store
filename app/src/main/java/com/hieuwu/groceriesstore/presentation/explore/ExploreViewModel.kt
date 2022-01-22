@@ -1,8 +1,8 @@
 package com.hieuwu.groceriesstore.presentation.explore
 
 import androidx.lifecycle.*
-import com.hieuwu.groceriesstore.domain.entities.LineItem
-import com.hieuwu.groceriesstore.domain.entities.Order
+import com.hieuwu.groceriesstore.data.entities.LineItem
+import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
