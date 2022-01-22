@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.utilities
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.hieuwu.groceriesstore.domain.entities.*
+import com.hieuwu.groceriesstore.data.entities.*
 
 
 object CollectionNames {
