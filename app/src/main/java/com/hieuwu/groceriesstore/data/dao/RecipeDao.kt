@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.hieuwu.groceriesstore.domain.entities.Recipe
+import com.hieuwu.groceriesstore.data.entities.Recipe
 import com.hieuwu.groceriesstore.utilities.RECIPE_TABLE
 import kotlinx.coroutines.flow.Flow
 
