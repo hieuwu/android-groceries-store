@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
-import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
+import com.hieuwu.groceriesstore.data.entities.OrderWithLineItems
+import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
