@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.domain.entities.ProductAndLineItem
+import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.models.RecipeModel
