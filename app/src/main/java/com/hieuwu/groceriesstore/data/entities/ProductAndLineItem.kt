@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.domain.entities
+package com.hieuwu.groceriesstore.data.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation
