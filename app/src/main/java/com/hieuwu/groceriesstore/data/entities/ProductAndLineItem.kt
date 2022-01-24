@@ -26,7 +26,7 @@ fun ProductAndLineItem.asDomainModel(): LineItemModel {
     )
 }
 
-fun List<ProductAndLineItem>.asDomainModel(): List<LineItemModel> {
+fun MutableList<ProductAndLineItem>.asDomainModel(): MutableList<LineItemModel> {
     return map {
         it.asDomainModel()
     }
