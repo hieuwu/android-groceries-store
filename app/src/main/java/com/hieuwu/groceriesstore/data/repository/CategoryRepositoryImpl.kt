@@ -5,8 +5,8 @@ import androidx.lifecycle.asLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.CategoryDao
-import com.hieuwu.groceriesstore.domain.entities.Category
-import com.hieuwu.groceriesstore.domain.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.entities.Category
+import com.hieuwu.groceriesstore.data.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertCategoryDocumentToEntity
