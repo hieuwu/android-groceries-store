@@ -2,8 +2,8 @@ package com.hieuwu.groceriesstore.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.hieuwu.groceriesstore.domain.entities.Order
-import com.hieuwu.groceriesstore.domain.entities.OrderWithLineItems
+import com.hieuwu.groceriesstore.data.entities.Order
+import com.hieuwu.groceriesstore.data.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.utilities.ORDER_TABLE
 import kotlinx.coroutines.flow.Flow
 
