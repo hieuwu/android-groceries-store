@@ -2,7 +2,6 @@ package com.hieuwu.groceriesstore.data.dao
 
 import androidx.room.*
 import com.hieuwu.groceriesstore.data.entities.Product
-import com.hieuwu.groceriesstore.utilities.FilterOrder
 import com.hieuwu.groceriesstore.utilities.PRODUCT_TABLE
 import kotlinx.coroutines.flow.Flow
 
