@@ -7,9 +7,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.domain.entities.LineItem
-import com.hieuwu.groceriesstore.domain.entities.Product
-import com.hieuwu.groceriesstore.domain.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.entities.LineItem
+import com.hieuwu.groceriesstore.data.entities.Product
+import com.hieuwu.groceriesstore.data.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
