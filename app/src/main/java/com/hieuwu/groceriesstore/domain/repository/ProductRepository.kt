@@ -1,8 +1,8 @@
 package com.hieuwu.groceriesstore.domain.repository
 
 import androidx.lifecycle.LiveData
-import com.hieuwu.groceriesstore.domain.entities.LineItem
-import com.hieuwu.groceriesstore.domain.entities.Product
+import com.hieuwu.groceriesstore.data.entities.LineItem
+import com.hieuwu.groceriesstore.data.entities.Product
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import kotlinx.coroutines.flow.Flow
 
