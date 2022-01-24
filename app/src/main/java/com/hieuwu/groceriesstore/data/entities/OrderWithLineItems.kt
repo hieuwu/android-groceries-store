@@ -2,6 +2,7 @@ package com.hieuwu.groceriesstore.data.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 
 data class OrderWithLineItems(
     @Embedded var order: Order,
@@ -12,3 +13,11 @@ data class OrderWithLineItems(
     )
     val lineItemList: MutableList<ProductAndLineItem>
 )
+
+fun OrderWithLineItems.asDomainModel(): OrderModel {
+    return OrderModel(
+        status = this.order.status,
+        address = this.order.address,
+        lineItemList = this.lineItemList.asDomainModel()
+    )
+}
