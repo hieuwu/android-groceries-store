@@ -23,5 +23,11 @@ fun ProductAndLineItem.asDomainModel(): LineItemModel {
         productId = this.product?.id,
         quantity = this.lineItem?.quantity,
         subtotal = this.lineItem?.subtotal,
-        )
+    )
+}
+
+fun List<ProductAndLineItem>.asDomainModel(): List<LineItemModel> {
+    return map {
+        it.asDomainModel()
+    }
 }
