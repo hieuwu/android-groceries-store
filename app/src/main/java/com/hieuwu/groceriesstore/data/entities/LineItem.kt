@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.domain.entities
+package com.hieuwu.groceriesstore.data.entities
 
 import androidx.room.*
 import com.hieuwu.groceriesstore.utilities.LINE_ITEM_TABLE
