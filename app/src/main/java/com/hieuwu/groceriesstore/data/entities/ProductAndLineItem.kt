@@ -29,5 +29,5 @@ fun ProductAndLineItem.asDomainModel(): LineItemModel {
 fun MutableList<ProductAndLineItem>.asDomainModel(): MutableList<LineItemModel> {
     return map {
         it.asDomainModel()
-    }
+    } as MutableList<LineItemModel>
 }
