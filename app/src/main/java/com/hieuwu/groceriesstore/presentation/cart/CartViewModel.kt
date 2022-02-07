@@ -3,8 +3,10 @@ package com.hieuwu.groceriesstore.presentation.cart
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
+import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
@@ -59,40 +61,40 @@ class CartViewModel @Inject constructor(
     }
 
 
-    fun decreaseQty(lineItemModel: ProductAndLineItem) {
+    fun decreaseQty(lineItemModel: LineItemModel) {
         Timber.d("Minus Clicked")
-        if (lineItemModel.lineItem?.quantity == 1) return
-        val qty = lineItemModel.lineItem?.quantity?.minus(1)
+        if (lineItemModel?.quantity == 1) return
+        val qty = lineItemModel?.quantity?.minus(1)
         if (qty != null) {
-            lineItemModel.lineItem.quantity = qty
-            lineItemModel.lineItem.subtotal = qty * (lineItemModel.product?.price ?: 1.0)
+            lineItemModel.quantity = qty
+            lineItemModel.subtotal = qty * (lineItemModel?.price ?: 1.0)
         }
         viewModelScope.launch {
             updateLineItem(lineItemModel)
         }
     }
 
-    fun increaseQty(lineItemModel: ProductAndLineItem) {
+    fun increaseQty(lineItemModel: LineItemModel) {
         Timber.d("Plus Clicked")
-        val qty = lineItemModel.lineItem?.quantity?.plus(1)
+        val qty = lineItemModel?.quantity?.plus(1)
         if (qty != null) {
-            lineItemModel.lineItem.quantity = qty
-            lineItemModel.lineItem.subtotal = qty * (lineItemModel.product?.price ?: 1.0)
+            lineItemModel.quantity = qty
+            lineItemModel.subtotal = qty * (lineItemModel?.price ?: 1.0)
         }
         viewModelScope.launch {
-            updateLineItem(lineItemModel)
+//            updateLineItem(lineItemModel)
         }
     }
 
-    fun removeItem(lineItemModel: ProductAndLineItem) {
+    fun removeItem(lineItemModel: LineItemModel) {
         viewModelScope.launch {
-            removeLineItem(lineItemModel)
+//            removeLineItem(lineItemModel)
         }
     }
 
-    private suspend fun updateLineItem(lineItemModel: ProductAndLineItem) {
+    private suspend fun updateLineItem(lineItemModel: LineItemModel) {
         withContext(Dispatchers.IO) {
-            productRepository.updateLineItem(lineItemModel.lineItem!!)
+//            productRepository.updateLineItem(lineItemModel!!)
         }
     }
 
