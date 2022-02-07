@@ -20,6 +20,7 @@ fun ProductAndLineItem.asDomainModel(): LineItemModel {
         id = null,
         name = this.product?.name,
         image = this.product?.image,
+        price = this.product?.price,
         productId = this.product?.id,
         quantity = this.lineItem?.quantity,
         subtotal = this.lineItem?.subtotal,
