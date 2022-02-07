@@ -6,16 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutLineListItemBinding
-import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
+import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import kotlinx.android.synthetic.main.layout_line_list_item.view.*
 
 class LineListItemAdapter(val onClickListener: OnClickListener, val context: Context) :
-    ListAdapter<ProductAndLineItem, LineListItemAdapter.LineItemViewHolder>(DiffCallback) {
+    ListAdapter<LineItemModel, LineListItemAdapter.LineItemViewHolder>(DiffCallback) {
 
 
     class LineItemViewHolder(private var binding: LayoutLineListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(lineItemModel: ProductAndLineItem) {
+        fun bind(lineItemModel: LineItemModel) {
             binding.lineItem = lineItemModel
             binding.executePendingBindings()
         }
@@ -47,30 +47,30 @@ class LineListItemAdapter(val onClickListener: OnClickListener, val context: Con
         return LineItemViewHolder(LayoutLineListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ProductAndLineItem>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<LineItemModel>() {
         override fun areItemsTheSame(
-            oldItem: ProductAndLineItem,
-            newItem: ProductAndLineItem
+            oldItem: LineItemModel,
+            newItem: LineItemModel
         ): Boolean {
-            return oldItem === newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ProductAndLineItem,
-            newItem: ProductAndLineItem
+            oldItem: LineItemModel,
+            newItem: LineItemModel
         ): Boolean {
-            return (oldItem == newItem)
+            return (oldItem.id == newItem.id)
         }
     }
 
     class OnClickListener constructor(
-        var minusListener: (lineItemModel: ProductAndLineItem) -> Unit,
-        var plusListener: (lineItemModel: ProductAndLineItem) -> Unit,
-        var removeListener: (lineItemModel: ProductAndLineItem) -> Unit,
+        var minusListener: (lineItemModel: LineItemModel) -> Unit,
+        var plusListener: (lineItemModel: LineItemModel) -> Unit,
+        var removeListener: (lineItemModel: LineItemModel) -> Unit,
     ) {
-        fun onMinusClick(lineItemModel: ProductAndLineItem) = minusListener(lineItemModel)
-        fun onPlusClick(lineItemModel: ProductAndLineItem) = plusListener(lineItemModel)
-        fun onRemoveItem(lineItemModel: ProductAndLineItem) = removeListener(lineItemModel)
+        fun onMinusClick(lineItemModel: LineItemModel) = minusListener(lineItemModel)
+        fun onPlusClick(lineItemModel: LineItemModel) = plusListener(lineItemModel)
+        fun onRemoveItem(lineItemModel: LineItemModel) = removeListener(lineItemModel)
     }
 
 }
