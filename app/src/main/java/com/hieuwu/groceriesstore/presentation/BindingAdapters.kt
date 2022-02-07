@@ -9,6 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
+import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.models.RecipeModel
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
@@ -38,7 +39,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 }
 
 @BindingAdapter("lineListData")
-fun bindRecyclerViewLine(recyclerView: RecyclerView, data: MutableList<ProductAndLineItem>?) {
+fun bindRecyclerViewLine(recyclerView: RecyclerView, data: MutableList<LineItemModel>?) {
     val adapter = recyclerView.adapter as LineListItemAdapter
     adapter.submitList(data)
 }
