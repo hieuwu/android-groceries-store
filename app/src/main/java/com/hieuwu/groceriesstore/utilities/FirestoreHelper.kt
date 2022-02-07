@@ -1,8 +1,11 @@
 package com.hieuwu.groceriesstore.utilities
 
+import android.util.TypedValue
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.hieuwu.groceriesstore.data.entities.*
+import com.hieuwu.groceriesstore.domain.models.LineItemModel
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 
 
 object CollectionNames {
@@ -12,24 +15,24 @@ object CollectionNames {
     const val users = "users"
 }
 
-fun convertItemEntityToDocument(lineItem: ProductAndLineItem): HashMap<String, Any> {
+fun convertItemEntityToDocument(lineItem: LineItemModel): HashMap<String, Any> {
     val document = HashMap<String, Any>()
-    document["quantity"] = lineItem.lineItem!!.quantity
-    document["subtotal"] = lineItem.lineItem.subtotal
-    document["product"] = "products/${lineItem.lineItem.productId}"
+    document["quantity"] = lineItem.quantity as TypedValue
+    document["subtotal"] = lineItem.subtotal as TypedValue
+    document["product"] = "products/${lineItem.productId}"
     return document
 }
 
-fun convertOrderEntityToDocument(order: OrderWithLineItems): HashMap<String, Any> {
+fun convertOrderEntityToDocument(order: OrderModel): HashMap<String, Any> {
     val document = HashMap<String, Any>()
     val lineOrderList = mutableListOf<HashMap<String, Any>>()
     var total = 0.0
     for (item in order.lineItemList) {
         lineOrderList.add(convertItemEntityToDocument(item))
-        total += item.lineItem?.subtotal ?: 0.0
+        total += item?.subtotal ?: 0.0
     }
 
-    document["address"] = order.order.address
+    document["address"] = order.address as TypedValue
     document["lineItems"] = lineOrderList
     document["total"] = total
     return document
