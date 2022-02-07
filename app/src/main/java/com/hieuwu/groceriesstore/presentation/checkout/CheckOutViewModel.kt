@@ -2,9 +2,8 @@ package com.hieuwu.groceriesstore.presentation.checkout
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.entities.OrderWithLineItems
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
@@ -29,8 +28,8 @@ class CheckOutViewModel @Inject constructor(
     val user: LiveData<UserModel?>
         get() = _user
 
-    private var _order = MutableLiveData<OrderWithLineItems>()
-    val order: LiveData<OrderWithLineItems>
+    private var _order = MutableLiveData<OrderModel>()
+    val order: LiveData<OrderModel>
         get() = _order
 
     private var _address = MutableLiveData<Double>()
@@ -54,7 +53,7 @@ class CheckOutViewModel @Inject constructor(
         var sum = 0.0
         if (_order.value?.lineItemList != null) {
             for (item in _order.value?.lineItemList!!) {
-                val sub = item.lineItem?.subtotal ?: 0.0
+                val sub = item?.subtotal ?: 0.0
                 sum = sum.plus(sub)
             }
         }
@@ -69,13 +68,13 @@ class CheckOutViewModel @Inject constructor(
 
     private suspend fun getLineItemFromLocal() {
         return withContext(Dispatchers.IO) {
-            _order = orderRepository.getCartWithLineItems(OrderStatus.IN_CART)
-                .asLiveData() as MutableLiveData<OrderWithLineItems>
+            _order = orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
+             as MutableLiveData<OrderModel>
         }
     }
 
     private fun setOrderAddress() {
-        _order.value?.order?.address = user.value?.address ?: ""
+        _order.value?.address = user.value?.address ?: ""
     }
 
     private suspend fun sendOrderToServer() {
