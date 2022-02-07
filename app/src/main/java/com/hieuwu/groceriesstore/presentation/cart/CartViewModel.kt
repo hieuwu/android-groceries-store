@@ -2,10 +2,10 @@ package com.hieuwu.groceriesstore.presentation.cart
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
@@ -21,8 +21,8 @@ class CartViewModel @Inject constructor(
     private val orderRepository: OrderRepository
 ) : ObservableViewModel() {
 
-    private var _order = MutableLiveData<OrderWithLineItems>()
-    val order: LiveData<OrderWithLineItems>
+    private var _order = MutableLiveData<OrderModel>()
+    val order: LiveData<OrderModel>
         get() = _order
 
     private var _totalPrice = MutableLiveData<Double>()
@@ -42,8 +42,8 @@ class CartViewModel @Inject constructor(
 
     private suspend fun getLineItemFromLocal() {
         return withContext(Dispatchers.IO) {
-            _order = orderRepository.getCartWithLineItems(OrderStatus.IN_CART)
-                .asLiveData() as MutableLiveData<OrderWithLineItems>
+            _order =
+                orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
         }
     }
 
@@ -51,7 +51,7 @@ class CartViewModel @Inject constructor(
         var sum = 0.0
         if (_order.value?.lineItemList != null) {
             for (item in _order.value?.lineItemList!!) {
-                val sub = item.lineItem?.subtotal ?: 0.0
+                val sub = item?.subtotal ?: 0.0
                 sum = sum.plus(sub)
             }
         }
