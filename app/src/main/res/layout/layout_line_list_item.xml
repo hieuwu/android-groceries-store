@@ -6,7 +6,7 @@
 
         <variable
             name="lineItem"
-            type="com.hieuwu.groceriesstore.data.entities.ProductAndLineItem" />
+            type="com.hieuwu.groceriesstore.domain.models.LineItemModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -27,7 +27,7 @@
                 android:layout_width="@dimen/icon_medium"
                 android:layout_height="@dimen/icon_medium"
                 android:contentDescription="@string/line_item_image"
-                app:imageUrl="@{lineItem.product.image}" />
+                app:imageUrl="@{lineItem.image}" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,14 +42,14 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textSize="18dp"
-                    android:text="@{lineItem.product.name}"
+                    android:text="@{lineItem.name}"
                     android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(lineItem.product.price) + ` $`}"
+                    android:text="@{String.valueOf(lineItem.price) + ` $`}"
                     android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
                     android:textColor="@android:color/darker_gray" />
 
@@ -74,7 +74,7 @@
                         android:background="@drawable/border_textview"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="5dp"
-                        android:text="@{String.valueOf(lineItem.lineItem.quantity)}"
+                        android:text="@{String.valueOf(lineItem.quantity)}"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/text_big_bold" />
 
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/margin_normal"
-                android:text="@{String.valueOf(lineItem.lineItem.subtotal) + ` $`}"
+                android:text="@{String.valueOf(lineItem.subtotal) + ` $`}"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
