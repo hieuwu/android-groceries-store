@@ -1,5 +1,9 @@
 package com.hieuwu.groceriesstore.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
@@ -7,6 +11,8 @@ import com.hieuwu.groceriesstore.data.dao.OrderDao
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.data.entities.OrderWithLineItems
+import com.hieuwu.groceriesstore.data.entities.asDomainModel
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument
@@ -53,6 +59,12 @@ class OrderRepositoryImpl @Inject constructor(
     override fun getCart(status: OrderStatus) = orderDao.getCart(status.value)
     override suspend fun getCartWithLineItems(status: OrderStatus) =
         orderDao.getCartWithLineItems(status.value)
+
+    override suspend fun getOneOrderByStatus(status: OrderStatus) =
+        Transformations.map(orderDao.getCartWithLineItems(status.value).asLiveData()) {
+            it.asDomainModel()
+        }
+
 
     override suspend fun sendOrderToServer(order: OrderWithLineItems): Boolean {
         val orderMap = convertOrderEntityToDocument(order)
