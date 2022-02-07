@@ -66,11 +66,11 @@ class OrderRepositoryImpl @Inject constructor(
         }
 
 
-    override suspend fun sendOrderToServer(order: OrderWithLineItems): Boolean {
+    override suspend fun sendOrderToServer(order: OrderModel): Boolean {
         val orderMap = convertOrderEntityToDocument(order)
         var isSuccess = false
         val db = Firebase.firestore
-        db.collection("orders").document(order.order.id)
+        db.collection("orders").document(order.id)
             .set(orderMap)
             .addOnSuccessListener {
                 isSuccess = true
