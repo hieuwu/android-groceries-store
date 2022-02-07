@@ -16,6 +16,7 @@ data class OrderWithLineItems(
 
 fun OrderWithLineItems.asDomainModel(): OrderModel {
     return OrderModel(
+        id = this.order.id,
         status = this.order.status,
         address = this.order.address,
         lineItemList = this.lineItemList.asDomainModel()
