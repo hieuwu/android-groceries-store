@@ -14,6 +14,9 @@ interface LineItemDao {
     @Query("SELECT * FROM $LINE_ITEM_TABLE WHERE lineItemId = :id")
     fun getById(id: Long): Flow<LineItem>
 
+    @Query("UPDATE  $LINE_ITEM_TABLE SET quantity = :quantity  WHERE lineItemId = :id")
+    fun updateQuantityById(quantity: Int, id: Long): Flow<LineItem>
+
     @Delete
     suspend fun remove(lineItem: LineItem)
 
@@ -27,5 +30,5 @@ interface LineItemDao {
 
     @Transaction
     @Query("SELECT * FROM $LINE_ITEM_TABLE WHERE orderId = :orderId")
-    fun getLineItemInOrder(orderId:String): Flow<List<ProductAndLineItem>>
+    fun getLineItemInOrder(orderId: String): Flow<List<ProductAndLineItem>>
 }
