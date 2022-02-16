@@ -82,7 +82,7 @@ class CartViewModel @Inject constructor(
             lineItemModel.subtotal = qty * (lineItemModel?.price ?: 1.0)
         }
         viewModelScope.launch {
-//            updateLineItem(lineItemModel)
+            updateLineItem(lineItemModel)
         }
     }
 
@@ -94,7 +94,7 @@ class CartViewModel @Inject constructor(
 
     private suspend fun updateLineItem(lineItemModel: LineItemModel) {
         withContext(Dispatchers.IO) {
-//            productRepository.updateLineItem(lineItemModel!!)
+            productRepository.updateLineItemQuantityById(lineItemModel.quantity!!, lineItemModel.id!!)
         }
     }
 
