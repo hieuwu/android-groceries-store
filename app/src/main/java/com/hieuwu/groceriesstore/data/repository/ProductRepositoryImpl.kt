@@ -54,6 +54,10 @@ class ProductRepositoryImpl @Inject constructor(
         lineItemDao.update(lineItem)
     }
 
+    override suspend fun updateLineItemQuantityById(quantity: Int, id: Long) {
+        lineItemDao.updateQuantityById(quantity, id)
+    }
+
     override suspend fun removeLineItem(lineItem: LineItem) {
         lineItemDao.remove(lineItem)
     }
