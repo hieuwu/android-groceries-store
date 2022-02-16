@@ -14,6 +14,7 @@ interface ProductRepository {
     suspend fun getFromServer()
     suspend fun hasProduct(): Boolean
     suspend fun updateLineItem(lineItem: LineItem)
+    suspend fun updateLineItemQuantityById(quantity: Int, id: Long)
     suspend fun removeLineItem(lineItem: LineItem)
     fun searchProductsListByName(name: String?) : LiveData<List<ProductModel>>
 }
