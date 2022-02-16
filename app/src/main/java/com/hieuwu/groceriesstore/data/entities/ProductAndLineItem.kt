@@ -17,7 +17,7 @@ data class ProductAndLineItem(
 
 fun ProductAndLineItem.asDomainModel(): LineItemModel {
     return LineItemModel(
-        id = null,
+        id = this.lineItem?.id,
         name = this.product?.name,
         image = this.product?.image,
         price = this.product?.price,
