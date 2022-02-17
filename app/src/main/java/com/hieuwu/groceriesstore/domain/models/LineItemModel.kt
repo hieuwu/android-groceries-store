@@ -7,5 +7,5 @@ data class LineItemModel(
     var image: String? = null,
     var productId: String? = null,
     var quantity: Int? = null,
-    var subtotal: Double? = null,
+    var subtotal: Double? = quantity?.let { price?.times(it) },
 )
