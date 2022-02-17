@@ -23,7 +23,6 @@ fun ProductAndLineItem.asDomainModel(): LineItemModel {
         price = this.product?.price,
         productId = this.product?.id,
         quantity = this.lineItem?.quantity,
-        subtotal = this.lineItem?.subtotal,
     )
 }
 
