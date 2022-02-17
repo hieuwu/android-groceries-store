@@ -59,8 +59,6 @@ class CartFragment : BottomSheetDialogFragment() {
         itemTouchHelper.attachToRecyclerView(binding.cartDetailRecyclerview);
         binding.cartDetailRecyclerview.adapter = adapter
 
-        viewModel.totalPrice.observe(viewLifecycleOwner, {})
-
         viewModel.order.observe(viewLifecycleOwner, {
             if (it != null) {
                 if (it.lineItemList.size > 0) {
@@ -70,7 +68,6 @@ class CartFragment : BottomSheetDialogFragment() {
                     binding.cartEmptyLayout.visibility = View.VISIBLE
                     binding.cartDetailLayout.visibility = View.GONE
                 }
-                viewModel.sumPrice()
             }
             else {
                 binding.cartEmptyLayout.visibility = View.VISIBLE
@@ -99,7 +96,6 @@ class CartFragment : BottomSheetDialogFragment() {
         super.onCreateContextMenu(menu, v, menuInfo)
         val inflater = MenuInflater(context)
         inflater.inflate(R.menu.line_item_context_menu, menu)
-
     }
 
     fun showSnackBar(lineItemModel: ProductAndLineItem) {
