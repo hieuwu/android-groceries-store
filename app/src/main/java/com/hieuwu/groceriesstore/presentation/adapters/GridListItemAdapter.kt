@@ -40,7 +40,7 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
 
     companion object DiffCallback : DiffUtil.ItemCallback<ProductModel>() {
         override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
-            return oldItem === newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
