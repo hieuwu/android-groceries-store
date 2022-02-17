@@ -106,7 +106,7 @@ class ShopFragment : Fragment() {
 
 
 
-        viewModel.CurrentCart.observe(viewLifecycleOwner, {})
+        viewModel.currentCart.observe(viewLifecycleOwner, {})
 
         return binding.root
     }
