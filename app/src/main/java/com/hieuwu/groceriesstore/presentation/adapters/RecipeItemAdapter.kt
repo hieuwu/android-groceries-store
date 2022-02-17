@@ -35,7 +35,7 @@ class RecipeItemAdapter(val onClickListener: OnClickListener) :
 
     companion object DiffCallback : DiffUtil.ItemCallback<RecipeModel>() {
         override fun areItemsTheSame(oldItem: RecipeModel, newItem: RecipeModel): Boolean {
-            return oldItem === newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: RecipeModel, newItem: RecipeModel): Boolean {
