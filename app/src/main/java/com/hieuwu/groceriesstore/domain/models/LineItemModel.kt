@@ -8,4 +8,13 @@ data class LineItemModel(
     var productId: String? = null,
     var quantity: Int? = null,
     var subtotal: Double? = quantity?.let { price?.times(it) },
-)
+) {
+    fun increaseQuantity() {
+        quantity = quantity?.plus(1)
+    }
+
+    fun decreaseQuantity() {
+        if (quantity == 1) return
+        quantity = quantity?.minus(1)
+    }
+}
