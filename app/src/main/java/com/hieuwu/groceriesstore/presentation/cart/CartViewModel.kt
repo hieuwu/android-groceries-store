@@ -24,12 +24,10 @@ class CartViewModel @Inject constructor(
         orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
     val order: LiveData<OrderModel>
         get() = _order
-    
+
     fun decreaseQty(lineItemModel: LineItemModel) {
         Timber.d("Minus Clicked")
-        if (lineItemModel?.quantity == 1) return
-        lineItemModel.quantity = lineItemModel.quantity?.minus(1)
-
+        lineItemModel.decreaseQuantity()
         viewModelScope.launch {
             updateLineItem(lineItemModel)
         }
@@ -37,14 +35,14 @@ class CartViewModel @Inject constructor(
 
     fun increaseQty(lineItemModel: LineItemModel) {
         Timber.d("Plus Clicked")
-        lineItemModel.quantity = lineItemModel.quantity?.plus(1)
-
+        lineItemModel.increaseQuantity()
         viewModelScope.launch {
             updateLineItem(lineItemModel)
         }
     }
 
     fun removeItem(lineItemModel: LineItemModel) {
+        lineItemModel.decreaseQuantity()
         viewModelScope.launch {
             removeLineItem(lineItemModel)
         }
