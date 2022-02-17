@@ -62,6 +62,11 @@ class ProductRepositoryImpl @Inject constructor(
         lineItemDao.remove(lineItem)
     }
 
+    override suspend fun removeLineItemById(id: Long) {
+        lineItemDao.removeLineItemById(id)
+
+    }
+
     override fun searchProductsListByName(name: String?) =
         Transformations.map(productDao.searchProductByName(name).asLiveData()) {
             it.asDomainModel()
