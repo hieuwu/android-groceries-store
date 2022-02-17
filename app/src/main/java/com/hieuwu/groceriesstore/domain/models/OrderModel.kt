@@ -17,4 +17,11 @@ data class OrderModel(
         }
         return sum
     }
+
+    fun isProductAdded(productId: String): Boolean {
+        for (item in lineItemList) {
+            if (item.productId.equals(productId)) return true
+        }
+        return false
+    }
 }
