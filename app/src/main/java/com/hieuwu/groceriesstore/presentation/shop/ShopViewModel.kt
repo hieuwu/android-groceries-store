@@ -21,7 +21,7 @@ class ShopViewModel @Inject constructor(
     val productList: LiveData<List<ProductModel>>
         get() = _productList
 
-    var CurrentCart: MutableLiveData<Order> =
+    var currentCart: MutableLiveData<Order> =
         orderRepository.getCart(OrderStatus.IN_CART).asLiveData() as MutableLiveData<Order>
 
     private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
@@ -37,9 +37,9 @@ class ShopViewModel @Inject constructor(
     }
 
     fun addToCart(product: ProductModel) {
-        if (CurrentCart.value != null) {
+        if (currentCart.value != null) {
             //Add to cart
-            val cartId = CurrentCart.value!!.id
+            val cartId = currentCart.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
                     product.id, cartId, 1, product.price!!
