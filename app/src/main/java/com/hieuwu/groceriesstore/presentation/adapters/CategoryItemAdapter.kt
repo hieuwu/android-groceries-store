@@ -39,7 +39,7 @@ class CategoryItemAdapter(val onClickListener: OnClickListener) :
 
     companion object DiffCallback : DiffUtil.ItemCallback<CategoryModel>() {
         override fun areItemsTheSame(oldItem: CategoryModel, newItem: CategoryModel): Boolean {
-            return oldItem === newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: CategoryModel, newItem: CategoryModel): Boolean {
