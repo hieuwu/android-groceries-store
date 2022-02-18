@@ -74,7 +74,7 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         var user: User? = null
         db.collection(CollectionNames.users).document(auth.currentUser?.uid!!).get()
             .addOnSuccessListener {
-                if (it != null) {
+                it?.let {
                     user = convertUserDocumentToEntity(id!!, it)
                 }
             }
