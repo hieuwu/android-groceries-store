@@ -52,10 +52,8 @@ class ShopFragment : Fragment() {
         binding.lifecycleOwner = this
 
         setUpRecyclerView(viewModel)
-
         viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
-
-            if (null != it) {
+            it?.let {
                 val direction = ShopFragmentDirections.actionShopFragmentToProductDetailFragment(
                     it.id
                 )
