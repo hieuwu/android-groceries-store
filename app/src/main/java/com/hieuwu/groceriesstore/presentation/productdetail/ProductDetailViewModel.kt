@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
@@ -22,9 +23,12 @@ class ProductDetailViewModel @Inject constructor(
     val product = productRepository.getProductById(id).asLiveData()
     val hasCart = orderRepository.hasCart()?.asLiveData()
 
-    var currentCart: MutableLiveData<Order> =
-        orderRepository.getCart(OrderStatus.IN_CART).asLiveData() as MutableLiveData<Order>
+    private var _currentCart: MutableLiveData<OrderModel>? = null
 
+
+    init {
+        _currentCart = orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
+    }
     private var _qty: Int = 1
     var qty: Int
         @Bindable
@@ -42,9 +46,9 @@ class ProductDetailViewModel @Inject constructor(
 
     fun addToCart() {
         val subtotal = product.value?.price?.times(qty) ?: 0.0
-        if (currentCart.value != null) {
+        if (_currentCart?.value != null) {
             //Add to cart
-            val cartId = currentCart.value!!.id
+            val cartId = _currentCart?.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
                     product.value!!.id, cartId, _qty, subtotal
