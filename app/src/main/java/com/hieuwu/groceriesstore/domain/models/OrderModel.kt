@@ -12,7 +12,7 @@ data class OrderModel(
     private fun calculateTotal(): Double {
         var sum = 0.0
         for (item in lineItemList) {
-            val sub = item?.subtotal ?: 0.0
+            val sub = item.subtotal ?: 0.0
             sum = sum.plus(sub)
         }
         return sum
