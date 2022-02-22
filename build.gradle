@@ -13,7 +13,7 @@ buildscript {
         legacySupportVersion = "1.0.0"
         gsonVersion = "2.8.5"
         timverVersion = "5.0.1"
-        glideVersion = "4.12.0"
+        glideVersion = "4.13.0"
         moshiVersion = "1.12.0"
         moshiConverterVersion = "2.9.0"
         firebaseBomVersion = "28.3.0"
@@ -29,7 +29,7 @@ buildscript {
         rxJavaVersion = "3.1.0"
         lottieVersion = "5.0.0"
         workVersion = "2.6.0"
-        coreVersion = "1.6.0"
+        coreVersion = "1.7.0"
     }
 
     repositories {
