@@ -7,7 +7,7 @@ buildscript {
         navigationVersion = "2.3.5"
         lifecycleVersion = "2.3.1"
         appCompatVersion = "1.2.0"
-        constraintLayoutVersion = "2.0.4"
+        constraintLayoutVersion = "2.1.3"
         fireStoreVersion = "21.6.0"
         coordinatorLayoutVersion = "1.1.0"
         legacySupportVersion = "1.0.0"
