@@ -12,7 +12,7 @@ buildscript {
         coordinatorLayoutVersion = "1.1.0"
         legacySupportVersion = "1.0.0"
         gsonVersion = "2.8.5"
-        timverVersion = "4.7.1"
+        timverVersion = "5.0.1"
         glideVersion = "4.12.0"
         moshiVersion = "1.12.0"
         moshiConverterVersion = "2.9.0"
