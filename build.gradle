@@ -25,7 +25,7 @@ buildscript {
         coreTestingVersion = "2.1.0"
         cardViewVersion = "1.0.0"
         googleServicesVersion = "4.3.3"
-        buildGradleVersion = "4.0.0"
+        buildGradleVersion = "7.1.2"
         rxJavaVersion = "3.1.0"
         lottieVersion = "5.0.0"
         workVersion = "2.6.0"
