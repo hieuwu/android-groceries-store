@@ -6,7 +6,7 @@ buildscript {
         roomVersion = "2.3.0"
         navigationVersion = "2.3.5"
         lifecycleVersion = "2.4.1"
-        appCompatVersion = "1.2.0"
+        appCompatVersion = "1.4.1"
         constraintLayoutVersion = "2.1.3"
         fireStoreVersion = "24.0.1"
         coordinatorLayoutVersion = "1.2.0"
