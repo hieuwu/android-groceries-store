@@ -20,7 +20,7 @@ buildscript {
         retrofitVersion = "2.9.0"
         kitlinCoroutineAdapter = "0.9.2"
         materialVersion = "1.4.0"
-        jUnitVersion = "4.12"
+        jUnitVersion = "4.13.2"
         testRunnerVersion = "1.2.0"
         coreTestingVersion = "2.1.0"
         cardViewVersion = "1.0.0"
