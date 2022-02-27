@@ -1,9 +1,7 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.map
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
@@ -52,11 +50,8 @@ class OrderRepositoryImpl @Inject constructor(
 
     override fun getOrderInCart(status: OrderStatus) = orderDao.getOrderInCart(status.value)
 
-    override fun getOrderWithLineItems() = orderDao.getOrderWithLineItems()
 
     override fun getCurrentCartId(status: OrderStatus) = orderDao.getCurrentCartId(status.value)
-
-    override fun getCart(status: OrderStatus) = orderDao.getCart(status.value)
 
     override fun getOneOrderByStatus(status: OrderStatus) =
         Transformations.map(orderDao.getCartWithLineItems(status.value).asLiveData()) {
