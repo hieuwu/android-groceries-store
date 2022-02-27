@@ -26,7 +26,7 @@ class OnboardingViewModel @Inject constructor(
         try {
             viewModelScope.launch {
                 getCategories()
-                productRepository.getFromServer()
+                productRepository.refreshDatabase()
                 recipeRepository.refreshDatabase()
             }
             updateSyncStatus(true)
