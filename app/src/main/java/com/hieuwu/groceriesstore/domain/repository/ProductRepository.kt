@@ -1,9 +1,7 @@
 package com.hieuwu.groceriesstore.domain.repository
 
 import androidx.lifecycle.LiveData
-import com.hieuwu.groceriesstore.data.entities.Product
 import com.hieuwu.groceriesstore.domain.models.ProductModel
-import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
     val products: LiveData<List<ProductModel>>
