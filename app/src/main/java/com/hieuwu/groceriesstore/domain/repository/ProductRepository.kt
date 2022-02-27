@@ -12,7 +12,6 @@ interface ProductRepository {
     fun getAllProducts(): LiveData<List<ProductModel>>
     suspend fun getAllProductsByCategory(categoryId: String):LiveData<List<ProductModel>>
     suspend fun getFromServer()
-    suspend fun updateLineItem(lineItem: LineItem)
     suspend fun updateLineItemQuantityById(quantity: Int, id: Long)
     suspend fun removeLineItemById(id: Long)
     fun searchProductsListByName(name: String?) : LiveData<List<ProductModel>>
