@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
@@ -48,8 +49,8 @@ class ExploreViewModel @Inject constructor(
         _navigateToSelectedProperty.value = null
     }
 
-    private var _currentCart: MutableLiveData<Order> =
-        orderRepository.getCart(OrderStatus.IN_CART).asLiveData() as MutableLiveData<Order>
+    private var _currentCart: MutableLiveData<OrderModel> =
+        orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
 
     fun addToCart(product: ProductModel) {
         if (_currentCart.value != null) {
