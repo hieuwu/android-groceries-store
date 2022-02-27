@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.hieuwu.groceriesstore.data.network.Api
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
@@ -21,8 +22,8 @@ class ShopViewModel @Inject constructor(
     val productList: LiveData<List<ProductModel>>
         get() = _productList
 
-    var currentCart: MutableLiveData<Order> =
-        orderRepository.getCart(OrderStatus.IN_CART).asLiveData() as MutableLiveData<Order>
+    var currentCart: MutableLiveData<OrderModel> =
+        orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
 
     private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
     val navigateToSelectedProperty: LiveData<ProductModel?>
