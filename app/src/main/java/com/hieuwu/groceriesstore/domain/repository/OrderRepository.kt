@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
 interface OrderRepository {
     suspend fun createOrUpdate(order: Order)
     suspend fun addLineItem(lineItem: LineItem)
-    fun getOrderInCart(status: OrderStatus): Flow<Order>
     fun getOneOrderByStatus(status: OrderStatus): LiveData<OrderModel>
     suspend fun sendOrderToServer(order: OrderModel): Boolean
 }

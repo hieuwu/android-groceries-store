@@ -38,8 +38,6 @@ class OrderRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getOrderInCart(status: OrderStatus) = orderDao.getOrderInCart(status.value)
-
     override fun getOneOrderByStatus(status: OrderStatus) =
         Transformations.map(orderDao.getCartWithLineItems(status.value).asLiveData()) {
             it.asDomainModel()
