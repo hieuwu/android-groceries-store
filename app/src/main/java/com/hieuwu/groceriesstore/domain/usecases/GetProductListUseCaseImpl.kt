@@ -1,4 +1,4 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-class GetProductListUseCaseImpl {
+class GetProductListUseCaseImpl : GetProductDetailUseCase {
 }
