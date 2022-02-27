@@ -23,12 +23,9 @@ class ProductDetailViewModel @Inject constructor(
     val product = productRepository.getProductById(id).asLiveData()
     val hasCart = orderRepository.hasCart()?.asLiveData()
 
-    private var _currentCart: MutableLiveData<OrderModel>? = null
+    var currentCart: MutableLiveData<OrderModel> =
+        orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
 
-
-    init {
-        _currentCart = orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
-    }
     private var _qty: Int = 1
     var qty: Int
         @Bindable
@@ -46,9 +43,9 @@ class ProductDetailViewModel @Inject constructor(
 
     fun addToCart() {
         val subtotal = product.value?.price?.times(qty) ?: 0.0
-        if (_currentCart?.value != null) {
+        if (currentCart?.value != null) {
             //Add to cart
-            val cartId = _currentCart?.value!!.id
+            val cartId = currentCart?.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
                     product.value!!.id, cartId, _qty, subtotal

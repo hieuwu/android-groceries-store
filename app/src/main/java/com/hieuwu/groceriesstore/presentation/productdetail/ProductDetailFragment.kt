@@ -52,6 +52,8 @@ class ProductDetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        //Todo: Thí code is a trick for the live data in VM, should be removed
+        viewModel.currentCart.observe(viewLifecycleOwner, {})
         viewModel.showSnackBarEvent.observe(viewLifecycleOwner, {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
