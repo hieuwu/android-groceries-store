@@ -20,7 +20,7 @@ class RefreshDatabaseWork(appContext: Context, params: WorkerParameters) :
     override suspend fun doWork(): Result {
         return try {
             Timber.d("Refreshing database")
-            productRepository.getFromServer()
+            productRepository.refreshDatabase()
             categoryRepository.getFromServer()
             Result.success()
         } catch (e: Exception) {
