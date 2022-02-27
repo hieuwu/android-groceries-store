@@ -8,14 +8,12 @@ import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.OrderDao
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
-import com.hieuwu.groceriesstore.data.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.data.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -28,11 +26,7 @@ class OrderRepositoryImpl @Inject constructor(
     private val lineItemDao: LineItemDao
 ) : OrderRepository {
 
-    override fun hasCart(): Flow<Boolean> {
-        return orderDao.isCartExisted(OrderStatus.IN_CART.value)
-    }
-
-    override suspend fun insert(order: Order) {
+    override suspend fun createOrUpdate(order: Order) {
         withContext(Dispatchers.IO) {
             orderDao.insert(order)
         }
@@ -44,20 +38,12 @@ class OrderRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getOrderById(id: String): OrderWithLineItems {
-        return orderDao.getById(id)
-    }
-
     override fun getOrderInCart(status: OrderStatus) = orderDao.getOrderInCart(status.value)
-
-
-    override fun getCurrentCartId(status: OrderStatus) = orderDao.getCurrentCartId(status.value)
 
     override fun getOneOrderByStatus(status: OrderStatus) =
         Transformations.map(orderDao.getCartWithLineItems(status.value).asLiveData()) {
             it.asDomainModel()
         }
-
 
     override suspend fun sendOrderToServer(order: OrderModel): Boolean {
         val orderMap = convertOrderEntityToDocument(order)
@@ -77,6 +63,4 @@ class OrderRepositoryImpl @Inject constructor(
         }
         return isSuccess
     }
-
-
 }
