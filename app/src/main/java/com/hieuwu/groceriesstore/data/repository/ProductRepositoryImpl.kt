@@ -58,10 +58,6 @@ class ProductRepositoryImpl @Inject constructor(
         lineItemDao.updateQuantityById(quantity, id)
     }
 
-    override suspend fun removeLineItem(lineItem: LineItem) {
-        lineItemDao.remove(lineItem)
-    }
-
     override suspend fun removeLineItemById(id: Long) {
         lineItemDao.removeLineItemById(id)
 
@@ -71,11 +67,6 @@ class ProductRepositoryImpl @Inject constructor(
         Transformations.map(productDao.searchProductByName(name).asLiveData()) {
             it.asDomainModel()
         }
-
-    override suspend fun hasProduct(): Boolean {
-        val product = productDao.hasProduct()
-        return product != null
-    }
 
     override fun getAllProducts() = Transformations.map(productDao.getAll().asLiveData()) {
         it.asDomainModel()
