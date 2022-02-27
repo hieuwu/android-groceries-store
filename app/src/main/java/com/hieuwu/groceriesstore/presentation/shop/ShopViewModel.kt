@@ -51,7 +51,7 @@ class ShopViewModel @Inject constructor(
             val id = UUID.randomUUID().toString()
             val newOrder = Order(id, OrderStatus.IN_CART.value, "")
             viewModelScope.launch {
-                orderRepository.insert(newOrder)
+                orderRepository.createOrUpdate(newOrder)
                 val lineItem = LineItem(
                     product.id, id, 1, product.price!!
                 )

@@ -21,7 +21,6 @@ class ProductDetailViewModel @Inject constructor(
 ) : ObservableViewModel() {
 
     val product = productRepository.getProductById(id).asLiveData()
-    val hasCart = orderRepository.hasCart()?.asLiveData()
 
     var currentCart: MutableLiveData<OrderModel> =
         orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
@@ -56,7 +55,7 @@ class ProductDetailViewModel @Inject constructor(
             val id = UUID.randomUUID().toString()
             val newOrder = Order(id, OrderStatus.IN_CART.value,"")
             viewModelScope.launch {
-                orderRepository.insert(newOrder)
+                orderRepository.createOrUpdate(newOrder)
                 val lineItem = LineItem(
                     product.value!!.id, id, _qty, subtotal
                 )
