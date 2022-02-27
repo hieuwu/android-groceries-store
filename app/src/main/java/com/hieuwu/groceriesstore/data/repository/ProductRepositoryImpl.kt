@@ -3,6 +3,7 @@ package com.hieuwu.groceriesstore.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
@@ -33,7 +34,7 @@ class ProductRepositoryImpl @Inject constructor(
             it.asDomainModel()
         }
 
-    override suspend fun getFromServer() {
+    override suspend fun refreshDatabase() {
         val fireStore = Firebase.firestore
         val productList = mutableListOf<Product>()
         fireStore.collection(CollectionNames.products).get().addOnSuccessListener { result ->
@@ -72,6 +73,8 @@ class ProductRepositoryImpl @Inject constructor(
             it.asDomainModel()
         }
 
-    override fun getProductById(productId: String) = productDao.getById(productId)
-
+    override fun getProductById(productId: String) =
+        Transformations.map(productDao.getById(productId).asLiveData()) {
+            it.asDomainModel()
+        }
 }

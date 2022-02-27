@@ -35,13 +35,17 @@ data class Product(
 
 fun List<Product>.asDomainModel(): List<ProductModel> {
     return map {
-        ProductModel(
-            id = it.id,
-            name = it.name,
-            description = it.description,
-            price = it.price,
-            image = it.image,
-            nutrition = it.nutrition
-        )
+        it.asDomainModel()
     }
+}
+
+fun Product.asDomainModel(): ProductModel {
+    return ProductModel(
+        id = this.id,
+        name = this.name,
+        description = this.description,
+        price = this.price,
+        image = this.image,
+        nutrition = this.nutrition
+    )
 }
