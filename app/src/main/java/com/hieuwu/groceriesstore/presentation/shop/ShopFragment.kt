@@ -16,7 +16,6 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
-import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
@@ -32,7 +31,6 @@ class ShopFragment : Fragment() {
     lateinit var orderRepository: OrderRepository
 
 
-    @ProductRepo
     @Inject
     lateinit var productRepository: ProductRepository
 
