@@ -10,7 +10,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
-import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
@@ -24,7 +23,6 @@ import javax.inject.Inject
 class CartFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCartBinding
 
-    @ProductRepo
     @Inject
     lateinit var productRepository: ProductRepository
 
