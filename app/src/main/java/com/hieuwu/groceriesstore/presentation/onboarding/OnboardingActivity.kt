@@ -11,7 +11,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.hieuwu.groceriesstore.MainActivity
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
-import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
@@ -29,7 +28,6 @@ class OnboardingActivity : AppCompatActivity() {
     @Inject
     lateinit var recipeRepository: RecipeRepository
 
-    @ProductRepo
     @Inject
     lateinit var productRepository: ProductRepository
 
