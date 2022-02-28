@@ -12,9 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductDetailBinding
-import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,9 +23,8 @@ class ProductDetailFragment : Fragment() {
     private lateinit var binding: FragmentProductDetailBinding
 
 
-    @ProductRepo
     @Inject
-    lateinit var productRepository: ProductRepository
+    lateinit var getProductDetailUseCase: GetProductDetailUseCase
 
     @Inject
     lateinit var orderRepository: OrderRepository
@@ -44,7 +42,7 @@ class ProductDetailFragment : Fragment() {
             )
 
         val viewModelFactory =
-            ProductDetailViewModelFactory(args.id, productRepository, orderRepository)
+            ProductDetailViewModelFactory(args.id, getProductDetailUseCase, orderRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductDetailViewModel::class.java)
 
