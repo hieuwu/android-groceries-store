@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
-import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
@@ -28,7 +27,6 @@ class ExploreFragment : Fragment() {
 
     private lateinit var binding: FragmentExploreBinding
 
-    @ProductRepo
     @Inject
     lateinit var productRepository: ProductRepository
 
