@@ -8,6 +8,7 @@ import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import kotlinx.coroutines.launch
@@ -16,11 +17,11 @@ import javax.inject.Inject
 
 class ProductDetailViewModel @Inject constructor(
     id: String,
-    private val productRepository: ProductRepository,
+    private val getProductDetailUseCase: GetProductDetailUseCase,
     private val orderRepository: OrderRepository
 ) : ObservableViewModel() {
 
-    val product = productRepository.getProductById(id)
+    val product = getProductDetailUseCase.getProductDetail(id)
 
     var currentCart: MutableLiveData<OrderModel> =
         orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
