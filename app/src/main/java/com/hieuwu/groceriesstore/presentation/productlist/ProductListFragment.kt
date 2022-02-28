@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductListBinding
-import com.hieuwu.groceriesstore.di.ProductRepo
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
@@ -25,7 +24,6 @@ class ProductListFragment : Fragment() {
     @Inject
     lateinit var orderRepository: OrderRepository
 
-    @ProductRepo
     @Inject
     lateinit var productRepository: ProductRepository
     override fun onCreateView(
