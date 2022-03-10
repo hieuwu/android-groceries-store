@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.data.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import com.google.firebase.firestore.ktx.firestore
@@ -38,9 +39,9 @@ class OrderRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getOneOrderByStatus(status: OrderStatus) =
-        Transformations.map(orderDao.getCartWithLineItems(status.value).asLiveData()) {
-            it.asDomainModel()
+    override fun getOneOrderByStatus(status: OrderStatus): LiveData<OrderModel>? =
+         Transformations.map(orderDao.getCartWithLineItems(status.value)?.asLiveData()) {
+            it?.asDomainModel()
         }
 
     override suspend fun sendOrderToServer(order: OrderModel): Boolean {
