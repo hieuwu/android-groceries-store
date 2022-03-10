@@ -1,7 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.shop
 
 import androidx.lifecycle.*
-import com.hieuwu.groceriesstore.data.network.Api
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.OrderModel
@@ -22,8 +21,8 @@ class ShopViewModel @Inject constructor(
     val productList: LiveData<List<ProductModel>>
         get() = _productList
 
-    var currentCart: MutableLiveData<OrderModel> =
-        orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
+    var currentCart: LiveData<OrderModel>? =
+        orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
 
     private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
     val navigateToSelectedProperty: LiveData<ProductModel?>
@@ -38,9 +37,9 @@ class ShopViewModel @Inject constructor(
     }
 
     fun addToCart(product: ProductModel) {
-        if (currentCart.value != null) {
+        if (currentCart?.value != null) {
             //Add to cart
-            val cartId = currentCart.value!!.id
+            val cartId = currentCart?.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
                     product.id, cartId, 1, product.price!!
@@ -58,21 +57,6 @@ class ShopViewModel @Inject constructor(
                 orderRepository.addLineItem(lineItem)
             }
         }
-    }
-
-    private fun getRecipes() {
-        viewModelScope.launch {
-            val getRecipeDeferred = Api.retrofitService.getRecipesList()
-            try {
-                var listResult = getRecipeDeferred.await().recipesList
-            } catch (t: Throwable) {
-                var message = t.message
-            }
-        }
-    }
-
-    init{
-        getRecipes()
     }
 
 }

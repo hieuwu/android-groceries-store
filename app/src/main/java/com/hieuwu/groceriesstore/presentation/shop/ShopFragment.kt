@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.shop
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,16 +38,15 @@ class ShopFragment : Fragment() {
     private lateinit var dots: Array<ImageView>
     private lateinit var binding: FragmentShopBinding
 
-    private val nonactiveDot =
-        ContextCompat.getDrawable(requireContext(), R.drawable.non_active_dot_shape)
-    private val activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)
+    private lateinit var nonActiveDot: Drawable
+    private lateinit var activeDot: Drawable
     private var dotCount: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate<FragmentShopBinding>(
             inflater, R.layout.fragment_shop, container, false
         )
 
@@ -55,12 +55,14 @@ class ShopFragment : Fragment() {
             .get(ShopViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
+        nonActiveDot =
+            ContextCompat.getDrawable(requireContext(), R.drawable.non_active_dot_shape)!!
+        activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)!!
         setObserver()
         setUpRecyclerView()
         drawSliderDotSymbols()
         setEventListener()
-        
+
         return binding.root
     }
 
@@ -71,7 +73,7 @@ class ShopFragment : Fragment() {
         val sliderDotspanel = binding.sliderDots
         dots = Array(dotCount) { ImageView(requireContext()) }
         for (i in 0 until dotCount) {
-            dots[i].setImageDrawable(nonactiveDot)
+            dots[i].setImageDrawable(nonActiveDot)
             val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -87,16 +89,13 @@ class ShopFragment : Fragment() {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-            }
+                positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
                 for (i in 0 until dotCount) {
-                    dots[i].setImageDrawable(nonactiveDot);
+                    dots[i].setImageDrawable(nonActiveDot);
                 }
                 dots[position].setImageDrawable(activeDot);
-
             }
 
             override fun onPageScrollStateChanged(state: Int) {}
@@ -118,7 +117,7 @@ class ShopFragment : Fragment() {
                 viewModel.displayPropertyDetailsComplete()
             }
         }
-        viewModel.currentCart.observe(viewLifecycleOwner) {}
+        viewModel.currentCart?.observe(viewLifecycleOwner) {}
     }
 
     private fun navigateToProductDetail(productId: String) {
@@ -134,8 +133,6 @@ class ShopFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
         binding.exclusiveOfferRecyclerview.adapter =
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
@@ -144,7 +141,7 @@ class ShopFragment : Fragment() {
                 )
             )
 
-        binding.exclusiveOfferRecyclerview.layoutManager = layoutManager
+        binding.exclusiveOfferRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         binding.bestSellingRecyclerview.adapter =
             GridListItemAdapter(
@@ -165,6 +162,6 @@ class ShopFragment : Fragment() {
                 )
             )
 
-        binding.recommendedRecyclerview.layoutManager = layoutManager
+        binding.recommendedRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 }
