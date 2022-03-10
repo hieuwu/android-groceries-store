@@ -15,7 +15,7 @@
 ![Firebase](https://img.shields.io/badge/Firebase-b0b0b0.svg?&style=for-the-badge&logo=firebase&logoColor=FFCA28)
 ![Github Action](https://img.shields.io/badge/Github%20Actions-424a53.svg?&style=for-the-badge&logo=githubactions&logoColor=white)
 
-# UI Design & Architecture
+## UI Design & Architecture
 - [Groceries Store Design](https://www.figma.com/file/exhlJtkLIcHvfxd8SDja3T/Online-Groceries-App-UI-(Community)?node-id=1%3A2)
 - <a href='https://www.freepik.com/vectors/background'>Background vector created by freepik - www.freepik.com</a>
 - <a href='https://www.freepik.com/vectors/food'>Food vector created by terdpongvector - www.freepik.com</a>
@@ -25,11 +25,11 @@ Next Step is to follow Clean Architecture:
 - [Clean Architecture](https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029)
 - MVVM Architecture (View - DataBinding - ViewModel - Model)
 
-# MAD Scorecard:
+## MAD Scorecard:
 
 ![Caption](https://i.imgur.com/omCNl7x.png)
 
-# Libraries
+## Libraries
 - [Glide](https://github.com/bumptech/glide) - Loading images.
 - [Timber](https://github.com/JakeWharton/timber) - Logging.
 - [Retrofit2](https://github.com/square/retrofit) - Construct the REST APIs and paging network data.
