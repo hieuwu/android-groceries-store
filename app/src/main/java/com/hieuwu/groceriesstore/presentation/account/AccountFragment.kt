@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentAccountBinding
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.presentation.updateprofile.UpdateProfileViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -19,9 +20,10 @@ import javax.inject.Inject
 class AccountFragment : Fragment() {
 
     private lateinit var binding: FragmentAccountBinding
+    private lateinit var viewModel: AccountViewModel
 
     @Inject
-    lateinit var userRepository: UserRepository
+    lateinit var authenticateUserUseCase: AuthenticateUserUseCase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,22 +33,30 @@ class AccountFragment : Fragment() {
             inflater, R.layout.fragment_account, container, false
         )
 
-        val viewModelFactory = UpdateProfileViewModelFactory(userRepository)
-        val viewModel =
+        val viewModelFactory = UpdateProfileViewModelFactory(authenticateUserUseCase)
+        viewModel =
             ViewModelProvider(this, viewModelFactory).get(AccountViewModel::class.java)
         binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
-        viewModel.user.observe(viewLifecycleOwner, {
+        setObserver()
+        setEventListener()
+
+        return binding.root
+    }
+
+    private fun setObserver() {
+        viewModel.user.observe(viewLifecycleOwner) {
             if (it == null) {
                 binding.profileLayout.visibility = View.GONE
                 binding.signoutButton.visibility = View.GONE
                 binding.animationView.visibility = View.VISIBLE
-
-            }else {
+            } else {
                 binding.animationView.visibility = View.GONE
             }
-        })
+        }
+    }
+
+    private fun setEventListener() {
         binding.profileLayout.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_updateProfileFragment)
         }
@@ -54,8 +64,6 @@ class AccountFragment : Fragment() {
         binding.signoutButton.setOnClickListener {
             viewModel.signOut()
         }
-
-        return binding.root
     }
 
 }
