@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentUpdateProfileBinding
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,9 +19,10 @@ import javax.inject.Inject
 class UpdateProfileFragment : Fragment() {
 
     lateinit var binding: FragmentUpdateProfileBinding;
+    lateinit var viewModel: UpdateProfileViewModel
 
     @Inject
-    lateinit var userRepository: UserRepository
+    lateinit var authenticateUserUseCase: AuthenticateUserUseCase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,42 +36,21 @@ class UpdateProfileFragment : Fragment() {
         )
         binding.lifecycleOwner = this
 
-        val viewModelFactory = UpdateProfileViewModelFactory(userRepository)
-        val viewModel =
+        val viewModelFactory = UpdateProfileViewModelFactory(authenticateUserUseCase)
+        viewModel =
             ViewModelProvider(this, viewModelFactory).get(UpdateProfileViewModel::class.java)
         binding.viewModel = viewModel
 
+        setObserver()
+        setEventListener()
+
+        return binding.root
+    }
+
+    private fun setEventListener() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-
-        viewModel.isDoneUpdate.observe(viewLifecycleOwner, {
-            if (it != null) {
-                if (it == true) {
-                    Snackbar.make(
-                        requireActivity().findViewById(android.R.id.content),
-                        "Update profile successfully!",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-                else {
-                    Snackbar.make(
-                        requireActivity().findViewById(android.R.id.content),
-                        "Update profile failed!",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
-
-        viewModel.user.observe(viewLifecycleOwner, {
-            if (it != null) {
-                viewModel.email = it.email
-                viewModel.name = it.name
-                viewModel.phoneNumber = it.phone
-                viewModel.address = it.address
-            }
-        })
 
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
@@ -82,8 +62,35 @@ class UpdateProfileFragment : Fragment() {
                 else -> false
             }
         }
-
-        return binding.root
     }
 
+    private fun showSnackBar(message: String) {
+        Snackbar.make(
+            requireActivity().findViewById(android.R.id.content),
+            message,
+            Snackbar.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun setObserver() {
+        viewModel.isDoneUpdate.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (it == true) {
+                    R.string.add_to_basket
+                    showSnackBar("Update profile successfully!")
+                } else {
+                    showSnackBar("Update profile failed!")
+                }
+            }
+        }
+
+        viewModel.user.observe(viewLifecycleOwner) {
+            if (it != null) {
+                viewModel.email = it.email
+                viewModel.name = it.name
+                viewModel.phoneNumber = it.phone
+                viewModel.address = it.address
+            }
+        }
+    }
 }

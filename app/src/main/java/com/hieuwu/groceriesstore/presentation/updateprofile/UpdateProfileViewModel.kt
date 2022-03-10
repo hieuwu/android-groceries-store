@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import kotlinx.coroutines.launch
@@ -69,7 +68,7 @@ class UpdateProfileViewModel @Inject constructor(private val authenticateUserUse
         get() = _isDoneUpdate
 
     fun updateUserProfile() {
-        var id = _user.value!!.id
+        val id = _user.value!!.id
         try {
             viewModelScope.launch {
                 authenticateUserUseCase.updateUserProfile(id, _name!!, _email!!, _phoneNumber!!, _address!!)
