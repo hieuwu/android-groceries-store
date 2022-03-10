@@ -28,7 +28,6 @@ class ProductRepositoryImpl @Inject constructor(
     private val lineItemDao: LineItemDao
 ) : ProductRepository {
 
-
     override val products: LiveData<List<ProductModel>> =
         Transformations.map(productDao.getAll().asLiveData()) {
             it.asDomainModel()
