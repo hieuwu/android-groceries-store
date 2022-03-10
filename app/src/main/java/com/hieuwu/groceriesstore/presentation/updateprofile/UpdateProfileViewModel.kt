@@ -7,17 +7,19 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
-class UpdateProfileViewModel @Inject constructor(private val userRepository: UserRepository) :
+class UpdateProfileViewModel @Inject constructor(private val authenticateUserUseCase: AuthenticateUserUseCase) :
     ObservableViewModel() {
     private val _user =
-        userRepository.getCurrentUser() as MutableLiveData<UserModel>
+        authenticateUserUseCase.getCurrentUser() as MutableLiveData<UserModel?>
     val user: LiveData<UserModel?>
         get() = _user
+
     private var _name: String? = null
     var name: String?
         @Bindable
@@ -70,7 +72,7 @@ class UpdateProfileViewModel @Inject constructor(private val userRepository: Use
         var id = _user.value!!.id
         try {
             viewModelScope.launch {
-                userRepository.updateUserProfile(id, _name!!, _email!!, _phoneNumber!!, _address!!)
+                authenticateUserUseCase.updateUserProfile(id, _name!!, _email!!, _phoneNumber!!, _address!!)
             }
             _isDoneUpdate.value = true
         } catch (e: Exception) {
