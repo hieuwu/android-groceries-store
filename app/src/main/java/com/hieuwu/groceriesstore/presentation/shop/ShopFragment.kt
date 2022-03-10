@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
@@ -25,69 +26,70 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ShopFragment : Fragment() {
-    private lateinit var binding: FragmentShopBinding
 
     @Inject
     lateinit var orderRepository: OrderRepository
 
-
     @Inject
     lateinit var productRepository: ProductRepository
+
+    private lateinit var viewModel: ShopViewModel
+    private lateinit var dots: Array<ImageView>
+    private lateinit var binding: FragmentShopBinding
+
+    private val nonactiveDot =
+        ContextCompat.getDrawable(requireContext(), R.drawable.non_active_dot_shape)
+    private val activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)
+    private var dotCount: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate<FragmentShopBinding>(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_shop, container, false
         )
 
         val viewModelFactory = ShopViewModelFactory(productRepository, orderRepository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ShopViewModel::class.java)
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        setUpRecyclerView(viewModel)
-        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
-            it?.let {
-                val direction = ShopFragmentDirections.actionShopFragmentToProductDetailFragment(
-                    it.id
-                )
-                findNavController().navigate(direction)
-                viewModel.displayPropertyDetailsComplete()
-            }
-        })
+        setObserver()
+        setUpRecyclerView()
+        drawSliderDotSymbols()
+        setEventListener()
+        
+        return binding.root
+    }
 
-        val nonactiveDot =
-            ContextCompat.getDrawable(requireContext(), R.drawable.non_active_dot_shape)
-        val activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)
-
+    private fun drawSliderDotSymbols() {
         val viewPagerAdapter = ViewPagerAdapter(requireContext())
         binding.viewPager.adapter = viewPagerAdapter
-
-        val dotCount = viewPagerAdapter.count
+        dotCount = viewPagerAdapter.count
         val sliderDotspanel = binding.sliderDots
-        val dots: Array<ImageView> = Array(dotCount){ ImageView(requireContext())}
+        dots = Array(dotCount) { ImageView(requireContext()) }
         for (i in 0 until dotCount) {
             dots[i].setImageDrawable(nonactiveDot)
             val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-
             params.setMargins(8, 0, 8, 0);
-
             sliderDotspanel.addView(dots[i], params);
         }
         dots[0].setImageDrawable(activeDot)
-        binding.viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
+    }
+
+    private fun setEventListener() {
+        binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-            ) {}
+            ) {
+            }
 
             override fun onPageSelected(position: Int) {
                 for (i in 0 until dotCount) {
@@ -99,12 +101,6 @@ class ShopFragment : Fragment() {
 
             override fun onPageScrollStateChanged(state: Int) {}
         })
-
-
-
-        viewModel.currentCart.observe(viewLifecycleOwner, {})
-
-        return binding.root
     }
 
     private fun showSnackBar(productName: String?) {
@@ -115,31 +111,46 @@ class ShopFragment : Fragment() {
         ).show()
     }
 
-    private fun setUpRecyclerView(viewModel: ShopViewModel) {
+    private fun setObserver() {
+        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner) {
+            it?.let {
+                navigateToProductDetail(it.id)
+                viewModel.displayPropertyDetailsComplete()
+            }
+        }
+        viewModel.currentCart.observe(viewLifecycleOwner) {}
+    }
+
+    private fun navigateToProductDetail(productId: String) {
+        val direction = ShopFragmentDirections.actionShopFragmentToProductDetailFragment(
+            productId
+        )
+        findNavController().navigate(direction)
+    }
+
+    private fun addToCart(product: ProductModel) {
+        viewModel.addToCart(product)
+        showSnackBar(product.name)
+    }
+
+    private fun setUpRecyclerView() {
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
         binding.exclusiveOfferRecyclerview.adapter =
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
-                    clickListener = {
-                        viewModel.displayPropertyDetails(it)
-                    },
-                    addToCartListener = {
-                        viewModel.addToCart(it)
-                        showSnackBar(it.name)
-                    },
+                    clickListener = { viewModel.displayPropertyDetails(it) },
+                    addToCartListener = { addToCart(it) },
                 )
             )
 
-        binding.exclusiveOfferRecyclerview.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.exclusiveOfferRecyclerview.layoutManager = layoutManager
 
         binding.bestSellingRecyclerview.adapter =
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
-                    addToCartListener = {
-                        viewModel.addToCart(it)
-                        showSnackBar(it.name)
-                    },
+                    addToCartListener = { addToCart(it) },
                 )
             )
 
@@ -150,14 +161,10 @@ class ShopFragment : Fragment() {
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
-                    addToCartListener = {
-                        viewModel.addToCart(it)
-                        showSnackBar(it.name)
-                    },
+                    addToCartListener = { addToCart(it) },
                 )
             )
 
-        binding.recommendedRecyclerview.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.recommendedRecyclerview.layoutManager = layoutManager
     }
 }
