@@ -1,8 +1,6 @@
-# android-groceries-store
-[![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
- 
+<h1 align="center"> 🚀 Groceries Store</h1>
 
-[Download on Google Play Store](https://play.google.com/store/apps/details?id=com.hieuwu.groceriesstore)
+ [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
 
 ![Groceries Store](https://i.imgur.com/Wn6ZcZl.jpeg)
 
@@ -14,6 +12,8 @@
 ![SQLite](https://img.shields.io/badge/SQLite-003B57.svg?&style=for-the-badge&logo=sqlite&logoColor=0772de)
 ![Firebase](https://img.shields.io/badge/Firebase-b0b0b0.svg?&style=for-the-badge&logo=firebase&logoColor=FFCA28)
 ![Github Action](https://img.shields.io/badge/Github%20Actions-424a53.svg?&style=for-the-badge&logo=githubactions&logoColor=white)
+
+[Download on Google Play Store](https://play.google.com/store/apps/details?id=com.hieuwu.groceriesstore)
 
 ## UI Design & Architecture
 - [Groceries Store Design](https://www.figma.com/file/exhlJtkLIcHvfxd8SDja3T/Online-Groceries-App-UI-(Community)?node-id=1%3A2)
