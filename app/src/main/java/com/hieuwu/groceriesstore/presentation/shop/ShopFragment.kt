@@ -18,8 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
 import com.hieuwu.groceriesstore.domain.models.ProductModel
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,12 +26,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ShopFragment : Fragment() {
-
     @Inject
-    lateinit var orderRepository: OrderRepository
-
-    @Inject
-    lateinit var productRepository: ProductRepository
+    lateinit var getProductListUseCase: GetProductListUseCase
 
     private lateinit var viewModel: ShopViewModel
     private lateinit var dots: Array<ImageView>
@@ -50,7 +45,7 @@ class ShopFragment : Fragment() {
             inflater, R.layout.fragment_shop, container, false
         )
 
-        val viewModelFactory = ShopViewModelFactory(productRepository, orderRepository)
+        val viewModelFactory = ShopViewModelFactory(getProductListUseCase)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ShopViewModel::class.java)
         binding.viewModel = viewModel

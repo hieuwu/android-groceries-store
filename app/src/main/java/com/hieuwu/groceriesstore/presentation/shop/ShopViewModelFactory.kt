@@ -2,17 +2,15 @@ package com.hieuwu.groceriesstore.presentation.shop
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 
 class ShopViewModelFactory(
-    private val productRepo: ProductRepository,
-    private val orderRepo: OrderRepository
+    private val getProductListUseCase: GetProductListUseCase
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ShopViewModel::class.java)) {
-            return ShopViewModel(productRepo, orderRepo) as T
+            return ShopViewModel(getProductListUseCase) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
