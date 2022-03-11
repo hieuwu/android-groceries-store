@@ -24,12 +24,12 @@ Groceries Store is a project to help people order grocery online. The main purpo
 <img src="https://github.com/hieuwu/hieuwu.github.io/blob/master/assets/img/real-estate.gif" align="left" height="280px">
 
 
-Design
+**Design**
 - [Groceries Store Design](https://www.figma.com/file/exhlJtkLIcHvfxd8SDja3T/Online-Groceries-App-UI-(Community)?node-id=1%3A2)
 - <a href='https://www.freepik.com/vectors/background'>Background vector created by freepik - www.freepik.com</a>
 - <a href='https://www.freepik.com/vectors/food'>Food vector created by terdpongvector - www.freepik.com</a>
 
-Architecture:
+**Architecture**
 - [Use Case](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
 - [Clean Architecture](https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029)
 - MVVM Architecture (View - DataBinding - ViewModel - Model)
