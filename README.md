@@ -32,8 +32,7 @@ Groceries Store is a project to help people order grocery online. The main purpo
 **Architecture**
 - [Use Case](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
 - [Clean Architecture](https://medium.com/@dmilicic/a-detailed-guide-on-developing-android-apps-using-the-clean-architecture-pattern-d38d71e94029)
-- MVVM Architecture (View - DataBinding - ViewModel - Model)
-
+- [MVVM Architecture](https://medium.com/swlh/understanding-mvvm-architecture-in-android-aa66f7e1a70b)
 
 
 ## MAD Scorecard:
