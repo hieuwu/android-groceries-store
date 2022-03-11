@@ -23,4 +23,9 @@ abstract class UseCaseModule {
     @Singleton
     @Binds
     abstract fun bindAuthenticateUserUseCase(impl: AuthenticateUserUseCaseImpl): AuthenticateUserUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindUpdateCartItemUseCase(impl: UpdateCartItemUseCaseImpl): UpdateCartItemUseCase
+
 }
