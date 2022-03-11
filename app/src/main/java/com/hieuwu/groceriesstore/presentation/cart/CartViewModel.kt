@@ -5,10 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import com.hieuwu.groceriesstore.utilities.OrderStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,12 +14,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class CartViewModel @Inject constructor(
-    private val productRepository: ProductRepository,
-    private val orderRepository: OrderRepository
+    private val updateCartItemUseCase: UpdateCartItemUseCase
 ) : ObservableViewModel() {
 
     private var _order: MutableLiveData<OrderModel> =
-        orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
+        updateCartItemUseCase.getCurrentCart() as MutableLiveData<OrderModel>
     val order: LiveData<OrderModel>
         get() = _order
 
@@ -50,13 +47,13 @@ class CartViewModel @Inject constructor(
 
     private suspend fun updateLineItem(lineItemModel: LineItemModel) {
         withContext(Dispatchers.IO) {
-            productRepository.updateLineItemQuantityById(lineItemModel.quantity!!, lineItemModel.id!!)
+            updateCartItemUseCase.updateLineItem(lineItemModel)
         }
     }
 
     private suspend fun removeLineItem(lineItemModel: LineItemModel) {
         withContext(Dispatchers.IO) {
-            productRepository.removeLineItemById(lineItemModel.id!!)
+            updateCartItemUseCase.removeLineItem(lineItemModel)
         }
     }
 }

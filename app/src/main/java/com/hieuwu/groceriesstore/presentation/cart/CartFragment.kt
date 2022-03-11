@@ -7,12 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
-import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.SwipeToDeleteCallback
 import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
@@ -22,12 +19,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CartFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCartBinding
-
+    private lateinit var viewModel: CartViewModel
     @Inject
-    lateinit var productRepository: ProductRepository
-
-    @Inject
-    lateinit var orderRepository: OrderRepository
+    lateinit var updateCartItemUseCase: UpdateCartItemUseCase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,13 +30,19 @@ class CartFragment : BottomSheetDialogFragment() {
         binding = DataBindingUtil.inflate<FragmentCartBinding>(
             inflater, R.layout.fragment_cart, container, false
         )
-
-        val viewModelFactory = CartViewModelFactory(productRepository, orderRepository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
+        val viewModelFactory = CartViewModelFactory(updateCartItemUseCase)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(CartViewModel::class.java)
         binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
+
+        setEventListener()
+        setObserver()
+        registerForContextMenu(binding.cartDetailRecyclerview)
+        return binding.root
+    }
+
+    private fun setEventListener() {
         val adapter = LineListItemAdapter(
             LineListItemAdapter.OnClickListener(
                 minusListener = { viewModel.decreaseQty(it) },
@@ -57,22 +57,6 @@ class CartFragment : BottomSheetDialogFragment() {
         itemTouchHelper.attachToRecyclerView(binding.cartDetailRecyclerview);
         binding.cartDetailRecyclerview.adapter = adapter
 
-        viewModel.order.observe(viewLifecycleOwner, {
-            if (it != null) {
-                if (it.lineItemList.size > 0) {
-                    binding.cartEmptyLayout.visibility = View.GONE
-                    binding.cartDetailLayout.visibility = View.VISIBLE
-                } else {
-                    binding.cartEmptyLayout.visibility = View.VISIBLE
-                    binding.cartDetailLayout.visibility = View.GONE
-                }
-            }
-            else {
-                binding.cartEmptyLayout.visibility = View.VISIBLE
-                binding.cartDetailLayout.visibility = View.GONE
-            }
-        })
-
         binding.checkoutButton.setOnClickListener {
             val direction =
                 ShopFragmentDirections.actionShopFragmentToCheckOutFragment(
@@ -82,8 +66,22 @@ class CartFragment : BottomSheetDialogFragment() {
             dismiss();
         }
 
-        registerForContextMenu(binding.cartDetailRecyclerview)
-        return binding.root
+    }
+    private fun setObserver() {
+        viewModel.order.observe(viewLifecycleOwner) {
+            if (it != null) {
+                if (it.lineItemList.size > 0) {
+                    binding.cartEmptyLayout.visibility = View.GONE
+                    binding.cartDetailLayout.visibility = View.VISIBLE
+                } else {
+                    binding.cartEmptyLayout.visibility = View.VISIBLE
+                    binding.cartDetailLayout.visibility = View.GONE
+                }
+            } else {
+                binding.cartEmptyLayout.visibility = View.VISIBLE
+                binding.cartDetailLayout.visibility = View.GONE
+            }
+        }
     }
 
     override fun onCreateContextMenu(
@@ -95,14 +93,5 @@ class CartFragment : BottomSheetDialogFragment() {
         val inflater = MenuInflater(context)
         inflater.inflate(R.menu.line_item_context_menu, menu)
     }
-
-    fun showSnackBar(lineItemModel: ProductAndLineItem) {
-        Snackbar.make(
-            dialog?.window?.decorView!!,
-            "Removed " + lineItemModel.product?.name,
-            Snackbar.LENGTH_SHORT
-        ).show()
-    }
-
 }
 
