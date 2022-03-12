@@ -23,6 +23,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CheckOutFragment : Fragment() {
     private lateinit var binding: FragmentCheckOutBinding
+    private lateinit var viewModel: CheckOutViewModel
 
     @Inject
     lateinit var createOrderUseCase: CreateOrderUseCase
@@ -39,40 +40,57 @@ class CheckOutFragment : Fragment() {
             false
         )
 
-        val args = CheckOutFragmentArgs.fromBundle(
-            arguments as Bundle
-        )
+        val args = CheckOutFragmentArgs.fromBundle(arguments as Bundle)
 
         val viewModelFactory =
             CheckOutViewModelFactory(args.orderId, createOrderUseCase)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(CheckOutViewModel::class.java)
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         val adapter = LineListItemAdapter(
-            LineListItemAdapter.OnClickListener(
-                minusListener = {},
-                plusListener = {},
-                removeListener = {}),
+            LineListItemAdapter.OnClickListener(),
             requireContext()
         )
         binding.cartDetailRecyclerview.adapter = adapter
+        setObserver()
+        setEventListener()
 
-        viewModel.order.observe(viewLifecycleOwner, {
+        return binding.root
+    }
+
+    private fun setObserver() {
+        viewModel.order.observe(viewLifecycleOwner) {
             if (it != null) viewModel.sumPrice()
-        })
+        }
 
-        viewModel.totalPrice.observe(viewLifecycleOwner, {})
+        viewModel.totalPrice.observe(viewLifecycleOwner) {}
+        viewModel.isOrderSentSuccessful.observe(viewLifecycleOwner) {
+            if (it) {
+                openSuccessDialog()
+            } else {
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    "Order created failed :(",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
 
+    private fun openSuccessDialog() {
+        val dialog = CheckOutSuccess()
+        dialog.setOnDismissListener { findNavController().navigateUp() }
+        dialog.show(requireActivity().supportFragmentManager, "SUCCESS_DIALOG")
+    }
+
+    private fun setEventListener() {
         binding.deliveryEditBtn.setOnClickListener {
             findNavController().navigate(R.id.action_checkOutFragment_to_deliveryFragment)
         }
 
         binding.confirmOrderBtn.setOnClickListener {
-            //Handle confirm button
-            //If logged in, send data to server
             if (viewModel.user.value != null) {
                 viewModel.sendOrder()
             } else {
@@ -81,24 +99,10 @@ class CheckOutFragment : Fragment() {
             }
         }
 
-        viewModel.isOrderSentSuccessful.observe(viewLifecycleOwner, {
-            if (it) {
-                val dialog = CheckOutSuccess()
-                dialog.setOnDismissListener { findNavController().navigateUp() }
-                dialog.show(requireActivity().supportFragmentManager, "SUCCESS_DIALOG")
-            } else {
-                Snackbar.make(
-                    requireActivity().findViewById(android.R.id.content),
-                    "Order created failed :(",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
-        })
-
         parentFragmentManager.setFragmentResultListener(
             KeyData.RESULT_KEY,
             viewLifecycleOwner
-        ) { requestKey, bundle ->
+        ) { _, bundle ->
             val name = bundle.getString(KeyData.NAME_KEY)
             val phone = bundle.getString(KeyData.PHONE_KEY)
             val street = bundle.getString(KeyData.STREET_KEY)
@@ -106,9 +110,5 @@ class CheckOutFragment : Fragment() {
             val city = bundle.getString(KeyData.CITY_KEY)
             binding.deliveryContent.text = "$name\n$phone\n$street, $ward, $city"
         }
-
-        return binding.root
     }
-
-
 }
