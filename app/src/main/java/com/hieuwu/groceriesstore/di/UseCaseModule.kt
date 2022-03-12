@@ -28,4 +28,8 @@ abstract class UseCaseModule {
     @Binds
     abstract fun bindUpdateCartItemUseCase(impl: UpdateCartItemUseCaseImpl): UpdateCartItemUseCase
 
+    @Singleton
+    @Binds
+    abstract fun bindCreateOrderUseCase(impl: CreateOrderUseCaseImpl): CreateOrderUseCase
+
 }
