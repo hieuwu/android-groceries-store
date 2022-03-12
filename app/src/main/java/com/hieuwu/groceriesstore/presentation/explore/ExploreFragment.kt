@@ -26,6 +26,7 @@ import javax.inject.Inject
 class ExploreFragment : Fragment() {
 
     private lateinit var binding: FragmentExploreBinding
+    private lateinit var viewModel: ExploreViewModel
 
     @Inject
     lateinit var productRepository: ProductRepository
@@ -47,36 +48,53 @@ class ExploreFragment : Fragment() {
         val viewModelFactory =
             ExploreViewModelFactory(categoryRepository, productRepository, orderRepository)
 
-        val viewModel = ViewModelProvider(this, viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ExploreViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         binding.productRecyclerview.adapter = GridListItemAdapter(
-            GridListItemAdapter.OnClickListener(
-                clickListener = {
-                    viewModel.displayPropertyDetails(it)
-                    viewModel.displayPropertyDetailsComplete()
+            createGridListItemEvent()
+        )
+        setObserver()
+        setTextSearchColor()
+        setEventListener()
 
-                },
-                addToCartListener = {
-                    viewModel.addToCart(it)
-                },
-            )
+        binding.categoryRecyclerview.adapter =
+            CategoryItemAdapter(CategoryItemAdapter.OnClickListener {
+                navigateToProductList(it.name!!, it.id)
+            })
+        return binding.root
+    }
+
+    private fun createGridListItemEvent(): GridListItemAdapter.OnClickListener =
+        GridListItemAdapter.OnClickListener(
+            clickListener = {
+                viewModel.displayPropertyDetails(it)
+                viewModel.displayPropertyDetailsComplete()
+            },
+            addToCartListener = {
+                viewModel.addToCart(it)
+            },
         )
 
-        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
+    private fun navigateToProductList(name: String, id: String) {
+        val direction =
+            ExploreFragmentDirections.actionExploreFragmentToProductListFragment(name, id)
+        findNavController().navigate(direction)
+    }
+
+    private fun setObserver() {
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner) {
             if (null != it) {
                 val direction =
-                    ExploreFragmentDirections.actionExploreFragmentToProductDetailFragment(
-                        it.id
-                    )
+                    ExploreFragmentDirections.actionExploreFragmentToProductDetailFragment(it.id)
                 findNavController().navigate(direction)
             }
-        })
+        }
+        viewModel.categories.observe(viewLifecycleOwner) {}
 
-
-        viewModel.productList.observe(viewLifecycleOwner, {
+        viewModel.productList.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
                 Timber.d("Empty")
             } else {
@@ -84,12 +102,16 @@ class ExploreFragment : Fragment() {
                 binding.animationLayout.visibility = View.GONE
                 Timber.d("Has item")
             }
-        })
+        }
+    }
 
+    private fun setTextSearchColor() {
         val searchEditText =
             binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
         searchEditText.setTextColor(Color.WHITE)
+    }
 
+    private fun setEventListener() {
         binding.searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -105,18 +127,23 @@ class ExploreFragment : Fragment() {
                 return true
             }
         })
+        binding.searchView.setOnQueryTextFocusChangeListener { _, _ ->
+            Timber.d("Search focused")
+            //Hide category list
+            //Show search result list with empty list product
+            binding.categoryRecyclerview.visibility = View.GONE
+        }
 
         binding.searchView.setOnQueryTextFocusChangeListener { _, _ ->
             Timber.d("Search focused")
             //Hide category list
             //Show search result list with empty list product
-
             binding.categoryRecyclerview.visibility = View.GONE
-
         }
 
         val closeSearchButton =
             binding.searchView.findViewById<AppCompatImageView>(androidx.appcompat.R.id.search_close_btn)
+
         closeSearchButton.setOnClickListener {
             binding.searchView.onActionViewCollapsed()
             Timber.d("Close search focused")
@@ -128,19 +155,6 @@ class ExploreFragment : Fragment() {
             binding.animationLayout.visibility = View.GONE
 
         }
-
-        viewModel.categories.observe(viewLifecycleOwner, {})
-
-        binding.categoryRecyclerview.adapter =
-            CategoryItemAdapter(CategoryItemAdapter.OnClickListener {
-                val direction =
-                    ExploreFragmentDirections.actionExploreFragmentToProductListFragment(
-                        it.name!!,
-                        it.id
-                    )
-                findNavController().navigate(direction)
-            })
-        return binding.root
     }
 
 }
