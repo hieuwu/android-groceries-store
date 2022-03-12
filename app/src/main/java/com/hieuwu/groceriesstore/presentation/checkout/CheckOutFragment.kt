@@ -12,8 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.presentation.AuthActivity
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.utilities.KeyData
@@ -26,10 +25,7 @@ class CheckOutFragment : Fragment() {
     private lateinit var binding: FragmentCheckOutBinding
 
     @Inject
-    lateinit var orderRepository: OrderRepository
-
-    @Inject
-    lateinit var userRepository: UserRepository
+    lateinit var createOrderUseCase: CreateOrderUseCase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +44,7 @@ class CheckOutFragment : Fragment() {
         )
 
         val viewModelFactory =
-            CheckOutViewModelFactory(args.orderId, orderRepository, userRepository)
+            CheckOutViewModelFactory(args.orderId, createOrderUseCase)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(CheckOutViewModel::class.java)
 

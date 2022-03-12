@@ -5,30 +5,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import com.hieuwu.groceriesstore.utilities.OrderStatus
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
 class CheckOutViewModel @Inject constructor(
     private val orderId: String,
-    val orderRepository: OrderRepository,
-    val userRepository: UserRepository
+    private val createOrderUseCase: CreateOrderUseCase
 ) :
     ObservableViewModel() {
-
-
     private val _user =
-        userRepository.getCurrentUser() as MutableLiveData<UserModel>
+        createOrderUseCase.getCurrentUser() as MutableLiveData<UserModel?>
     val user: LiveData<UserModel?>
         get() = _user
 
-    private var _order = MutableLiveData<OrderModel>()
+    private var _order: MutableLiveData<OrderModel> =
+        createOrderUseCase.getCurrentCart() as MutableLiveData<OrderModel>
     val order: LiveData<OrderModel>
         get() = _order
 
@@ -45,9 +39,9 @@ class CheckOutViewModel @Inject constructor(
     val isOrderSentSuccessful: LiveData<Boolean>
         get() = _isOrderSentSuccessful
 
-    init {
-        getLineItemFromDatabase()
-    }
+//    init {
+//        getLineItemFromDatabase()
+//    }
 
     fun sumPrice() {
         var sum = 0.0
@@ -60,36 +54,24 @@ class CheckOutViewModel @Inject constructor(
         _totalPrice.value = sum
     }
 
-    private fun getLineItemFromDatabase() {
-        viewModelScope.launch {
-            getLineItemFromLocal()
-        }
-    }
-
-    private suspend fun getLineItemFromLocal() {
-        return withContext(Dispatchers.IO) {
-            _order = orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
-             as MutableLiveData<OrderModel>
-        }
-    }
-
     private fun setOrderAddress() {
         _order.value?.address = user.value?.address ?: ""
     }
 
-    private suspend fun sendOrderToServer() {
+//    private suspend fun sendOrderToServer() {
+//        var res = false
+//        withContext(Dispatchers.IO) {
+//            createOrderUseCase.sendOrderToServer(order.value!!)
+//        }
+//        _isOrderSentSuccessful.value = res
+//    }
+
+    fun sendOrder() {
         var res = false
-        withContext(Dispatchers.IO) {
-            res = orderRepository.sendOrderToServer(order.value!!)
+        setOrderAddress()
+        viewModelScope.launch {
+            res = createOrderUseCase.sendOrderToServer(order.value!!)
         }
         _isOrderSentSuccessful.value = res
     }
-
-    fun sendOrder() {
-        setOrderAddress()
-        viewModelScope.launch {
-            sendOrderToServer()
-        }
-    }
-
 }
