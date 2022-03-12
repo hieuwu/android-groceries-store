@@ -64,9 +64,9 @@ class LineListItemAdapter(val onClickListener: OnClickListener, val context: Con
     }
 
     class OnClickListener constructor(
-        var minusListener: (lineItemModel: LineItemModel) -> Unit,
-        var plusListener: (lineItemModel: LineItemModel) -> Unit,
-        var removeListener: (lineItemModel: LineItemModel) -> Unit,
+        var minusListener: (lineItemModel: LineItemModel) -> Unit = {},
+        var plusListener: (lineItemModel: LineItemModel) -> Unit = {},
+        var removeListener: (lineItemModel: LineItemModel) -> Unit = {},
     ) {
         fun onMinusClick(lineItemModel: LineItemModel) = minusListener(lineItemModel)
         fun onPlusClick(lineItemModel: LineItemModel) = plusListener(lineItemModel)
