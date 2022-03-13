@@ -35,21 +35,9 @@ class FavouriteFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.recipesRecyclerview.adapter =
-            RecipeItemAdapter(
-                RecipeItemAdapter.OnClickListener(
-                    clickListener = {
-                        viewModel.displayRecipeDetails(it)
-                    }
-                )
-            )
+            RecipeItemAdapter(RecipeItemAdapter.OnClickListener())
 
-        viewModel.recipesList.observe(viewLifecycleOwner,{})
-
-        viewModel.navigateToSelectedRecipe.observe(viewLifecycleOwner, {
-            if (it != null) {
-                //Go to detail screen
-            }
-        })
+        viewModel.recipesList.observe(viewLifecycleOwner) {}
         return binding.root
     }
 }
