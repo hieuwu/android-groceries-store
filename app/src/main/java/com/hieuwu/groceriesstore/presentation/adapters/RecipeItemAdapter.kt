@@ -43,7 +43,7 @@ class RecipeItemAdapter(val onClickListener: OnClickListener) :
         }
     }
 
-    class OnClickListener(val clickListener: (category: RecipeModel) -> Unit) {
+    class OnClickListener(val clickListener: (category: RecipeModel) -> Unit = {}) {
         fun onClick(category: RecipeModel) = clickListener(category)
     }
 }
