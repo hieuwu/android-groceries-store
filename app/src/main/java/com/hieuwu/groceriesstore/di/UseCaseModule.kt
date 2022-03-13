@@ -32,4 +32,8 @@ abstract class UseCaseModule {
     @Binds
     abstract fun bindCreateOrderUseCase(impl: CreateOrderUseCaseImpl): CreateOrderUseCase
 
+    @Singleton
+    @Binds
+    abstract fun bindExploreProductUseCase(impl: ExploreProductProductUseCaseImpl): ExploreProductUseCase
+
 }
