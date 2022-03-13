@@ -39,10 +39,6 @@ class CheckOutViewModel @Inject constructor(
     val isOrderSentSuccessful: LiveData<Boolean>
         get() = _isOrderSentSuccessful
 
-//    init {
-//        getLineItemFromDatabase()
-//    }
-
     fun sumPrice() {
         var sum = 0.0
         if (_order.value?.lineItemList != null) {
@@ -57,14 +53,6 @@ class CheckOutViewModel @Inject constructor(
     private fun setOrderAddress() {
         _order.value?.address = user.value?.address ?: ""
     }
-
-//    private suspend fun sendOrderToServer() {
-//        var res = false
-//        withContext(Dispatchers.IO) {
-//            createOrderUseCase.sendOrderToServer(order.value!!)
-//        }
-//        _isOrderSentSuccessful.value = res
-//    }
 
     fun sendOrder() {
         var res = false
