@@ -21,7 +21,7 @@ import javax.inject.Singleton
 class CategoryRepositoryImpl @Inject constructor(private val categoryDao: CategoryDao) :
     CategoryRepository {
 
-    override suspend fun getFromServer() {
+    override suspend fun refreshDatabase() {
         val categoriesList = mutableListOf<Category>()
         val fireStore = Firebase.firestore
         fireStore.collection(CollectionNames.categories).get().addOnSuccessListener { result ->

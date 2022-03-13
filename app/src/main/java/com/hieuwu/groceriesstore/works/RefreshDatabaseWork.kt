@@ -19,7 +19,7 @@ class RefreshDatabaseWork(appContext: Context, params: WorkerParameters) :
         return try {
             Timber.d("Refreshing database")
             productRepository.refreshDatabase()
-            categoryRepository.getFromServer()
+            categoryRepository.refreshDatabase()
             Result.success()
         } catch (e: Exception) {
             Result.retry()

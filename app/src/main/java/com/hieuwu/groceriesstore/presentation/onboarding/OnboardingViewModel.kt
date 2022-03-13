@@ -7,9 +7,7 @@ import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class OnboardingViewModel @Inject constructor(
@@ -25,7 +23,7 @@ class OnboardingViewModel @Inject constructor(
     init {
         try {
             viewModelScope.launch {
-                getCategories()
+                categoryRepository.refreshDatabase()
                 productRepository.refreshDatabase()
                 recipeRepository.refreshDatabase()
             }
@@ -39,9 +37,4 @@ class OnboardingViewModel @Inject constructor(
         _isSyncedSuccessful.value = status
     }
 
-    private suspend fun getCategories() {
-        withContext(Dispatchers.IO) {
-            categoryRepository.getFromServer()
-        }
-    }
 }
