@@ -3,17 +3,13 @@ package com.hieuwu.groceriesstore.presentation.onboarding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
+import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OnboardingViewModel @Inject constructor(
-    private val productRepository: ProductRepository,
-    private val categoryRepository: CategoryRepository,
-    private val recipeRepository: RecipeRepository
+    private val refreshAppDataUseCase: RefreshAppDataUseCase
 ) : ObservableViewModel() {
 
     private val _isSyncedSuccessful = MutableLiveData(false)
@@ -23,9 +19,7 @@ class OnboardingViewModel @Inject constructor(
     init {
         try {
             viewModelScope.launch {
-                categoryRepository.refreshDatabase()
-                productRepository.refreshDatabase()
-                recipeRepository.refreshDatabase()
+                refreshAppDataUseCase.refreshAppData()
             }
             updateSyncStatus(true)
         } catch(e: Exception) {
