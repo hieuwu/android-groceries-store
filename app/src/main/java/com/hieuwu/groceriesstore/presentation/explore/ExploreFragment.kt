@@ -48,18 +48,24 @@ class ExploreFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.productRecyclerview.adapter = GridListItemAdapter(
-            createGridListItemEvent()
-        )
+        initAdapters()
         setObserver()
         setTextSearchColor()
         setEventListener()
+
+        return binding.root
+    }
+
+
+    private fun initAdapters() {
+        binding.productRecyclerview.adapter = GridListItemAdapter(
+            createGridListItemEvent()
+        )
 
         binding.categoryRecyclerview.adapter =
             CategoryItemAdapter(CategoryItemAdapter.OnClickListener {
                 navigateToProductList(it.name!!, it.id)
             })
-        return binding.root
     }
 
     private fun createGridListItemEvent(): GridListItemAdapter.OnClickListener =
@@ -79,13 +85,15 @@ class ExploreFragment : Fragment() {
         findNavController().navigate(direction)
     }
 
+    private fun navigateToProductDetail(productId: String) {
+        val direction =
+            ExploreFragmentDirections.actionExploreFragmentToProductDetailFragment(productId)
+        findNavController().navigate(direction)
+    }
+
     private fun setObserver() {
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner) {
-            if (null != it) {
-                val direction =
-                    ExploreFragmentDirections.actionExploreFragmentToProductDetailFragment(it.id)
-                findNavController().navigate(direction)
-            }
+            if (null != it) navigateToProductDetail(it.id)
         }
         viewModel.categories.observe(viewLifecycleOwner) {}
 
