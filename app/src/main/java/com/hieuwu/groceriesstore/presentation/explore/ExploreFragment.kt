@@ -16,6 +16,7 @@ import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,13 +30,7 @@ class ExploreFragment : Fragment() {
     private lateinit var viewModel: ExploreViewModel
 
     @Inject
-    lateinit var productRepository: ProductRepository
-
-    @Inject
-    lateinit var categoryRepository: CategoryRepository
-
-    @Inject
-    lateinit var orderRepository: OrderRepository
+    lateinit var exploreProductUseCase: ExploreProductUseCase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +41,7 @@ class ExploreFragment : Fragment() {
             inflater, R.layout.fragment_explore, container, false
         )
         val viewModelFactory =
-            ExploreViewModelFactory(categoryRepository, productRepository, orderRepository)
+            ExploreViewModelFactory(exploreProductUseCase)
 
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ExploreViewModel::class.java)
@@ -70,8 +65,8 @@ class ExploreFragment : Fragment() {
     private fun createGridListItemEvent(): GridListItemAdapter.OnClickListener =
         GridListItemAdapter.OnClickListener(
             clickListener = {
-                viewModel.displayPropertyDetails(it)
-                viewModel.displayPropertyDetailsComplete()
+                viewModel.displayProductDetail(it)
+                viewModel.displayProductDetailComplete()
             },
             addToCartListener = {
                 viewModel.addToCart(it)
