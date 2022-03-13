@@ -36,4 +36,7 @@ abstract class UseCaseModule {
     @Binds
     abstract fun bindExploreProductUseCase(impl: ExploreProductProductUseCaseImpl): ExploreProductUseCase
 
+    @Singleton
+    @Binds
+    abstract fun bindRefreshAppDataUseCase(impl: RefreshAppDataUseCaseImpl): RefreshAppDataUseCase
 }
