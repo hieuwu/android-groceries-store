@@ -31,4 +31,7 @@ class GetProductListUseCaseImpl @Inject constructor(
         orderRepository.createOrUpdate(order)
     }
 
+    override suspend fun getAllProductsByCategory(categoryId: String) =
+        productRepository.getAllProductsByCategory(categoryId)
+
 }

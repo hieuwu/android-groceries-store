@@ -11,4 +11,5 @@ interface GetProductListUseCase {
     fun getCurrentCart(): LiveData<OrderModel>?
     suspend fun addToCart(lineItem: LineItem)
     suspend fun createNewOrder(order: Order)
+    suspend fun getAllProductsByCategory(categoryId: String):LiveData<List<ProductModel>>
 }
