@@ -19,7 +19,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
     lateinit var binding: FragmentProductListBinding
-
+    lateinit var viewModel: ProductListViewModel
     @Inject
     lateinit var getProductListUseCase: GetProductListUseCase
 
@@ -36,37 +36,24 @@ class ProductListFragment : Fragment() {
         )
 
         val categoryName = args.categoryName
-        var categoryId = args.categoryId
+        val categoryId = args.categoryId
         val viewModelFactory =
             ProductListViewModelFactory(categoryId, getProductListUseCase)
         binding.toolbar.title = categoryName
 
-        val viewModel = ViewModelProvider(this, viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductListViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        setUpRecyclerView(viewModel)
-        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner, {
-            if (null != it) {
-                val direction =
-                    ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(
-                        it.id
-                    )
-                findNavController().navigate(direction)
-                viewModel.displayProductDetailComplete()
-            }
-        })
+        setUpRecyclerView()
+        setObserver()
+        setEventListener()
 
-        viewModel.currentCart.observe(viewLifecycleOwner, {})
+        return binding.root
+    }
 
-        viewModel.productList.observe(viewLifecycleOwner, {
-            if (it.isEmpty()) {
-                binding.productRecyclerview.visibility = View.GONE
-                binding.emptyLayout.visibility = View.VISIBLE
-            }
-        })
-
+    private fun setEventListener() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
@@ -75,26 +62,46 @@ class ProductListFragment : Fragment() {
             when (item.itemId) {
                 R.id.action_filter -> {
                     showFilterDialog()
-                    val bottomSheetDialogFragment = FilterFragment()
-                    bottomSheetDialogFragment.show(
-                        activity?.supportFragmentManager!!,
-                        bottomSheetDialogFragment.tag
-                    )
                     true
                 }
                 else -> false
             }
         }
+    }
 
+    private fun setObserver() {
+        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner) {
+            if (null != it) {
+                navigateToProductDetail(it.id)
+                viewModel.displayProductDetailComplete()
+            }
+        }
 
-        return binding.root
+        viewModel.currentCart.observe(viewLifecycleOwner) {}
+
+        viewModel.productList.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.productRecyclerview.visibility = View.GONE
+                binding.emptyLayout.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun navigateToProductDetail(id: String) {
+        val direction =
+            ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(id)
+        findNavController().navigate(direction)
     }
 
     private fun showFilterDialog() {
-
+        val bottomSheetDialogFragment = FilterFragment()
+        bottomSheetDialogFragment.show(
+            activity?.supportFragmentManager!!,
+            bottomSheetDialogFragment.tag
+        )
     }
 
-    private fun setUpRecyclerView(viewModel: ProductListViewModel) {
+    private fun setUpRecyclerView() {
         binding.productRecyclerview.adapter =
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
