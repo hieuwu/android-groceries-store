@@ -11,8 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductListBinding
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -22,10 +21,8 @@ class ProductListFragment : Fragment() {
     lateinit var binding: FragmentProductListBinding
 
     @Inject
-    lateinit var orderRepository: OrderRepository
+    lateinit var getProductListUseCase: GetProductListUseCase
 
-    @Inject
-    lateinit var productRepository: ProductRepository
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +38,7 @@ class ProductListFragment : Fragment() {
         val categoryName = args.categoryName
         var categoryId = args.categoryId
         val viewModelFactory =
-            ProductListViewModelFactory(categoryId, productRepository, orderRepository)
+            ProductListViewModelFactory(categoryId, getProductListUseCase)
         binding.toolbar.title = categoryName
 
         val viewModel = ViewModelProvider(this, viewModelFactory)
@@ -57,11 +54,11 @@ class ProductListFragment : Fragment() {
                         it.id
                     )
                 findNavController().navigate(direction)
-                viewModel.displayPropertyDetailsComplete()
+                viewModel.displayProductDetailComplete()
             }
         })
 
-        viewModel.CurrentCart.observe(viewLifecycleOwner, {})
+        viewModel.currentCart.observe(viewLifecycleOwner, {})
 
         viewModel.productList.observe(viewLifecycleOwner, {
             if (it.isEmpty()) {
@@ -102,7 +99,7 @@ class ProductListFragment : Fragment() {
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
                     clickListener = {
-                        viewModel.displayPropertyDetails(it)
+                        viewModel.displayProductDetail(it)
                     },
                     addToCartListener = {
                         viewModel.addToCart(it)
