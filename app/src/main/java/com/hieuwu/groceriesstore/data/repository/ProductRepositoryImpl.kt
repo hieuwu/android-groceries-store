@@ -3,12 +3,10 @@ package com.hieuwu.groceriesstore.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.map
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Product
 import com.hieuwu.groceriesstore.data.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
