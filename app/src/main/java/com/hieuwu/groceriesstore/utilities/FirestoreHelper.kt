@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.utilities
 
-import android.util.TypedValue
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.hieuwu.groceriesstore.data.entities.*
@@ -17,8 +16,8 @@ object CollectionNames {
 
 fun convertItemEntityToDocument(lineItem: LineItemModel): HashMap<String, Any> {
     val document = HashMap<String, Any>()
-    document["quantity"] = lineItem.quantity as TypedValue
-    document["subtotal"] = lineItem.subtotal as TypedValue
+    document["quantity"] = lineItem.quantity as Number
+    document["subtotal"] = lineItem.subtotal as Number
     document["product"] = "products/${lineItem.productId}"
     return document
 }
@@ -32,7 +31,7 @@ fun convertOrderEntityToDocument(order: OrderModel): HashMap<String, Any> {
         total += item?.subtotal ?: 0.0
     }
 
-    document["address"] = order.address as TypedValue
+    document["address"] = order.address as String
     document["lineItems"] = lineOrderList
     document["total"] = total
     return document
@@ -59,18 +58,17 @@ fun convertCategoryDocumentToEntity(document: QueryDocumentSnapshot): Category {
 
 fun convertUserDocumentToEntity(id: String, document: DocumentSnapshot): User {
     val name: String = document.data?.get("name")!! as String
-    val phone: String = document.data!!["phone"]!! as String
-    val address: String = document.data!!["address"]!! as String
-    val email: String = document.data!!["email"]!! as String
+    val phone: String = document.data?.get("phone") as String
+    val address: String = document.data?.get("address") as String
+    val email: String = document.data?.get("email") as String
     return User(id, name, email, address, phone)
 }
 
 fun convertUserEntityToDocument(user: User): HashMap<String, String?> {
-    val document = hashMapOf(
+    return hashMapOf(
         "name" to user.name,
         "email" to user.email,
         "phone" to user.phone,
         "address" to user.address,
     )
-    return document
 }
