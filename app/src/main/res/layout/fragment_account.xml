@@ -13,169 +13,110 @@
 
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".presentation.account.AccountFragment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:padding="12dp">
+                android:layout_marginVertical="@dimen/margin_normal"
+                android:text="@{Converter.stringToEmpTy(viewModel.user.name)}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_big_bold"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <!--                <ImageView-->
-                <!--                    android:layout_width="@dimen/image_profile_rounded"-->
-                <!--                    android:layout_height="@dimen/image_profile_rounded"-->
-                <!--                    android:layout_gravity="center_horizontal|bottom"-->
-                <!--                    android:layout_marginHorizontal="@dimen/horizontal_margin"-->
-                <!--                    android:layout_marginTop="48dp"-->
-                <!--                    android:background="@drawable/rounded_image"-->
-                <!--                    android:src="@drawable/ic_baseline_filter_list_36" />-->
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.user.address}"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:orientation="vertical">
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.user.email}"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/margin_normal"
-                        android:text="@{Converter.stringToEmpTy(viewModel.user.name)}"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_big_bold"
-                        android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.user.phone}"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.user.address}"
-                        android:textColor="@android:color/white" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="list_empty.json"
+                app:lottie_loop="true" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.user.email}"
-                        android:textColor="@android:color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.user.phone}"
-                        android:textColor="@android:color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/profile_information"
+                android:textStyle="bold" />
 
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/animation_view"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    app:lottie_autoPlay="true"
-                    android:layout_gravity="center_horizontal"
-                    app:lottie_fileName="list_empty.json"
-                    app:lottie_loop="true" />
-
-                <RelativeLayout
-                    android:id="@+id/profile_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/horizontal_margin"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/profile_information"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="@dimen/icon_small"
-                        android:layout_height="@dimen/icon_small"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_baseline_chevron_right_24" />
-
-                </RelativeLayout>
+            <ImageView
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_baseline_chevron_right_24" />
 
 
-                <!--                <RelativeLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginHorizontal="@dimen/horizontal_margin"-->
-                <!--                    android:layout_marginTop="@dimen/margin_small"-->
-                <!--                    android:gravity="center_vertical"-->
-                <!--                    android:orientation="horizontal">-->
+        </RelativeLayout>
 
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_centerVertical="true"-->
-                <!--                        android:text="@string/order_history"-->
-                <!--                        android:textStyle="bold" />-->
+        <Button
+            android:id="@+id/signout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginVertical="@dimen/margin_normal"
+            android:background="@drawable/secondary_button"
+            android:text="@string/sign_out"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            app:backgroundTint="@null"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </LinearLayout>
 
-                <!--                    <ImageView-->
-                <!--                        android:layout_width="@dimen/icon_small"-->
-                <!--                        android:layout_height="@dimen/icon_small"-->
-                <!--                        android:layout_alignParentEnd="true"-->
-                <!--                        android:src="@drawable/ic_baseline_chevron_right_24" />-->
-
-                <!--                </RelativeLayout>-->
-
-                <!--                <RelativeLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginHorizontal="@dimen/horizontal_margin"-->
-                <!--                    android:layout_marginTop="@dimen/margin_small"-->
-                <!--                    android:gravity="center_vertical"-->
-                <!--                    android:orientation="horizontal">-->
-
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_centerVertical="true"-->
-                <!--                        android:text="Settings"-->
-                <!--                        android:textStyle="bold" />-->
-
-                <!--                    <ImageView-->
-                <!--                        android:layout_width="@dimen/icon_small"-->
-                <!--                        android:layout_height="@dimen/icon_small"-->
-                <!--                        android:layout_alignParentEnd="true"-->
-                <!--                        android:src="@drawable/ic_baseline_chevron_right_24" />-->
-
-                <!--                </RelativeLayout>-->
-
-
-                <Button
-                    android:id="@+id/signout_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_normal"
-                    android:layout_marginVertical="@dimen/margin_normal"
-                    android:background="@drawable/secondary_button"
-                    android:text="@string/sign_out"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
-                    app:backgroundTint="@null" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </FrameLayout>
 </layout>
