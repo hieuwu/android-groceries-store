@@ -29,14 +29,14 @@ interface OrderDao {
     @Query("SELECT * FROM `${ORDER_TABLE}` WHERE status = :status LIMIT 1")
     fun getOrderInCart(status: String): Flow<Order>
 
-    @Query("SELECT orderId FROM `${ORDER_TABLE}` WHERE status = :status LIMIT 1")
+    @Query("SELECT orderId FROM `$ORDER_TABLE` WHERE status = :status LIMIT 1")
     fun getCurrentCartId(status: String): LiveData<String>
 
 
-    @Query("SELECT * FROM `${ORDER_TABLE}` WHERE status = :status  LIMIT 1 ")
+    @Query("SELECT * FROM `$ORDER_TABLE` WHERE status = :status  LIMIT 1 ")
     fun getCart(status: String): Flow<Order>
 
     @Transaction
-    @Query("SELECT * FROM `${ORDER_TABLE}` WHERE status = :status  LIMIT 1 ")
+    @Query("SELECT * FROM `$ORDER_TABLE` WHERE status = :status  LIMIT 1 ")
     fun getCartWithLineItems(status: String): Flow<OrderWithLineItems>
 }

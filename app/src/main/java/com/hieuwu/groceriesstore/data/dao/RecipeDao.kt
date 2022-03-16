@@ -13,6 +13,6 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(recipes: List<Recipe>)
 
-    @Query("SELECT * FROM `$RECIPE_TABLE`")
+    @Query("SELECT * FROM $RECIPE_TABLE")
     fun getAll(): Flow<List<Recipe>>
 }
