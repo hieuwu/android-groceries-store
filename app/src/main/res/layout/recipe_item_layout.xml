@@ -20,9 +20,9 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_medium"
             android:background="@drawable/rounded_border_grid_item"
-            android:padding="@dimen/margin_normal">
+            android:padding="@dimen/margin_medium">
 
             <ImageView
                 android:id="@+id/image"
