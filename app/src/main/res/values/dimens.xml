@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="horizontal_margin">16dp</dimen>
-    <dimen name="vertical_margin">16dp</dimen>
     <dimen name="image_profile_rounded">81dp</dimen>
     <dimen name="text_big_bold">22sp</dimen>
     <dimen name="icon_small">36dp</dimen>
     <dimen name="icon_medium">64dp</dimen>
-    <dimen name="margin_normal">16dp</dimen>
+
+    <dimen name="margin_xsmall">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
-    <dimen name="margin_extra_small">4dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+
+    <dimen name="padding_xsmall">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+
 </resources>

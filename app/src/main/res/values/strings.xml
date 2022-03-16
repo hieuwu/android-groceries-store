@@ -47,5 +47,6 @@
     <string name="order_history">Order History</string>
     <string name="order_is_created_successfully">Order is created successfully !</string>
     <string name="continue_shopping">Continue Shopping</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
 
 </resources>
