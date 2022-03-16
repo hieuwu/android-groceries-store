@@ -38,7 +38,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:layout_marginVertical="@dimen/margin_medium"
                     android:fontFamily="monospace"
                     android:text="Welcome to our store"
                     android:textColor="@android:color/white"
@@ -48,7 +48,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/vertical_margin"
+                    android:layout_marginBottom="@dimen/margin_medium"
                     android:text="Get your gorceries in as fast as one hour"
                     android:textColor="@android:color/white" />
 
@@ -56,11 +56,11 @@
                     android:id="@+id/get_started_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/horizontal_margin"
+                    android:layout_marginHorizontal="@dimen/margin_medium"
                     android:layout_marginBottom="120dp"
                     android:background="@drawable/primary_button"
                     android:enabled="false"
-                    android:text="Get Started"
+                    android:text="@string/get_started"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white" />
             </LinearLayout>
