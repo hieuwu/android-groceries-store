@@ -27,7 +27,7 @@
                 android:background="@drawable/rounded_background"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/horizontal_margin"
+                android:paddingHorizontal="@dimen/margin_medium"
                 android:paddingTop="32dp">
 
                 <TextView
@@ -66,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/signup_btn"
-                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:layout_marginVertical="@dimen/margin_medium"
                     android:background="@drawable/primary_button"
                     android:text="@string/sign_up"
                     android:textAllCaps="false"
