@@ -81,13 +81,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="14dp">
+                android:layout_marginHorizontal="@dimen/margin_medium">
 
                 <RelativeLayout
                     android:id="@+id/product_name_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="@dimen/margin_medium"
                     app:layout_constraintBottom_toTopOf="@+id/quantity_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +130,7 @@
                         android:id="@+id/qty_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginHorizontal="@dimen/margin_small"
                         android:layout_toRightOf="@id/minus_btn"
                         android:background="@drawable/border_textview"
                         android:paddingHorizontal="8dp"
@@ -154,7 +154,7 @@
                     android:id="@+id/view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:layout_marginVertical="@dimen/margin_medium"
                     android:background="@android:color/darker_gray"
                     app:layout_constraintTop_toBottomOf="@id/quantity_layout" />
 
@@ -182,7 +182,7 @@
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:layout_marginVertical="@dimen/margin_medium"
                     android:background="@android:color/darker_gray"
                     app:layout_constraintTop_toBottomOf="@id/product_description" />
 
@@ -208,7 +208,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginHorizontal="14dp"
+                    android:layout_marginHorizontal="@dimen/margin_medium"
                     android:background="@drawable/primary_button"
                     android:onClick="@{() -> viewModel.addToCart()}"
                     android:text="@string/add_to_basket"
