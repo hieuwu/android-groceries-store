@@ -19,7 +19,7 @@
             android:id="@+id/cart_detail_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:layout_weight="1"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -32,7 +32,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_normal">
+            android:layout_marginHorizontal="@dimen/margin_medium">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,14 +56,14 @@
             android:id="@+id/delivery_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginHorizontal="@dimen/margin_medium"
             android:text="@{viewModel.user.address}"
             android:textSize="16dp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_normal">
+            android:layout_marginHorizontal="@dimen/margin_medium">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_normal">
+            android:layout_marginHorizontal="@dimen/margin_medium">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_normal">
+            android:layout_marginHorizontal="@dimen/margin_medium">
 
             <TextView
                 android:layout_width="wrap_content"
