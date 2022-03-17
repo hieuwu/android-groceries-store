@@ -21,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProductDetailFragment : Fragment() {
     private lateinit var binding: FragmentProductDetailBinding
-
+    private lateinit var viewModel: ProductDetailViewModel
 
     @Inject
     lateinit var getProductDetailUseCase: GetProductDetailUseCase
@@ -37,22 +37,28 @@ class ProductDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentProductDetailBinding>(
             inflater, R.layout.fragment_product_detail, container, false
         )
-        val args = ProductDetailFragmentArgs.fromBundle(
-                arguments as Bundle
-            )
+        val args = ProductDetailFragmentArgs.fromBundle(arguments as Bundle)
 
         val viewModelFactory =
             ProductDetailViewModelFactory(args.id, getProductDetailUseCase, orderRepository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ProductDetailViewModel::class.java)
-
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        //Todo: Thí code is a trick for the live data in VM, should be removed
-        viewModel.currentCart.observe(viewLifecycleOwner, {})
-        viewModel.showSnackBarEvent.observe(viewLifecycleOwner, {
+
+        setObserver()
+
+
+        seEventListener()
+
+        return binding.root
+    }
+
+    private fun setObserver() {
+        viewModel.currentCart.observe(viewLifecycleOwner) {}
+        viewModel.showSnackBarEvent.observe(viewLifecycleOwner) {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
@@ -64,8 +70,10 @@ class ProductDetailFragment : Fragment() {
                 // has a configuration change.
                 viewModel.doneShowingSnackbar()
             }
-        })
+        }
+    }
 
+    private fun seEventListener() {
         var isToolbarShown = false
         binding.productDetailScrollview.setOnScrollChangeListener(
             NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
@@ -92,9 +100,5 @@ class ProductDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-
-
-        return binding.root
     }
-
 }

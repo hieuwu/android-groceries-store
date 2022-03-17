@@ -29,9 +29,7 @@ class ProductDetailViewModel @Inject constructor(
     private var _qty: Int = 1
     var qty: Int
         @Bindable
-        get() {
-            return _qty
-        }
+        get() = _qty
         set(value) {
             _qty = value
             notifyPropertyChanged(BR.qty)
