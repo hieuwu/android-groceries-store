@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.presentation.bindImage
+import com.hieuwu.groceriesstore.presentation.utils.bindImage
 
 class ViewPagerAdapter(val context: Context) : PagerAdapter() {
 
