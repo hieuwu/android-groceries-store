@@ -20,7 +20,7 @@ class SignInFragment : Fragment() {
 
     private lateinit var binding: FragmentSigninBinding
     private lateinit var auth: FirebaseAuth
-
+    lateinit var viewModel: SignInViewModel
 
     @Inject
     lateinit var userRepository: UserRepository
@@ -37,28 +37,33 @@ class SignInFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         val viewModelFactory = ViewModelFactory(userRepository)
-        val signInViewModel = ViewModelProvider(this, viewModelFactory)
+        viewModel= ViewModelProvider(this, viewModelFactory)
             .get(SignInViewModel::class.java)
-        binding.signInViewModel = signInViewModel
-
+        binding.signInViewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.signUpTextview.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
-        }
+        setObserver()
+        setEventListener()
 
-        signInViewModel.isSignUpSuccessful.observe(viewLifecycleOwner) {
+        return binding.root
+    }
+
+    private fun setObserver() {
+        viewModel.isSignUpSuccessful.observe(viewLifecycleOwner) {
             if (it != null) {
                 if (it == true) activity?.finish()
             }
         }
+    }
 
-        binding.signinButton.setOnClickListener {
-            signInViewModel.signIn(signInViewModel.email!!, signInViewModel.password!!)
-
+    private fun setEventListener() {
+        binding.signUpTextview.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
-        return binding.root
+        binding.signinButton.setOnClickListener {
+            viewModel.signIn(viewModel.email!!, viewModel.password!!)
+        }
     }
 
 
