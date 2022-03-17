@@ -15,9 +15,7 @@ class SignUpViewModel @Inject constructor(private val userRepository: UserReposi
     private var _email: String? = null
     var email: String?
         @Bindable
-        get() {
-            return _email
-        }
+        get() = _email
         set(value) {
             _email = value
             notifyPropertyChanged(BR.email)
@@ -26,9 +24,7 @@ class SignUpViewModel @Inject constructor(private val userRepository: UserReposi
     private var _password: String? = null
     var password: String?
         @Bindable
-        get() {
-            return _password
-        }
+        get() = _password
         set(value) {
             _password = value
             notifyPropertyChanged(BR.password)
@@ -37,9 +33,7 @@ class SignUpViewModel @Inject constructor(private val userRepository: UserReposi
     private var _name: String? = null
     var name: String?
         @Bindable
-        get() {
-            return _name
-        }
+        get() = _name
         set(value) {
             _name = value
             notifyPropertyChanged(BR.name)
