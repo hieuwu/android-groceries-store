@@ -48,5 +48,7 @@
     <string name="order_is_created_successfully">Order is created successfully !</string>
     <string name="continue_shopping">Continue Shopping</string>
     <string name="your_cart_is_empty">Your cart is empty</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="authentication_successfully">Authentication successfully.</string>
 
 </resources>
