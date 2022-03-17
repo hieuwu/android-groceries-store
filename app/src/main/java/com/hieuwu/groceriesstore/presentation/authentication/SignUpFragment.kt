@@ -21,6 +21,8 @@ class SignUpFragment : Fragment() {
     private lateinit var loadingDialog: LoadingDialog
     private lateinit var binding: FragmentSignUpBinding
 
+    private lateinit var viewModel: SignUpViewModel
+
     @Inject
     lateinit var userRepository: UserRepository
 
@@ -35,37 +37,41 @@ class SignUpFragment : Fragment() {
         loadingDialog = LoadingDialog(requireActivity())
 
         val viewModelFactory = ViewModelFactory(userRepository)
-        val signUpViewModel = ViewModelProvider(this, viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(SignUpViewModel::class.java)
-        binding.signUpViewModel = signUpViewModel
-        signUpViewModel.isSignUpSuccessful?.observe(viewLifecycleOwner) {
-            loadingDialog.show()
-            if (it != null) {
-                if (it == true) {
-                    Toast.makeText(
-                        context, "Authentication successfully.",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        context, "Authentication failed.",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                loadingDialog.dismiss()
-
-            }
-
-
-        }
-
+        binding.signUpViewModel = viewModel
         binding.lifecycleOwner = this
-        binding.signupBtn.setOnClickListener {
-            //If sign in successful, go back
-            signUpViewModel.createAccount()
-        }
+
+        setObserver()
+        setEventListener()
 
         return binding.root
+    }
+
+    private fun setObserver() {
+        viewModel.isSignUpSuccessful?.observe(viewLifecycleOwner) {
+            loadingDialog.show()
+            if (it != null) {
+
+                if (it == true) showSnackbar(getString(R.string.authentication_successfully))
+                else showSnackbar(getString(R.string.authentication_failed))
+
+                loadingDialog.dismiss()
+            }
+        }
+    }
+
+    private fun setEventListener() {
+        binding.signupBtn.setOnClickListener {
+            viewModel.createAccount()
+        }
+    }
+
+    private fun showSnackbar(message: String) {
+        Toast.makeText(
+            context, message,
+            Toast.LENGTH_LONG
+        ).show()
     }
 
 }
