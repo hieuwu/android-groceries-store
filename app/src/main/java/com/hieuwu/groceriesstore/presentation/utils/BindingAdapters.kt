@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation
+package com.hieuwu.groceriesstore.presentation.utils
 
 import android.widget.ImageView
 import androidx.core.net.toUri
