@@ -49,3 +49,7 @@ Groceries Store is a project to help people order grocery online. The main purpo
   - Lifecycle - dispose of observing data when lifecycle state changes.
   - ViewModel - UI related data holder, lifecycle aware.
   - Room Persistence - construct a database using the abstract layer.
+
+## Find this repository useful? :heart:
+Support it by joining __[stargazers](https://github.com/hieuwu/android-groceries-store/stargazers)__ for this repository. :star: <br>
+Also, __[follow me](https://github.com/hieuwu)__ on GitHub for my next creations! 🤩
