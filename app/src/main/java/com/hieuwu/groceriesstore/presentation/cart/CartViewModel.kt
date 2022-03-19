@@ -7,9 +7,7 @@ import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,6 +19,19 @@ class CartViewModel @Inject constructor(
         updateCartItemUseCase.getCurrentCart() as MutableLiveData<OrderModel>
     val order: LiveData<OrderModel>
         get() = _order
+
+    private var _isCartEmpty: Boolean = getOrderStatus()
+    val isCartEmpty: Boolean
+        get() = _isCartEmpty
+
+    private fun getOrderStatus(): Boolean {
+        if (_order == null) return false
+        return try {
+            _order?.value?.lineItemList?.size!! > 0
+        } catch (e: Exception) {
+            false
+        }
+    }
 
     fun decreaseQty(lineItemModel: LineItemModel) {
         Timber.d("Minus Clicked")
@@ -42,12 +53,6 @@ class CartViewModel @Inject constructor(
         lineItemModel.decreaseQuantity()
         viewModelScope.launch {
             updateCartItemUseCase.removeLineItem(lineItemModel)
-        }
-    }
-
-    private suspend fun updateLineItem(lineItemModel: LineItemModel) {
-        withContext(Dispatchers.IO) {
-            updateCartItemUseCase.updateLineItem(lineItemModel)
         }
     }
 }
