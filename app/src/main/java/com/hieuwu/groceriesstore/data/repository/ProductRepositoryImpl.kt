@@ -48,12 +48,15 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateLineItemQuantityById(quantity: Int, id: Long) {
-        lineItemDao.updateQuantityById(quantity, id)
+        withContext(Dispatchers.IO) {
+            lineItemDao.updateQuantityById(quantity, id)
+        }
     }
 
     override suspend fun removeLineItemById(id: Long) {
-        lineItemDao.removeLineItemById(id)
-
+        withContext(Dispatchers.IO) {
+            lineItemDao.removeLineItemById(id)
+        }
     }
 
     override fun searchProductsListByName(name: String?) =
