@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.hieuwu.groceriesstore.presentation.cart.CartViewModel" />
@@ -47,6 +47,7 @@
 
         <LinearLayout
             android:id="@+id/cart_detail_layout"
+            android:visibility="@{viewModel.isCartEmpty ? View.GONE : View.VISIBLE}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -84,10 +85,10 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:id="@+id/cart_empty_layout"
+            android:visibility="@{viewModel.isCartEmpty ? View.VISIBLE : View.GONE}"
             android:minHeight="400dp"
             android:orientation="vertical"
-            android:paddingTop="24dp"
-            android:visibility="gone">
+            android:paddingTop="24dp">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation_view"
