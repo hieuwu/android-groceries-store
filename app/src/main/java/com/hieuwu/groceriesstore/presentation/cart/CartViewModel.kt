@@ -34,20 +34,17 @@ class CartViewModel @Inject constructor(
     }
 
     fun decreaseQty(lineItemModel: LineItemModel) {
-        Timber.d("Minus Clicked")
         try {
             lineItemModel.decreaseQuantity()
             viewModelScope.launch {
                 updateCartItemUseCase.updateLineItem(lineItemModel)
             }
-        } catch(ex: Exception) {
+        } catch (ex: Exception) {
             Timber.e(ex.message)
         }
-
     }
 
     fun increaseQty(lineItemModel: LineItemModel) {
-        Timber.d("Plus Clicked")
         try {
             lineItemModel.increaseQuantity()
             viewModelScope.launch {
@@ -64,9 +61,8 @@ class CartViewModel @Inject constructor(
             viewModelScope.launch {
                 updateCartItemUseCase.removeLineItem(lineItemModel)
             }
-        } catch(ex: Exception) {
+        } catch (ex: Exception) {
             Timber.e(ex.message)
         }
-
     }
 }
