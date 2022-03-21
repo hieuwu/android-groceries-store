@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your order has been accepted"
+            android:text="@string/your_order_has_been_accepted"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="26sp"
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your items has been placed and is on\n the way to be processed"
+            android:text="@string/your_items_has_been_placed_and_is_on_n_the_way_to_be_processed"
             android:textAlignment="center" />
 
     </LinearLayout>
@@ -40,7 +40,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="18dp"
         android:background="@drawable/primary_button"
-        android:text="Ok, thank you"
+        android:text="@string/ok_thank_you"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>
