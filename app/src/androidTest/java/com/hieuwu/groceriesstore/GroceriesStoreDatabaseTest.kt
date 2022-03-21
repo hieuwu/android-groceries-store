@@ -9,11 +9,13 @@ import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.OrderDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.data.utils.OrderStatus
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.data.entities.Product
+import com.hieuwu.groceriesstore.utilities.OrderStatus
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -55,18 +57,22 @@ class GroceriesStoreDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetProduct() {
-        val aProduct = Product("123", "Product Test", "Test", 12.0, "empty")
-        productDao.insert(aProduct)
+    suspend fun insertAndGetProduct() {
+        val aProduct = Product("123", "Product Test", "Test", 12.0, "","","")
+        withContext(Dispatchers.IO) {
+            productDao.insert(aProduct)
+        }
         var product = productDao.getById(aProduct.id).asLiveData()
         assertEquals(product.getOrAwaitValue().price, 12.0)
     }
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetLineItem() {
-        val aProduct = Product("123", "Product Test", "Test", 12.0, "empty")
-        productDao.insert(aProduct)
+    suspend fun insertAndGetLineItem() {
+        val aProduct = Product("123", "Product Test", "Test", 12.0, "","","")
+        withContext(Dispatchers.IO) {
+            productDao.insert(aProduct)
+        }
         val lineItem = LineItem(1, aProduct.id, "123", 4, 5.6)
         linetItemDao.insert(lineItem)
         var lineItemAfter = linetItemDao.getById(lineItem.id).asLiveData()
@@ -78,12 +84,15 @@ class GroceriesStoreDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetOrderWithItems() {
-        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty")
-        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty")
-        productDao.insert(firstProduct)
-        productDao.insert(secondProduct)
-        val order = Order("12", OrderStatus.IN_CART.value)
+    suspend fun insertAndGetOrderWithItems() {
+        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty","","")
+        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty","","")
+        withContext(Dispatchers.IO) {
+            productDao.insert(firstProduct)
+            productDao.insert(secondProduct)
+        }
+
+        val order = Order("12", OrderStatus.IN_CART.value, "")
 
         val firstLineItem = LineItem(1, firstProduct.id, "12", 4, 5.6)
         val secondLineItem = LineItem(2, secondProduct.id, "12", 5, 7.0)
@@ -92,15 +101,15 @@ class GroceriesStoreDatabaseTest {
         linetItemDao.insert(firstLineItem)
         linetItemDao.insert(secondLineItem)
 
-        var completedOrder = orderDao.getOrderWithLineItems().asLiveData()
-        var a = completedOrder.getOrAwaitValue()
+        var completedOrder = orderDao.getById("12")
+        var a = completedOrder
         assertEquals(completedOrder, null)
     }
 
     @Test
     @Throws(Exception::class)
     fun insertAndGetCurrentCart() {
-        val order = Order("12", OrderStatus.IN_CART.value)
+        val order = Order("12", OrderStatus.IN_CART.value,"")
         orderDao.insert(order)
 
         var cart = orderDao.getCart(OrderStatus.IN_CART.value).asLiveData()
@@ -110,12 +119,16 @@ class GroceriesStoreDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun removeItem() {
-        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty")
-        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty")
-        productDao.insert(firstProduct)
-        productDao.insert(secondProduct)
-        val order = Order("12", OrderStatus.IN_CART.value)
+    suspend fun removeItem() {
+        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty","","")
+        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty","","")
+
+        withContext(Dispatchers.IO) {
+            productDao.insert(firstProduct)
+            productDao.insert(secondProduct)
+        }
+
+        val order = Order("12", OrderStatus.IN_CART.value, "")
 
         val firstLineItem = LineItem(1, firstProduct.id, "12", 4, 5.6)
         val secondLineItem = LineItem(2, secondProduct.id, "12", 5, 7.0)
@@ -125,8 +138,9 @@ class GroceriesStoreDatabaseTest {
         linetItemDao.insert(secondLineItem)
         var cart = orderDao.getCart(OrderStatus.IN_CART.value).asLiveData()
 
-
-        linetItemDao.removeCurrentItem(firstLineItem)
+        withContext(Dispatchers.IO) {
+            linetItemDao.remove(firstLineItem)
+        }
 
         var list = linetItemDao.getAll().asLiveData()
         var data = list.getOrAwaitValue()
