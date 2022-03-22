@@ -29,7 +29,6 @@ class GroceriesStoreApplication : Application() {
                 RefreshDatabaseWork.WORK_NAME,
                 ExistingPeriodicWorkPolicy.KEEP, repeatingRequest
             )
-
         }
     }
 }
