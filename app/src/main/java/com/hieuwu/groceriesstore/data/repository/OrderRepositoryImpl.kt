@@ -12,6 +12,7 @@ import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.data.entities.asDomainModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
+import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +49,8 @@ class OrderRepositoryImpl @Inject constructor(
         val orderMap = convertOrderEntityToDocument(order)
         var isSuccess = false
         val db = Firebase.firestore
-        db.collection("orders").document(order.id)
+
+        db.collection(CollectionNames.orders).document(order.id)
             .set(orderMap)
             .addOnSuccessListener {
                 isSuccess = true
