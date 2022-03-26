@@ -50,6 +50,42 @@ Groceries Store is a project to help people order grocery online. The main purpo
   - ViewModel - UI related data holder, lifecycle aware.
   - Room Persistence - construct a database using the abstract layer.
 
+## Setup
+
+#### Android Studio
+Android Studio Bumblebee or later
+SDK 23 or later
+
+#### Firestore
+1. Create your Firebase account and setup your own Google service following instruction from Firebase
+2. Update the properties in each collection as below
+- `products`
+   -    `category`: reference (to specific category)
+   -    `description`: string
+   -    `id`: string
+   -    `image`: string
+   -    `name`: string
+   -    `nutrition`: string
+   -    `price`: number
+
+- `orders`
+   -    `address`: string
+   -    `lineItems`: array
+   -    `total`: number
+
+- `categories`
+   -    `description`: string
+   -    `image`: string
+   -    `name`: string
+
+- `users`
+   -    `address`: string
+   -    `email`: string
+   -    `name`: string
+   -    `phone`: string
+
+3. If you have any changes in the Firestore collections, feel free to update the `FirebaseStoreConstant.kt` file
+
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/hieuwu/android-groceries-store/stargazers)__ for this repository. :star: <br>
 Also, __[follow me](https://github.com/hieuwu)__ on GitHub for my next creations! 🤩
