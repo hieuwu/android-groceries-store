@@ -35,7 +35,7 @@ class FirebaseCloudMessageService : FirebaseMessagingService() {
         val pendingIntent = PendingIntent.getActivity(
             this, 0, intent,
             PendingIntent.FLAG_ONE_SHOT
-        );
+        )
 
         val builder = NotificationCompat
             .Builder(
