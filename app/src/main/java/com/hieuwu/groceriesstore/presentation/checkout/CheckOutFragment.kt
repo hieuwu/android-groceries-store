@@ -9,13 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.presentation.AuthActivity
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.utilities.KeyData
+import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -70,11 +70,7 @@ class CheckOutFragment : Fragment() {
             if (it) {
                 openSuccessDialog()
             } else {
-                Snackbar.make(
-                    requireActivity().findViewById(android.R.id.content),
-                    "Order created failed :(",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                showMessageSnackBar(getString(R.string.order_created_failed))
             }
         }
     }
@@ -82,7 +78,7 @@ class CheckOutFragment : Fragment() {
     private fun openSuccessDialog() {
         val dialog = CheckOutSuccess()
         dialog.setOnDismissListener { findNavController().navigateUp() }
-        dialog.show(requireActivity().supportFragmentManager, "SUCCESS_DIALOG")
+        dialog.show(requireActivity().supportFragmentManager, getString(R.string.order_success_dialog))
     }
 
     private fun setEventListener() {
