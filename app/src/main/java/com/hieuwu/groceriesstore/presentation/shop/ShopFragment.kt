@@ -21,6 +21,7 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.ViewPagerAdapter
+import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -97,14 +98,6 @@ class ShopFragment : Fragment() {
         })
     }
 
-    private fun showSnackBar(productName: String?) {
-        Snackbar.make(
-            requireActivity().findViewById(android.R.id.content),
-            "Added $productName",
-            Snackbar.LENGTH_SHORT
-        ).show()
-    }
-
     private fun setObserver() {
         viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner) {
             it?.let {
@@ -124,7 +117,7 @@ class ShopFragment : Fragment() {
 
     private fun addToCart(product: ProductModel) {
         viewModel.addToCart(product)
-        showSnackBar(product.name)
+        showMessageSnackBar("Added $product.name")
     }
 
     private fun setUpRecyclerView() {
