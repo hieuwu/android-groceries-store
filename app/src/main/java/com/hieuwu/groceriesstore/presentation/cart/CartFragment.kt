@@ -68,20 +68,7 @@ class CartFragment : BottomSheetDialogFragment() {
 
     }
     private fun setObserver() {
-        viewModel.order.observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                if (it.lineItemList.size > 0) {
-//                    binding.cartEmptyLayout.visibility = View.GONE
-//                    binding.cartDetailLayout.visibility = View.VISIBLE
-//                } else {
-//                    binding.cartEmptyLayout.visibility = View.VISIBLE
-//                    binding.cartDetailLayout.visibility = View.GONE
-//                }
-//            } else {
-//                binding.cartEmptyLayout.visibility = View.VISIBLE
-//                binding.cartDetailLayout.visibility = View.GONE
-//            }
-        }
+        viewModel.order.observe(viewLifecycleOwner) {}
     }
 
     override fun onCreateContextMenu(
