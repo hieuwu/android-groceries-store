@@ -53,5 +53,9 @@
     <string name="ok_thank_you">Ok, thank you</string>
     <string name="your_items_has_been_placed_and_is_on_n_the_way_to_be_processed">Your items has been placed and is on\n the way to be processed</string>
     <string name="your_order_has_been_accepted">Your order has been accepted</string>
+    <string name="order_created_failed">Order created failed :(</string>
+    <string name="order_success_dialog">SUCCESS_DIALOG</string>
+    <string name="update_profile_successfully">Update profile successfully!</string>
+    <string name="update_profile_failed">Update profile failed!</string>
 
 </resources>
