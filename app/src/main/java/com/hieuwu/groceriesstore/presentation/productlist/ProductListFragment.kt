@@ -13,6 +13,7 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductListBinding
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
+import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -110,17 +111,10 @@ class ProductListFragment : Fragment() {
                     },
                     addToCartListener = {
                         viewModel.addToCart(it)
-                        showSnackBar(it.name)
+                        showMessageSnackBar("Added ${it.name}")
                     },
                 )
             )
     }
 
-    private fun showSnackBar(productName: String?) {
-        Snackbar.make(
-            requireActivity().findViewById(android.R.id.content),
-            "Added $productName",
-            Snackbar.LENGTH_SHORT
-        ).show()
-    }
 }
