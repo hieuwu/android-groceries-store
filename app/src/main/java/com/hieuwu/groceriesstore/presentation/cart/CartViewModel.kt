@@ -20,19 +20,6 @@ class CartViewModel @Inject constructor(
     val order: LiveData<OrderModel>
         get() = _order
 
-    private var _isCartEmpty: Boolean = getOrderStatus()
-    val isCartEmpty: Boolean
-        get() = _isCartEmpty
-
-    private fun getOrderStatus(): Boolean {
-        if (_order == null) return false
-        return try {
-            _order?.value?.lineItemList?.size!! > 0
-        } catch (e: Exception) {
-            false
-        }
-    }
-
     fun decreaseQty(lineItemModel: LineItemModel) {
         try {
             lineItemModel.decreaseQuantity()
