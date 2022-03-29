@@ -8,10 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentUpdateProfileBinding
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
+import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -64,22 +64,15 @@ class UpdateProfileFragment : Fragment() {
         }
     }
 
-    private fun showSnackBar(message: String) {
-        Snackbar.make(
-            requireActivity().findViewById(android.R.id.content),
-            message,
-            Snackbar.LENGTH_SHORT
-        ).show()
-    }
 
     private fun setObserver() {
         viewModel.isDoneUpdate.observe(viewLifecycleOwner) {
             if (it != null) {
                 if (it == true) {
                     R.string.add_to_basket
-                    showSnackBar("Update profile successfully!")
+                    showMessageSnackBar(getString(R.string.update_profile_successfully))
                 } else {
-                    showSnackBar("Update profile failed!")
+                    showMessageSnackBar(getString(R.string.update_profile_failed))
                 }
             }
         }
