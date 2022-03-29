@@ -12,6 +12,7 @@ import com.hieuwu.groceriesstore.LoadingDialog
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSignUpBinding
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -53,8 +54,8 @@ class SignUpFragment : Fragment() {
             loadingDialog.show()
             if (it != null) {
 
-                if (it == true) showSnackbar(getString(R.string.authentication_successfully))
-                else showSnackbar(getString(R.string.authentication_failed))
+                if (it == true) showMessageSnackBar(getString(R.string.authentication_successfully))
+                else showMessageSnackBar(getString(R.string.authentication_failed))
 
                 loadingDialog.dismiss()
             }
@@ -65,13 +66,6 @@ class SignUpFragment : Fragment() {
         binding.signupBtn.setOnClickListener {
             viewModel.createAccount()
         }
-    }
-
-    private fun showSnackbar(message: String) {
-        Toast.makeText(
-            context, message,
-            Toast.LENGTH_LONG
-        ).show()
     }
 
 }
