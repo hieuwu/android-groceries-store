@@ -14,6 +14,7 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductDetailBinding
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
+import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -60,12 +61,8 @@ class ProductDetailFragment : Fragment() {
         viewModel.currentCart.observe(viewLifecycleOwner) {}
         viewModel.showSnackBarEvent.observe(viewLifecycleOwner) {
             if (it == true) { // Observed state is true.
-                Snackbar.make(
-                    requireActivity().findViewById(android.R.id.content),
-                    viewModel.qty.toString() + "  x  " +
-                            viewModel.product.value?.name + " is added",
-                    Snackbar.LENGTH_SHORT // How long to display the message.
-                ).show()
+                showMessageSnackBar(viewModel.qty.toString() + "  x  " +
+                        viewModel.product.value?.name + " is added")
                 // Reset state to make sure the snackbar is only shown once, even if the device
                 // has a configuration change.
                 viewModel.doneShowingSnackbar()
