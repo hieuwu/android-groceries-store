@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
 import com.hieuwu.groceriesstore.domain.models.ProductModel
@@ -117,7 +116,7 @@ class ShopFragment : Fragment() {
 
     private fun addToCart(product: ProductModel) {
         viewModel.addToCart(product)
-        showMessageSnackBar("Added $product.name")
+        showMessageSnackBar("Added ${product.name}")
     }
 
     private fun setUpRecyclerView() {
