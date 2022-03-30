@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.account
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentAccountBinding
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
+import com.hieuwu.groceriesstore.presentation.AuthActivity
 import com.hieuwu.groceriesstore.presentation.updateprofile.UpdateProfileViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -45,15 +46,12 @@ class AccountFragment : Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.user.observe(viewLifecycleOwner) {
-            if (it == null) {
-                binding.profileLayout.visibility = View.GONE
-                binding.signoutButton.visibility = View.GONE
-                binding.animationView.visibility = View.VISIBLE
-            } else {
-                binding.animationView.visibility = View.GONE
-            }
-        }
+        viewModel.user.observe(viewLifecycleOwner) {}
+    }
+
+    private fun navigateToAuthentication() {
+        val intent = Intent(context, AuthActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setEventListener() {
@@ -63,6 +61,10 @@ class AccountFragment : Fragment() {
 
         binding.signoutButton.setOnClickListener {
             viewModel.signOut()
+        }
+
+        binding.signinButton.setOnClickListener {
+            navigateToAuthentication()
         }
     }
 
