@@ -67,14 +67,14 @@ class ShopFragment : Fragment() {
         dotCount = viewPagerAdapter.count
         val sliderDotspanel = binding.sliderDots
         dots = Array(dotCount) { ImageView(requireContext()) }
-        for (i in 0 until dotCount) {
-            dots[i].setImageDrawable(nonActiveDot)
-            val params = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            params.setMargins(8, 0, 8, 0);
-            sliderDotspanel.addView(dots[i], params);
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(8, 0, 8, 0)
+        repeat(dotCount) {
+            dots[it].setImageDrawable(nonActiveDot)
+            sliderDotspanel.addView(dots[it], params)
         }
         dots[0].setImageDrawable(activeDot)
     }
@@ -87,10 +87,10 @@ class ShopFragment : Fragment() {
                 positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
-                for (i in 0 until dotCount) {
-                    dots[i].setImageDrawable(nonActiveDot);
+                repeat(dotCount) {
+                    dots[it].setImageDrawable(nonActiveDot)
                 }
-                dots[position].setImageDrawable(activeDot);
+                dots[position].setImageDrawable(activeDot)
             }
 
             override fun onPageScrollStateChanged(state: Int) {}
