@@ -59,7 +59,7 @@ class CheckOutViewModel @Inject constructor(
         setOrderAddress()
         viewModelScope.launch {
             res = createOrderUseCase.sendOrderToServer(order.value!!)
+            _isOrderSentSuccessful.value = res
         }
-        _isOrderSentSuccessful.value = res
     }
 }
