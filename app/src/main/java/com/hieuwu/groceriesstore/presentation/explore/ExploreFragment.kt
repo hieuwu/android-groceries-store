@@ -111,22 +111,18 @@ class ExploreFragment : Fragment() {
         searchEditText.setTextColor(Color.WHITE)
     }
 
+    private fun onTextChange(text: String): Boolean {
+        viewModel.searchNameChanged(text)
+        return true
+    }
+
     private fun setEventListener() {
         binding.searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                //Query product by name
-                viewModel.searchNameChanged(query!!)
-                return true
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                Timber.d("Search: $query")
-                //Query product by name
-                viewModel.searchNameChanged(query!!)
-                return true
-            }
+            override fun onQueryTextSubmit(query: String?) = onTextChange(query!!)
+            override fun onQueryTextChange(query: String?) = onTextChange(query!!)
         })
+
         binding.searchView.setOnQueryTextFocusChangeListener { _, _ ->
             Timber.d("Search focused")
             //Hide category list
