@@ -1,9 +1,8 @@
 package com.hieuwu.groceriesstore.utilities
 
-
 enum class OrderStatus(val value: String) { IN_CART("cart"), COMPLETED("completed") }
 enum class ProductListMode(val value: String) { CATEGORY("category"), DEFAULT("product") }
-enum class FilterOrder (val value: String) { ASC("asc"), DESC("desc") }
+enum class FilterOrder(val value: String) { ASC("asc"), DESC("desc") }
 
 const val PRODUCT_TABLE = "product"
 const val CATEGORY_TABLE = "category"

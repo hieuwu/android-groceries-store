@@ -2,10 +2,11 @@ package com.hieuwu.groceriesstore.utilities
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.hieuwu.groceriesstore.data.entities.*
+import com.hieuwu.groceriesstore.data.entities.Category
+import com.hieuwu.groceriesstore.data.entities.Product
+import com.hieuwu.groceriesstore.data.entities.User
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
-
 
 fun convertItemEntityToDocument(lineItem: LineItemModel): HashMap<String, Any> {
     val document = HashMap<String, Any>()
@@ -14,7 +15,6 @@ fun convertItemEntityToDocument(lineItem: LineItemModel): HashMap<String, Any> {
     document[LineItemDocumentProperties.product] = "${CollectionNames.products}/${lineItem.productId}"
     return document
 }
-
 
 fun convertOrderEntityToDocument(order: OrderModel): HashMap<String, Any> {
     val document = HashMap<String, Any>()
@@ -50,7 +50,6 @@ fun convertCategoryDocumentToEntity(document: QueryDocumentSnapshot): Category {
     return Category(id, name, image)
 }
 
-
 fun convertUserDocumentToEntity(id: String, document: DocumentSnapshot): User {
     val name: String = document.data?.get(UserDocumentProperties.name)!! as String
     val phone: String = document.data?.get(UserDocumentProperties.phone) as String
@@ -64,6 +63,6 @@ fun convertUserEntityToDocument(user: User): HashMap<String, String?> {
         UserDocumentProperties.name to user.name,
         UserDocumentProperties.email to user.email,
         UserDocumentProperties.phone to user.phone,
-        UserDocumentProperties.address to user.address,
+        UserDocumentProperties.address to user.address
     )
 }
