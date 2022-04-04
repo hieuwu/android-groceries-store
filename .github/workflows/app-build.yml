@@ -41,3 +41,5 @@ jobs:
         with:
           name: assemble
           path: assemble.zip
+      - name: Spotless check for code style
+        run:  gradlew spotlessCheck
