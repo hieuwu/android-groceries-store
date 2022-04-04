@@ -27,7 +27,8 @@ class AccountFragment : Fragment() {
     lateinit var authenticateUserUseCase: AuthenticateUserUseCase
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate<FragmentAccountBinding>(
@@ -67,5 +68,4 @@ class AccountFragment : Fragment() {
             navigateToAuthentication()
         }
     }
-
 }

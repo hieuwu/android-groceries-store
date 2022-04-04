@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class AccountViewModel @Inject constructor(private val authenticateUserUseCase: AuthenticateUserUseCase) :
     ObservableViewModel() {
@@ -21,5 +21,4 @@ class AccountViewModel @Inject constructor(private val authenticateUserUseCase: 
             authenticateUserUseCase.signOut()
         }
     }
-
 }
