@@ -35,7 +35,7 @@ interface RecipesApiService {
     fun getRecipesList(
         @Query("from") from: Int = 20,
         @Query("size") size: Int = 30,
-        @Query("tags") tags: String = "under_30_minutes",
+        @Query("tags") tags: String = "under_30_minutes"
     ): Deferred<RecipeListResponse>
 }
 
