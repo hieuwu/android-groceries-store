@@ -10,11 +10,11 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
-    private lateinit var binding: FragmentMainBinding;
-
+    private lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -24,6 +24,4 @@ class MainFragment : Fragment() {
 
         return binding.root
     }
-
-
 }
