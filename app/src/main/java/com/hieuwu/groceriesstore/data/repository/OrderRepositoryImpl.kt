@@ -15,12 +15,12 @@ import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 class OrderRepositoryImpl @Inject constructor(
@@ -41,7 +41,7 @@ class OrderRepositoryImpl @Inject constructor(
     }
 
     override fun getOneOrderByStatus(status: OrderStatus): LiveData<OrderModel>? =
-         Transformations.map(orderDao.getCartWithLineItems(status.value)?.asLiveData()) {
+        Transformations.map(orderDao.getCartWithLineItems(status.value)?.asLiveData()) {
             it?.asDomainModel()
         }
 

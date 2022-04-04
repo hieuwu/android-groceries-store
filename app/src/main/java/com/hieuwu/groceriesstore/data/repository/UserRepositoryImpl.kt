@@ -12,12 +12,12 @@ import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
 import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : UserRepository {
@@ -34,7 +34,7 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
                     val userId = auth.currentUser!!.uid
                     val newUser = hashMapOf(
                         "name" to name,
-                        "email" to email,
+                        "email" to email
                     )
                     isSucess = true
 
@@ -43,7 +43,7 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
                     db.collection(CollectionNames.users).document(userId)
                         .set(newUser)
                         .addOnSuccessListener {
-                            //Handle success
+                            // Handle success
                             isSucess = true
                         }
                         .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
@@ -56,7 +56,6 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
             }
             return true
         } else return false
-        return true
     }
 
     override suspend fun authenticate(email: String, password: String): Boolean {
@@ -68,7 +67,6 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
                 Timber.d(task.exception)
                 isSuccess = task.isSuccessful
                 id = auth.currentUser?.uid!!
-
             }.addOnFailureListener { Exception -> Timber.d(Exception) }.await()
 
         var user: User? = null
@@ -120,6 +118,4 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         Transformations.map(userDao.getCurrentUser().asLiveData()) {
             it?.asDomainModel()
         }
-
-
 }

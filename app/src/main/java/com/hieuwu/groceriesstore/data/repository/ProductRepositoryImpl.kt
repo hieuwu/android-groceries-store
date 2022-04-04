@@ -13,12 +13,12 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertProductDocumentToEntity
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 class ProductRepositoryImpl @Inject constructor(
@@ -39,7 +39,7 @@ class ProductRepositoryImpl @Inject constructor(
                 productList.add(convertProductDocumentToEntity(document))
             }
         }.addOnFailureListener { exception ->
-                Timber.w("Error getting documents.${exception}")
+                Timber.w("Error getting documents.$exception")
             }.await()
 
         withContext(Dispatchers.IO) {
