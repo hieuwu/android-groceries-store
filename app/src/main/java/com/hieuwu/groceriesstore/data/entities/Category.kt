@@ -18,7 +18,7 @@ data class Category(
     val name: String?,
 
     @ColumnInfo(name = "image")
-    val image: String?,
+    val image: String?
 )
 
 fun List<Category>.asDomainModel(): List<CategoryModel> {

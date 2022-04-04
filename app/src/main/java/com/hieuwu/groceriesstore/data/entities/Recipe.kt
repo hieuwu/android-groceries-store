@@ -15,7 +15,7 @@ data class Recipe(
     val image: String,
 
     @ColumnInfo(name = "name")
-    val name: String,
+    val name: String
 )
 
 fun List<Recipe>.asDomainModel(): List<RecipeModel> {

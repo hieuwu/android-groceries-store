@@ -30,7 +30,7 @@ data class Product(
     var category: String?,
 
     @ColumnInfo(name = "nutrition")
-    var nutrition: String?,
+    var nutrition: String?
 )
 
 fun List<Product>.asDomainModel(): List<ProductModel> {

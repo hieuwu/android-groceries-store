@@ -21,7 +21,7 @@ class User(
     var address: String?,
 
     @ColumnInfo(name = "phone")
-    var phone: String?,
+    var phone: String?
 )
 
 fun User.asDomainModel(): UserModel {

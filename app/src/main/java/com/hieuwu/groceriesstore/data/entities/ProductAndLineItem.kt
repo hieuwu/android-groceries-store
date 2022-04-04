@@ -4,7 +4,6 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 
-
 data class ProductAndLineItem(
     @Embedded val lineItem: LineItem?,
     @Relation(
@@ -22,7 +21,7 @@ fun ProductAndLineItem.asDomainModel(): LineItemModel {
         image = this.product?.image,
         price = this.product?.price,
         productId = this.product?.id,
-        quantity = this.lineItem?.quantity,
+        quantity = this.lineItem?.quantity
     )
 }
 
