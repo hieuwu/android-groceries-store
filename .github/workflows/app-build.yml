@@ -42,4 +42,4 @@ jobs:
           name: assemble
           path: assemble.zip
       - name: Spotless check for code style
-        run:  gradlew spotlessCheck
+        run:  chmod +x .github/scripts/gradlew_recursive.sh ; .github/scripts/gradlew_recursive.sh spotlessCheck
