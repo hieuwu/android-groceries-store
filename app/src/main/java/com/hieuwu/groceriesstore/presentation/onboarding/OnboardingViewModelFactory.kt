@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 
 class OnboardingViewModelFactory(
-    private val refreshAppDataUseCase: RefreshAppDataUseCase) :
+    private val refreshAppDataUseCase: RefreshAppDataUseCase
+) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(OnboardingViewModel::class.java)) {

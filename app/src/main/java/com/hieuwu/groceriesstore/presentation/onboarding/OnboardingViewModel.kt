@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class OnboardingViewModel @Inject constructor(
     private val refreshAppDataUseCase: RefreshAppDataUseCase
@@ -22,7 +22,7 @@ class OnboardingViewModel @Inject constructor(
                 refreshAppDataUseCase.refreshAppData()
             }
             updateSyncStatus(true)
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             updateSyncStatus(false)
         }
     }
@@ -30,5 +30,4 @@ class OnboardingViewModel @Inject constructor(
     private fun updateSyncStatus(status: Boolean) {
         _isSyncedSuccessful.value = status
     }
-
 }

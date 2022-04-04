@@ -14,8 +14,8 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
@@ -86,6 +86,5 @@ class OnboardingActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
     }
 }
