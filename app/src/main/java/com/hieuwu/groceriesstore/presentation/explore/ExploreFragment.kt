@@ -17,8 +17,8 @@ import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ExploreFragment : Fragment() {
@@ -30,7 +30,8 @@ class ExploreFragment : Fragment() {
     lateinit var exploreProductUseCase: ExploreProductUseCase
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -53,7 +54,6 @@ class ExploreFragment : Fragment() {
         return binding.root
     }
 
-
     private fun initAdapters() {
         binding.productRecyclerview.adapter = GridListItemAdapter(
             createGridListItemEvent()
@@ -73,7 +73,7 @@ class ExploreFragment : Fragment() {
             },
             addToCartListener = {
                 viewModel.addToCart(it)
-            },
+            }
         )
 
     private fun navigateToProductList(name: String, id: String) {
@@ -125,15 +125,15 @@ class ExploreFragment : Fragment() {
 
         binding.searchView.setOnQueryTextFocusChangeListener { _, _ ->
             Timber.d("Search focused")
-            //Hide category list
-            //Show search result list with empty list product
+            // Hide category list
+            // Show search result list with empty list product
             binding.categoryRecyclerview.visibility = View.GONE
         }
 
         binding.searchView.setOnQueryTextFocusChangeListener { _, _ ->
             Timber.d("Search focused")
-            //Hide category list
-            //Show search result list with empty list product
+            // Hide category list
+            // Show search result list with empty list product
             binding.categoryRecyclerview.visibility = View.GONE
         }
 
@@ -143,14 +143,12 @@ class ExploreFragment : Fragment() {
         closeSearchButton.setOnClickListener {
             binding.searchView.onActionViewCollapsed()
             Timber.d("Close search focused")
-            //Show category list
-            //Clear search result
-            //Hide search result
+            // Show category list
+            // Clear search result
+            // Hide search result
             binding.productRecyclerview.visibility = View.GONE
             binding.categoryRecyclerview.visibility = View.VISIBLE
             binding.animationLayout.visibility = View.GONE
-
         }
     }
-
 }

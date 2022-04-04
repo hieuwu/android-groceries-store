@@ -12,12 +12,12 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
-import kotlinx.coroutines.launch
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class ExploreViewModel @Inject constructor(
-    private val exploreProductUseCase: ExploreProductUseCase,
+    private val exploreProductUseCase: ExploreProductUseCase
 ) : ObservableViewModel() {
     private var _currentCart: MutableLiveData<OrderModel> =
         exploreProductUseCase.getCurrentCart() as MutableLiveData<OrderModel>
@@ -53,7 +53,7 @@ class ExploreViewModel @Inject constructor(
 
     fun addToCart(product: ProductModel) {
         if (_currentCart.value != null) {
-            //Add to cart
+            // Add to cart
             val cartId = _currentCart.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
@@ -72,7 +72,5 @@ class ExploreViewModel @Inject constructor(
                 exploreProductUseCase.addToCart(lineItem)
             }
         }
-
     }
-
 }
