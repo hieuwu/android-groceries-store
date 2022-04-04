@@ -13,7 +13,8 @@ import com.hieuwu.groceriesstore.databinding.FragmentCheckOutSuccessBinding
 class CheckOutSuccess : DialogFragment() {
     private lateinit var binding: FragmentCheckOutSuccessBinding
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -49,5 +50,4 @@ class CheckOutSuccess : DialogFragment() {
     fun setOnDismissListener(callback: (() -> Unit)?) {
         dismissListener = callback
     }
-
 }

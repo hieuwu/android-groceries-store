@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 
 class CheckOutViewModelFactory(
-    private val orderId: String, private val createOrderUseCase: CreateOrderUseCase
+    private val orderId: String,
+    private val createOrderUseCase: CreateOrderUseCase
 
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

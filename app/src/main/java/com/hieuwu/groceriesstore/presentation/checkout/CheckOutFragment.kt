@@ -19,7 +19,6 @@ import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class CheckOutFragment : Fragment() {
     private lateinit var binding: FragmentCheckOutBinding
@@ -29,7 +28,8 @@ class CheckOutFragment : Fragment() {
     lateinit var createOrderUseCase: CreateOrderUseCase
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 

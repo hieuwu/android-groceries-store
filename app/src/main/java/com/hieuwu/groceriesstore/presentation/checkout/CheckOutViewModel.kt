@@ -7,9 +7,8 @@ import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+import kotlinx.coroutines.launch
 
 class CheckOutViewModel @Inject constructor(
     private val orderId: String,
@@ -33,7 +32,6 @@ class CheckOutViewModel @Inject constructor(
     private var _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double>
         get() = _totalPrice
-
 
     private var _isOrderSentSuccessful = MutableLiveData<Boolean>()
     val isOrderSentSuccessful: LiveData<Boolean>
