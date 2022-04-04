@@ -25,7 +25,7 @@ class SwipeToDeleteCallback constructor(val adapter: LineListItemAdapter) :
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        val position = viewHolder.adapterPosition;
+        val position = viewHolder.adapterPosition
         adapter.removeItemAt(position)
     }
 
@@ -39,8 +39,8 @@ class SwipeToDeleteCallback constructor(val adapter: LineListItemAdapter) :
         isCurrentlyActive: Boolean
     ) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-        val itemView = viewHolder.itemView;
-        val backgroundCornerOffset = 20;
+        val itemView = viewHolder.itemView
+        val backgroundCornerOffset = 20
         val iconMargin = (itemView.height - _icon?.intrinsicHeight!!) / 2
         val iconTop = itemView.top + (itemView.height - _icon?.intrinsicHeight!!) / 2
         val iconBottom = iconTop + _icon?.intrinsicHeight!!
@@ -50,7 +50,7 @@ class SwipeToDeleteCallback constructor(val adapter: LineListItemAdapter) :
             dX < 0 -> {
                 val iconLeft = itemView.right - iconMargin - _icon?.intrinsicWidth!!
                 val iconRight = itemView.right - iconMargin
-                _icon?.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                _icon?.setBounds(iconLeft, iconTop, iconRight, iconBottom)
 
                 _background.setBounds(
                     itemView.right + dX.toInt() - backgroundCornerOffset,

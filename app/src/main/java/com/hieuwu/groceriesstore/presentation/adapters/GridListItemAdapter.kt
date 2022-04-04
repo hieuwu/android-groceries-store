@@ -18,7 +18,6 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
             binding.product = productModel
             binding.executePendingBindings()
         }
-
     }
 
     override fun onBindViewHolder(holder: ProductGridViewHolder, position: Int) {
