@@ -20,7 +20,6 @@ class FirebaseCloudMessageService : FirebaseMessagingService() {
         remoteMessage.notification?.let {
             showNotification(it.title!!, it.body!!)
         }
-
     }
 
     private fun showNotification(
@@ -31,7 +30,7 @@ class FirebaseCloudMessageService : FirebaseMessagingService() {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
-        val channelId = "notification_channel";
+        val channelId = "notification_channel"
         val pendingIntent = PendingIntent.getActivity(
             this, 0, intent,
             PendingIntent.FLAG_ONE_SHOT
@@ -66,6 +65,6 @@ class FirebaseCloudMessageService : FirebaseMessagingService() {
             )
         }
 
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(0, builder.build())
     }
 }
