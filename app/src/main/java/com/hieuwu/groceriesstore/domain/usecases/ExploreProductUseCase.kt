@@ -9,7 +9,7 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 
 interface ExploreProductUseCase {
     fun getCategoryList(): LiveData<List<CategoryModel>>
-    fun searchProductByName(name: String?) : LiveData<List<ProductModel>>
+    fun searchProductByName(name: String?): LiveData<List<ProductModel>>
     fun getCurrentCart(): LiveData<OrderModel>?
     suspend fun addToCart(lineItem: LineItem)
     suspend fun createNewOrder(order: Order)

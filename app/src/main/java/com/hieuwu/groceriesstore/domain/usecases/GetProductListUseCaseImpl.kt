@@ -33,5 +33,4 @@ class GetProductListUseCaseImpl @Inject constructor(
 
     override suspend fun getAllProductsByCategory(categoryId: String) =
         productRepository.getAllProductsByCategory(categoryId)
-
 }

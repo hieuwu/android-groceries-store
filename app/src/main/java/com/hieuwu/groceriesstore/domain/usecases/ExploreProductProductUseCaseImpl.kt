@@ -20,10 +20,8 @@ class ExploreProductProductUseCaseImpl @Inject constructor(
     override fun getCategoryList(): LiveData<List<CategoryModel>> =
         categoryRepository.getFromLocal()
 
-
     override fun searchProductByName(name: String?): LiveData<List<ProductModel>> =
         productRepository.searchProductsListByName(name)
-
 
     override fun getCurrentCart(): LiveData<OrderModel>? {
         return orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
@@ -36,5 +34,4 @@ class ExploreProductProductUseCaseImpl @Inject constructor(
     override suspend fun createNewOrder(order: Order) {
         orderRepository.createOrUpdate(order)
     }
-
 }
