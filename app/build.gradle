@@ -112,5 +112,5 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
     implementation("androidx.cardview:cardview:$cardViewVersion")
     implementation "com.airbnb.android:lottie:$lottieVersion"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1'
 }
