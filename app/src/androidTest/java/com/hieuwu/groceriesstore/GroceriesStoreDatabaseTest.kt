@@ -13,6 +13,7 @@ import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.data.entities.Product
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import java.io.IOException
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,7 +22,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 class GroceriesStoreDatabaseTest {
@@ -46,7 +46,6 @@ class GroceriesStoreDatabaseTest {
         productDao = db.productDao()
         linetItemDao = db.lineItemDao()
         orderDao = db.orderDao()
-
     }
 
     @After
@@ -58,7 +57,7 @@ class GroceriesStoreDatabaseTest {
     @Test
     @Throws(Exception::class)
     suspend fun insertAndGetProduct() {
-        val aProduct = Product("123", "Product Test", "Test", 12.0, "","","")
+        val aProduct = Product("123", "Product Test", "Test", 12.0, "", "", "")
         withContext(Dispatchers.IO) {
             productDao.insert(aProduct)
         }
@@ -69,7 +68,7 @@ class GroceriesStoreDatabaseTest {
     @Test
     @Throws(Exception::class)
     suspend fun insertAndGetLineItem() {
-        val aProduct = Product("123", "Product Test", "Test", 12.0, "","","")
+        val aProduct = Product("123", "Product Test", "Test", 12.0, "", "", "")
         withContext(Dispatchers.IO) {
             productDao.insert(aProduct)
         }
@@ -85,8 +84,8 @@ class GroceriesStoreDatabaseTest {
     @Test
     @Throws(Exception::class)
     suspend fun insertAndGetOrderWithItems() {
-        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty","","")
-        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty","","")
+        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty", "", "")
+        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty", "", "")
         withContext(Dispatchers.IO) {
             productDao.insert(firstProduct)
             productDao.insert(secondProduct)
@@ -109,7 +108,7 @@ class GroceriesStoreDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun insertAndGetCurrentCart() {
-        val order = Order("12", OrderStatus.IN_CART.value,"")
+        val order = Order("12", OrderStatus.IN_CART.value, "")
         orderDao.insert(order)
 
         var cart = orderDao.getCart(OrderStatus.IN_CART.value).asLiveData()
@@ -120,8 +119,8 @@ class GroceriesStoreDatabaseTest {
     @Test
     @Throws(Exception::class)
     suspend fun removeItem() {
-        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty","","")
-        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty","","")
+        val firstProduct = Product("1", "First Product", "Test", 12.0, "empty", "", "")
+        val secondProduct = Product("2", "Second Product", "Test", 13.0, "empty", "", "")
 
         withContext(Dispatchers.IO) {
             productDao.insert(firstProduct)
