@@ -7,9 +7,9 @@ import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
 class CartViewModel @Inject constructor(
     private val updateCartItemUseCase: UpdateCartItemUseCase

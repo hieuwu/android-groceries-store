@@ -1,7 +1,11 @@
 package com.hieuwu.groceriesstore.presentation.cart
 
 import android.os.Bundle
-import android.view.*
+import android.view.ContextMenu
+import android.view.LayoutInflater
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -24,7 +28,8 @@ class CartFragment : BottomSheetDialogFragment() {
     lateinit var updateCartItemUseCase: UpdateCartItemUseCase
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate<FragmentCartBinding>(
@@ -51,10 +56,10 @@ class CartFragment : BottomSheetDialogFragment() {
             ), requireContext()
         )
 
-        //Setup recyclerview
+        // Setup recyclerview
         val itemTouchHelper =
-            ItemTouchHelper(SwipeToDeleteCallback(adapter));
-        itemTouchHelper.attachToRecyclerView(binding.cartDetailRecyclerview);
+            ItemTouchHelper(SwipeToDeleteCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(binding.cartDetailRecyclerview)
         binding.cartDetailRecyclerview.adapter = adapter
 
         binding.checkoutButton.setOnClickListener {
@@ -63,9 +68,8 @@ class CartFragment : BottomSheetDialogFragment() {
                     viewModel.order.value?.id as String
                 )
             this.findNavController().navigate(direction)
-            dismiss();
+            dismiss()
         }
-
     }
     private fun setObserver() {
         viewModel.order.observe(viewLifecycleOwner) {}
@@ -81,4 +85,3 @@ class CartFragment : BottomSheetDialogFragment() {
         inflater.inflate(R.menu.line_item_context_menu, menu)
     }
 }
-
