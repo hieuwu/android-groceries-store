@@ -1,6 +1,12 @@
 package com.hieuwu.groceriesstore.data.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.ProductAndLineItem
 import com.hieuwu.groceriesstore.utilities.LINE_ITEM_TABLE
@@ -26,7 +32,6 @@ interface LineItemDao {
     @Transaction
     @Query("SELECT * FROM $LINE_ITEM_TABLE ")
     fun getAll(): Flow<List<ProductAndLineItem>>
-
 
     @Transaction
     @Query("SELECT * FROM $LINE_ITEM_TABLE WHERE orderId = :orderId")

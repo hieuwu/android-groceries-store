@@ -1,6 +1,10 @@
 package com.hieuwu.groceriesstore.data.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import com.hieuwu.groceriesstore.data.entities.Product
 import com.hieuwu.groceriesstore.utilities.PRODUCT_TABLE
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(product: Product)
-
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(products: List<Product>)
@@ -25,7 +28,6 @@ interface ProductDao {
 
     @Query("SELECT * FROM $PRODUCT_TABLE WHERE name LIKE '%' || :name || '%'")
     fun searchProductByName(name: String?): Flow<List<Product>>
-
 
     @Query("SELECT * FROM $PRODUCT_TABLE LIMIT 10")
     fun getAll(): Flow<List<Product>>
