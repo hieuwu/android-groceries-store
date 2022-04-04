@@ -3,7 +3,6 @@ package com.hieuwu.groceriesstore.presentation.productdetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 
 class ProductDetailViewModelFactory(

@@ -1,19 +1,20 @@
 package com.hieuwu.groceriesstore.presentation.productdetail
 
 import androidx.databinding.Bindable
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
-import kotlinx.coroutines.launch
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class ProductDetailViewModel @Inject constructor(
     id: String,
@@ -42,7 +43,7 @@ class ProductDetailViewModel @Inject constructor(
     fun addToCart() {
         val subtotal = product.value?.price?.times(qty) ?: 0.0
         if (currentCart?.value != null) {
-            //Add to cart
+            // Add to cart
             val cartId = currentCart?.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
@@ -52,7 +53,7 @@ class ProductDetailViewModel @Inject constructor(
             }
         } else {
             val id = UUID.randomUUID().toString()
-            val newOrder = Order(id, OrderStatus.IN_CART.value,"")
+            val newOrder = Order(id, OrderStatus.IN_CART.value, "")
             viewModelScope.launch {
                 orderRepository.createOrUpdate(newOrder)
                 val lineItem = LineItem(
