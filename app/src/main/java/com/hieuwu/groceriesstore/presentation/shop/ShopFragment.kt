@@ -38,7 +38,8 @@ class ShopFragment : Fragment() {
     private var dotCount: Int = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate<FragmentShopBinding>(
@@ -84,7 +85,8 @@ class ShopFragment : Fragment() {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
-                positionOffsetPixels: Int) {}
+                positionOffsetPixels: Int
+            ) {}
 
             override fun onPageSelected(position: Int) {
                 repeat(dotCount) {
@@ -124,7 +126,7 @@ class ShopFragment : Fragment() {
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
-                    addToCartListener = { addToCart(it) },
+                    addToCartListener = { addToCart(it) }
                 )
             )
 
@@ -134,7 +136,7 @@ class ShopFragment : Fragment() {
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
-                    addToCartListener = { addToCart(it) },
+                    addToCartListener = { addToCart(it) }
                 )
             )
 
@@ -145,7 +147,7 @@ class ShopFragment : Fragment() {
             GridListItemAdapter(
                 GridListItemAdapter.OnClickListener(
                     clickListener = { viewModel.displayPropertyDetails(it) },
-                    addToCartListener = { addToCart(it) },
+                    addToCartListener = { addToCart(it) }
                 )
             )
 

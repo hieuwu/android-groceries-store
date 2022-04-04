@@ -1,20 +1,23 @@
 package com.hieuwu.groceriesstore.presentation.shop
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
-import kotlinx.coroutines.*
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class ShopViewModel @Inject constructor(
     private val getProductListUseCase: GetProductListUseCase
 ) : ViewModel() {
-    private var _productList:MutableLiveData<List<ProductModel>> = getProductListUseCase.getProductList()
+    private var _productList: MutableLiveData<List<ProductModel>> = getProductListUseCase.getProductList()
             as MutableLiveData<List<ProductModel>>
     val productList: LiveData<List<ProductModel>>
         get() = _productList
@@ -35,7 +38,7 @@ class ShopViewModel @Inject constructor(
 
     fun addToCart(product: ProductModel) {
         if (currentCart?.value != null) {
-            //Add to cart
+            // Add to cart
             val cartId = currentCart?.value!!.id
             viewModelScope.launch {
                 getProductListUseCase
@@ -49,5 +52,4 @@ class ShopViewModel @Inject constructor(
             }
         }
     }
-
 }
