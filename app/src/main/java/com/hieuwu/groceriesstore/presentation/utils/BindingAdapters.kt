@@ -16,7 +16,6 @@ import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.RecipeItemAdapter
 
-
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<ProductModel>?) {
     val adapter = recyclerView.adapter as GridListItemAdapter
@@ -42,7 +41,6 @@ fun bindRecyclerViewLine(recyclerView: RecyclerView, data: MutableList<LineItemM
     val adapter = recyclerView.adapter as LineListItemAdapter
     adapter.submitList(data)
 }
-
 
 @BindingAdapter("categoryListData")
 fun bindRecyclerViewCategory(recyclerView: RecyclerView, data: MutableList<CategoryModel>?) {
