@@ -4,7 +4,7 @@ data class OrderModel(
     var id: String = "",
     var status: String? = null,
     var address: String? = null,
-    val lineItemList: MutableList<LineItemModel>,
+    val lineItemList: MutableList<LineItemModel>
 ) {
     val total: Double
         get() = calculateTotal()
