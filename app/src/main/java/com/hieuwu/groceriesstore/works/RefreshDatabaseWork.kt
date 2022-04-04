@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 class RefreshDatabaseWork(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
@@ -25,5 +25,4 @@ class RefreshDatabaseWork(appContext: Context, params: WorkerParameters) :
     companion object {
         const val WORK_NAME = "RefreshDatabaseWorker"
     }
-
 }
