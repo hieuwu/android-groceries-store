@@ -6,11 +6,11 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.hieuwu.groceriesstore.works.RefreshDatabaseWork
 import dagger.hilt.android.HiltAndroidApp
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 @HiltAndroidApp
 class GroceriesStoreApplication : Application() {
