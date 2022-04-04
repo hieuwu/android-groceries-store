@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class SignUpViewModel @Inject constructor(private val userRepository: UserRepository) : ObservableViewModel() {
 
@@ -39,17 +39,15 @@ class SignUpViewModel @Inject constructor(private val userRepository: UserReposi
             notifyPropertyChanged(BR.name)
         }
 
-    //Declare check variable as live data, set it when create success fully
-    //In fragment observe it
+    // Declare check variable as live data, set it when create success fully
+    // In fragment observe it
     private val _isSignUpSuccessful = MutableLiveData<Boolean?>()
     val isSignUpSuccessful: LiveData<Boolean?>
         get() = _isSignUpSuccessful
-
 
     fun createAccount() {
         viewModelScope.launch {
             _isSignUpSuccessful.value = userRepository!!.createAccount(_email!!, _password!!, _name!!)
         }
     }
-
 }
