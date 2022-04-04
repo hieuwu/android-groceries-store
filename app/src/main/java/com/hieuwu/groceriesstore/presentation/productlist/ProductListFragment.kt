@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductListBinding
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
@@ -25,7 +24,8 @@ class ProductListFragment : Fragment() {
     lateinit var getProductListUseCase: GetProductListUseCase
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate<FragmentProductListBinding>(
@@ -112,9 +112,8 @@ class ProductListFragment : Fragment() {
                     addToCartListener = {
                         viewModel.addToCart(it)
                         showMessageSnackBar("Added ${it.name}")
-                    },
+                    }
                 )
             )
     }
-
 }

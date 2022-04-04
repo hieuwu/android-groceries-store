@@ -1,18 +1,21 @@
 package com.hieuwu.groceriesstore.presentation.productlist
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import java.util.UUID
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
-import javax.inject.Inject
 
 class ProductListViewModel @Inject constructor(
     val categoryId: String,
@@ -68,7 +71,7 @@ class ProductListViewModel @Inject constructor(
 
     fun addToCart(product: ProductModel) {
         if (currentCart.value != null) {
-            //Add to cart
+            // Add to cart
             val cartId = currentCart.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
@@ -88,5 +91,4 @@ class ProductListViewModel @Inject constructor(
             }
         }
     }
-
 }
