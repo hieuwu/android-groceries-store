@@ -6,7 +6,7 @@ import com.squareup.moshi.Json
 data class RecipeDto(
     @Json(name = "id") val id: String,
     @Json(name = "thumbnail_url") val image: String,
-    @Json(name = "name") val name: String,
+    @Json(name = "name") val name: String
 )
 
 fun List<RecipeDto>.asEntity(): List<Recipe> {
