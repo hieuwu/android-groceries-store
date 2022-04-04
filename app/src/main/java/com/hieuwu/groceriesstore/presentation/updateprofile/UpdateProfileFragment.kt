@@ -18,14 +18,15 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class UpdateProfileFragment : Fragment() {
 
-    lateinit var binding: FragmentUpdateProfileBinding;
+    lateinit var binding: FragmentUpdateProfileBinding
     lateinit var viewModel: UpdateProfileViewModel
 
     @Inject
     lateinit var authenticateUserUseCase: AuthenticateUserUseCase
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate<FragmentUpdateProfileBinding>(
@@ -55,7 +56,7 @@ class UpdateProfileFragment : Fragment() {
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_save -> {
-                    //Update user data to backend
+                    // Update user data to backend
                     viewModel.updateUserProfile()
                     true
                 }
@@ -63,7 +64,6 @@ class UpdateProfileFragment : Fragment() {
             }
         }
     }
-
 
     private fun setObserver() {
         viewModel.isDoneUpdate.observe(viewLifecycleOwner) {

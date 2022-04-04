@@ -8,9 +8,9 @@ import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
-import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class UpdateProfileViewModel @Inject constructor(private val authenticateUserUseCase: AuthenticateUserUseCase) :
     ObservableViewModel() {
@@ -78,5 +78,4 @@ class UpdateProfileViewModel @Inject constructor(private val authenticateUserUse
             _isDoneUpdate.value = false
         }
     }
-
 }

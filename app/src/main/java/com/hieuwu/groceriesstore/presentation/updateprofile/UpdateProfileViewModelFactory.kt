@@ -16,5 +16,4 @@ class UpdateProfileViewModelFactory(private val authenticateUserUseCase: Authent
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-
 }
