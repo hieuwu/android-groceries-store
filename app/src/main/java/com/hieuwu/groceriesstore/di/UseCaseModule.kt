@@ -1,12 +1,24 @@
 package com.hieuwu.groceriesstore.di
 
-import com.hieuwu.groceriesstore.domain.usecases.*
+import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
+import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
+import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.ExploreProductProductUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
+import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
+import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
 
 @InstallIn(SingletonComponent::class)
 @Module
