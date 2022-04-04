@@ -23,7 +23,8 @@ class FavouriteFragment : Fragment() {
     lateinit var recipeRepository: RecipeRepository
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate<FragmentFavouriteBinding>(

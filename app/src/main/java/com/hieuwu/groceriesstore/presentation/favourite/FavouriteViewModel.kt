@@ -14,5 +14,4 @@ class FavouriteViewModel @Inject constructor(private val recipeRepository: Recip
             as MutableLiveData<List<RecipeModel>>
     val recipesList: LiveData<List<RecipeModel>>
         get() = _recipesList
-    
 }

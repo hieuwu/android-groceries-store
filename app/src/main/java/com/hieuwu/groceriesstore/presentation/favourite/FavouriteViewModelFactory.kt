@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
 
-
 class FavouriteViewModelFactory(
     private val recipeRepository: RecipeRepository
 ) :
