@@ -6,5 +6,8 @@ import javax.inject.Inject
 
 class NotificationSettingsViewModel @Inject constructor(private val userSettingsUseCase: UserSettingsUseCase) :
     ObservableViewModel() {
+    fun updateNotificationSettings() {
+        TODO("Not yet implemented")
+    }
 
 }
