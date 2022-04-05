@@ -1,4 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.notificationsettings
 
-class NotificationSettingViewModel {
+import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+
+class NotificationSettingsViewModel: ObservableViewModel() {
+
 }
