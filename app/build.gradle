@@ -7,8 +7,8 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30"
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
 
     defaultConfig {
         applicationId "com.hieuwu.groceriesstore"
