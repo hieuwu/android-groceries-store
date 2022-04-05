@@ -57,5 +57,6 @@
     <string name="order_success_dialog">SUCCESS_DIALOG</string>
     <string name="update_profile_successfully">Update profile successfully!</string>
     <string name="update_profile_failed">Update profile failed!</string>
+    <string name="notification_settings">Notification settings</string>
 
 </resources>
