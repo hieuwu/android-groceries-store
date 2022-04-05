@@ -14,6 +14,7 @@ import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCaseImpl
 import dagger.Binds
 import dagger.Module
@@ -55,5 +56,5 @@ abstract class UseCaseModule {
 
     @Singleton
     @Binds
-    abstract fun bindUserSettingsUseCase(impl: UserSettingsUseCaseImpl): UserSettingsUseCaseImpl
+    abstract fun bindUserSettingsUseCase(impl: UserSettingsUseCaseImpl): UserSettingsUseCase
 }
