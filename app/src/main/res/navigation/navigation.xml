@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_shopFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_notificationSettingsFragment"
+            app:destination="@id/notificationSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -128,5 +131,9 @@
         android:id="@+id/updateProfileFragment"
         android:name="com.hieuwu.groceriesstore.presentation.updateprofile.UpdateProfileFragment"
         android:label="UpdateProfileFragment" />
+    <fragment
+        android:id="@+id/notificationSettingsFragment"
+        android:name="com.hieuwu.groceriesstore.presentation.notificationsettings.NotificationSettingsFragment"
+        android:label="NotificationSettingsFragment" />
 
 </navigation>
