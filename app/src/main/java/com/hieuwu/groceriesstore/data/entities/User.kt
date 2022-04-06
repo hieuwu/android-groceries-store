@@ -21,7 +21,16 @@ class User(
     var address: String?,
 
     @ColumnInfo(name = "phone")
-    var phone: String?
+    var phone: String?,
+
+    @ColumnInfo(name = "isOrderCreatedNotiEnabled")
+    var isOrderCreatedNotiEnabled: Boolean,
+
+    @ColumnInfo(name = "isPromotionNotiEnabled")
+    var isPromotionNotiEnabled: Boolean,
+
+    @ColumnInfo(name = "isDataRefreshedNotiEnabled")
+    var isDataRefreshedNotiEnabled: Boolean
 )
 
 fun User.asDomainModel(): UserModel {
@@ -30,6 +39,9 @@ fun User.asDomainModel(): UserModel {
         name = this.name,
         phone = this.phone ?: "",
         email = this.email,
-        address = this.address ?: ""
+        address = this.address ?: "",
+        isDataRefreshedNotiEnabled = this.isDataRefreshedNotiEnabled,
+        isOrderCreatedNotiEnabled = this.isOrderCreatedNotiEnabled,
+        isPromotionNotiEnabled = this.isPromotionNotiEnabled
     )
 }
