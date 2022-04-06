@@ -9,4 +9,8 @@ interface UserRepository {
     fun getCurrentUser(): LiveData<UserModel?>
     suspend fun updateUserProfile(userId: String, name: String, email: String, phone: String, address: String)
     suspend fun clearUser()
+    suspend fun updateUserSettings(
+        id: String, isOrderCreatedEnabled: Boolean, isDatabaseRefreshedEnabled: Boolean,
+        isPromotionEnabled: Boolean
+    )
 }

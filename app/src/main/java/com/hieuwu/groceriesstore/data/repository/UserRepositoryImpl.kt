@@ -38,7 +38,11 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
                     )
                     isSucess = true
 
-                    dbUser = User(userId, name, email, null, null)
+                    dbUser = User(userId, name, email, null, null,
+                        isOrderCreatedNotiEnabled = false,
+                        isPromotionNotiEnabled = false,
+                        isDataRefreshedNotiEnabled = false
+                    )
                     val db = Firebase.firestore
                     db.collection(CollectionNames.users).document(userId)
                         .set(newUser)
@@ -92,7 +96,11 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         address: String
     ) {
         val db = Firebase.firestore
-        val dbUser = User(userId, name, email, address, phone)
+        val dbUser = User(userId, name, email, address, phone,
+            isOrderCreatedNotiEnabled = false,
+            isPromotionNotiEnabled = false,
+            isDataRefreshedNotiEnabled = false
+        )
         val newUser = convertUserEntityToDocument(dbUser)
         var isSuccess = false
         db.collection(CollectionNames.users).document(userId)
@@ -111,6 +119,16 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
     override suspend fun clearUser() {
         withContext(Dispatchers.IO) {
             userDao.clear()
+        }
+    }
+
+    override suspend fun updateUserSettings(id: String,
+        isOrderCreatedEnabled: Boolean,
+        isDatabaseRefreshedEnabled: Boolean,
+        isPromotionEnabled: Boolean
+    ) {
+        withContext(Dispatchers.IO) {
+            userDao.updateUserSettings(id, isOrderCreatedEnabled, isDatabaseRefreshedEnabled, isPromotionEnabled)
         }
     }
 
