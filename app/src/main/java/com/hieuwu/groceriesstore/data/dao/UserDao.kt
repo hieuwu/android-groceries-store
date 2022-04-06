@@ -25,7 +25,7 @@ interface UserDao {
 
     @Query("UPDATE  $USER_TABLE SET isOrderCreatedNotiEnabled = :isOrderCreatedEnabled, isDataRefreshedNotiEnabled =:isDatabaseRefreshedEnabled, isPromotionNotiEnabled =:isPromotionEnabled WHERE id = :id")
     suspend fun updateUserSettings(
-        id: Int,
+        id: String,
         isOrderCreatedEnabled: Boolean,
         isDatabaseRefreshedEnabled: Boolean,
         isPromotionEnabled: Boolean
