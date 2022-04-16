@@ -55,7 +55,7 @@ fun convertUserDocumentToEntity(id: String, document: DocumentSnapshot): User {
     val phone: String = document.data?.get(UserDocumentProperties.phone) as String
     val address: String = document.data?.get(UserDocumentProperties.address) as String
     val email: String = document.data?.get(UserDocumentProperties.email) as String
-    return User(id, name, email, address, phone)
+    return User(id, name, email, address, phone, false, false, false)
 }
 
 fun convertUserEntityToDocument(user: User): HashMap<String, String?> {
