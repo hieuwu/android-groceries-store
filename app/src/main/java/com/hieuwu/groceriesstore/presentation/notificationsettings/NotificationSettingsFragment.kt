@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentNotificationSettingsBinding
+import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,6 +25,9 @@ class NotificationSettingsFragment : Fragment() {
     @Inject
     lateinit var userSettingsUseCase: UserSettingsUseCase
 
+    @Inject
+    lateinit var authenticateUserUseCase: AuthenticateUserUseCase
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,11 +36,23 @@ class NotificationSettingsFragment : Fragment() {
             inflater, R.layout.fragment_notification_settings, container, false
         )
 
-        val viewModelFactory = NotificationSettingsViewModelFactory(userSettingsUseCase)
+        val viewModelFactory =
+            NotificationSettingsViewModelFactory(userSettingsUseCase, authenticateUserUseCase)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(NotificationSettingsViewModel::class.java)
         binding.viewModel = viewModel
         setEventListeners()
+        viewModel.user.observe(viewLifecycleOwner) {
+            viewModel.user.value?.let {
+                viewModel.isOrderCreatedNotiEnabled.value = it.isPromotionNotiEnabled
+                viewModel.isDatabaseRefreshedNotiEnabled.value = it.isDataRefreshedNotiEnabled
+                viewModel.isOrderCreatedNotiEnabled.value = it.isOrderCreatedNotiEnabled
+            }
+        }
+        viewModel.isOrderCreatedNotiEnabled.observe(viewLifecycleOwner) {}
+        viewModel.isDatabaseRefreshedNotiEnabled.observe(viewLifecycleOwner) {}
+        viewModel.isPromotionNotiEnabled.observe(viewLifecycleOwner) {}
+
         return binding.root
         // Inflate the layout for this fragment
     }
@@ -47,15 +63,15 @@ class NotificationSettingsFragment : Fragment() {
         }
 
         binding.switchDatabaseRefreshDone.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.isDatabaseRefreshedNotiEnabled = isChecked
+            viewModel.isDatabaseRefreshedNotiEnabled.value = isChecked
         }
 
         binding.switchOrderCreated.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.isOrderCreatedNotiEnabled = isChecked
+            viewModel.isOrderCreatedNotiEnabled.value = isChecked
         }
 
         binding.switchPromotion.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.isPromotionNotiEnabled = isChecked
+            viewModel.isPromotionNotiEnabled?.value = isChecked
         }
 
         binding.toolbar.setOnMenuItemClickListener { item ->
