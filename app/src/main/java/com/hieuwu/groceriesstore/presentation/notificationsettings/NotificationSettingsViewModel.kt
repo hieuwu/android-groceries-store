@@ -12,57 +12,53 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class NotificationSettingsViewModel @Inject constructor(private val userSettingsUseCase: UserSettingsUseCase) :
+class NotificationSettingsViewModel @Inject constructor(
+    private val userSettingsUseCase: UserSettingsUseCase,
+    private val authenticateUserUseCase: AuthenticateUserUseCase
+) :
     ObservableViewModel() {
-//    @Inject
-//    lateinit var authenticateUserUseCase: AuthenticateUserUseCase
-//
-//    private val _user =
-//        authenticateUserUseCase.getCurrentUser() as MutableLiveData<UserModel?>
-//    val user: LiveData<UserModel?>
-//        get() = _user
+    private val _user =
+        authenticateUserUseCase.getCurrentUser() as MutableLiveData<UserModel?>
+    val user: LiveData<UserModel?>
+        get() = _user
 
-    private var _isDatabaseRefreshedNotiEnabled: Boolean? = null
-    var isDatabaseRefreshedNotiEnabled: Boolean?
-        get() {
-            return _isDatabaseRefreshedNotiEnabled
-        }
+    private var _isDatabaseRefreshedNotiEnabled = MutableLiveData(false)
+    var isDatabaseRefreshedNotiEnabled: MutableLiveData<Boolean> = _isDatabaseRefreshedNotiEnabled
         set(value) {
-            _isDatabaseRefreshedNotiEnabled = value
+            _isDatabaseRefreshedNotiEnabled.value = value.value
+            field = value
         }
-
-    private var _isOrderCreatedNotiEnabled: Boolean? = null
-    var isOrderCreatedNotiEnabled: Boolean?
-        get() {
-            return _isOrderCreatedNotiEnabled
-        }
+    private var _isOrderCreatedNotiEnabled = MutableLiveData(false)
+    var isOrderCreatedNotiEnabled: MutableLiveData<Boolean> = _isOrderCreatedNotiEnabled
         set(value) {
-            _isOrderCreatedNotiEnabled = value
+            _isOrderCreatedNotiEnabled.value = value.value
+            field = value
         }
 
-    private var _isPromotionNotiEnabled: Boolean? = null
-    var isPromotionNotiEnabled: Boolean?
-        get() {
-            return _isPromotionNotiEnabled
-        }
+    private var _isPromotionNotiEnabled = MutableLiveData(false)
+    var isPromotionNotiEnabled: MutableLiveData<Boolean> = _isOrderCreatedNotiEnabled
         set(value) {
-            _isPromotionNotiEnabled = value
+            _isPromotionNotiEnabled.value = value.value
+            field = value
         }
 
     init {
-//        _isPromotionNotiEnabled = _user.value?.isPromotionNotiEnabled
-//        _isDatabaseRefreshedNotiEnabled = _user.value?.isDataRefreshedNotiEnabled
-//        _isOrderCreatedNotiEnabled = _user.value?.isOrderCreatedNotiEnabled
+        _user.value?.let {
+            _isPromotionNotiEnabled.value = it.isPromotionNotiEnabled
+            _isDatabaseRefreshedNotiEnabled.value = it.isDataRefreshedNotiEnabled
+            _isOrderCreatedNotiEnabled.value = it.isOrderCreatedNotiEnabled
+        }
     }
 
     fun updateNotificationSettings() {
         Timber.d("promo: $isPromotionNotiEnabled, ord: $isOrderCreatedNotiEnabled, db: $isDatabaseRefreshedNotiEnabled")
         viewModelScope.launch {
-//            userSettingsUseCase.updateUserSettings(
-//                user.value?.id!!,
-//                isOrderCreatedNotiEnabled!!, isDatabaseRefreshedNotiEnabled
-//                !!, isPromotionNotiEnabled!!
-//            )
+            userSettingsUseCase.updateUserSettings(
+                user.value?.id!!,
+                isOrderCreatedNotiEnabled?.value!!,
+                isDatabaseRefreshedNotiEnabled?.value!!,
+                isPromotionNotiEnabled?.value!!
+            )
         }
     }
 
