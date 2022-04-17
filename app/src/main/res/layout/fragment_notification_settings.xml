@@ -41,6 +41,7 @@
             android:id="@+id/switch_order_created"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="@{viewModel.isPromotionNotiEnabled}"
             android:layout_marginHorizontal="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_medium"
             android:minHeight="@dimen/switch_min_height"
