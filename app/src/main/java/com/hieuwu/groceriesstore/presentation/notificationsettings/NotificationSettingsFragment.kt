@@ -41,20 +41,18 @@ class NotificationSettingsFragment : Fragment() {
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(NotificationSettingsViewModel::class.java)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         setEventListeners()
-        viewModel.user.observe(viewLifecycleOwner) {
-            viewModel.user.value?.let {
-                viewModel.isOrderCreatedNotiEnabled.value = it.isPromotionNotiEnabled
-                viewModel.isDatabaseRefreshedNotiEnabled.value = it.isDataRefreshedNotiEnabled
-                viewModel.isOrderCreatedNotiEnabled.value = it.isOrderCreatedNotiEnabled
-            }
-        }
+        setObservers()
+
+        return binding.root
+    }
+
+    private fun setObservers() {
+        viewModel.user.observe(viewLifecycleOwner) { viewModel.initializeSwitchValue(it) }
         viewModel.isOrderCreatedNotiEnabled.observe(viewLifecycleOwner) {}
         viewModel.isDatabaseRefreshedNotiEnabled.observe(viewLifecycleOwner) {}
         viewModel.isPromotionNotiEnabled.observe(viewLifecycleOwner) {}
-
-        return binding.root
-        // Inflate the layout for this fragment
     }
 
     private fun setEventListeners() {
@@ -71,7 +69,7 @@ class NotificationSettingsFragment : Fragment() {
         }
 
         binding.switchPromotion.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.isPromotionNotiEnabled?.value = isChecked
+            viewModel.isPromotionNotiEnabled.value = isChecked
         }
 
         binding.toolbar.setOnMenuItemClickListener { item ->
