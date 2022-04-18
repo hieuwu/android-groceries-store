@@ -12,6 +12,7 @@ import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
 import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
+import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
@@ -127,8 +128,23 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         isDatabaseRefreshedEnabled: Boolean,
         isPromotionEnabled: Boolean
     ) {
-        withContext(Dispatchers.IO) {
-            userDao.updateUserSettings(id, isOrderCreatedEnabled, isDatabaseRefreshedEnabled, isPromotionEnabled)
+        val updateRequest = createUpdateUserRequest(
+            isOrderCreatedEnabled,
+            isDatabaseRefreshedEnabled,
+            isPromotionEnabled
+        )
+        val db = Firebase.firestore
+        var isSuccess = false
+        db.collection(CollectionNames.users).document(id)
+            .set(updateRequest)
+            .addOnSuccessListener {
+                isSuccess = true
+            }
+            .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }.await()
+        if (isSuccess) {
+            withContext(Dispatchers.IO) {
+                userDao.updateUserSettings(id, isOrderCreatedEnabled, isDatabaseRefreshedEnabled, isPromotionEnabled)
+            }
         }
     }
 
