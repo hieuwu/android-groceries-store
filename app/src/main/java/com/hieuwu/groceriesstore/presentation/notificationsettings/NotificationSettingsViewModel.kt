@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.presentation.notificationsettings
 
-import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -28,6 +27,7 @@ class NotificationSettingsViewModel @Inject constructor(
             _isDatabaseRefreshedNotiEnabled.value = value.value
             field = value
         }
+
     private var _isOrderCreatedNotiEnabled = MutableLiveData(false)
     var isOrderCreatedNotiEnabled: MutableLiveData<Boolean> = _isOrderCreatedNotiEnabled
         set(value) {
@@ -42,11 +42,11 @@ class NotificationSettingsViewModel @Inject constructor(
             field = value
         }
 
-    init {
-        _user.value?.let {
-            _isPromotionNotiEnabled.value = it.isPromotionNotiEnabled
-            _isDatabaseRefreshedNotiEnabled.value = it.isDataRefreshedNotiEnabled
-            _isOrderCreatedNotiEnabled.value = it.isOrderCreatedNotiEnabled
+    fun initializeSwitchValue(user: UserModel?) {
+        user?.let {
+            isOrderCreatedNotiEnabled.value = it.isPromotionNotiEnabled
+            isDatabaseRefreshedNotiEnabled.value = it.isDataRefreshedNotiEnabled
+            isOrderCreatedNotiEnabled.value = it.isOrderCreatedNotiEnabled
         }
     }
 
@@ -55,9 +55,9 @@ class NotificationSettingsViewModel @Inject constructor(
         viewModelScope.launch {
             userSettingsUseCase.updateUserSettings(
                 user.value?.id!!,
-                isOrderCreatedNotiEnabled?.value!!,
-                isDatabaseRefreshedNotiEnabled?.value!!,
-                isPromotionNotiEnabled?.value!!
+                isOrderCreatedNotiEnabled.value!!,
+                isDatabaseRefreshedNotiEnabled.value!!,
+                isPromotionNotiEnabled.value!!
             )
         }
     }
