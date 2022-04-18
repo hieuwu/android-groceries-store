@@ -12,7 +12,8 @@ fun convertItemEntityToDocument(lineItem: LineItemModel): HashMap<String, Any> {
     val document = HashMap<String, Any>()
     document[LineItemDocumentProperties.quantity] = lineItem.quantity as Number
     document[LineItemDocumentProperties.subtotal] = lineItem.subtotal as Number
-    document[LineItemDocumentProperties.product] = "${CollectionNames.products}/${lineItem.productId}"
+    document[LineItemDocumentProperties.product] =
+        "${CollectionNames.products}/${lineItem.productId}"
     return document
 }
 
@@ -65,4 +66,16 @@ fun convertUserEntityToDocument(user: User): HashMap<String, String?> {
         UserDocumentProperties.phone to user.phone,
         UserDocumentProperties.address to user.address
     )
+}
+
+fun createUpdateUserRequest(
+    isOrderCreatedEnabled: Boolean,
+    isDatabaseRefreshedEnabled: Boolean,
+    isPromotionEnabled: Boolean
+): HashMap<String, Boolean> {
+    val hash = hashMapOf<String, Boolean>()
+    hash[UserDocumentProperties.isDatabaseNotiEnabled] = isDatabaseRefreshedEnabled
+    hash[UserDocumentProperties.isOrderNotiEnabled] = isOrderCreatedEnabled
+    hash[UserDocumentProperties.isPromotionNotiEnabled] = isPromotionEnabled
+    return hash
 }
