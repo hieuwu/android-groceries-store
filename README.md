@@ -1,4 +1,9 @@
 <h1 align="center"> 🚀 Groceries Store</h1>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
  [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
 
@@ -89,3 +94,23 @@ SDK 23 or later
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/hieuwu/android-groceries-store/stargazers)__ for this repository. :star: <br>
 Also, __[follow me](https://github.com/hieuwu)__ on GitHub for my next creations! 🤩
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/saurabhkpatel"><img src="https://avatars.githubusercontent.com/u/1188367?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Saurabh Patel</b></sub></a><br /><a href="https://github.com/hieuwu/android-groceries-store/commits?author=saurabhkpatel" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
