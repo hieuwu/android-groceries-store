@@ -63,4 +63,14 @@
     <string name="show_when_promotion_sent">Show when promotion sent</string>
     <string name="show_when_app_data_is_refreshed">Show when app data refreshed</string>
 
+<!--    Notification constant-->
+    <string name="order_created_notification_channel_id" translatable="false">order_created_channel</string>
+    <string name="order_created_notification_channel_name" translatable="true">Order created</string>
+
+    <string name="database_synced_notification_channel_id" translatable="false">database_synced_channel</string>
+    <string name="database_synced_notification_channel_name" translatable="true">Database synced</string>
+
+    <string name="promotion_sent_notification_channel_id" translatable="false">promotion_sent_channel</string>
+    <string name="promotion_sent_notification_channel_name" translatable="true">Promotion sent</string>
+    <string name="notification_title">Groceries Store</string>
 </resources>
