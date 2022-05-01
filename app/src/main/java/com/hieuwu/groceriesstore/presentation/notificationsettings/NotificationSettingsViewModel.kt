@@ -36,7 +36,7 @@ class NotificationSettingsViewModel @Inject constructor(
         }
 
     private var _isPromotionNotiEnabled = MutableLiveData(false)
-    var isPromotionNotiEnabled: MutableLiveData<Boolean> = _isOrderCreatedNotiEnabled
+    var isPromotionNotiEnabled: MutableLiveData<Boolean> = _isPromotionNotiEnabled
         set(value) {
             _isPromotionNotiEnabled.value = value.value
             field = value
@@ -44,7 +44,7 @@ class NotificationSettingsViewModel @Inject constructor(
 
     fun initializeSwitchValue(user: UserModel?) {
         user?.let {
-            isOrderCreatedNotiEnabled.value = it.isPromotionNotiEnabled
+            isPromotionNotiEnabled.value = it.isPromotionNotiEnabled
             isDatabaseRefreshedNotiEnabled.value = it.isDataRefreshedNotiEnabled
             isOrderCreatedNotiEnabled.value = it.isOrderCreatedNotiEnabled
         }
