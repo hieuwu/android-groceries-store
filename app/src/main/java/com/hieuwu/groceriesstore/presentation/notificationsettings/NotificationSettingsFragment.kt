@@ -1,10 +1,15 @@
 package com.hieuwu.groceriesstore.presentation.notificationsettings
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,7 +17,10 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentNotificationSettingsBinding
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
+import com.hieuwu.groceriesstore.presentation.notification.NotificationType
+import com.hieuwu.groceriesstore.presentation.notification.buildNotification
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -60,17 +68,9 @@ class NotificationSettingsFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.switchDatabaseRefreshDone.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.isDatabaseRefreshedNotiEnabled.value = isChecked
-        }
-
-        binding.switchOrderCreated.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.isOrderCreatedNotiEnabled.value = isChecked
-        }
-
-        binding.switchPromotion.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.isPromotionNotiEnabled.value = isChecked
-        }
+        createChannel(
+            getString(R.string.order_created_notification_channel_id),
+            getString(R.string.order_created_notification_channel_name))
 
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
@@ -82,5 +82,24 @@ class NotificationSettingsFragment : Fragment() {
                 else -> false
             }
         }
+    }
+
+    private fun createChannel(channelId: String, channelName: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                channelId, channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            with(notificationChannel) {
+                description = "Time for breakfast"
+                lightColor = Color.RED
+                enableVibration(true)
+                enableLights(true)
+                setShowBadge(false)
+            }
+            val notificationManager = activity?.getSystemService(NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(notificationChannel)
+        }
+
     }
 }
