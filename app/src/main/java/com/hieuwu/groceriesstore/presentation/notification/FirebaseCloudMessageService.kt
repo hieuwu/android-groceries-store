@@ -17,9 +17,14 @@ class FirebaseCloudMessageService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         Timber.d(remoteMessage.toString())
-        val type = remoteMessage.data["type"]
+        val type = remoteMessage.data["type"] as String
+
         remoteMessage.notification?.let {
-            showNotification(it.title!!, it.body!!)
+
+            val notificationManager = getSystemService(
+                Context.NOTIFICATION_SERVICE
+            ) as NotificationManager
+            notificationManager.buildNotification(NotificationType.valueOf(type),it.body!!, applicationContext)
         }
     }
 
