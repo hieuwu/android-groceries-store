@@ -5,22 +5,18 @@ import android.app.NotificationManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentNotificationSettingsBinding
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
-import com.hieuwu.groceriesstore.presentation.notification.NotificationType
-import com.hieuwu.groceriesstore.presentation.notification.buildNotification
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 
