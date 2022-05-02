@@ -22,7 +22,6 @@ private fun createStyleByType(
         NotificationType.PROMOTION_SENT -> {
             val bannerImage =
                 BitmapFactory.decodeResource(applicationContext.resources, R.drawable.banner)
-
             return NotificationCompat.BigPictureStyle().bigPicture(bannerImage)
                 .bigLargeIcon(null)
         }
@@ -38,15 +37,28 @@ private fun createStyleByType(
     }
 }
 
+private fun getChannelIdByType(type: NotificationType): Int = when (type) {
+    NotificationType.PROMOTION_SENT -> {
+        R.string.promotion_sent_notification_channel_id
+    }
+    NotificationType.DATABASE_SYNCED -> {
+        R.string.database_synced_notification_channel_id
+    }
+    NotificationType.ORDER_CREATED -> {
+        R.string.order_created_notification_channel_id
+    }
+}
+
 fun NotificationManager.buildNotification(
     type: NotificationType,
     messageBody: String,
     applicationContext: Context
 ) {
     val style = createStyleByType(type, applicationContext)
+    val channel = getChannelIdByType(type)
     val notificationBuilder = NotificationCompat.Builder(
         applicationContext,
-        applicationContext.getString(R.string.order_created_notification_channel_id)
+        applicationContext.getString(channel)
     )
         .setSmallIcon(R.drawable.ic_app_notification)
         .setContentText(applicationContext.getString(R.string.notification_title))
