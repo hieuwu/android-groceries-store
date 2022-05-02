@@ -16,7 +16,7 @@ class FirebaseCloudMessageService : FirebaseMessagingService() {
             val notificationManager = getSystemService(
                 Context.NOTIFICATION_SERVICE
             ) as NotificationManager
-            notificationManager.buildNotification(NotificationType.valueOf(type),it.body!!, applicationContext)
+            notificationManager.showNotification(NotificationType.valueOf(type),it.body!!, applicationContext)
         }
     }
 }

@@ -133,16 +133,16 @@ fun createNotificationChannel(type: NotificationType, applicationContext: Contex
 }
 
 
-fun NotificationManager.buildNotification(
+fun NotificationManager.showNotification(
     type: NotificationType,
     messageBody: String,
     applicationContext: Context
 ) {
     val style = createStyleByType(type, applicationContext)
-    val channel = getChannelIdByType(type)
+    val channel = applicationContext.getString(getChannelIdByType(type))
+
     val notificationBuilder = NotificationCompat.Builder(
-        applicationContext,
-        applicationContext.getString(channel)
+        applicationContext, channel
     )
         .setSmallIcon(R.drawable.ic_app_notification)
         .setContentText(applicationContext.getString(R.string.notification_title))
