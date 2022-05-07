@@ -18,11 +18,16 @@ class FirebaseCloudMessageService : FirebaseMessagingService() {
         Timber.d(remoteMessage.toString())
         val type = (remoteMessage.data["type"] ?: "")
 
+        createNotificationChannel(NotificationType.valueOf(type), applicationContext)
         remoteMessage.notification?.let {
             val notificationManager = getSystemService(
                 Context.NOTIFICATION_SERVICE
             ) as NotificationManager
-            notificationManager.showNotification(NotificationType.valueOf(type),it.body!!, applicationContext)
+            notificationManager.showNotification(
+                NotificationType.valueOf(type),
+                it.body!!,
+                applicationContext
+            )
         }
     }
 }
