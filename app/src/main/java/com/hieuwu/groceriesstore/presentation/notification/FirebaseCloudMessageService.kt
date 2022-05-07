@@ -7,6 +7,12 @@ import com.google.firebase.messaging.RemoteMessage
 import timber.log.Timber
 
 class FirebaseCloudMessageService : FirebaseMessagingService() {
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        Timber.d("New token", token)
+    }
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         Timber.d(remoteMessage.toString())
