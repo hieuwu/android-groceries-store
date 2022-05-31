@@ -2,7 +2,7 @@
 buildscript {
     ext {
         kotlinVersion = "1.4"
-        hiltVersion = '2.41'
+        hiltVersion = '2.42'
         roomVersion = "2.3.0"
         navigationVersion = "2.4.2"
         lifecycleVersion = "2.4.1"
