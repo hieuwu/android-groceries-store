@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlinVersion = "1.4"
+        kotlinVersion = "1.6.21"
         hiltVersion = '2.42'
         roomVersion = "2.3.0"
         navigationVersion = "2.4.2"
@@ -27,7 +27,7 @@ buildscript {
         googleServicesVersion = "4.3.10"
         buildGradleVersion = "7.1.2"
         rxJavaVersion = "3.1.4"
-        lottieVersion = "5.0.3"
+        lottieVersion = "5.2.0"
         workVersion = "2.7.1"
         coreVersion = "1.6.0"
     }
