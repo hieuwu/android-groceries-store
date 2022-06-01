@@ -29,7 +29,7 @@ buildscript {
         rxJavaVersion = "3.1.4"
         lottieVersion = "5.2.0"
         workVersion = "2.7.1"
-        coreVersion = "1.6.0"
+        coreVersion = "1.8.0"
     }
 
     repositories {
