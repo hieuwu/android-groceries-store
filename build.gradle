@@ -13,7 +13,7 @@ buildscript {
         legacySupportVersion = "1.0.0"
         gsonVersion = "2.9.0"
         timverVersion = "5.0.1"
-        glideVersion = "4.13.1"
+        glideVersion = "4.13.2"
         moshiVersion = "1.12.0"
         moshiConverterVersion = "2.9.0"
         firebaseBomVersion = "29.3.0"
