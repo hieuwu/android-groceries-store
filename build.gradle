@@ -27,7 +27,7 @@ buildscript {
         googleServicesVersion = "4.3.10"
         buildGradleVersion = "7.1.2"
         rxJavaVersion = "3.1.4"
-        lottieVersion = "5.0.3"
+        lottieVersion = "5.2.0"
         workVersion = "2.7.1"
         coreVersion = "1.6.0"
     }
