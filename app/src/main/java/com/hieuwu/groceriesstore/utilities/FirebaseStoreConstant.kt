@@ -15,8 +15,6 @@ object UserDocumentProperties {
     const val isPromotionNotiEnabled = "isPromotionNotiEnabled"
     const val isOrderNotiEnabled = "isOrderNotiEnabled"
     const val isDatabaseNotiEnabled = "isDatabaseNotiEnabled"
-
-
 }
 
 object ProductDocumentProperties {
