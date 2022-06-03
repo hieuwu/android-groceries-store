@@ -20,22 +20,17 @@ private val NOTIFICATION_ID = 0
 private fun createStyleByType(
     type: NotificationType, applicationContext: Context
 ): NotificationCompat.Style {
-
-    when (type) {
+    return when (type) {
         NotificationType.PROMOTION_SENT -> {
             val bannerImage =
                 BitmapFactory.decodeResource(applicationContext.resources, R.drawable.banner)
-            return NotificationCompat.BigPictureStyle().bigPicture(bannerImage)
-                .bigLargeIcon(null)
+            NotificationCompat.BigPictureStyle().bigPicture(bannerImage)
         }
         NotificationType.DATABASE_SYNCED -> {
-            return NotificationCompat.BigTextStyle().bigText("Some big text")
-                .setSummaryText("This is a very log text summary for notification")
+            NotificationCompat.BigTextStyle()
         }
         NotificationType.ORDER_CREATED -> {
-            return NotificationCompat.InboxStyle().addLine("Line")
-                .setBigContentTitle("big conent tittle")
-                .setSummaryText("Summary text")
+            NotificationCompat.InboxStyle()
         }
     }
 }
