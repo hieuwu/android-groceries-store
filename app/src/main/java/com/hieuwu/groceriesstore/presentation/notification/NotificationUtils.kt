@@ -139,7 +139,6 @@ fun NotificationManager.showNotification(
         applicationContext, channel
     )
         .setSmallIcon(R.drawable.ic_app_notification)
-        .setContentText(applicationContext.getString(R.string.notification_title))
         .setContentText(messageBody)
         .setStyle(style)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
