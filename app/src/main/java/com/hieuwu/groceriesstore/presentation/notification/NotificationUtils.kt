@@ -47,7 +47,6 @@ private fun getChannelIdByType(type: NotificationType) = when (type) {
     }
 }
 
-
 private fun getChannelNameByType(type: NotificationType) = when (type) {
     NotificationType.PROMOTION_SENT -> {
         R.string.promotion_sent_notification_channel_name
