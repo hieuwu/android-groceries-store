@@ -114,3 +114,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.1'
 }
+
+task wrapper(type: Wrapper){
+    gradleVersion = '7.2'
+}
