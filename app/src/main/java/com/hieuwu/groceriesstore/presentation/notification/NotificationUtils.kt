@@ -35,27 +35,24 @@ private fun createStyleByType(
     }
 }
 
-private fun getChannelIdByType(type: NotificationType) = when (type) {
+private fun getPairOfChannelNameAndId(type: NotificationType) = when (type) {
     NotificationType.PROMOTION_SENT -> {
-        R.string.promotion_sent_notification_channel_id
+        Pair(
+            R.string.promotion_sent_notification_channel_name,
+            R.string.promotion_sent_notification_channel_id
+        )
     }
     NotificationType.DATABASE_SYNCED -> {
-        R.string.database_synced_notification_channel_id
+        Pair(
+            R.string.database_synced_notification_channel_name,
+            R.string.database_synced_notification_channel_id
+        )
     }
     NotificationType.ORDER_CREATED -> {
-        R.string.order_created_notification_channel_id
-    }
-}
-
-private fun getChannelNameByType(type: NotificationType) = when (type) {
-    NotificationType.PROMOTION_SENT -> {
-        R.string.promotion_sent_notification_channel_name
-    }
-    NotificationType.DATABASE_SYNCED -> {
-        R.string.database_synced_notification_channel_name
-    }
-    NotificationType.ORDER_CREATED -> {
-        R.string.order_created_notification_channel_name
+        Pair(
+            R.string.order_created_notification_channel_name,
+            R.string.order_created_notification_channel_id
+        )
     }
 }
 
@@ -63,8 +60,8 @@ private fun createChannelByType(
     type: NotificationType,
     applicationContext: Context
 ): NotificationChannel? {
-    val channelId = applicationContext.getString(getChannelIdByType(type))
-    val channelName = applicationContext.getString(getChannelNameByType(type))
+    val channelName = applicationContext.getString(getPairOfChannelNameAndId(type).first)
+    val channelId = applicationContext.getString(getPairOfChannelNameAndId(type).second)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         when (type) {
             NotificationType.PROMOTION_SENT -> {
@@ -133,7 +130,7 @@ fun NotificationManager.showNotification(
     applicationContext: Context
 ) {
     val style = createStyleByType(type, applicationContext)
-    val channel = applicationContext.getString(getChannelIdByType(type))
+    val channel = applicationContext.getString(getPairOfChannelNameAndId(type).second)
 
     val notificationBuilder = NotificationCompat.Builder(
         applicationContext, channel
@@ -144,3 +141,4 @@ fun NotificationManager.showNotification(
         .setPriority(NotificationCompat.PRIORITY_HIGH)
     notify(NOTIFICATION_ID, notificationBuilder.build())
 }
+
