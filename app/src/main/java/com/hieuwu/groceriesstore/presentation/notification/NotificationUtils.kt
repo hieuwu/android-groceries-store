@@ -27,10 +27,18 @@ private fun createStyleByType(
             NotificationCompat.BigPictureStyle().bigPicture(bannerImage)
         }
         NotificationType.DATABASE_SYNCED -> {
-            NotificationCompat.BigTextStyle()
+            NotificationCompat.BigTextStyle().bigText("You are up-to-date with new products! Let's discover!")
+                .setSummaryText("New products have arrived!")
+                .setBigContentTitle("New day new products!")
         }
         NotificationType.ORDER_CREATED -> {
             NotificationCompat.InboxStyle()
+                .setBigContentTitle("Order is ready!")
+                .setSummaryText("About 30 minutes")
+                .addLine("Be ready to receive it")
+                .addLine("We have more for you! See you next Time")
+                .addLine("You received this notification when the order is ready")
+
         }
     }
 }
@@ -135,7 +143,8 @@ fun NotificationManager.showNotification(
     val notificationBuilder = NotificationCompat.Builder(
         applicationContext, channel
     )
-        .setSmallIcon(R.drawable.ic_app_notification)
+        .setSmallIcon(R.drawable.gcm_icon)
+        .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
         .setContentText(messageBody)
         .setStyle(style)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
