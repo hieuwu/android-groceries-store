@@ -24,7 +24,7 @@ buildscript {
         testRunnerVersion = "1.4.0"
         coreTestingVersion = "2.1.0"
         cardViewVersion = "1.0.0"
-        googleServicesVersion = "4.3.10"
+        googleServicesVersion = "4.3.13"
         buildGradleVersion = "7.2.1"
         rxJavaVersion = "3.1.5"
         lottieVersion = "5.2.0"
@@ -42,7 +42,7 @@ buildscript {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
         classpath "com.google.gms:google-services:$googleServicesVersion"
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion")
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.7.2"
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.8.0"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
