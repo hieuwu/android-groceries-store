@@ -5,7 +5,7 @@ buildscript {
         hiltVersion = '2.42'
         roomVersion = "2.3.0"
         navigationVersion = "2.4.2"
-        lifecycleVersion = "2.4.1"
+        lifecycleVersion = "2.5.0"
         appCompatVersion = "1.4.2"
         constraintLayoutVersion = "2.1.4"
         fireStoreVersion = "24.2.0"
