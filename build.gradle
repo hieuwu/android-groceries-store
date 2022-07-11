@@ -4,7 +4,7 @@ buildscript {
         kotlinVersion = "1.6.21"
         hiltVersion = '2.42'
         roomVersion = "2.3.0"
-        navigationVersion = "2.4.2"
+        navigationVersion = "2.5.0"
         lifecycleVersion = "2.5.0"
         appCompatVersion = "1.4.2"
         constraintLayoutVersion = "2.1.4"
