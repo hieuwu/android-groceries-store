@@ -57,7 +57,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:$roomVersion"
-    implementation 'com.google.firebase:firebase-messaging:23.0.2'
+    implementation 'com.google.firebase:firebase-messaging:23.0.6'
     kapt "androidx.room:room-compiler:$roomVersion"
 
     //Navigation component
