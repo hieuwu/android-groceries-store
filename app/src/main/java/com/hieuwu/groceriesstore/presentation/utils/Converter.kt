@@ -25,4 +25,13 @@ object Converter {
     ): String? {
         return if (value.isNullOrEmpty()) return "Not signed in" else value
     }
+
+    @InverseMethod("booleanToChecked")
+    @JvmStatic
+    fun booleanToChecked(
+        value: Boolean?
+    ): String? {
+        return value.toString()
+    }
+
 }

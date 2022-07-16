@@ -22,4 +22,12 @@ interface UserDao {
 
     @Query("DELETE FROM  $USER_TABLE")
     suspend fun clear()
+
+    @Query("UPDATE  $USER_TABLE SET isOrderCreatedNotiEnabled = :isOrderCreatedEnabled, isDataRefreshedNotiEnabled =:isDatabaseRefreshedEnabled, isPromotionNotiEnabled =:isPromotionEnabled WHERE id = :id")
+    suspend fun updateUserSettings(
+        id: String,
+        isOrderCreatedEnabled: Boolean,
+        isDatabaseRefreshedEnabled: Boolean,
+        isPromotionEnabled: Boolean
+    )
 }

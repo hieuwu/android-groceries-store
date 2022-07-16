@@ -12,6 +12,7 @@ import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
 import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
+import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +39,11 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
                     )
                     isSucess = true
 
-                    dbUser = User(userId, name, email, null, null)
+                    dbUser = User(userId, name, email, null, null,
+                        isOrderCreatedNotiEnabled = false,
+                        isPromotionNotiEnabled = false,
+                        isDataRefreshedNotiEnabled = false
+                    )
                     val db = Firebase.firestore
                     db.collection(CollectionNames.users).document(userId)
                         .set(newUser)
@@ -92,7 +97,11 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         address: String
     ) {
         val db = Firebase.firestore
-        val dbUser = User(userId, name, email, address, phone)
+        val dbUser = User(userId, name, email, address, phone,
+            isOrderCreatedNotiEnabled = false,
+            isPromotionNotiEnabled = false,
+            isDataRefreshedNotiEnabled = false
+        )
         val newUser = convertUserEntityToDocument(dbUser)
         var isSuccess = false
         db.collection(CollectionNames.users).document(userId)
@@ -111,6 +120,31 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
     override suspend fun clearUser() {
         withContext(Dispatchers.IO) {
             userDao.clear()
+        }
+    }
+
+    override suspend fun updateUserSettings(id: String,
+        isOrderCreatedEnabled: Boolean,
+        isDatabaseRefreshedEnabled: Boolean,
+        isPromotionEnabled: Boolean
+    ) {
+        val updateRequest = createUpdateUserRequest(
+            isOrderCreatedEnabled,
+            isDatabaseRefreshedEnabled,
+            isPromotionEnabled
+        )
+        val db = Firebase.firestore
+        var isSuccess = false
+        db.collection(CollectionNames.users).document(id)
+            .set(updateRequest)
+            .addOnSuccessListener {
+                isSuccess = true
+            }
+            .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }.await()
+        if (isSuccess) {
+            withContext(Dispatchers.IO) {
+                userDao.updateUserSettings(id, isOrderCreatedEnabled, isDatabaseRefreshedEnabled, isPromotionEnabled)
+            }
         }
     }
 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hieuwu.groceriesstore.presentation.notificationsettings.NotificationSettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.notificationsettings.NotificationSettingsFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:contentInsetStartWithNavigation="0dp"
+                app:menu="@menu/update_menu"
+                app:navigationIcon="@drawable/ic_detail_back"
+                app:title="@string/notifications"
+                app:titleCentered="true"
+                app:titleTextColor="@android:color/white"
+                app:toolbarId="@id/toolbar" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <Switch
+            android:id="@+id/switch_order_created"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.isOrderCreatedNotiEnabled}"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:minHeight="@dimen/switch_min_height"
+            android:text="@string/show_when_order_created"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar" />
+
+        <Switch
+            android:id="@+id/switch_promotion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.isPromotionNotiEnabled}"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:minHeight="@dimen/switch_min_height"
+            android:text="@string/show_when_promotion_sent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/switch_order_created" />
+
+        <Switch
+            android:id="@+id/switch_database_refresh_done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.isDatabaseRefreshedNotiEnabled}"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:minHeight="@dimen/switch_min_height"
+            android:text="@string/show_when_app_data_is_refreshed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/switch_promotion" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

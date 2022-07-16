@@ -118,6 +118,32 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/notification_setting_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.user == null ? View.GONE : View.VISIBLE}"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/notification_settings"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_baseline_chevron_right_24" />
+
+
+        </RelativeLayout>
+
         <Button
             android:id="@+id/signout_button"
             android:layout_width="match_parent"

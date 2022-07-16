@@ -60,6 +60,10 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.action_accountFragment_to_updateProfileFragment)
         }
 
+        binding.notificationSettingLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_notificationSettingsFragment)
+        }
+
         binding.signoutButton.setOnClickListener {
             viewModel.signOut()
         }
