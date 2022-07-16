@@ -143,7 +143,7 @@ fun NotificationManager.showNotification(
     val notificationBuilder = NotificationCompat.Builder(
         applicationContext, channel
     )
-        .setSmallIcon(R.drawable.gcm_icon)
+        .setSmallIcon(R.drawable.ic_baseline_check_circle_24)
         .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
         .setContentText(messageBody)
         .setStyle(style)
