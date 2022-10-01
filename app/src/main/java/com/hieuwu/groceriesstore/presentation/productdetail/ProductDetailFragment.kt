@@ -1,6 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.productdetail
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +52,12 @@ class ProductDetailFragment : Fragment() {
         setObserver()
 
         seEventListener()
+
+
+
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
+        exitTransition = inflater.inflateTransition(R.transition.fade)
 
         return binding.root
     }

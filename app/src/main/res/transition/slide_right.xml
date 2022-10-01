@@ -1,0 +1,3 @@
+<slide xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="75"
+    android:slideEdge="right" />
