@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -48,7 +49,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7sp"
-
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColor="#53B175"
+                    app:startIconDrawable="@drawable/ic_baseline_alternate_email_24"
+                    android:textColorHint="#53B175"
+                    app:boxStrokeColor="#53B175"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#53B175"
+                    app:startIconTint="#53B175"
+                    app:hintTextColor="#53B175"
                     >
 
                     <EditText
@@ -62,10 +71,18 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20sp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColor="#53B175"
+                    android:textColorHint="#53B175"
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="#53B175"
+                    app:boxStrokeColor="#53B175"
+                    app:startIconTint="#53B175"
+                    app:hintTextColor="#53B175"
                     >
 
 
