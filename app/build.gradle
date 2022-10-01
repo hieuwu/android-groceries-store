@@ -45,6 +45,8 @@ android {
 dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
 
+    implementation 'com.google.android.material:material:1.6.1'
+
     //Constraint and Coordinator layout
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorLayoutVersion"

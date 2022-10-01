@@ -44,22 +44,43 @@
                     android:textSize="26sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/email_edit_text"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:hint="@string/email"
-                    android:text="@={signInViewModel.email}"/>
+                    android:layout_marginTop="7sp"
 
-                <EditText
-                    android:id="@+id/password_edit_text"
+                    >
+
+                    <EditText
+                        android:id="@+id/email_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace"
+                        android:hint="@string/email"
+                        android:text="@={signInViewModel.email}"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:text="@={signInViewModel.password}"/>
+                    android:layout_marginTop="20sp"
+                    >
+
+
+                    <EditText
+                        android:id="@+id/password_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:text="@={signInViewModel.password}"/>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <Button
                     android:id="@+id/signin_button"
