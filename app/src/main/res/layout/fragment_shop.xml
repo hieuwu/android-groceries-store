@@ -10,9 +10,48 @@
             type="com.hieuwu.groceriesstore.presentation.shop.ShopViewModel" />
     </data>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary_button"
+        tools:context=".ui.fragments.ExploreFragment">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_explore_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="26sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_explore_fragment"
+        android:background="@drawable/round_shape_sheet"
+        android:elevation="40sp"
+        android:orientation="vertical"
+        >
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         tools:context=".presentation.shop.ShopFragment">
 
         <LinearLayout
@@ -30,6 +69,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6sp"
+                android:layout_marginBottom="5sp"
                 android:text="@string/welcome_prompt"
                 android:textAlignment="center" />
 
@@ -37,25 +78,30 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginHorizontal="@dimen/margin_medium" />
+                android:layout_marginLeft="@dimen/margin_medium"
+                android:layout_marginRight="@dimen/margin_medium"
+                />
 
             <LinearLayout
                 android:id="@+id/slider_dots"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="5sp"
+                android:layout_marginBottom="20sp"
+
                 android:orientation="horizontal" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_medium">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/exclusive_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/exclusive_offer"
+                    android:layout_marginLeft="@dimen/margin_medium"
                     android:textSize="@dimen/text_big_bold"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -66,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/margin_medium"
                     android:text="@string/see_all"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="@+id/exclusive_title"
@@ -78,14 +125,14 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/exclusive_title"
                     app:listData="@{viewModel.productList}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_medium">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/best_selling_title"
@@ -93,6 +140,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/best_selling"
                     android:textSize="@dimen/text_big_bold"
+                    android:layout_marginLeft="@dimen/margin_medium"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -103,6 +151,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:text="@string/see_all"
+                    android:layout_marginRight="@dimen/margin_medium"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="@+id/best_selling_title"
                     app:layout_constraintRight_toRightOf="parent"
@@ -119,7 +168,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_medium"
                 android:orientation="vertical">
 
                 <TextView
@@ -127,6 +175,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/recommended"
+                    android:layout_marginLeft="@dimen/margin_medium"
+
                     android:textSize="@dimen/text_big_bold"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -137,6 +187,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/margin_medium"
                     android:text="@string/see_all"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="@+id/recommended_title"
@@ -152,4 +203,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
+    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
