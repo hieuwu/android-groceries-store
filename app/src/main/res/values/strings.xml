@@ -73,4 +73,5 @@
     <string name="promotion_sent_notification_channel_id" translatable="false">promotion_sent_channel</string>
     <string name="promotion_sent_notification_channel_name" translatable="true">Promotion sent</string>
     <string name="notification_title">Groceries Store</string>
+    <string name="delete">Delete</string>
 </resources>
