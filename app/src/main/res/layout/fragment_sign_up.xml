@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
         <variable
@@ -40,19 +41,65 @@
                     android:textSize="@dimen/text_big_bold"
                     android:textStyle="bold" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7sp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColor="#53B175"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
+                    android:textColorHint="#53B175"
+                    app:boxStrokeColor="#53B175"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#53B175"
+                    app:startIconTint="#53B175"
+                    app:hintTextColor="#53B175"
+                    >
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:hint="@string/name"
                     android:text="@={signUpViewModel.name}"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7sp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColor="#53B175"
+                    app:startIconDrawable="@drawable/ic_baseline_alternate_email_24"
+                    android:textColorHint="#53B175"
+                    app:boxStrokeColor="#53B175"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#53B175"
+                    app:startIconTint="#53B175"
+                    app:hintTextColor="#53B175"
+                    >
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:hint="@string/email"
                     android:text="@={signUpViewModel.email}"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7sp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColor="#53B175"
+                    android:textColorHint="#53B175"
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="#53B175"
+                    app:boxStrokeColor="#53B175"
+                    app:startIconTint="#53B175"
+                    app:hintTextColor="#53B175"
+                    >
 
                 <EditText
                     android:layout_width="match_parent"
@@ -62,6 +109,7 @@
                     android:inputType="textPassword"
                     android:text="@={signUpViewModel.password}"/>
 
+                </com.google.android.material.textfield.TextInputLayout>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
