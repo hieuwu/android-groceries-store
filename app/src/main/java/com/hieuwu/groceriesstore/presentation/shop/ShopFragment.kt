@@ -33,7 +33,7 @@ class ShopFragment : Fragment() {
     private lateinit var viewModel: ShopViewModel
     private lateinit var dots: Array<ImageView>
     private lateinit var binding: FragmentShopBinding
-
+    private lateinit var gridListItemAdapter: GridListItemAdapter
     private lateinit var nonActiveDot: Drawable
     private lateinit var activeDot: Drawable
     private var dotCount: Int = 0
@@ -127,34 +127,25 @@ class ShopFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        binding.exclusiveOfferRecyclerview.adapter =
-            GridListItemAdapter(
-                GridListItemAdapter.OnClickListener(
-                    clickListener = { viewModel.displayPropertyDetails(it) },
-                    addToCartListener = { addToCart(it) }
-                )
+        gridListItemAdapter = GridListItemAdapter(
+            GridListItemAdapter.OnClickListener(
+                clickListener = { viewModel.displayPropertyDetails(it) },
+                addToCartListener = { addToCart(it) }
             )
+        )
+        binding.exclusiveOfferRecyclerview.adapter =
+            gridListItemAdapter
 
         binding.exclusiveOfferRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         binding.bestSellingRecyclerview.adapter =
-            GridListItemAdapter(
-                GridListItemAdapter.OnClickListener(
-                    clickListener = { viewModel.displayPropertyDetails(it) },
-                    addToCartListener = { addToCart(it) }
-                )
-            )
+            gridListItemAdapter
 
         binding.bestSellingRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         binding.recommendedRecyclerview.adapter =
-            GridListItemAdapter(
-                GridListItemAdapter.OnClickListener(
-                    clickListener = { viewModel.displayPropertyDetails(it) },
-                    addToCartListener = { addToCart(it) }
-                )
-            )
+            gridListItemAdapter
 
         binding.recommendedRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
