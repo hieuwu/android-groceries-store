@@ -77,7 +77,7 @@ class ShopFragment : Fragment() {
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        params.setMargins(8, 0, 8, 0)
+        params.setMargins(10, 0, 10, 0)
         repeat(dotCount) {
             dots[it].setImageDrawable(nonActiveDot)
             sliderDotspanel.addView(dots[it], params)
