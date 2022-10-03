@@ -10,6 +10,7 @@ import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ExploreProductProductUseCaseImpl @Inject constructor(
@@ -23,7 +24,7 @@ class ExploreProductProductUseCaseImpl @Inject constructor(
     override fun searchProductByName(name: String?): LiveData<List<ProductModel>> =
         productRepository.searchProductsListByName(name)
 
-    override fun getCurrentCart(): LiveData<OrderModel>? {
+    override fun getCurrentCart(): Flow<OrderModel?> {
         return orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
     }
 

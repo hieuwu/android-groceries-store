@@ -1,10 +1,11 @@
 package com.hieuwu.groceriesstore.presentation.onboarding
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
@@ -12,9 +13,9 @@ class OnboardingViewModel @Inject constructor(
     private val refreshAppDataUseCase: RefreshAppDataUseCase
 ) : ObservableViewModel() {
 
-    private val _isSyncedSuccessful = MutableLiveData(false)
-    val isSyncedSuccessful: LiveData<Boolean?>
-        get() = _isSyncedSuccessful
+    private val _isSyncedSuccessful = MutableStateFlow(false)
+    val isSyncedSuccessful: StateFlow<Boolean>
+        get() = _isSyncedSuccessful.asStateFlow()
 
     init {
         try {

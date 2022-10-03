@@ -40,5 +40,5 @@ interface OrderDao {
 
     @Transaction
     @Query("SELECT * FROM `$ORDER_TABLE` WHERE status = :status  LIMIT 1 ")
-    fun getCartWithLineItems(status: String): Flow<OrderWithLineItems>
+    fun getCartWithLineItems(status: String): Flow<OrderWithLineItems?>
 }

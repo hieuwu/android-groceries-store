@@ -1,8 +1,5 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.asLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.LineItemDao
@@ -18,6 +15,8 @@ import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -40,8 +39,8 @@ class OrderRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getOneOrderByStatus(status: OrderStatus): LiveData<OrderModel>? =
-        Transformations.map(orderDao.getCartWithLineItems(status.value)?.asLiveData()) {
+    override fun getOneOrderByStatus(status: OrderStatus): Flow<OrderModel?> =
+        orderDao.getCartWithLineItems(status.value).map {
             it?.asDomainModel()
         }
 

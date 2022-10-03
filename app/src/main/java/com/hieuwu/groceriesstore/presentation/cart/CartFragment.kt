@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -18,6 +20,7 @@ import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.SwipeToDeleteCallback
 import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -72,7 +75,9 @@ class CartFragment : BottomSheetDialogFragment() {
         }
     }
     private fun setObserver() {
-        viewModel.order.observe(viewLifecycleOwner) {}
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.order.flowWithLifecycle(lifecycle).collect {}
+        }
     }
 
     override fun onCreateContextMenu(

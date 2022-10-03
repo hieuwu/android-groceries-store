@@ -87,6 +87,7 @@ dependencies {
 
     //Livedata
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
 
     //Room
     implementation "androidx.room:room-ktx:$roomVersion"

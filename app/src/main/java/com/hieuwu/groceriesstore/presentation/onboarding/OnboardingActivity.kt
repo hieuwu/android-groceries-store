@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.flowWithLifecycle
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.hieuwu.groceriesstore.MainActivity
@@ -14,6 +16,7 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import timber.log.Timber
 
@@ -59,16 +62,18 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
-        viewModel.isSyncedSuccessful.observe(this) {
-            if (it!!) {
-                if (it == true) {
-                    with(sharedPreferences.edit()) {
-                        putBoolean(getString(R.string.sync_success), true)
-                        apply()
+        lifecycleScope.launch {
+            viewModel.isSyncedSuccessful
+                .flowWithLifecycle(lifecycle)
+                .collect {
+                    if (it) {
+                        with(sharedPreferences.edit()) {
+                            putBoolean(getString(R.string.sync_success), true)
+                            apply()
+                        }
+                        binding.getStartedButton.isEnabled = true
                     }
-                    binding.getStartedButton.isEnabled = true
                 }
-            }
         }
     }
 
