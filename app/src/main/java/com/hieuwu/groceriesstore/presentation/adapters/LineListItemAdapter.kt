@@ -36,8 +36,8 @@ class LineListItemAdapter(val onClickListener: OnClickListener, val context: Con
             onClickListener.onMinusClick(lineItem)
         }
 
-        holder.itemView.options_btn.setOnClickListener {
-            it.showContextMenu()
+        holder.itemView.delete_btn.setOnClickListener {
+            onClickListener.onRemoveItem(lineItem)
         }
 
         holder.bind(lineItem)

@@ -2,6 +2,7 @@ package com.hieuwu.groceriesstore.presentation.shop
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +59,10 @@ class ShopFragment : Fragment() {
         setUpRecyclerView()
         drawSliderDotSymbols()
         setEventListener()
+
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.fade)
+
 
         return binding.root
     }
