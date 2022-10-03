@@ -6,23 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentUpdateProfileBinding
-import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class UpdateProfileFragment : Fragment() {
 
     lateinit var binding: FragmentUpdateProfileBinding
-    lateinit var viewModel: UpdateProfileViewModel
-
-    @Inject
-    lateinit var authenticateUserUseCase: AuthenticateUserUseCase
+    private val viewModel: UpdateProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,9 +32,6 @@ class UpdateProfileFragment : Fragment() {
         )
         binding.lifecycleOwner = this
 
-        val viewModelFactory = UpdateProfileViewModelFactory(authenticateUserUseCase)
-        viewModel =
-            ViewModelProvider(this, viewModelFactory).get(UpdateProfileViewModel::class.java)
         binding.viewModel = viewModel
 
         setObserver()

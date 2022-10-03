@@ -7,10 +7,12 @@ import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@HiltViewModel
 class NotificationSettingsViewModel @Inject constructor(
     private val userSettingsUseCase: UserSettingsUseCase,
     private val authenticateUserUseCase: AuthenticateUserUseCase

@@ -6,24 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSigninBinding
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
 
     private lateinit var binding: FragmentSigninBinding
     private lateinit var auth: FirebaseAuth
-    lateinit var viewModel: SignInViewModel
-
-    @Inject
-    lateinit var userRepository: UserRepository
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,9 +31,6 @@ class SignInFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        val viewModelFactory = ViewModelFactory(userRepository)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(SignInViewModel::class.java)
         binding.signInViewModel = viewModel
         binding.lifecycleOwner = this
 

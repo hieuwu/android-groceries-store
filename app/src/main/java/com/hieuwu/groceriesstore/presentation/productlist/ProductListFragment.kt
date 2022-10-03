@@ -6,22 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductListBinding
-import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
     lateinit var binding: FragmentProductListBinding
-    lateinit var viewModel: ProductListViewModel
-    @Inject
-    lateinit var getProductListUseCase: GetProductListUseCase
+    private val viewModel: ProductListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +33,8 @@ class ProductListFragment : Fragment() {
         )
 
         val categoryName = args.categoryName
-        val categoryId = args.categoryId
-        val viewModelFactory =
-            ProductListViewModelFactory(categoryId, getProductListUseCase)
         binding.toolbar.title = categoryName
 
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(ProductListViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

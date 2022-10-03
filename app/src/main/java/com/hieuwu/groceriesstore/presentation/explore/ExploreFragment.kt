@@ -9,25 +9,20 @@ import android.widget.EditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
-import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import timber.log.Timber
 
 @AndroidEntryPoint
 class ExploreFragment : Fragment() {
 
     private lateinit var binding: FragmentExploreBinding
-    private lateinit var viewModel: ExploreViewModel
-
-    @Inject
-    lateinit var exploreProductUseCase: ExploreProductUseCase
+    private val viewModel: ExploreViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,11 +33,6 @@ class ExploreFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentExploreBinding>(
             inflater, R.layout.fragment_explore, container, false
         )
-        val viewModelFactory =
-            ExploreViewModelFactory(exploreProductUseCase)
-
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(ExploreViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

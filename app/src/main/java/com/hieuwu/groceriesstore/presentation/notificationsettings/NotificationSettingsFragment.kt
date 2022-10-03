@@ -10,27 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentNotificationSettingsBinding
-import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
-import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class NotificationSettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentNotificationSettingsBinding
-    private lateinit var viewModel: NotificationSettingsViewModel
-
-    @Inject
-    lateinit var userSettingsUseCase: UserSettingsUseCase
-
-    @Inject
-    lateinit var authenticateUserUseCase: AuthenticateUserUseCase
+    private val viewModel: NotificationSettingsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +31,6 @@ class NotificationSettingsFragment : Fragment() {
             inflater, R.layout.fragment_notification_settings, container, false
         )
 
-        val viewModelFactory =
-            NotificationSettingsViewModelFactory(userSettingsUseCase, authenticateUserUseCase)
-        viewModel =
-            ViewModelProvider(this, viewModelFactory).get(NotificationSettingsViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setEventListeners()

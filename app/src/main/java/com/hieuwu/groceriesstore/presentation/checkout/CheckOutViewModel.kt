@@ -7,11 +7,12 @@ import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class CheckOutViewModel @Inject constructor(
-    private val orderId: String,
     private val createOrderUseCase: CreateOrderUseCase
 ) :
     ObservableViewModel() {

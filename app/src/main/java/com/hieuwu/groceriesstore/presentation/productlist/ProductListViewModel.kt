@@ -2,6 +2,7 @@ package com.hieuwu.groceriesstore.presentation.productlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.entities.LineItem
@@ -10,6 +11,7 @@ import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
@@ -17,10 +19,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@HiltViewModel
 class ProductListViewModel @Inject constructor(
-    val categoryId: String,
+    savedStateHandle: SavedStateHandle,
     val getProductListUseCase: GetProductListUseCase
 ) : ViewModel() {
+
+    private val args = ProductListFragmentArgs.fromSavedStateHandle(savedStateHandle)
+    private val categoryId = args.categoryId
 
     private var viewModelJob = Job()
     private var _productList = MutableLiveData<List<ProductModel>>()
