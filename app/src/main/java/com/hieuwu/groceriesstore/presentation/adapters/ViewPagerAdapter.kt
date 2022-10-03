@@ -12,9 +12,9 @@ import com.hieuwu.groceriesstore.presentation.utils.bindImage
 class ViewPagerAdapter(val context: Context) : PagerAdapter() {
 
     private val images = arrayOf(
-        "https://firebasestorage.googleapis.com/v0/b/groceries-store-ad0eb.appspot.com/o/slider-1.jpg?alt=media&token=468896eb-8083-4a79-ba18-6af6a7c3e3eb",
-        "https://firebasestorage.googleapis.com/v0/b/groceries-store-ad0eb.appspot.com/o/slider-3.jpg?alt=media&token=94a991e9-75a1-45ae-9439-3dc94522eb9f",
-        "https://firebasestorage.googleapis.com/v0/b/groceries-store-ad0eb.appspot.com/o/slider-2.jpg?alt=media&token=c7fcd8de-3bb6-48e2-9a63-f393d4b45c98"
+        "https://firebasestorage.googleapis.com/v0/b/shopee-93233.appspot.com/o/product_image1664736648315.png?alt=media&token=2ca8be3a-37c3-4c73-b966-dcf3129958fd",
+        "https://firebasestorage.googleapis.com/v0/b/shopee-93233.appspot.com/o/product_image1664737376188.png?alt=media&token=01123878-812e-4b2b-be91-d9c05b1e9b98",
+        "https://firebasestorage.googleapis.com/v0/b/shopee-93233.appspot.com/o/product_image1664737421330.png?alt=media&token=66f45505-ce68-4583-b018-2d2855aa714e"
     )
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
