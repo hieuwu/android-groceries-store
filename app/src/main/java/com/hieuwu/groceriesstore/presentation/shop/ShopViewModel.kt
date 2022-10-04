@@ -10,10 +10,12 @@ import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class ShopViewModel @Inject constructor(
     private val getProductListUseCase: GetProductListUseCase
 ) : ViewModel() {

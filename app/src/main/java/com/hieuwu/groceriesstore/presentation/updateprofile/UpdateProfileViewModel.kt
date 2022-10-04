@@ -8,10 +8,12 @@ import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.Exception
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class UpdateProfileViewModel @Inject constructor(private val authenticateUserUseCase: AuthenticateUserUseCase) :
     ObservableViewModel() {
     private val _user =

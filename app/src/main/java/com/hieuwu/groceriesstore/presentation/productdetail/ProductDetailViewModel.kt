@@ -3,6 +3,7 @@ package com.hieuwu.groceriesstore.presentation.productdetail
 import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.data.entities.LineItem
@@ -12,17 +13,21 @@ import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class ProductDetailViewModel @Inject constructor(
-    id: String,
+    savedStateHandle: SavedStateHandle,
     private val getProductDetailUseCase: GetProductDetailUseCase,
     private val orderRepository: OrderRepository
 ) : ObservableViewModel() {
 
-    val product = getProductDetailUseCase.getProductDetail(id)
+    private val args = ProductDetailFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    val product = getProductDetailUseCase.getProductDetail(args.id)
 
     var currentCart: MutableLiveData<OrderModel> =
         orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>

@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.hieuwu.groceriesstore.LoadingDialog
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSignUpBinding
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
@@ -21,10 +19,7 @@ class SignUpFragment : Fragment() {
     private lateinit var loadingDialog: LoadingDialog
     private lateinit var binding: FragmentSignUpBinding
 
-    private lateinit var viewModel: SignUpViewModel
-
-    @Inject
-    lateinit var userRepository: UserRepository
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,9 +31,6 @@ class SignUpFragment : Fragment() {
         )
         loadingDialog = LoadingDialog(requireActivity())
 
-        val viewModelFactory = ViewModelFactory(userRepository)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(SignUpViewModel::class.java)
         binding.signUpViewModel = viewModel
         binding.lifecycleOwner = this
 

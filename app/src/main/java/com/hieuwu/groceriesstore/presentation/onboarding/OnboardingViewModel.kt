@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class OnboardingViewModel @Inject constructor(
     private val refreshAppDataUseCase: RefreshAppDataUseCase
 ) : ObservableViewModel() {

@@ -8,27 +8,18 @@ import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductDetailBinding
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import timber.log.Timber
 
 @AndroidEntryPoint
 class ProductDetailFragment : Fragment() {
     private lateinit var binding: FragmentProductDetailBinding
-    private lateinit var viewModel: ProductDetailViewModel
-
-    @Inject
-    lateinit var getProductDetailUseCase: GetProductDetailUseCase
-
-    @Inject
-    lateinit var orderRepository: OrderRepository
+    private val viewModel: ProductDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,12 +30,6 @@ class ProductDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentProductDetailBinding>(
             inflater, R.layout.fragment_product_detail, container, false
         )
-        val args = ProductDetailFragmentArgs.fromBundle(arguments as Bundle)
-
-        val viewModelFactory =
-            ProductDetailViewModelFactory(args.id, getProductDetailUseCase, orderRepository)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(ProductDetailViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

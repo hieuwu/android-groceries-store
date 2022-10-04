@@ -11,26 +11,22 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
 import com.hieuwu.groceriesstore.domain.models.ProductModel
-import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.ViewPagerAdapter
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ShopFragment : Fragment() {
-    @Inject
-    lateinit var getProductListUseCase: GetProductListUseCase
 
-    private lateinit var viewModel: ShopViewModel
+    private val viewModel: ShopViewModel by viewModels()
     private lateinit var dots: Array<ImageView>
     private lateinit var binding: FragmentShopBinding
     private lateinit var gridListItemAdapter: GridListItemAdapter
@@ -47,9 +43,6 @@ class ShopFragment : Fragment() {
             inflater, R.layout.fragment_shop, container, false
         )
 
-        val viewModelFactory = ShopViewModelFactory(getProductListUseCase)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(ShopViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         nonActiveDot =

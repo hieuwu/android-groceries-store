@@ -6,9 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class AccountViewModel @Inject constructor(private val authenticateUserUseCase: AuthenticateUserUseCase) :
     ObservableViewModel() {
 
