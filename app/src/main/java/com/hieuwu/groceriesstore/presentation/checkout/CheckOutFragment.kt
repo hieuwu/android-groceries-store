@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCheckOutBinding
@@ -16,6 +19,7 @@ import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.utilities.KeyData
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CheckOutFragment : Fragment() {
@@ -50,16 +54,25 @@ class CheckOutFragment : Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.order.observe(viewLifecycleOwner) {
-            if (it != null) viewModel.sumPrice()
-        }
-
-        viewModel.totalPrice.observe(viewLifecycleOwner) {}
-        viewModel.isOrderSentSuccessful.observe(viewLifecycleOwner) {
-            if (it) {
-                openSuccessDialog()
-            } else {
-                showMessageSnackBar(getString(R.string.order_created_failed))
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.order.collect {
+                        if (it != null) viewModel.sumPrice()
+                    }
+                }
+                launch {
+                    viewModel.totalPrice.collect {}
+                }
+                launch {
+                    viewModel.isOrderSentSuccessful.collect {
+                        when (it) {
+                            true -> openSuccessDialog()
+                            false -> showMessageSnackBar(getString(R.string.order_created_failed))
+                            else -> {} // before send order
+                        }
+                    }
+                }
             }
         }
     }

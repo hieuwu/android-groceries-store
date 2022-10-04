@@ -9,11 +9,15 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentProductDetailBinding
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -48,14 +52,22 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.currentCart.observe(viewLifecycleOwner) {}
-        viewModel.showSnackBarEvent.observe(viewLifecycleOwner) {
-            if (it == true) { // Observed state is true.
-                showMessageSnackBar(viewModel.qty.toString() + "  x  " +
-                        viewModel.product.value?.name + " is added")
-                // Reset state to make sure the snackbar is only shown once, even if the device
-                // has a configuration change.
-                viewModel.doneShowingSnackbar()
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.currentCart.collect{}
+                }
+                launch {
+                    viewModel.showSnackBarEvent.collect {
+                        if (it) { // Observed state is true.
+                            showMessageSnackBar(viewModel.qty.toString() + "  x  " +
+                                    viewModel.product.value?.name + " is added")
+                            // Reset state to make sure the snackbar is only shown once, even if the device
+                            // has a configuration change.
+                            viewModel.doneShowingSnackbar()
+                        }
+                    }
+                }
             }
         }
     }

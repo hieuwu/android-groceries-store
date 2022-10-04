@@ -14,6 +14,9 @@ import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
@@ -21,8 +24,9 @@ import kotlinx.coroutines.launch
 class ExploreViewModel @Inject constructor(
     private val exploreProductUseCase: ExploreProductUseCase
 ) : ObservableViewModel() {
-    private var _currentCart: MutableLiveData<OrderModel> =
-        exploreProductUseCase.getCurrentCart() as MutableLiveData<OrderModel>
+    private val _currentCart: StateFlow<OrderModel?> =
+        exploreProductUseCase.getCurrentCart()
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     private var _categories =
         exploreProductUseCase.getCategoryList() as MutableLiveData<List<CategoryModel>>

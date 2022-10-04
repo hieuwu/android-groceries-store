@@ -1,8 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.productdetail
 
 import androidx.databinding.Bindable
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
@@ -15,13 +13,18 @@ import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getProductDetailUseCase: GetProductDetailUseCase,
+    getProductDetailUseCase: GetProductDetailUseCase,
     private val orderRepository: OrderRepository
 ) : ObservableViewModel() {
 
@@ -29,8 +32,9 @@ class ProductDetailViewModel @Inject constructor(
 
     val product = getProductDetailUseCase.getProductDetail(args.id)
 
-    var currentCart: MutableLiveData<OrderModel> =
-        orderRepository.getOneOrderByStatus(OrderStatus.IN_CART) as MutableLiveData<OrderModel>
+    var currentCart: StateFlow<OrderModel?> =
+        orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     private var _qty: Int = 1
     var qty: Int
@@ -41,15 +45,15 @@ class ProductDetailViewModel @Inject constructor(
             notifyPropertyChanged(BR.qty)
         }
 
-    private var _showSnackbarEvent = MutableLiveData<Boolean>()
-    val showSnackBarEvent: LiveData<Boolean>
-        get() = _showSnackbarEvent
+    private var _showSnackbarEvent = MutableStateFlow(false)
+    val showSnackBarEvent: StateFlow<Boolean>
+        get() = _showSnackbarEvent.asStateFlow()
 
     fun addToCart() {
         val subtotal = product.value?.price?.times(qty) ?: 0.0
-        if (currentCart?.value != null) {
+        if (currentCart.value != null) {
             // Add to cart
-            val cartId = currentCart?.value!!.id
+            val cartId = currentCart.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
                     product.value!!.id, cartId, _qty, subtotal

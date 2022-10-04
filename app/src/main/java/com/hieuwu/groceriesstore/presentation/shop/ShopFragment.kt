@@ -12,6 +12,9 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
@@ -22,6 +25,7 @@ import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.ViewPagerAdapter
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ShopFragment : Fragment() {
@@ -98,13 +102,21 @@ class ShopFragment : Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.navigateToSelectedProperty.observe(this.viewLifecycleOwner) {
-            it?.let {
-                navigateToProductDetail(it.id)
-                viewModel.displayPropertyDetailsComplete()
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.navigateToSelectedProperty.collect {
+                        it?.let {
+                            navigateToProductDetail(it.id)
+                            viewModel.displayPropertyDetailsComplete()
+                        }
+                    }
+                }
+                launch {
+                    viewModel.currentCart.collect{}
+                }
             }
         }
-        viewModel.currentCart?.observe(viewLifecycleOwner) {}
     }
 
     private fun navigateToProductDetail(productId: String) {

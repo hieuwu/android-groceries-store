@@ -1,7 +1,5 @@
 package com.hieuwu.groceriesstore.presentation.productlist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,10 +12,14 @@ import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
 import javax.inject.Inject
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
@@ -29,38 +31,23 @@ class ProductListViewModel @Inject constructor(
     private val categoryId = args.categoryId
 
     private var viewModelJob = Job()
-    private var _productList = MutableLiveData<List<ProductModel>>()
-    val productList: LiveData<List<ProductModel>>
-        get() = _productList
 
-    var currentCart: MutableLiveData<OrderModel> =
-        getProductListUseCase.getCurrentCart() as MutableLiveData<OrderModel>
-    private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
-
-    val navigateToSelectedProperty: LiveData<ProductModel?>
-        get() = _navigateToSelectedProperty
-
-    init {
-        getProductsFromDatabase()
+    // TODO: check type for categoryId
+    private val _productList: Flow<List<ProductModel>> = if (categoryId == null) {
+        getProductListUseCase.getProductList()
+    } else {
+        getProductListUseCase.getAllProductsByCategory(categoryId)
     }
+    val productList: StateFlow<List<ProductModel>> = _productList
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    private fun getProductsFromDatabase() {
-        viewModelScope.launch {
-            getProductFromLocal()
-        }
-    }
+    var currentCart: StateFlow<OrderModel?> =
+        getProductListUseCase.getCurrentCart()
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+    private val _navigateToSelectedProperty = MutableStateFlow<ProductModel?>(null)
 
-    private suspend fun getProductFromLocal() {
-        return withContext(Dispatchers.IO) {
-            _productList = if (categoryId == null) {
-                getProductListUseCase.getProductList()
-                        as MutableLiveData<List<ProductModel>>
-            } else {
-                getProductListUseCase.getAllProductsByCategory(categoryId)
-                        as MutableLiveData<List<ProductModel>>
-            }
-        }
-    }
+    val navigateToSelectedProperty: StateFlow<ProductModel?>
+        get() = _navigateToSelectedProperty.asStateFlow()
 
     override fun onCleared() {
         super.onCleared()

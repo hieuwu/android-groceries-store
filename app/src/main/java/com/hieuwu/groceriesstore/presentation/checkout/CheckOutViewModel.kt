@@ -8,6 +8,11 @@ import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
@@ -21,28 +26,28 @@ class CheckOutViewModel @Inject constructor(
     val user: LiveData<UserModel?>
         get() = _user
 
-    private var _order: MutableLiveData<OrderModel> =
-        createOrderUseCase.getCurrentCart() as MutableLiveData<OrderModel>
-    val order: LiveData<OrderModel>
-        get() = _order
+    val order: StateFlow<OrderModel?> =
+        createOrderUseCase.getCurrentCart()
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
-    private var _address = MutableLiveData<Double>()
-    val address: LiveData<Double>
-        get() = _address
+    // TODO: check for type
+    private var _address = MutableStateFlow(0.0)
+    val address: StateFlow<Double>
+        get() = _address.asStateFlow()
 
-    private var _totalPrice = MutableLiveData<Double>()
-    val totalPrice: LiveData<Double>
-        get() = _totalPrice
+    private var _totalPrice = MutableStateFlow(0.0)
+    val totalPrice: StateFlow<Double>
+        get() = _totalPrice.asStateFlow()
 
-    private var _isOrderSentSuccessful = MutableLiveData<Boolean>()
-    val isOrderSentSuccessful: LiveData<Boolean>
-        get() = _isOrderSentSuccessful
+    private var _isOrderSentSuccessful = MutableStateFlow<Boolean?>(null)
+    val isOrderSentSuccessful: StateFlow<Boolean?>
+        get() = _isOrderSentSuccessful.asStateFlow()
 
     fun sumPrice() {
         var sum = 0.0
-        if (_order.value?.lineItemList != null) {
-            for (item in _order.value?.lineItemList!!) {
-                val sub = item?.subtotal ?: 0.0
+        if (order.value?.lineItemList != null) {
+            for (item in order.value?.lineItemList!!) {
+                val sub = item.subtotal ?: 0.0
                 sum = sum.plus(sub)
             }
         }
@@ -50,7 +55,7 @@ class CheckOutViewModel @Inject constructor(
     }
 
     private fun setOrderAddress() {
-        _order.value?.address = user.value?.address ?: ""
+        order.value?.address = user.value?.address ?: ""
     }
 
     fun sendOrder() {

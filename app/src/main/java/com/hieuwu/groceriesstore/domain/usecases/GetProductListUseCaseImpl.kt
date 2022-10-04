@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-import androidx.lifecycle.LiveData
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.OrderModel
@@ -8,6 +7,7 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetProductListUseCaseImpl @Inject constructor(
@@ -15,11 +15,11 @@ class GetProductListUseCaseImpl @Inject constructor(
     private val orderRepository: OrderRepository
 ) : GetProductListUseCase {
 
-    override fun getProductList(): LiveData<List<ProductModel>> {
+    override fun getProductList(): Flow<List<ProductModel>> {
         return productRepository.products
     }
 
-    override fun getCurrentCart(): LiveData<OrderModel>? {
+    override fun getCurrentCart(): Flow<OrderModel?> {
         return orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
     }
 
@@ -31,6 +31,6 @@ class GetProductListUseCaseImpl @Inject constructor(
         orderRepository.createOrUpdate(order)
     }
 
-    override suspend fun getAllProductsByCategory(categoryId: String) =
+    override fun getAllProductsByCategory(categoryId: String) =
         productRepository.getAllProductsByCategory(categoryId)
 }

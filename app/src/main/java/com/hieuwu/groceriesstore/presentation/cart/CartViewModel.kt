@@ -1,13 +1,14 @@
 package com.hieuwu.groceriesstore.presentation.cart
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -17,10 +18,9 @@ class CartViewModel @Inject constructor(
     private val updateCartItemUseCase: UpdateCartItemUseCase
 ) : ObservableViewModel() {
 
-    private var _order: MutableLiveData<OrderModel> =
-        updateCartItemUseCase.getCurrentCart() as MutableLiveData<OrderModel>
-    val order: LiveData<OrderModel>
-        get() = _order
+    val order: StateFlow<OrderModel?> =
+        updateCartItemUseCase.getCurrentCart()
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     fun decreaseQty(lineItemModel: LineItemModel) {
         try {

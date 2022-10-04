@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import com.google.firebase.firestore.ktx.firestore
@@ -16,6 +15,8 @@ import com.hieuwu.groceriesstore.utilities.convertProductDocumentToEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -26,8 +27,8 @@ class ProductRepositoryImpl @Inject constructor(
     private val lineItemDao: LineItemDao
 ) : ProductRepository {
 
-    override val products: LiveData<List<ProductModel>> =
-        Transformations.map(productDao.getAll().asLiveData()) {
+    override val products: Flow<List<ProductModel>> =
+        productDao.getAll().map {
             it.asDomainModel()
         }
 
@@ -68,8 +69,8 @@ class ProductRepositoryImpl @Inject constructor(
         it.asDomainModel()
     }
 
-    override suspend fun getAllProductsByCategory(categoryId: String) =
-        Transformations.map(productDao.getAllByCategory(categoryId).asLiveData()) {
+    override fun getAllProductsByCategory(categoryId: String) =
+        productDao.getAllByCategory(categoryId).map {
             it.asDomainModel()
         }
 
