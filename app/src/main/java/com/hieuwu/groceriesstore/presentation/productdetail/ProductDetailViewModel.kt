@@ -1,6 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.productdetail
 
 import androidx.databinding.Bindable
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.data.entities.LineItem
@@ -10,6 +11,7 @@ import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -19,13 +21,16 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class ProductDetailViewModel @Inject constructor(
-    id: String,
+    savedStateHandle: SavedStateHandle,
     getProductDetailUseCase: GetProductDetailUseCase,
     private val orderRepository: OrderRepository
 ) : ObservableViewModel() {
 
-    val product = getProductDetailUseCase.getProductDetail(id)
+    private val args = ProductDetailFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    val product = getProductDetailUseCase.getProductDetail(args.id)
 
     var currentCart: StateFlow<OrderModel?> =
         orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)

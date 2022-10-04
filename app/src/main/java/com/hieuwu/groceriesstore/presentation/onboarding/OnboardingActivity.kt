@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.flowWithLifecycle
 import com.google.android.gms.tasks.OnCompleteListener
@@ -14,21 +14,16 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.hieuwu.groceriesstore.MainActivity
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
-import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import timber.log.Timber
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
     lateinit var binding: ActivityOnboardingBinding
 
-    private lateinit var viewModel: OnboardingViewModel
+    private val viewModel: OnboardingViewModel by viewModels()
     private lateinit var sharedPreferences: SharedPreferences
-
-    @Inject
-    lateinit var refreshAppDataUseCase: RefreshAppDataUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +38,6 @@ class OnboardingActivity : AppCompatActivity() {
         if (isSyncedSuccessful) navigateToMainInitialScreen()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
-        val viewModelFactory =
-            OnboardingViewModelFactory(refreshAppDataUseCase)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(OnboardingViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

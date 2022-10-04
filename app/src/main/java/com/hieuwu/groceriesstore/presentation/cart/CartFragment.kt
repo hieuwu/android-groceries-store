@@ -7,7 +7,7 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,20 +15,16 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
-import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.SwipeToDeleteCallback
 import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CartFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCartBinding
-    private lateinit var viewModel: CartViewModel
-    @Inject
-    lateinit var updateCartItemUseCase: UpdateCartItemUseCase
+    private val viewModel: CartViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,9 +34,6 @@ class CartFragment : BottomSheetDialogFragment() {
         binding = DataBindingUtil.inflate<FragmentCartBinding>(
             inflater, R.layout.fragment_cart, container, false
         )
-        val viewModelFactory = CartViewModelFactory(updateCartItemUseCase)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(CartViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

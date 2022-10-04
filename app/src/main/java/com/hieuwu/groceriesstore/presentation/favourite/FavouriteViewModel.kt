@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import com.hieuwu.groceriesstore.domain.models.RecipeModel
 import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class FavouriteViewModel @Inject constructor(private val recipeRepository: RecipeRepository) :
     ObservableViewModel() {
 
