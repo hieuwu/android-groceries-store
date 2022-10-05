@@ -22,6 +22,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "DeKaN",
+      "name": "Dmitriy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1156370?v=4",
+      "profile": "https://github.com/DeKaN",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
