@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         val fabButton = findViewById<FloatingActionButton>(R.id.fabButton)
 
-        val bottomSheetDialogFragment = CartFragment()
         fabButton.setOnClickListener {
+            val bottomSheetDialogFragment = CartFragment()
             bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
         }
 
