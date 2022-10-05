@@ -49,6 +49,16 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "NiranjanNlc",
+      "name": "NLC",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25600880?v=4",
+      "profile": "https://github.com/NiranjanNlc",
+      "contributions": [
+        "design",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
