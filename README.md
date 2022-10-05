@@ -1,8 +1,6 @@
 <h1 align="center"> 🚀 Groceries Store</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
  [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
@@ -103,9 +101,15 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/saurabhkpatel"><img src="https://avatars.githubusercontent.com/u/1188367?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Saurabh Patel</b></sub></a><br /><a href="https://github.com/hieuwu/android-groceries-store/commits?author=saurabhkpatel" title="Code">💻</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/saurabhkpatel"><img src="https://avatars.githubusercontent.com/u/1188367?v=4?s=100" width="100px;" alt="Saurabh Patel"/><br /><sub><b>Saurabh Patel</b></sub></a><br /><a href="https://github.com/hieuwu/android-groceries-store/commits?author=saurabhkpatel" title="Code">💻</a></td>
+      <td align="center"><a href="https://aditya-gupta99.github.io/"><img src="https://avatars.githubusercontent.com/u/94394661?v=4?s=100" width="100px;" alt="Aditya Gupta"/><br /><sub><b>Aditya Gupta</b></sub></a><br /><a href="#design-Aditya-gupta99" title="Design">🎨</a></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    
+  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->
