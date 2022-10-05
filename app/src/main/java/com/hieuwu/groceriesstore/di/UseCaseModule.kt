@@ -19,42 +19,42 @@ import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 @Module
 abstract class UseCaseModule {
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun bindGetProductListUseCase(impl: GetProductListUseCaseImpl): GetProductListUseCase
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun bindGetProductDetailUseCase(impl: GetProductDetailUseCaseImpl): GetProductDetailUseCase
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun bindAuthenticateUserUseCase(impl: AuthenticateUserUseCaseImpl): AuthenticateUserUseCase
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun bindUpdateCartItemUseCase(impl: UpdateCartItemUseCaseImpl): UpdateCartItemUseCase
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun bindCreateOrderUseCase(impl: CreateOrderUseCaseImpl): CreateOrderUseCase
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun bindExploreProductUseCase(impl: ExploreProductProductUseCaseImpl): ExploreProductUseCase
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun bindRefreshAppDataUseCase(impl: RefreshAppDataUseCaseImpl): RefreshAppDataUseCase
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun bindUserSettingsUseCase(impl: UserSettingsUseCaseImpl): UserSettingsUseCase
 }
