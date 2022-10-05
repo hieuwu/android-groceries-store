@@ -24,6 +24,43 @@
         "code",
         "example"
       ]
+    },
+    {
+      "login": "DeKaN",
+      "name": "Dmitriy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1156370?v=4",
+      "profile": "https://github.com/DeKaN",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Devendra34",
+      "name": "Devendra Varma",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51832211?v=4",
+      "profile": "https://github.com/Devendra34",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "AmartyaSingh97",
+      "name": "Amartya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/85061899?v=4",
+      "profile": "https://developers.google.com/profile/u/115663579126625722254",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "NiranjanNlc",
+      "name": "NLC",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25600880?v=4",
+      "profile": "https://github.com/NiranjanNlc",
+      "contributions": [
+        "design",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
