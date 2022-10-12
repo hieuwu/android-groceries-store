@@ -59,7 +59,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:$roomVersion"
-    implementation 'com.google.firebase:firebase-messaging:23.0.6'
+    implementation 'com.google.firebase:firebase-messaging:23.1.0'
     implementation 'com.android.car.ui:car-ui-lib:2.0.0'
     kapt "androidx.room:room-compiler:$roomVersion"
 
