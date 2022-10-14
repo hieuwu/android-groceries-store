@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import kotlinx.coroutines.flow.Flow
-
+@Deprecated("Use UseCase instead")
 interface CreateOrderUseCase {
     @Deprecated("Use SubmitOrderUseCase")
     suspend fun sendOrderToServer(order: OrderModel): Boolean
