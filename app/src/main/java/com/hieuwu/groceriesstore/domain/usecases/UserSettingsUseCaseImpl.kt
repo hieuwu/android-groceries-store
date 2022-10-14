@@ -8,20 +8,15 @@ import javax.inject.Inject
 class UserSettingsUseCaseImpl @Inject constructor(private val userRepository: UserRepository) :
     UserSettingsUseCase {
 
-    override suspend fun updateUserSettings(
-        id: String,
-        isOrderCreatedEnabled: Boolean,
-        isDatabaseRefreshedEnabled: Boolean,
-        isPromotionEnabled: Boolean
-    ) {
+    override suspend fun execute(input: UserSettingsUseCase.Input): UserSettingsUseCase.Output {
         withContext(Dispatchers.IO) {
             userRepository.updateUserSettings(
-                id,
-                isOrderCreatedEnabled,
-                isDatabaseRefreshedEnabled,
-                isPromotionEnabled
+                input.id,
+                input.isOrderCreatedEnabled,
+                input.isDatabaseRefreshedEnabled,
+                input.isPromotionEnabled
             )
         }
+        return UserSettingsUseCase.Output()
     }
-
 }
