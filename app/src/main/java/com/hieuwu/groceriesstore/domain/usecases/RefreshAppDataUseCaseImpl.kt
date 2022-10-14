@@ -10,7 +10,7 @@ class RefreshAppDataUseCaseImpl @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val recipeRepository: RecipeRepository
 ) : RefreshAppDataUseCase {
-    override suspend fun refreshAppData() {
+    override suspend fun execute(input: Unit) {
         categoryRepository.refreshDatabase()
         productRepository.refreshDatabase()
         recipeRepository.refreshDatabase()
