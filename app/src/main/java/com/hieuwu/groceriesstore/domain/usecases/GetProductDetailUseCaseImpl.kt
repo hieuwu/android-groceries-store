@@ -4,10 +4,8 @@ import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import javax.inject.Inject
 
 class GetProductDetailUseCaseImpl @Inject constructor(
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
 ) : GetProductDetailUseCase {
-    override suspend fun execute(input: GetProductDetailUseCase.Input): GetProductDetailUseCase.Output {
-        val result = productRepository.getProductById(input.id)
-        return GetProductDetailUseCase.Output(result)
-    }
+    override fun getProductDetail(productId: String) = productRepository.getProductById(productId)
 }
+
