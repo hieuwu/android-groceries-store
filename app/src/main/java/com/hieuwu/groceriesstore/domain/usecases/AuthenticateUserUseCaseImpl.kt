@@ -5,15 +5,16 @@ import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import javax.inject.Inject
 
+@Deprecated("Use simple use case instead")
 class AuthenticateUserUseCaseImpl @Inject constructor(private val userRepository: UserRepository) :
     AuthenticateUserUseCase {
     override suspend fun signIn(email: String, password: String) {
         userRepository.authenticate(email, password)
     }
 
-    override suspend fun signOut() {
-        userRepository.clearUser()
-    }
+//    override suspend fun signOut() {
+//        userRepository.clearUser()
+//    }
 
     override fun getCurrentUser(): LiveData<UserModel?> {
         return userRepository.getCurrentUser()
