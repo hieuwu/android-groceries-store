@@ -6,5 +6,8 @@ import javax.inject.Inject
 class GetProductDetailUseCaseImpl @Inject constructor(
     private val productRepository: ProductRepository
 ) : GetProductDetailUseCase {
-    override fun getProductDetail(productId: String) = productRepository.getProductById(productId)
+    override suspend fun execute(input: GetProductDetailUseCase.Input): GetProductDetailUseCase.Output {
+        val result = productRepository.getProductById(input.id)
+        return GetProductDetailUseCase.Output(result)
+    }
 }
