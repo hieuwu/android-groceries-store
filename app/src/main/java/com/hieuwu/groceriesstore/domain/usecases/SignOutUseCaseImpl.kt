@@ -5,7 +5,8 @@ import javax.inject.Inject
 
 class SignOutUseCaseImpl @Inject constructor(private val userRepository: UserRepository) :
     SignOutUseCase {
-    override suspend fun execute(input: SignOutUseCase.Input) {
+    override suspend fun execute(input: SignOutUseCase.Input): SignOutUseCase.Output {
         userRepository.clearUser()
+        return SignOutUseCase.Output()
     }
 }
