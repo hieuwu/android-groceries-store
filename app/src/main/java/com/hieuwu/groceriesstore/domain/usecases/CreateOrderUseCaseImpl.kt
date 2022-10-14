@@ -15,9 +15,5 @@ class CreateOrderUseCaseImpl @Inject constructor(
 
     override fun getCurrentUser() = userRepository.getCurrentUser()
 
-    override fun setOrderAddress() {
-        TODO("Not yet implemented")
-    }
-
     override fun getCurrentCart() = orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
 }

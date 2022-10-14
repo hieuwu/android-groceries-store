@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface CreateOrderUseCase {
     suspend fun sendOrderToServer(order: OrderModel): Boolean
+
+    @Deprecated("Use GetProfileUseCase")
     fun getCurrentUser(): LiveData<UserModel?>
-    fun setOrderAddress()
+
+    @Deprecated("Use GetCurrentCartUseCase")
     fun getCurrentCart(): Flow<OrderModel?>
 }
