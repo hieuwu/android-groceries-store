@@ -1,4 +1,10 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-interface GetProductsByCategory {
+import com.hieuwu.groceriesstore.domain.models.ProductModel
+import kotlinx.coroutines.flow.Flow
+
+interface GetProductsByCategoryUseCase :
+    UseCase<GetProductsByCategoryUseCase.Input, GetProductsByCategoryUseCase.Output> {
+    class Input(val categoryId: String)
+    class Output(result: Flow<List<ProductModel>>)
 }
