@@ -10,8 +10,14 @@ import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
+import com.hieuwu.groceriesstore.domain.usecases.SignInUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
+import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
@@ -57,4 +63,16 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindUserSettingsUseCase(impl: UserSettingsUseCaseImpl): UserSettingsUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindSignInUseCase(impl: SignInUseCaseImpl): SignInUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindSignOutUseCase(impl: SignOutUseCaseImpl): SignOutUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindSignOutGetProfileUseCase(impl: GetProfileUseCaseImpl): GetProfileUseCase
 }
