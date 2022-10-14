@@ -55,11 +55,13 @@ class NotificationSettingsViewModel @Inject constructor(
     fun updateNotificationSettings() {
         Timber.d("promo: $isPromotionNotiEnabled, ord: $isOrderCreatedNotiEnabled, db: $isDatabaseRefreshedNotiEnabled")
         viewModelScope.launch {
-            userSettingsUseCase.updateUserSettings(
-                user.value?.id!!,
-                isOrderCreatedNotiEnabled.value!!,
-                isDatabaseRefreshedNotiEnabled.value!!,
-                isPromotionNotiEnabled.value!!
+            userSettingsUseCase.execute(
+                UserSettingsUseCase.Input(
+                    user.value?.id!!,
+                    isOrderCreatedNotiEnabled.value!!,
+                    isDatabaseRefreshedNotiEnabled.value!!,
+                    isPromotionNotiEnabled.value!!
+                )
             )
         }
     }
