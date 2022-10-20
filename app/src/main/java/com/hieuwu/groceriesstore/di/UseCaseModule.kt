@@ -4,6 +4,8 @@ import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
+import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.ExploreProductProductUseCaseImpl
@@ -93,4 +95,8 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindAddToCartUseCase(impl: AddToCartUseCaseImpl): AddToCartUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindCreateNewOrderUseCase(iml: CreateNewOrderUseCaseImpl): CreateNewOrderUseCase
 }
