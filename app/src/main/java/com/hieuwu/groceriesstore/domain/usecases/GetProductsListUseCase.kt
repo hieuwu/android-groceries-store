@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface GetProductsListUseCase: UseCase<GetProductsListUseCase.Input, GetProductsListUseCase.Output> {
     class Input
-    class Output(result: Flow<List<ProductModel>>)
+    class Output(val result: Flow<List<ProductModel>>)
 }
