@@ -27,7 +27,6 @@ private const val STOP_TIMEOUT = 5000L
 
 @HiltViewModel
 class ShopViewModel @Inject constructor(
-    private val getProductListUseCase: GetProductListUseCase,
     private val getProductsListUseCase: GetProductsListUseCase,
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val addToCartUseCase: AddToCartUseCase,
