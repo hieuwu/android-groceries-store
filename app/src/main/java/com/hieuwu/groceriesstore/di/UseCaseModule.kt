@@ -1,15 +1,21 @@
 package com.hieuwu.groceriesstore.di
 
+import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
+import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.ExploreProductProductUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
@@ -35,6 +41,10 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindGetProductListUseCase(impl: GetProductListUseCaseImpl): GetProductListUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindGetProductsListUseCase(impl: GetProductsListUseCaseImpl): GetProductsListUseCase
 
     @ViewModelScoped
     @Binds
@@ -75,4 +85,12 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindSignOutGetProfileUseCase(impl: GetProfileUseCaseImpl): GetProfileUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindGetCurrentCartUseCase(impl: GetCurrentCartUseCaseImpl): GetCurrentCartUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindAddToCartUseCase(impl: AddToCartUseCaseImpl): AddToCartUseCase
 }
