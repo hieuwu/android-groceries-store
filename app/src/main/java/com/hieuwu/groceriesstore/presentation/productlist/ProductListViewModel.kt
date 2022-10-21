@@ -7,6 +7,7 @@ import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,8 +25,9 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    val getProductListUseCase: GetProductListUseCase
-) : ViewModel() {
+    val getProductListUseCase: GetProductListUseCase,
+    private val addToCartUseCase: AddToCartUseCase,
+    ) : ViewModel() {
 
     private val args = ProductListFragmentArgs.fromSavedStateHandle(savedStateHandle)
     private val categoryId = args.categoryId
