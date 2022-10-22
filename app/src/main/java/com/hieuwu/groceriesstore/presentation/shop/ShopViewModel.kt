@@ -9,7 +9,6 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
