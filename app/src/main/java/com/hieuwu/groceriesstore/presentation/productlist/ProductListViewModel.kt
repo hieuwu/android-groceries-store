@@ -31,9 +31,7 @@ class ProductListViewModel @Inject constructor(
 
     private val args = ProductListFragmentArgs.fromSavedStateHandle(savedStateHandle)
     private val categoryId = args.categoryId
-
-    private var viewModelJob = Job()
-
+    
     // TODO: check type for categoryId
     private val _productList: Flow<List<ProductModel>> = if (categoryId == null) {
         getProductListUseCase.getProductList()
@@ -51,11 +49,6 @@ class ProductListViewModel @Inject constructor(
     val navigateToSelectedProperty: StateFlow<ProductModel?>
         get() = _navigateToSelectedProperty.asStateFlow()
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
     fun displayProductDetail(product: ProductModel) {
         _navigateToSelectedProperty.value = product
     }
@@ -69,20 +62,22 @@ class ProductListViewModel @Inject constructor(
             // Add to cart
             val cartId = currentCart.value!!.id
             viewModelScope.launch {
-                val lineItem = LineItem(
+                addToCartUseCase.execute(AddToCartUseCase.Input(LineItem(
                     product.id, cartId, 1, product.price!!
-                )
-                getProductListUseCase.addToCart(lineItem)
+                )))
             }
         } else {
             val id = UUID.randomUUID().toString()
             val newOrder = Order(id, OrderStatus.IN_CART.value, "")
             viewModelScope.launch {
                 getProductListUseCase.createNewOrder(newOrder)
-                val lineItem = LineItem(
-                    product.id, id, 1, product.price!!
+                addToCartUseCase.execute(
+                    AddToCartUseCase.Input(
+                        LineItem(
+                            product.id, id, 1, product.price!!
+                        )
+                    )
                 )
-                getProductListUseCase.addToCart(lineItem)
             }
         }
     }
