@@ -14,8 +14,6 @@ import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCaseImpl
-import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductsByCategoryUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductsByCategoryUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
@@ -41,11 +39,6 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @InstallIn(ViewModelComponent::class)
 @Module
 abstract class UseCaseModule {
-
-    @ViewModelScoped
-    @Binds
-    abstract fun bindGetProductListUseCase(impl: GetProductListUseCaseImpl): GetProductListUseCase
-
     @ViewModelScoped
     @Binds
     abstract fun bindGetProductsListUseCase(impl: GetProductsListUseCaseImpl): GetProductsListUseCase
