@@ -16,6 +16,8 @@ import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductListUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.GetProductsByCategoryUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProductsByCategoryUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
@@ -98,5 +100,10 @@ abstract class UseCaseModule {
 
     @ViewModelScoped
     @Binds
-    abstract fun bindCreateNewOrderUseCase(iml: CreateNewOrderUseCaseImpl): CreateNewOrderUseCase
+    abstract fun bindCreateNewOrderUseCase(impl: CreateNewOrderUseCaseImpl): CreateNewOrderUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindGetProductsByCategoryUseCase(impl: GetProductsByCategoryUseCaseImpl): GetProductsByCategoryUseCase
+
 }
