@@ -6,13 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(private val userRepository: UserRepository) : ObservableViewModel() {
+class SignInViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val signInUseCase: SignInUseCase
+) :
+    ObservableViewModel() {
 
     private var _email: String? = null
     var email: String?
@@ -39,8 +44,14 @@ class SignInViewModel @Inject constructor(private val userRepository: UserReposi
     val isSignUpSuccessful: LiveData<Boolean?>
         get() = _isSignUpSuccessful
 
-    public fun signIn(email: String, password: String) {
+    fun signIn() {
         viewModelScope.launch {
-            _isSignUpSuccessful.value = userRepository!!.authenticate(_email!!, _password!!)
+            _isSignUpSuccessful.value = signInUseCase.execute(
+                SignInUseCase.Input(
+                    email = _email!!,
+                    password = _password!!
+                )
+            ).result
         }
-    } }
+    }
+}
