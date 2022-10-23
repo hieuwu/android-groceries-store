@@ -52,11 +52,20 @@ fun convertCategoryDocumentToEntity(document: QueryDocumentSnapshot): Category {
 }
 
 fun convertUserDocumentToEntity(id: String, document: DocumentSnapshot): User {
-    val name: String = document.data?.get(UserDocumentProperties.name)!! as String
-    val phone: String = document.data?.get(UserDocumentProperties.phone) as String
-    val address: String = document.data?.get(UserDocumentProperties.address) as String
-    val email: String = document.data?.get(UserDocumentProperties.email) as String
-    return User(id, name, email, address, phone, false, false, false)
+    val name: String = document.data?.get(UserDocumentProperties.name)!! as String ?: ""
+//    val phone: String? = document.data?.get(UserDocumentProperties.phone) ?: "" as String ?: ""
+    val address: String = document.data?.get(UserDocumentProperties.address) as String ?: ""
+    val email: String = document.data?.get(UserDocumentProperties.email) as String ?: ""
+    return User(
+        id = id,
+        name = name,
+        email = email,
+        address = address,
+        phone =  "",
+        isOrderCreatedNotiEnabled = false,
+        isPromotionNotiEnabled = false,
+        isDataRefreshedNotiEnabled = false
+    )
 }
 
 fun convertUserEntityToDocument(user: User): HashMap<String, String?> {
