@@ -1,10 +1,14 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.kapt
+    alias libs.plugins.android.application
+    alias libs.plugins.hilt.android
+    alias libs.plugins.gms
+    alias libs.plugins.spotless
+    alias libs.plugins.navigation.safeargs
+}
+
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 31
@@ -41,82 +45,41 @@ android {
     }
 }
 
-
 dependencies {
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-
-    implementation 'com.google.android.material:material:1.6.1'
-
-    //Constraint and Coordinator layout
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorLayoutVersion"
-    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
-    implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
-
-    //Work Manager
-    implementation "androidx.work:work-runtime-ktx:$workVersion"
-    implementation("androidx.core:core-ktx:$coreVersion")
-
-    // Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    implementation 'com.google.firebase:firebase-messaging:23.0.6'
-    implementation 'com.android.car.ui:car-ui-lib:2.0.0'
-    kapt "androidx.room:room-compiler:$roomVersion"
-
-    //Navigation component
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation libs.bundles.androidx
+    implementation libs.bundles.android.ui
 
-    //Hilt
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation libs.kotlin.stdlib
 
-    //Junit for testing
-    testImplementation "junit:junit:$jUnitVersion"
-    androidTestImplementation("androidx.test:runner:$testRunnerVersion")
-    androidTestImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    implementation libs.legacy.support.v4
+    implementation libs.rxjava
 
-    //Gson for json parser
-    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation libs.timber
 
-    //Timber for log
-    implementation "com.jakewharton.timber:timber:$timverVersion"
+    implementation libs.bundles.room
+    kapt libs.room.compiler
 
-    //Livedata
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation libs.hilt
+    kapt libs.hilt.compiler
 
-    //Room
-    implementation "androidx.room:room-ktx:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation libs.glide
+    annotationProcessor libs.glide.compiler
+    implementation libs.lottie
 
-    //Glide for image loading
-    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation libs.bundles.retrofit
+    implementation libs.gson
+    implementation libs.moshi
+    implementation libs.kotlin.coroutines.play.services
 
-    //Moshi for json parser
-    implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
-    implementation "com.squareup.retrofit2:converter-moshi:$moshiConverterVersion"
+    implementation platform(libs.firebase.bom)
+    implementation libs.bundles.firebase
 
-    //Firebase
-    implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
-    implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation 'com.google.firebase:firebase-database-ktx'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation "com.google.firebase:firebase-firestore-ktx:${fireStoreVersion}"
+    implementation libs.caruilib
 
-
-    //Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$kitlinCoroutineAdapter"
-
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation("androidx.cardview:cardview:$cardViewVersion")
-    implementation "com.airbnb.android:lottie:$lottieVersion"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.androidx.test.arch.core
 }
 
 task wrapper(type: Wrapper){
