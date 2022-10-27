@@ -61,6 +61,15 @@
         "design",
         "code"
       ]
+    },
+    {
+      "login": "fejd",
+      "name": "Fredrik Henricsson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4249809?v=4",
+      "profile": "https://github.com/fejd",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -68,5 +77,6 @@
   "projectOwner": "hieuwu",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
