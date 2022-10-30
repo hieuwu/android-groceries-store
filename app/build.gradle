@@ -1,7 +1,10 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     alias libs.plugins.kotlin.android
     alias libs.plugins.kotlin.kapt
     alias libs.plugins.android.application
+    alias libs.plugins.ktlint.gradle
     alias libs.plugins.hilt.android
     alias libs.plugins.gms
     alias libs.plugins.spotless
@@ -84,4 +87,12 @@ dependencies {
 
 task wrapper(type: Wrapper){
     gradleVersion = '7.2'
+}
+
+ktlint {
+    android.set(true)
+    reporters {
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.HTML)
+    }
 }
