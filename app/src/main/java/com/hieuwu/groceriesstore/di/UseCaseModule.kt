@@ -28,6 +28,8 @@ import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
+import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCaseImpl
 import dagger.Binds
@@ -98,5 +100,9 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindGetProductsByCategoryUseCase(impl: GetProductsByCategoryUseCaseImpl): GetProductsByCategoryUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindUpdateProfileUseCase(impl: UpdateProfileUseCaseImpl): UpdateProfileUseCase
 
 }

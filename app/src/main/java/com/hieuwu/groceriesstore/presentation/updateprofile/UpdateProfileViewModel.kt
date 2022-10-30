@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
+import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.Exception
@@ -14,7 +15,10 @@ import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class UpdateProfileViewModel @Inject constructor(private val authenticateUserUseCase: AuthenticateUserUseCase) :
+class UpdateProfileViewModel @Inject constructor(
+    private val authenticateUserUseCase: AuthenticateUserUseCase,
+    private val updateProfileUseCase: UpdateProfileUseCase
+) :
     ObservableViewModel() {
     private val _user =
         authenticateUserUseCase.getCurrentUser() as MutableLiveData<UserModel?>
@@ -73,7 +77,15 @@ class UpdateProfileViewModel @Inject constructor(private val authenticateUserUse
         val id = _user.value!!.id
         try {
             viewModelScope.launch {
-                authenticateUserUseCase.updateUserProfile(id, _name!!, _email!!, _phoneNumber!!, _address!!)
+                updateProfileUseCase.execute(
+                    UpdateProfileUseCase.Input(
+                        userId = id,
+                        name = _name!!,
+                        email = _email!!,
+                        phone = _phoneNumber!!,
+                        address = _address!!
+                    )
+                )
             }
             _isDoneUpdate.value = true
         } catch (e: Exception) {
