@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,12 +16,12 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class UpdateProfileViewModel @Inject constructor(
-    private val authenticateUserUseCase: AuthenticateUserUseCase,
-    private val updateProfileUseCase: UpdateProfileUseCase
-) :
+    private val updateProfileUseCase: UpdateProfileUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
+
+    ) :
     ObservableViewModel() {
-    private val _user =
-        authenticateUserUseCase.getCurrentUser() as MutableLiveData<UserModel?>
+    private val _user: MutableLiveData<UserModel?> = MutableLiveData()
     val user: LiveData<UserModel?>
         get() = _user
 
@@ -72,6 +72,16 @@ class UpdateProfileViewModel @Inject constructor(
     private val _isDoneUpdate = MutableLiveData<Boolean>(null)
     val isDoneUpdate: LiveData<Boolean?>
         get() = _isDoneUpdate
+
+    init {
+        getCurrentUser()
+    }
+
+    private fun getCurrentUser() {
+        viewModelScope.launch {
+            _user.value = getProfileUseCase.execute(GetProfileUseCase.Input()).result.value
+        }
+    }
 
     fun updateUserProfile() {
         val id = _user.value!!.id
