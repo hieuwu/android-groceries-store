@@ -1,0 +1,106 @@
+[versions]
+appCompatVersion = "1.4.2"
+buildGradleVersion = "7.2.1"
+cardViewVersion = "1.0.0"
+carUiLibVersion = "2.0.0"
+constraintLayoutVersion = "2.1.4"
+coordinatorLayoutVersion = "1.2.0"
+coreTestingVersion = "2.1.0"
+coreVersion = "1.8.0"
+firebaseBomVersion = "30.3.2"
+fireStoreVersion = "24.2.2"
+firebaseVersion = "23.0.6"
+glideVersion = "4.13.2"
+googleServicesVersion = "4.3.13"
+gsonVersion = "2.9.0"
+hiltVersion = '2.42'
+jUnitVersion = "4.13.2"
+kotlinVersion = "1.6.21"
+kotlinCoroutineAdapter = "0.9.2"
+kotlinCoroutinePlayServicesVersion = "1.6.4"
+ktlintGradleVersion = "11.0.0"
+legacySupportVersion = "1.0.0"
+lifecycleVersion = "2.5.0"
+lottieVersion = "5.2.0"
+materialVersion = "1.6.1"
+moshiConverterVersion = "2.9.0"
+moshiVersion = "1.12.0"
+navigationVersion = "2.4.2"
+retrofitVersion = "2.9.0"
+roomVersion = "2.3.0"
+rxJavaVersion = "3.1.5"
+spotlessVersion = "6.8.0"
+testRunnerVersion = "1.4.0"
+timberVersion = "5.0.1"
+workVersion = "2.7.1"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompatVersion" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "coreVersion" }
+androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleVersion" }
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleVersion" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "testRunnerVersion" }
+androidx-test-arch-core = { module = "androidx.arch.core:core-testing", version.ref = "coreTestingVersion" }
+androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "workVersion" }
+cardview = { module = "androidx.cardview:cardview", version.ref = "cardViewVersion" }
+caruilib = { module = "com.android.car.ui:car-ui-lib", version.ref = "carUiLibVersion" }
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayoutVersion" }
+coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorLayoutVersion" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
+firebase-auth = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "fireStoreVersion" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseVersion" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glideVersion" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltVersion" }
+junit = { module = "junit:junit", version.ref = "jUnitVersion" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlinVersion" }
+kotlin-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinCoroutinePlayServicesVersion" }
+legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacySupportVersion" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottieVersion" }
+material-components = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiVersion" }
+navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationVersion" }
+navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationVersion" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "moshiConverterVersion" }
+retrofit-coroutines-adapter = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "kotlinCoroutineAdapter" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxJavaVersion" }
+room = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
+
+[bundles]
+androidx = [
+    "androidx-core",
+    "androidx-lifecycle-livedata",
+    "androidx-lifecycle-runtime",
+    "androidx-work-runtime",
+]
+android-ui = [
+    "androidx-appcompat",
+    "cardview",
+    "constraintlayout",
+    "coordinatorlayout",
+    "material-components",
+    "navigation-fragment",
+    "navigation-ui",
+]
+firebase = ["firebase-auth", "firebase-database", "firebase-analytics", "firebase-firestore", "firebase-messaging"]
+retrofit = ["retrofit", "retrofit-converter-moshi", "retrofit-coroutines-adapter"]
+room = ["room", "room-runtime"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "buildGradleVersion" }
+gms = { id = "com.google.gms.google-services", version.ref = "googleServicesVersion" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinVersion" }
+ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradleVersion" }
+navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigationVersion"}
+spotless = { id = "com.diffplug.spotless", version.ref = "spotlessVersion" }
