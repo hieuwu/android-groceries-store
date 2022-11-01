@@ -6,8 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
+import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -18,17 +22,19 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class CheckOutViewModel @Inject constructor(
-    private val createOrderUseCase: CreateOrderUseCase
+    private val createOrderUseCase: CreateOrderUseCase,
+    private val getCurrentCartUseCase: GetCurrentCartUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
+    private val submitOrderUseCase: SubmitOrderUseCase
 ) :
     ObservableViewModel() {
     private val _user =
-        createOrderUseCase.getCurrentUser() as MutableLiveData<UserModel?>
+        getCurrentUser() as MutableLiveData<UserModel?>
     val user: LiveData<UserModel?>
         get() = _user
 
     val order: StateFlow<OrderModel?> =
-        createOrderUseCase.getCurrentCart()
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+        getCurrentCard()!!.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     // TODO: check for type
     private var _address = MutableStateFlow(0.0)
@@ -58,10 +64,28 @@ class CheckOutViewModel @Inject constructor(
         order.value?.address = user.value?.address ?: ""
     }
 
+    private fun getCurrentCard(): Flow<OrderModel?>? {
+        var res: Flow<OrderModel?>? = null
+        viewModelScope.launch {
+            res = getCurrentCartUseCase.execute(GetCurrentCartUseCase.Input()).result
+        }
+        return res
+    }
+
+    private fun getCurrentUser(): LiveData<UserModel?>? {
+        var res: LiveData<UserModel?>? = null
+        viewModelScope.launch {
+            res = getProfileUseCase.execute(GetProfileUseCase.Input()).result
+        }
+        return res
+    }
+
+
     fun sendOrder() {
         setOrderAddress()
         viewModelScope.launch {
-            _isOrderSentSuccessful.value = createOrderUseCase.sendOrderToServer(order.value!!)
+            _isOrderSentSuccessful.value =
+                submitOrderUseCase.execute(SubmitOrderUseCase.Input(order.value!!)).result
         }
     }
 }
