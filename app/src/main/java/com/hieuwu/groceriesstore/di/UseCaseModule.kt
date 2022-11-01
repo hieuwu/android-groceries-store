@@ -26,6 +26,8 @@ import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
+import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
@@ -104,5 +106,9 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindUpdateProfileUseCase(impl: UpdateProfileUseCaseImpl): UpdateProfileUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindSubmitOrderUseCase(impl: SubmitOrderUseCaseImpl): SubmitOrderUseCase
 
 }
