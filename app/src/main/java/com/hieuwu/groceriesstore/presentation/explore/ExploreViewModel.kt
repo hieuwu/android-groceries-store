@@ -30,7 +30,6 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
-    private val exploreProductUseCase: ExploreProductUseCase,
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val getCategoriesListUseCase: GetCategoriesListUseCase,
     private val searchProductUseCase: SearchProductUseCase,
@@ -114,19 +113,16 @@ class ExploreViewModel @Inject constructor(
                     product.id, cartId, 1, product.price!!
                 )
                 addToCartUseCase.execute(AddToCartUseCase.Input(lineItem = lineItem))
-//                exploreProductUseCase.addToCart(lineItem)
             }
         } else {
             val id = UUID.randomUUID().toString()
             val newOrder = Order(id, OrderStatus.IN_CART.value, "")
             viewModelScope.launch {
                 createNewOrderUseCase.execute(CreateNewOrderUseCase.Input(order = newOrder))
-//                exploreProductUseCase.createNewOrder(newOrder)
                 val lineItem = LineItem(
                     product.id, id, 1, product.price!!
                 )
                 addToCartUseCase.execute(AddToCartUseCase.Input(lineItem = lineItem))
-//                exploreProductUseCase.addToCart(lineItem)
             }
         }
     }
