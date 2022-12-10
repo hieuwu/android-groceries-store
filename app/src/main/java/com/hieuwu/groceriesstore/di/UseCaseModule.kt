@@ -10,6 +10,8 @@ import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.ExploreProductProductUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
@@ -22,6 +24,8 @@ import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
+import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
@@ -111,4 +115,12 @@ abstract class UseCaseModule {
     @Binds
     abstract fun bindSubmitOrderUseCase(impl: SubmitOrderUseCaseImpl): SubmitOrderUseCase
 
+    @ViewModelScoped
+    @Binds
+    abstract fun bindGetCategoriesListUseCase(impl: GetCategoriesListUseCaseImpl): GetCategoriesListUseCase
+
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindSearchProductUseCase(impl: SearchProductUseCaseImpl): SearchProductUseCase
 }
