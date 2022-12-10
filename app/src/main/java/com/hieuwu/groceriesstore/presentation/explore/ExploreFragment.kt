@@ -10,12 +10,16 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -82,8 +86,14 @@ class ExploreFragment : Fragment() {
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner) {
             if (null != it) navigateToProductDetail(it.id)
         }
-        viewModel.categories.observe(viewLifecycleOwner) {}
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.categories.collect {}
+                }
 
+            }
+        }
         viewModel.productList.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
                 Timber.d("Empty")
