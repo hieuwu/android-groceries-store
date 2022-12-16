@@ -1,6 +1,7 @@
-package com.hieuwu.groceriesstore.domain.usecases
+package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
+import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import javax.inject.Inject
 
 class AddToCartUseCaseImpl @Inject constructor(private val orderRepository: OrderRepository) :
