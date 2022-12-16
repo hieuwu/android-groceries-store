@@ -100,8 +100,7 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindGetCategoriesListUseCase(impl: GetCategoriesListUseCaseImpl): GetCategoriesListUseCase
-
-
+    
     @ViewModelScoped
     @Binds
     abstract fun bindSearchProductUseCase(impl: SearchProductUseCaseImpl): SearchProductUseCase
