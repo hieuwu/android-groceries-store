@@ -1,6 +1,7 @@
-package com.hieuwu.groceriesstore.domain.usecases
+package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import javax.inject.Inject
 
 class UpdateProfileUseCaseImpl @Inject constructor(private val userRepository: UserRepository) :
