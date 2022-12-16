@@ -1,19 +1,19 @@
-package com.hieuwu.groceriesstore.data
+package com.hieuwu.groceriesstore.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.hieuwu.groceriesstore.data.dao.CategoryDao
-import com.hieuwu.groceriesstore.data.dao.LineItemDao
-import com.hieuwu.groceriesstore.data.dao.OrderDao
-import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.data.dao.RecipeDao
-import com.hieuwu.groceriesstore.data.dao.UserDao
-import com.hieuwu.groceriesstore.data.entities.Category
-import com.hieuwu.groceriesstore.data.entities.LineItem
-import com.hieuwu.groceriesstore.data.entities.Order
-import com.hieuwu.groceriesstore.data.entities.Product
-import com.hieuwu.groceriesstore.data.entities.Recipe
-import com.hieuwu.groceriesstore.data.entities.User
+import com.hieuwu.groceriesstore.data.database.dao.CategoryDao
+import com.hieuwu.groceriesstore.data.database.dao.LineItemDao
+import com.hieuwu.groceriesstore.data.database.dao.OrderDao
+import com.hieuwu.groceriesstore.data.database.dao.ProductDao
+import com.hieuwu.groceriesstore.data.database.dao.RecipeDao
+import com.hieuwu.groceriesstore.data.database.dao.UserDao
+import com.hieuwu.groceriesstore.data.database.entities.Category
+import com.hieuwu.groceriesstore.data.database.entities.LineItem
+import com.hieuwu.groceriesstore.data.database.entities.Order
+import com.hieuwu.groceriesstore.data.database.entities.Product
+import com.hieuwu.groceriesstore.data.database.entities.Recipe
+import com.hieuwu.groceriesstore.data.database.entities.User
 
 @Database(
     entities = [Product::class, LineItem::class, Order::class, Category::class, User::class, Recipe::class],

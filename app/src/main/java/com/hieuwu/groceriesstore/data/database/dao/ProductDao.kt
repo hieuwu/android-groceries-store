@@ -1,11 +1,11 @@
-package com.hieuwu.groceriesstore.data.dao
+package com.hieuwu.groceriesstore.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.hieuwu.groceriesstore.data.entities.Product
+import com.hieuwu.groceriesstore.data.database.entities.Product
 import com.hieuwu.groceriesstore.utilities.PRODUCT_TABLE
 import kotlinx.coroutines.flow.Flow
 

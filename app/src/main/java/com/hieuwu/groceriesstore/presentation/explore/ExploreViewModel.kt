@@ -6,8 +6,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.entities.LineItem
-import com.hieuwu.groceriesstore.data.entities.Order
+import com.hieuwu.groceriesstore.data.database.entities.LineItem
+import com.hieuwu.groceriesstore.data.database.entities.Order
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel

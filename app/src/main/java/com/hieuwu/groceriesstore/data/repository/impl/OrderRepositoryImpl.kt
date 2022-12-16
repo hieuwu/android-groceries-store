@@ -2,11 +2,11 @@ package com.hieuwu.groceriesstore.data.repository.impl
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.hieuwu.groceriesstore.data.dao.LineItemDao
-import com.hieuwu.groceriesstore.data.dao.OrderDao
-import com.hieuwu.groceriesstore.data.entities.LineItem
-import com.hieuwu.groceriesstore.data.entities.Order
-import com.hieuwu.groceriesstore.data.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.database.dao.LineItemDao
+import com.hieuwu.groceriesstore.data.database.dao.OrderDao
+import com.hieuwu.groceriesstore.data.database.entities.LineItem
+import com.hieuwu.groceriesstore.data.database.entities.Order
+import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.utilities.CollectionNames

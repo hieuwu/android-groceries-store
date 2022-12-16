@@ -1,6 +1,6 @@
-package com.hieuwu.groceriesstore.data.dto
+package com.hieuwu.groceriesstore.data.network.dto
 
-import com.hieuwu.groceriesstore.data.entities.Recipe
+import com.hieuwu.groceriesstore.data.database.entities.Recipe
 import com.squareup.moshi.Json
 
 data class RecipeDto(

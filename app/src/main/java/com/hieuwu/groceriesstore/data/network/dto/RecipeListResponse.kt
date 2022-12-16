@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.data.dto
+package com.hieuwu.groceriesstore.data.network.dto
 
 import com.squareup.moshi.Json
 

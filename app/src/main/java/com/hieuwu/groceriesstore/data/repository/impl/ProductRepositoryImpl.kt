@@ -4,10 +4,10 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.hieuwu.groceriesstore.data.dao.LineItemDao
-import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.data.entities.Product
-import com.hieuwu.groceriesstore.data.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.database.dao.LineItemDao
+import com.hieuwu.groceriesstore.data.database.dao.ProductDao
+import com.hieuwu.groceriesstore.data.database.entities.Product
+import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.utilities.CollectionNames

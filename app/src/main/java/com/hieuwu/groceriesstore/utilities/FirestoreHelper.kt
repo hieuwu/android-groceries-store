@@ -2,9 +2,9 @@ package com.hieuwu.groceriesstore.utilities
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.hieuwu.groceriesstore.data.entities.Category
-import com.hieuwu.groceriesstore.data.entities.Product
-import com.hieuwu.groceriesstore.data.entities.User
+import com.hieuwu.groceriesstore.data.database.entities.Category
+import com.hieuwu.groceriesstore.data.database.entities.Product
+import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 

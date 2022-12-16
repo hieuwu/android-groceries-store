@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.data.entities
+package com.hieuwu.groceriesstore.data.database.entities
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo

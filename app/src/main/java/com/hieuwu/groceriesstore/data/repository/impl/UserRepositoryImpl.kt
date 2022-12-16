@@ -5,9 +5,9 @@ import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.hieuwu.groceriesstore.data.dao.UserDao
-import com.hieuwu.groceriesstore.data.entities.User
-import com.hieuwu.groceriesstore.data.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.database.dao.UserDao
+import com.hieuwu.groceriesstore.data.database.entities.User
+import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity

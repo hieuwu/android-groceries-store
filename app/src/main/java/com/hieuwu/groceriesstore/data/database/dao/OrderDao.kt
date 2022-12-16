@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.data.dao
+package com.hieuwu.groceriesstore.data.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.hieuwu.groceriesstore.data.entities.Order
-import com.hieuwu.groceriesstore.data.entities.OrderWithLineItems
+import com.hieuwu.groceriesstore.data.database.entities.Order
+import com.hieuwu.groceriesstore.data.database.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.utilities.ORDER_TABLE
 import kotlinx.coroutines.flow.Flow
 

@@ -2,8 +2,8 @@ package com.hieuwu.groceriesstore.presentation.shop
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.entities.LineItem
-import com.hieuwu.groceriesstore.data.entities.Order
+import com.hieuwu.groceriesstore.data.database.entities.LineItem
+import com.hieuwu.groceriesstore.data.database.entities.Order
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase

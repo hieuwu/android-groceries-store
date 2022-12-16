@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.data.entities
+package com.hieuwu.groceriesstore.data.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

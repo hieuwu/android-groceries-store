@@ -2,9 +2,9 @@ package com.hieuwu.groceriesstore.data.repository.impl
 
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
-import com.hieuwu.groceriesstore.data.dao.RecipeDao
-import com.hieuwu.groceriesstore.data.dto.asEntity
-import com.hieuwu.groceriesstore.data.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.database.dao.RecipeDao
+import com.hieuwu.groceriesstore.data.network.dto.asEntity
+import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.Api
 import com.hieuwu.groceriesstore.data.repository.RecipeRepository
 import javax.inject.Inject

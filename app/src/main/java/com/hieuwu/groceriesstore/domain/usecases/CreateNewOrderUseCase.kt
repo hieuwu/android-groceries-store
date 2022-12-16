@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-import com.hieuwu.groceriesstore.data.entities.Order
+import com.hieuwu.groceriesstore.data.database.entities.Order
 
 interface CreateNewOrderUseCase :
     UseCase<CreateNewOrderUseCase.Input, CreateNewOrderUseCase.Output> {
