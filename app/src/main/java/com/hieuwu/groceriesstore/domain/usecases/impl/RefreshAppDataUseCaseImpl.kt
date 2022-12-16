@@ -1,8 +1,9 @@
-package com.hieuwu.groceriesstore.domain.usecases
+package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
+import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
 import javax.inject.Inject
 
 class RefreshAppDataUseCaseImpl @Inject constructor(
