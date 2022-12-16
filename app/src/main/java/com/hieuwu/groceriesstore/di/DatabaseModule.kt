@@ -2,13 +2,13 @@ package com.hieuwu.groceriesstore.di
 
 import android.content.Context
 import androidx.room.Room
-import com.hieuwu.groceriesstore.data.GroceriesStoreDatabase
-import com.hieuwu.groceriesstore.data.dao.CategoryDao
-import com.hieuwu.groceriesstore.data.dao.LineItemDao
-import com.hieuwu.groceriesstore.data.dao.OrderDao
-import com.hieuwu.groceriesstore.data.dao.ProductDao
-import com.hieuwu.groceriesstore.data.dao.RecipeDao
-import com.hieuwu.groceriesstore.data.dao.UserDao
+import com.hieuwu.groceriesstore.data.database.GroceriesStoreDatabase
+import com.hieuwu.groceriesstore.data.database.dao.CategoryDao
+import com.hieuwu.groceriesstore.data.database.dao.LineItemDao
+import com.hieuwu.groceriesstore.data.database.dao.OrderDao
+import com.hieuwu.groceriesstore.data.database.dao.ProductDao
+import com.hieuwu.groceriesstore.data.database.dao.RecipeDao
+import com.hieuwu.groceriesstore.data.database.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

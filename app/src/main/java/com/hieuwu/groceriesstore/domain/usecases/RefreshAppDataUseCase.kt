@@ -1,5 +1,3 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-interface RefreshAppDataUseCase {
-    suspend fun refreshAppData()
-}
+interface RefreshAppDataUseCase : UseCase<Unit, Unit>

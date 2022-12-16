@@ -6,7 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
+import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.Exception
@@ -14,10 +15,13 @@ import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class UpdateProfileViewModel @Inject constructor(private val authenticateUserUseCase: AuthenticateUserUseCase) :
+class UpdateProfileViewModel @Inject constructor(
+    private val updateProfileUseCase: UpdateProfileUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
+
+    ) :
     ObservableViewModel() {
-    private val _user =
-        authenticateUserUseCase.getCurrentUser() as MutableLiveData<UserModel?>
+    private val _user: MutableLiveData<UserModel?> = MutableLiveData()
     val user: LiveData<UserModel?>
         get() = _user
 
@@ -69,11 +73,29 @@ class UpdateProfileViewModel @Inject constructor(private val authenticateUserUse
     val isDoneUpdate: LiveData<Boolean?>
         get() = _isDoneUpdate
 
+    init {
+        getCurrentUser()
+    }
+
+    private fun getCurrentUser() {
+        viewModelScope.launch {
+            _user.value = getProfileUseCase.execute(GetProfileUseCase.Input()).result.value
+        }
+    }
+
     fun updateUserProfile() {
         val id = _user.value!!.id
         try {
             viewModelScope.launch {
-                authenticateUserUseCase.updateUserProfile(id, _name!!, _email!!, _phoneNumber!!, _address!!)
+                updateProfileUseCase.execute(
+                    UpdateProfileUseCase.Input(
+                        userId = id,
+                        name = _name!!,
+                        email = _email!!,
+                        phone = _phoneNumber!!,
+                        address = _address!!
+                    )
+                )
             }
             _isDoneUpdate.value = true
         } catch (e: Exception) {

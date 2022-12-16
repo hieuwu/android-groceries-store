@@ -54,7 +54,7 @@ class SignInFragment : Fragment() {
         }
 
         binding.signinButton.setOnClickListener {
-            viewModel.signIn(viewModel.email!!, viewModel.password!!)
+            viewModel.signIn()
         }
     }
 }

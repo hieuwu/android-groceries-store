@@ -84,6 +84,9 @@ class ProductListFragment : Fragment() {
                         if (it.isEmpty()) {
                             binding.productRecyclerview.visibility = View.GONE
                             binding.emptyLayout.visibility = View.VISIBLE
+                        } else {
+                            binding.productRecyclerview.visibility = View.VISIBLE
+                            binding.emptyLayout.visibility = View.GONE
                         }
                     }
                 }

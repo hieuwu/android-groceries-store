@@ -22,7 +22,7 @@ class OnboardingViewModel @Inject constructor(
     init {
         try {
             viewModelScope.launch {
-                refreshAppDataUseCase.refreshAppData()
+                refreshAppDataUseCase.execute(Unit)
             }
             updateSyncStatus(true)
         } catch (e: Exception) {

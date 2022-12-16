@@ -2,9 +2,9 @@ package com.hieuwu.groceriesstore.utilities
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.hieuwu.groceriesstore.data.entities.Category
-import com.hieuwu.groceriesstore.data.entities.Product
-import com.hieuwu.groceriesstore.data.entities.User
+import com.hieuwu.groceriesstore.data.database.entities.Category
+import com.hieuwu.groceriesstore.data.database.entities.Product
+import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 
@@ -52,11 +52,20 @@ fun convertCategoryDocumentToEntity(document: QueryDocumentSnapshot): Category {
 }
 
 fun convertUserDocumentToEntity(id: String, document: DocumentSnapshot): User {
-    val name: String = document.data?.get(UserDocumentProperties.name)!! as String
-    val phone: String = document.data?.get(UserDocumentProperties.phone) as String
-    val address: String = document.data?.get(UserDocumentProperties.address) as String
-    val email: String = document.data?.get(UserDocumentProperties.email) as String
-    return User(id, name, email, address, phone, false, false, false)
+    val name: String = document.data?.get(UserDocumentProperties.name)!! as String ?: ""
+//    val phone: String? = document.data?.get(UserDocumentProperties.phone) ?: "" as String ?: ""
+    val address: String = document.data?.get(UserDocumentProperties.address) as String ?: ""
+    val email: String = document.data?.get(UserDocumentProperties.email) as String ?: ""
+    return User(
+        id = id,
+        name = name,
+        email = email,
+        address = address,
+        phone =  "",
+        isOrderCreatedNotiEnabled = false,
+        isPromotionNotiEnabled = false,
+        isDataRefreshedNotiEnabled = false
+    )
 }
 
 fun convertUserEntityToDocument(user: User): HashMap<String, String?> {

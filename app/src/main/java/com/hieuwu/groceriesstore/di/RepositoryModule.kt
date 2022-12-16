@@ -1,15 +1,15 @@
 package com.hieuwu.groceriesstore.di
 
-import com.hieuwu.groceriesstore.data.repository.CategoryRepositoryImpl
-import com.hieuwu.groceriesstore.data.repository.OrderRepositoryImpl
-import com.hieuwu.groceriesstore.data.repository.ProductRepositoryImpl
-import com.hieuwu.groceriesstore.data.repository.RecipeRepositoryImpl
-import com.hieuwu.groceriesstore.data.repository.UserRepositoryImpl
-import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
-import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.data.repository.impl.CategoryRepositoryImpl
+import com.hieuwu.groceriesstore.data.repository.impl.OrderRepositoryImpl
+import com.hieuwu.groceriesstore.data.repository.impl.ProductRepositoryImpl
+import com.hieuwu.groceriesstore.data.repository.impl.RecipeRepositoryImpl
+import com.hieuwu.groceriesstore.data.repository.impl.UserRepositoryImpl
+import com.hieuwu.groceriesstore.data.repository.CategoryRepository
+import com.hieuwu.groceriesstore.data.repository.OrderRepository
+import com.hieuwu.groceriesstore.data.repository.ProductRepository
+import com.hieuwu.groceriesstore.data.repository.RecipeRepository
+import com.hieuwu.groceriesstore.data.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
