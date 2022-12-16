@@ -1,6 +1,7 @@
-package com.hieuwu.groceriesstore.domain.usecases
+package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
 import javax.inject.Inject
 
 class SignOutUseCaseImpl @Inject constructor(private val userRepository: UserRepository) :
