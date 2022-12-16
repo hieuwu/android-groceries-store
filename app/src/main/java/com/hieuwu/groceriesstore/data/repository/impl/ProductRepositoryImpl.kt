@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.data.repository
+package com.hieuwu.groceriesstore.data.repository.impl
 
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
@@ -8,8 +8,8 @@ import com.hieuwu.groceriesstore.data.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.dao.ProductDao
 import com.hieuwu.groceriesstore.data.entities.Product
 import com.hieuwu.groceriesstore.data.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.models.ProductModel
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertProductDocumentToEntity
 import javax.inject.Inject

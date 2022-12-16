@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.data.repository
+package com.hieuwu.groceriesstore.data.repository.impl
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -7,8 +7,8 @@ import com.hieuwu.groceriesstore.data.dao.OrderDao
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
 import com.hieuwu.groceriesstore.data.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.models.OrderModel
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument

@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.domain.repository
+package com.hieuwu.groceriesstore.data.repository
 
 import androidx.lifecycle.LiveData
 import com.hieuwu.groceriesstore.domain.models.RecipeModel

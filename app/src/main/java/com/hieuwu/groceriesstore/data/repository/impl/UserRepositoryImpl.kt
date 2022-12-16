@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.data.repository
+package com.hieuwu.groceriesstore.data.repository.impl
 
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
@@ -8,7 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.dao.UserDao
 import com.hieuwu.groceriesstore.data.entities.User
 import com.hieuwu.groceriesstore.data.entities.asDomainModel
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
 import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument

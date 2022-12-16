@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.domain.repository
+package com.hieuwu.groceriesstore.data.repository
 
 import com.hieuwu.groceriesstore.data.entities.LineItem
 import com.hieuwu.groceriesstore.data.entities.Order
