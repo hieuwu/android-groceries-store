@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
@@ -22,7 +21,6 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class CheckOutViewModel @Inject constructor(
-    private val createOrderUseCase: CreateOrderUseCase,
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val getProfileUseCase: GetProfileUseCase,
     private val submitOrderUseCase: SubmitOrderUseCase

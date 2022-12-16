@@ -13,7 +13,6 @@ import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
-import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase

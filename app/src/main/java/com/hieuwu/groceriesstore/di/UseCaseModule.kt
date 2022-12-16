@@ -2,14 +2,8 @@ package com.hieuwu.groceriesstore.di
 
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCaseImpl
-import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCase
-import com.hieuwu.groceriesstore.domain.usecases.AuthenticateUserUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCaseImpl
-import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCase
-import com.hieuwu.groceriesstore.domain.usecases.CreateOrderUseCaseImpl
-import com.hieuwu.groceriesstore.domain.usecases.ExploreProductProductUseCaseImpl
-import com.hieuwu.groceriesstore.domain.usecases.ExploreProductUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
@@ -57,19 +51,7 @@ abstract class UseCaseModule {
 
     @ViewModelScoped
     @Binds
-    abstract fun bindAuthenticateUserUseCase(impl: AuthenticateUserUseCaseImpl): AuthenticateUserUseCase
-
-    @ViewModelScoped
-    @Binds
     abstract fun bindUpdateCartItemUseCase(impl: UpdateCartItemUseCaseImpl): UpdateCartItemUseCase
-
-    @ViewModelScoped
-    @Binds
-    abstract fun bindCreateOrderUseCase(impl: CreateOrderUseCaseImpl): CreateOrderUseCase
-
-    @ViewModelScoped
-    @Binds
-    abstract fun bindExploreProductUseCase(impl: ExploreProductProductUseCaseImpl): ExploreProductUseCase
 
     @ViewModelScoped
     @Binds
