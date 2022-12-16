@@ -1,6 +1,7 @@
-package com.hieuwu.groceriesstore.domain.usecases
+package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
+import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import javax.inject.Inject
 
 class GetCategoriesListUseCaseImpl @Inject constructor(
