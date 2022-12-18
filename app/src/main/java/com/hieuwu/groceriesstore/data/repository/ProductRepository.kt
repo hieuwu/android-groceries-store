@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
     val products: Flow<List<ProductModel>>
-    fun getProductById(productId: String): LiveData<ProductModel>
+    fun getProductById(productId: String): Flow<ProductModel>
     fun getAllProducts(): LiveData<List<ProductModel>>
     fun getAllProductsByCategory(categoryId: String): Flow<List<ProductModel>>
     suspend fun refreshDatabase()
