@@ -16,6 +16,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -74,8 +75,11 @@ class ProductRepositoryImpl @Inject constructor(
             it.asDomainModel()
         }
 
-    override fun getProductById(productId: String) =
-        Transformations.map(productDao.getById(productId).asLiveData()) {
-            it.asDomainModel()
-        }
+    override fun getProductById(productId: String): Flow<ProductModel> {
+        val productFlow = productDao.getById(productId)
+         return productFlow.map {
+             it.asDomainModel()
+         }
+    }
+
 }
