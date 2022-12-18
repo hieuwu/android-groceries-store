@@ -42,8 +42,6 @@ class ProductDetailFragment : Fragment() {
 
         seEventListener()
 
-
-
         val inflater = TransitionInflater.from(requireContext())
         enterTransition = inflater.inflateTransition(R.transition.slide_right)
         exitTransition = inflater.inflateTransition(R.transition.fade)
@@ -55,8 +53,13 @@ class ProductDetailFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
+                    viewModel.product.collect{}
+                }
+
+                launch {
                     viewModel.currentCart.collect{}
                 }
+
                 launch {
                     viewModel.showSnackBarEvent.collect {
                         if (it) { // Observed state is true.
