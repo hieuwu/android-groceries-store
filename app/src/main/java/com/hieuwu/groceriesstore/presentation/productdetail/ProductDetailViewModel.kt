@@ -30,7 +30,11 @@ class ProductDetailViewModel @Inject constructor(
 
     private val args = ProductDetailFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    val product = getProductDetailUseCase.getProductDetail(args.id)
+    val product = getProductDetailUseCase.getProductDetail(args.id).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        null
+    )
 
     var currentCart: StateFlow<OrderModel?> =
         orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
@@ -45,33 +49,41 @@ class ProductDetailViewModel @Inject constructor(
             notifyPropertyChanged(BR.qty)
         }
 
-    private var _showSnackbarEvent = MutableStateFlow(false)
+    private val _showSnackbarEvent = MutableStateFlow(false)
     val showSnackBarEvent: StateFlow<Boolean>
         get() = _showSnackbarEvent.asStateFlow()
 
     fun addToCart() {
-        val subtotal = product.value?.price?.times(qty) ?: 0.0
-        if (currentCart.value != null) {
-            // Add to cart
-            val cartId = currentCart.value!!.id
-            viewModelScope.launch {
+        viewModelScope.launch {
+            val subtotal = product.value?.price?.times(qty) ?: 0.0
+            if (currentCart.value != null) {
+                // Add to cart
+                val cartId = currentCart.value!!.id
                 val lineItem = LineItem(
-                    product.value!!.id, cartId, _qty, subtotal
+                    productId = product.value!!.id,
+                    orderId = cartId,
+                    quantity = _qty,
+                    subtotal = subtotal
                 )
                 orderRepository.addLineItem(lineItem)
-            }
-        } else {
-            val id = UUID.randomUUID().toString()
-            val newOrder = Order(id, OrderStatus.IN_CART.value, "")
-            viewModelScope.launch {
+            } else {
+                val id = UUID.randomUUID().toString()
+                val newOrder = Order(
+                    id = id,
+                    status = OrderStatus.IN_CART.value,
+                    address = ""
+                )
                 orderRepository.createOrUpdate(newOrder)
                 val lineItem = LineItem(
-                    product.value!!.id, id, _qty, subtotal
+                    productId = product.value!!.id,
+                    orderId = id,
+                    quantity = _qty,
+                    subtotal = subtotal
                 )
                 orderRepository.addLineItem(lineItem)
             }
+            _showSnackbarEvent.value = true
         }
-        _showSnackbarEvent.value = true
     }
 
     fun increaseQty() {
