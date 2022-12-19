@@ -16,6 +16,7 @@ import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -162,8 +163,8 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         }
     }
 
-    override fun getCurrentUser() =
-        Transformations.map(userDao.getCurrentUser().asLiveData()) {
-            it?.asDomainModel()
-        }
+    override fun getCurrentUser() = userDao.getCurrentUser().map {
+        it?.asDomainModel()
+    }
+
 }
