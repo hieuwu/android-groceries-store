@@ -62,6 +62,9 @@ class CheckOutFragment : Fragment() {
                     }
                 }
                 launch {
+                    viewModel.user.collect{}
+                }
+                launch {
                     viewModel.totalPrice.collect {}
                 }
                 launch {

@@ -27,8 +27,8 @@ class CheckOutViewModel @Inject constructor(
 ) :
     ObservableViewModel() {
     private val _user =
-        getCurrentUser() as MutableLiveData<UserModel?>
-    val user: LiveData<UserModel?>
+        getCurrentUser()!!.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+    val user: StateFlow<UserModel?>
         get() = _user
 
     val order: StateFlow<OrderModel?> =
@@ -70,8 +70,8 @@ class CheckOutViewModel @Inject constructor(
         return res
     }
 
-    private fun getCurrentUser(): LiveData<UserModel?>? {
-        var res: LiveData<UserModel?>? = null
+    private fun getCurrentUser(): Flow<UserModel?>? {
+        var res: Flow<UserModel?>? = null
         viewModelScope.launch {
             res = getProfileUseCase.execute(GetProfileUseCase.Input()).result
         }
