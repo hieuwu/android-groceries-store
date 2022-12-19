@@ -11,6 +11,7 @@ import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.Exception
+import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
@@ -21,8 +22,8 @@ class UpdateProfileViewModel @Inject constructor(
 
     ) :
     ObservableViewModel() {
-    private val _user: MutableLiveData<UserModel?> = MutableLiveData()
-    val user: LiveData<UserModel?>
+    private val _user: MutableStateFlow<UserModel?> = MutableStateFlow(null)
+    val user: MutableStateFlow<UserModel?>
         get() = _user
 
     private var _name: String? = null
@@ -79,7 +80,9 @@ class UpdateProfileViewModel @Inject constructor(
 
     private fun getCurrentUser() {
         viewModelScope.launch {
-            _user.value = getProfileUseCase.execute(GetProfileUseCase.Input()).result.value
+             getProfileUseCase.execute(GetProfileUseCase.Input()).result.collect{
+                 _user.value = it
+            }
         }
     }
 

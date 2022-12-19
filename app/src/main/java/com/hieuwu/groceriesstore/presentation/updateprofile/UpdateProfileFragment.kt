@@ -7,11 +7,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentUpdateProfileBinding
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class UpdateProfileFragment : Fragment() {
@@ -69,12 +74,18 @@ class UpdateProfileFragment : Fragment() {
             }
         }
 
-        viewModel.user.observe(viewLifecycleOwner) {
-            if (it != null) {
-                viewModel.email = it.email
-                viewModel.name = it.name
-                viewModel.phoneNumber = it.phone
-                viewModel.address = it.address
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.user.collect{
+                        if (it != null) {
+                            viewModel.email = it.email
+                            viewModel.name = it.name
+                            viewModel.phoneNumber = it.phone
+                            viewModel.address = it.address
+                        }
+                    }
+                }
             }
         }
     }
