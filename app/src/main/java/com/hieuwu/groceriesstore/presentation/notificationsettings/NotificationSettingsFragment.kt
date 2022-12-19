@@ -11,10 +11,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentNotificationSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -40,7 +45,14 @@ class NotificationSettingsFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.user.observe(viewLifecycleOwner) { viewModel.initializeSwitchValue(it) }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.user.collect { viewModel.initializeSwitchValue(it) }
+                }
+            }
+        }
+
         viewModel.isOrderCreatedNotiEnabled.observe(viewLifecycleOwner) {}
         viewModel.isDatabaseRefreshedNotiEnabled.observe(viewLifecycleOwner) {}
         viewModel.isPromotionNotiEnabled.observe(viewLifecycleOwner) {}
@@ -53,7 +65,8 @@ class NotificationSettingsFragment : Fragment() {
 
         createChannel(
             getString(R.string.order_created_notification_channel_id),
-            getString(R.string.order_created_notification_channel_name))
+            getString(R.string.order_created_notification_channel_name)
+        )
 
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
