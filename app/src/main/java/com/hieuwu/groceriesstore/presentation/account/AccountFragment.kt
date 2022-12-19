@@ -8,11 +8,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentAccountBinding
 import com.hieuwu.groceriesstore.presentation.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AccountFragment : Fragment() {
@@ -38,7 +42,13 @@ class AccountFragment : Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.user.observe(viewLifecycleOwner) {}
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.user.collect {}
+                }
+            }
+        }
     }
 
     private fun navigateToAuthentication() {
