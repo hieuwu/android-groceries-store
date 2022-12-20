@@ -12,7 +12,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSigninBinding
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
@@ -23,7 +22,7 @@ import kotlinx.coroutines.launch
 class SignInFragment : Fragment() {
 
     private lateinit var binding: FragmentSigninBinding
-    private lateinit var auth: FirebaseAuth
+
     private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreateView(
@@ -34,8 +33,6 @@ class SignInFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentSigninBinding>(
             inflater, R.layout.fragment_signin, container, false
         )
-
-        auth = FirebaseAuth.getInstance()
 
         binding.signInViewModel = viewModel
         binding.lifecycleOwner = this
