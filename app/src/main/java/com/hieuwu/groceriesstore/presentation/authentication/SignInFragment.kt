@@ -62,12 +62,13 @@ class SignInFragment : Fragment() {
     }
 
     private fun setEventListener() {
-        binding.signUpTextview.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
-        }
-
-        binding.signinButton.setOnClickListener {
-            viewModel.signIn()
+        with(binding) {
+            signUpTextview.setOnClickListener {
+                view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
+            }
+            signinButton.setOnClickListener {
+                viewModel.signIn()
+            }
         }
     }
 }
