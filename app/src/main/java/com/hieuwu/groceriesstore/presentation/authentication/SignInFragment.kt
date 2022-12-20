@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.authentication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentSigninBinding
+import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
@@ -40,10 +46,22 @@ class SignInFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun setObserver() {
         viewModel.isSignUpSuccessful.observe(viewLifecycleOwner) {
             if (it != null) {
                 if (it == true) activity?.finish()
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.showAccountNotExistedError.collect {
+                        showMessageSnackBar("Account is not existed")
+                    }
+                }
+                
             }
         }
     }

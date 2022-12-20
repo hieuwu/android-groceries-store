@@ -5,16 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
-import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val userRepository: UserRepository,
     private val signInUseCase: SignInUseCase
 ) :
     ObservableViewModel() {
@@ -40,18 +40,34 @@ class SignInViewModel @Inject constructor(
             _password = value
             notifyPropertyChanged(BR.password)
         }
+
     private val _isSignUpSuccessful = MutableLiveData<Boolean?>()
     val isSignUpSuccessful: LiveData<Boolean?>
         get() = _isSignUpSuccessful
 
+    private val _showAccountNotExistedError = MutableStateFlow(false)
+    val showAccountNotExistedError: StateFlow<Boolean> = _showAccountNotExistedError
+
     fun signIn() {
         viewModelScope.launch {
-            _isSignUpSuccessful.value = signInUseCase.execute(
+            val res = signInUseCase.execute(
                 SignInUseCase.Input(
                     email = _email!!,
                     password = _password!!
                 )
-            ).result
+            )
+
+            when(res) {
+                is SignInUseCase.Output.Error -> {
+                    //TODO Handle show general error
+                }
+                is SignInUseCase.Output.AccountNotExistedError -> {
+                    //TODO Handle show account not existed error
+                    _showAccountNotExistedError.value = true
+                    _isSignUpSuccessful.value = false
+                }
+            }
+
         }
     }
 }
