@@ -17,6 +17,12 @@ class SignInViewModel @Inject constructor(
 ) :
     ObservableViewModel() {
 
+    private val _isSignUpSuccessful = MutableStateFlow<Boolean?>(false)
+    val isSignUpSuccessful: StateFlow<Boolean?> = _isSignUpSuccessful
+
+    private val _showAccountNotExistedError = MutableStateFlow(false)
+    val showAccountNotExistedError: StateFlow<Boolean> = _showAccountNotExistedError
+
     private var _email: String? = null
     var email: String?
         @Bindable
@@ -38,13 +44,6 @@ class SignInViewModel @Inject constructor(
             _password = value
             notifyPropertyChanged(BR.password)
         }
-
-    private val _isSignUpSuccessful = MutableStateFlow<Boolean?>(false)
-    val isSignUpSuccessful: StateFlow<Boolean?>
-        get() = _isSignUpSuccessful
-
-    private val _showAccountNotExistedError = MutableStateFlow(false)
-    val showAccountNotExistedError: StateFlow<Boolean> = _showAccountNotExistedError
 
     fun signIn() {
         viewModelScope.launch {
