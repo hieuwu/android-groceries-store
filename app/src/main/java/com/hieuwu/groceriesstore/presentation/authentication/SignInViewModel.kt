@@ -1,8 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.authentication
 
 import androidx.databinding.Bindable
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
@@ -10,8 +8,8 @@ import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
@@ -41,8 +39,8 @@ class SignInViewModel @Inject constructor(
             notifyPropertyChanged(BR.password)
         }
 
-    private val _isSignUpSuccessful = MutableLiveData<Boolean?>()
-    val isSignUpSuccessful: LiveData<Boolean?>
+    private val _isSignUpSuccessful = MutableStateFlow<Boolean?>(false)
+    val isSignUpSuccessful: StateFlow<Boolean?>
         get() = _isSignUpSuccessful
 
     private val _showAccountNotExistedError = MutableStateFlow(false)

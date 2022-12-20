@@ -48,12 +48,6 @@ class SignInFragment : Fragment() {
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun setObserver() {
-        viewModel.isSignUpSuccessful.observe(viewLifecycleOwner) {
-            if (it != null) {
-                if (it == true) activity?.finish()
-            }
-        }
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -61,7 +55,11 @@ class SignInFragment : Fragment() {
                         showMessageSnackBar("Account is not existed")
                     }
                 }
-                
+
+                launch {
+                    viewModel.isSignUpSuccessful.collect {}
+                }
+
             }
         }
     }
