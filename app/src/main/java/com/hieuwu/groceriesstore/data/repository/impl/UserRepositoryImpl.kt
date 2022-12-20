@@ -66,15 +66,23 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
     }
 
     override suspend fun authenticate(email: String, password: String): Boolean {
+        //TODO Make this method smaller by separating the concerns
         var isSuccess = false
         val db = Firebase.firestore
         var id: String? = null
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                Timber.d(task.exception)
-                isSuccess = task.isSuccessful
-                id = auth.currentUser?.uid!!
-            }.addOnFailureListener { Exception -> Timber.d(Exception) }.await()
+        try {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        isSuccess = task.isSuccessful
+                        id = auth.currentUser?.uid!!
+                    }
+                }.addOnFailureListener { ex -> Timber.d(ex.message) }.await()
+
+        } catch (e: Exception) {
+            Timber.d(e.message)
+            throw e
+        }
 
         var user: User? = null
         db.collection(CollectionNames.users).document(auth.currentUser?.uid!!).get()
