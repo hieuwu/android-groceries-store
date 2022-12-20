@@ -56,7 +56,6 @@ class SignInFragment : Fragment() {
                 launch {
                     viewModel.isSignUpSuccessful.collect {}
                 }
-
             }
         }
     }
