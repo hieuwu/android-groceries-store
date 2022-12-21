@@ -54,7 +54,11 @@ class SignInFragment : Fragment() {
                 }
 
                 launch {
-                    viewModel.isSignUpSuccessful.collect {}
+                    viewModel.isSignUpSuccessful.collect {
+                        if (it == true) {
+                            activity?.finish()
+                        }
+                    }
                 }
             }
         }
