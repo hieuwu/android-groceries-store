@@ -23,7 +23,7 @@ fun convertOrderEntityToDocument(order: OrderModel): HashMap<String, Any> {
     var total = 0.0
     for (item in order.lineItemList) {
         lineOrderList.add(convertItemEntityToDocument(item))
-        total += item?.subtotal ?: 0.0
+        total += item.subtotal ?: 0.0
     }
 
     document[OrderDocumentProperties.address] = order.address as String
