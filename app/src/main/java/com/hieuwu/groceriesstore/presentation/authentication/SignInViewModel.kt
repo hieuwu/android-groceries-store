@@ -63,6 +63,9 @@ class SignInViewModel @Inject constructor(
                     _showAccountNotExistedError.value = true
                     _isSignUpSuccessful.value = false
                 }
+                else -> {
+                    _isSignUpSuccessful.value = true
+                }
             }
 
         }
