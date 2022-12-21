@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.explore
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -82,17 +84,10 @@ class ExploreFragment : Fragment() {
         findNavController().navigate(direction)
     }
 
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun setObserver() {
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner) {
             if (null != it) navigateToProductDetail(it.id)
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.categories.collect {}
-                }
-
-            }
         }
         viewModel.productList.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
@@ -101,6 +96,14 @@ class ExploreFragment : Fragment() {
                 binding.productRecyclerview.visibility = View.VISIBLE
                 binding.animationLayout.visibility = View.GONE
                 Timber.d("Has item")
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.categories.collect {}
+                }
+
             }
         }
     }
