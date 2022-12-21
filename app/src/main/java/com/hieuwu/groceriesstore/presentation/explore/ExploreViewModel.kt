@@ -3,7 +3,6 @@ package com.hieuwu.groceriesstore.presentation.explore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
@@ -98,7 +97,7 @@ class ExploreViewModel @Inject constructor(
     private fun getCategoriesList(): Flow<List<CategoryModel>>? {
         var res: Flow<List<CategoryModel>>? = null
         viewModelScope.launch {
-            res = getCategoriesListUseCase.execute(GetCategoriesListUseCase.Input()).result.asFlow()
+            res = getCategoriesListUseCase.execute(GetCategoriesListUseCase.Input()).result
         }
         return res
     }
