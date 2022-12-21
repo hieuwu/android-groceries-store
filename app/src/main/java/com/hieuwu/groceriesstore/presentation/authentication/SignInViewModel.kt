@@ -14,8 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase
-) :
-    ObservableViewModel() {
+) : ObservableViewModel() {
 
     private val _isSignUpSuccessful = MutableSharedFlow<Boolean?>()
     val isSignUpSuccessful: SharedFlow<Boolean?> = _isSignUpSuccessful
