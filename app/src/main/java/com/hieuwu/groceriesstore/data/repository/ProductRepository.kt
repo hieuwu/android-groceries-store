@@ -12,5 +12,5 @@ interface ProductRepository {
     suspend fun refreshDatabase()
     suspend fun updateLineItemQuantityById(quantity: Int, id: Long)
     suspend fun removeLineItemById(id: Long)
-    fun searchProductsListByName(name: String?): LiveData<List<ProductModel>>
+    fun searchProductsListByName(name: String?): Flow<List<ProductModel>>
 }
