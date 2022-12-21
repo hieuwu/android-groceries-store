@@ -41,8 +41,8 @@ class ProductRepositoryImpl @Inject constructor(
                 productList.add(convertProductDocumentToEntity(document))
             }
         }.addOnFailureListener { exception ->
-                Timber.w("Error getting documents.$exception")
-            }.await()
+            Timber.w("Error getting documents.$exception")
+        }.await()
 
         withContext(Dispatchers.IO) {
             productDao.insertAll(productList)
@@ -62,9 +62,7 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
     override fun searchProductsListByName(name: String?) =
-        Transformations.map(productDao.searchProductByName(name).asLiveData()) {
-            it.asDomainModel()
-        }
+        productDao.searchProductByName(name).map { it.asDomainModel() }
 
     override fun getAllProducts() = Transformations.map(productDao.getAll().asLiveData()) {
         it.asDomainModel()
@@ -77,9 +75,9 @@ class ProductRepositoryImpl @Inject constructor(
 
     override fun getProductById(productId: String): Flow<ProductModel> {
         val productFlow = productDao.getById(productId)
-         return productFlow.map {
-             it.asDomainModel()
-         }
+        return productFlow.map {
+            it.asDomainModel()
+        }
     }
 
 }
