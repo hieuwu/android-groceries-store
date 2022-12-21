@@ -6,8 +6,8 @@ import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,11 +17,11 @@ class SignInViewModel @Inject constructor(
 ) :
     ObservableViewModel() {
 
-    private val _isSignUpSuccessful = MutableStateFlow<Boolean?>(false)
-    val isSignUpSuccessful: StateFlow<Boolean?> = _isSignUpSuccessful
+    private val _isSignUpSuccessful = MutableSharedFlow<Boolean?>()
+    val isSignUpSuccessful: SharedFlow<Boolean?> = _isSignUpSuccessful
 
-    private val _showAccountNotExistedError = MutableStateFlow(false)
-    val showAccountNotExistedError: StateFlow<Boolean> = _showAccountNotExistedError
+    private val _showAccountNotExistedError = MutableSharedFlow<Boolean>()
+    val showAccountNotExistedError: SharedFlow<Boolean> = _showAccountNotExistedError
 
     private var _email: String? = null
     var email: String?
@@ -54,17 +54,16 @@ class SignInViewModel @Inject constructor(
                 )
             )
 
-            when(res) {
+            when (res) {
                 is SignInUseCase.Output.Error -> {
                     //TODO Handle show general error
                 }
                 is SignInUseCase.Output.AccountNotExistedError -> {
-                    //TODO Handle show account not existed error
-                    _showAccountNotExistedError.value = true
-                    _isSignUpSuccessful.value = false
+                    _showAccountNotExistedError.emit(true)
+                    _isSignUpSuccessful.emit(false)
                 }
                 else -> {
-                    _isSignUpSuccessful.value = true
+                    _isSignUpSuccessful.emit(true)
                 }
             }
 
