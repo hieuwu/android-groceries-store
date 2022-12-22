@@ -1,7 +1,5 @@
 package com.hieuwu.groceriesstore.data.repository.impl
 
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.asLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.database.dao.LineItemDao
@@ -12,15 +10,14 @@ import com.hieuwu.groceriesstore.data.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertProductDocumentToEntity
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class ProductRepositoryImpl @Inject constructor(
@@ -63,10 +60,6 @@ class ProductRepositoryImpl @Inject constructor(
 
     override fun searchProductsListByName(name: String?) =
         productDao.searchProductByName(name).map { it.asDomainModel() }
-
-    override fun getAllProducts() = Transformations.map(productDao.getAll().asLiveData()) {
-        it.asDomainModel()
-    }
 
     override fun getAllProductsByCategory(categoryId: String) =
         productDao.getAllByCategory(categoryId).map {
