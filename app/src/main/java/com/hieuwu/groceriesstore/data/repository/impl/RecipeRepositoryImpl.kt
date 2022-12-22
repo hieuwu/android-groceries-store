@@ -1,15 +1,14 @@
 package com.hieuwu.groceriesstore.data.repository.impl
 
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.asLiveData
 import com.hieuwu.groceriesstore.data.database.dao.RecipeDao
-import com.hieuwu.groceriesstore.data.network.dto.asEntity
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.Api
+import com.hieuwu.groceriesstore.data.network.dto.asEntity
 import com.hieuwu.groceriesstore.data.repository.RecipeRepository
-import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class RecipeRepositoryImpl @Inject constructor(
     private val recipeDao: RecipeDao
@@ -26,7 +25,5 @@ class RecipeRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getFromLocal() = Transformations.map(recipeDao.getAll().asLiveData()) {
-        it.asDomainModel()
-    }
+    override fun getFromLocal() = recipeDao.getAll().map { it.asDomainModel()}
 }
