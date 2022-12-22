@@ -34,7 +34,6 @@ class ExploreViewModel @Inject constructor(
     private val searchProductUseCase: SearchProductUseCase,
     private val createNewOrderUseCase: CreateNewOrderUseCase,
     private val addToCartUseCase: AddToCartUseCase
-
 ) : ObservableViewModel() {
     private val _currentCart: StateFlow<OrderModel?> =
         getCurrentCard()!!
@@ -50,6 +49,7 @@ class ExploreViewModel @Inject constructor(
         searchString.value = name
     }
 
+    //TODO convert this to use flow
     val productList: LiveData<List<ProductModel>> =
         Transformations.switchMap(searchString) { string ->
             if (string.isNotEmpty()) searchProduct(name = string).asLiveData()
@@ -70,11 +70,12 @@ class ExploreViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _currentCart.collect{}
+            _currentCart.collect {}
         }
     }
+
     private fun searchProduct(name: String): Flow<List<ProductModel>> {
-        var output: Flow<List<ProductModel>> = flow{}
+        var output: Flow<List<ProductModel>> = flow {}
         viewModelScope.launch {
             when (val res = searchProductUseCase.execute(SearchProductUseCase.Input(name = name))) {
                 is SearchProductUseCase.Output -> {
