@@ -1,23 +1,26 @@
 package com.hieuwu.groceriesstore.presentation.authentication
 
 import androidx.databinding.Bindable
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
-import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val userRepository: UserRepository,
     private val signInUseCase: SignInUseCase
-) :
-    ObservableViewModel() {
+) : ObservableViewModel() {
+
+    private val _isSignUpSuccessful = MutableSharedFlow<Boolean?>()
+    val isSignUpSuccessful: SharedFlow<Boolean?> = _isSignUpSuccessful
+
+    private val _showAccountNotExistedError = MutableSharedFlow<Boolean>()
+    val showAccountNotExistedError: SharedFlow<Boolean> = _showAccountNotExistedError
 
     private var _email: String? = null
     var email: String?
@@ -40,18 +43,29 @@ class SignInViewModel @Inject constructor(
             _password = value
             notifyPropertyChanged(BR.password)
         }
-    private val _isSignUpSuccessful = MutableLiveData<Boolean?>()
-    val isSignUpSuccessful: LiveData<Boolean?>
-        get() = _isSignUpSuccessful
 
     fun signIn() {
         viewModelScope.launch {
-            _isSignUpSuccessful.value = signInUseCase.execute(
+            val res = signInUseCase.execute(
                 SignInUseCase.Input(
                     email = _email!!,
                     password = _password!!
                 )
-            ).result
+            )
+
+            when (res) {
+                is SignInUseCase.Output.Error -> {
+                    //TODO Handle show general error
+                }
+                is SignInUseCase.Output.AccountNotExistedError -> {
+                    _showAccountNotExistedError.emit(true)
+                    _isSignUpSuccessful.emit(false)
+                }
+                else -> {
+                    _isSignUpSuccessful.emit(true)
+                }
+            }
+
         }
     }
 }

@@ -1,10 +1,7 @@
 package com.hieuwu.groceriesstore.data.repository.impl
 
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.hieuwu.groceriesstore.data.database.dao.UserDao
 import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
@@ -16,13 +13,17 @@ import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 @Singleton
-class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : UserRepository {
-    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+class UserRepositoryImpl @Inject constructor(
+    private val userDao: UserDao,
+    private val auth: FirebaseAuth,
+    private val fireStore: FirebaseFirestore
+) : UserRepository {
 
     override suspend fun createAccount(email: String, password: String, name: String): Boolean {
         var dbUser: User? = null
@@ -45,8 +46,7 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
                         isPromotionNotiEnabled = false,
                         isDataRefreshedNotiEnabled = false
                     )
-                    val db = Firebase.firestore
-                    db.collection(CollectionNames.users).document(userId)
+                    fireStore.collection(CollectionNames.users).document(userId)
                         .set(newUser)
                         .addOnSuccessListener {
                             // Handle success
@@ -65,18 +65,24 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
     }
 
     override suspend fun authenticate(email: String, password: String): Boolean {
+        //TODO Make this method smaller by separating the concerns
         var isSuccess = false
-        val db = Firebase.firestore
         var id: String? = null
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                Timber.d(task.exception)
-                isSuccess = task.isSuccessful
-                id = auth.currentUser?.uid!!
-            }.addOnFailureListener { Exception -> Timber.d(Exception) }.await()
+        try {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        isSuccess = task.isSuccessful
+                        id = auth.currentUser?.uid!!
+                    }
+                }.addOnFailureListener { ex -> throw ex }.await()
+        } catch (e: Exception) {
+            Timber.d(e.message)
+            throw e
+        }
 
         var user: User? = null
-        db.collection(CollectionNames.users).document(auth.currentUser?.uid!!).get()
+        fireStore.collection(CollectionNames.users).document(auth.currentUser?.uid!!).get()
             .addOnSuccessListener {
                 it?.let {
                     user = convertUserDocumentToEntity(id!!, it)
@@ -97,7 +103,6 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         phone: String,
         address: String
     ) {
-        val db = Firebase.firestore
         val dbUser = User(
             userId, name, email, address, phone,
             isOrderCreatedNotiEnabled = false,
@@ -107,7 +112,7 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         val newUser = convertUserEntityToDocument(dbUser)
         var isSuccess = false
         try {
-            db.collection(CollectionNames.users).document(userId)
+            fireStore.collection(CollectionNames.users).document(userId)
                 .set(newUser)
                 .addOnSuccessListener {
                     isSuccess = true
@@ -142,9 +147,8 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
             isDatabaseRefreshedEnabled,
             isPromotionEnabled
         )
-        val db = Firebase.firestore
         var isSuccess = false
-        db.collection(CollectionNames.users).document(id)
+        fireStore.collection(CollectionNames.users).document(id)
             .set(updateRequest)
             .addOnSuccessListener {
                 isSuccess = true
@@ -162,8 +166,8 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         }
     }
 
-    override fun getCurrentUser() =
-        Transformations.map(userDao.getCurrentUser().asLiveData()) {
-            it?.asDomainModel()
-        }
+    override fun getCurrentUser() = userDao.getCurrentUser().map {
+        it?.asDomainModel()
+    }
+
 }

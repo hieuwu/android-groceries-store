@@ -23,7 +23,7 @@ fun convertOrderEntityToDocument(order: OrderModel): HashMap<String, Any> {
     var total = 0.0
     for (item in order.lineItemList) {
         lineOrderList.add(convertItemEntityToDocument(item))
-        total += item?.subtotal ?: 0.0
+        total += item.subtotal ?: 0.0
     }
 
     document[OrderDocumentProperties.address] = order.address as String
@@ -34,34 +34,42 @@ fun convertOrderEntityToDocument(order: OrderModel): HashMap<String, Any> {
 
 fun convertProductDocumentToEntity(document: QueryDocumentSnapshot): Product {
     val id = document.id
-    val name: String = document.data[ProductDocumentProperties.name] as String
-    val description: String = document.data[ProductDocumentProperties.description] as String
-    val price: Number = document.data[ProductDocumentProperties.price] as Number
+    val name = document.data[ProductDocumentProperties.name]?.toString()
+    val description = document.data[ProductDocumentProperties.description]?.toString()
+    val price = document.data[ProductDocumentProperties.price]?.toString()
     val image: String = document.data[ProductDocumentProperties.image] as String
     val nutrition: String = document.data[ProductDocumentProperties.nutrition] as String
     val category = document.getDocumentReference(ProductDocumentProperties.category)
 
-    return Product(id, name, description, price.toDouble(), image, category?.id, nutrition)
+    return Product(
+        id = id,
+        name = name,
+        description = description,
+        price = price?.toDouble(),
+        image = image,
+        category = category?.id,
+        nutrition = nutrition
+    )
 }
 
 fun convertCategoryDocumentToEntity(document: QueryDocumentSnapshot): Category {
     val id = document.id
-    val name: String = document.data[CategoryDocumentProperties.name] as String
-    val image: String = document.data[CategoryDocumentProperties.image] as String
-    return Category(id, name, image)
+    val name = document.data[CategoryDocumentProperties.name]?.toString()
+    val image = document.data[CategoryDocumentProperties.image]?.toString()
+    return Category(id = id, name = name, image = image)
 }
 
 fun convertUserDocumentToEntity(id: String, document: DocumentSnapshot): User {
-    val name: String = document.data?.get(UserDocumentProperties.name)!! as String ?: ""
-//    val phone: String? = document.data?.get(UserDocumentProperties.phone) ?: "" as String ?: ""
-    val address: String = document.data?.get(UserDocumentProperties.address) as String ?: ""
-    val email: String = document.data?.get(UserDocumentProperties.email) as String ?: ""
+    val name = document.data?.get(UserDocumentProperties.name)?.toString() ?: ""
+    val phone = document.data?.get(UserDocumentProperties.phone)?.toString()
+    val address = document.data?.get(UserDocumentProperties.address)?.toString()
+    val email = document.data?.get(UserDocumentProperties.email)?.toString() ?: ""
     return User(
         id = id,
         name = name,
         email = email,
         address = address,
-        phone =  "",
+        phone = phone,
         isOrderCreatedNotiEnabled = false,
         isPromotionNotiEnabled = false,
         isDataRefreshedNotiEnabled = false

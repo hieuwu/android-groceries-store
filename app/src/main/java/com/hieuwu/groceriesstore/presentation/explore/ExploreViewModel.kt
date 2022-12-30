@@ -3,8 +3,7 @@ package com.hieuwu.groceriesstore.presentation.explore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.liveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
@@ -19,13 +18,14 @@ import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.UUID
+import java.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
@@ -34,7 +34,6 @@ class ExploreViewModel @Inject constructor(
     private val searchProductUseCase: SearchProductUseCase,
     private val createNewOrderUseCase: CreateNewOrderUseCase,
     private val addToCartUseCase: AddToCartUseCase
-
 ) : ObservableViewModel() {
     private val _currentCart: StateFlow<OrderModel?> =
         getCurrentCard()!!
@@ -44,15 +43,16 @@ class ExploreViewModel @Inject constructor(
         getCategoriesList()!!.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)!!
     val categories: StateFlow<List<CategoryModel>?>
         get() = _categories
-    private val searchString: MutableLiveData<String> = MutableLiveData<String>("")
+    private val searchString: MutableLiveData<String> = MutableLiveData("")
 
     fun searchNameChanged(name: String) {
         searchString.value = name
     }
 
+    //TODO convert this to use flow
     val productList: LiveData<List<ProductModel>> =
         Transformations.switchMap(searchString) { string ->
-            if (string.isNotEmpty()) searchProduct(name = string)
+            if (string.isNotEmpty()) searchProduct(name = string).asLiveData()
             else MutableLiveData()
         }
 
@@ -70,11 +70,12 @@ class ExploreViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _currentCart.collect{}
+            _currentCart.collect {}
         }
     }
-    private fun searchProduct(name: String): LiveData<List<ProductModel>> {
-        var output: LiveData<List<ProductModel>> = liveData { }
+
+    private fun searchProduct(name: String): Flow<List<ProductModel>> {
+        var output: Flow<List<ProductModel>> = flow {}
         viewModelScope.launch {
             when (val res = searchProductUseCase.execute(SearchProductUseCase.Input(name = name))) {
                 is SearchProductUseCase.Output -> {
@@ -98,7 +99,7 @@ class ExploreViewModel @Inject constructor(
     private fun getCategoriesList(): Flow<List<CategoryModel>>? {
         var res: Flow<List<CategoryModel>>? = null
         viewModelScope.launch {
-            res = getCategoriesListUseCase.execute(GetCategoriesListUseCase.Input()).result.asFlow()
+            res = getCategoriesListUseCase.execute(GetCategoriesListUseCase.Input()).result
         }
         return res
     }

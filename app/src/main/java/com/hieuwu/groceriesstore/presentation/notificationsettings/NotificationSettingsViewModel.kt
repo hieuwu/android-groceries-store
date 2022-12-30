@@ -8,6 +8,7 @@ import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,8 +19,8 @@ class NotificationSettingsViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
 ) :
     ObservableViewModel() {
-    private val _user = MutableLiveData<UserModel>()
-    val user: LiveData<UserModel?>
+    private val _user: MutableStateFlow<UserModel?> = MutableStateFlow(null)
+    val user: MutableStateFlow<UserModel?>
         get() = _user
 
     private var _isDatabaseRefreshedNotiEnabled = MutableLiveData(false)
@@ -49,7 +50,9 @@ class NotificationSettingsViewModel @Inject constructor(
 
     private fun getCurrentUser() {
         viewModelScope.launch {
-            _user.value = getProfileUseCase.execute(GetProfileUseCase.Input()).result.value
+            getProfileUseCase.execute(GetProfileUseCase.Input()).result.collect {
+                _user.value = it
+            }
         }
     }
 
