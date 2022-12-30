@@ -16,12 +16,12 @@ import javax.inject.Inject
 class FavouriteViewModel @Inject constructor(private val recipeRepository: RecipeRepository) :
     ObservableViewModel() {
 
-    private var _recipesList: MutableLiveData<List<RecipeModel>> = recipeRepository.getFromLocal().stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(5000),
-        emptyList()
-    ).asLiveData() as MutableLiveData<List<RecipeModel>>
+    private var _recipesList: MutableLiveData<List<RecipeModel>> =
+        recipeRepository.getFromLocal().stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            emptyList()
+        ).asLiveData() as MutableLiveData<List<RecipeModel>>
     val recipesList: LiveData<List<RecipeModel>> = _recipesList
 
-    }
 }
