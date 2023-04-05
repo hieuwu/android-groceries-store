@@ -9,8 +9,9 @@ plugins {
     alias libs.plugins.gms
     alias libs.plugins.spotless
     alias libs.plugins.navigation.safeargs
-}
+    id "org.jetbrains.kotlin.plugin.serialization" version "1.7.0"
 
+}
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -25,6 +26,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
+        buildConfigField("String", "SECRET", "\"${properties.getProperty("SECRET")}\"")
+        buildConfigField("String", "SUPABASE_URL", "\"${properties.getProperty("SUPABASE_URL")}\"")
+
+
     }
 
     buildTypes {
@@ -49,6 +57,7 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation libs.bundles.androidx
     implementation libs.bundles.android.ui
@@ -77,6 +86,15 @@ dependencies {
 
     implementation platform(libs.firebase.bom)
     implementation libs.bundles.firebase
+//    implementation 'io.supabase:postgrest-kt:0.9.0-alpha-4'
+
+//    implementation("io.github.jan-tennert.supabase:postgrest-kt:0.2.0")
+    implementation("io.ktor:ktor-client-cio:1.6.0")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt-android:0.9.0-alpha-4")
+    implementation "io.ktor:ktor-client-android:2.2.1"
+    implementation "io.ktor:ktor-utils-jvm:1.6.0"
+    implementation "io.ktor:ktor-client-logging-jvm:1.6.0"
+    implementation("io.ktor:ktor-client-core:2.2.4")
 
     implementation libs.caruilib
 
@@ -85,7 +103,7 @@ dependencies {
     androidTestImplementation libs.androidx.test.arch.core
 }
 
-task wrapper(type: Wrapper){
+task wrapper(type: Wrapper) {
     gradleVersion = '7.2'
 }
 
