@@ -29,7 +29,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".presentation.onboarding.OnboardingActivity">
+        <activity android:name=".presentation.onboarding.OnboardingActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

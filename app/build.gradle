@@ -14,13 +14,13 @@ plugins {
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion "31.0.0"
 
     defaultConfig {
         applicationId "com.hieuwu.groceriesstore"
         minSdkVersion 22
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 5
         versionName "1.0"
 
