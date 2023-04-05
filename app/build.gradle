@@ -9,8 +9,9 @@ plugins {
     alias libs.plugins.gms
     alias libs.plugins.spotless
     alias libs.plugins.navigation.safeargs
-}
+    id "org.jetbrains.kotlin.plugin.serialization" version "1.7.0"
 
+}
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -90,10 +91,10 @@ dependencies {
 //    implementation("io.github.jan-tennert.supabase:postgrest-kt:0.2.0")
     implementation("io.ktor:ktor-client-cio:1.6.0")
     implementation("io.github.jan-tennert.supabase:postgrest-kt-android:0.9.0-alpha-4")
-    implementation "io.ktor:ktor-client-android:1.6.0"
+    implementation "io.ktor:ktor-client-android:2.2.1"
     implementation "io.ktor:ktor-utils-jvm:1.6.0"
     implementation "io.ktor:ktor-client-logging-jvm:1.6.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.2.0"
+    implementation("io.ktor:ktor-client-core:2.2.4")
 
     implementation libs.caruilib
 
