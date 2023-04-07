@@ -16,7 +16,7 @@ object SupabaseModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseAuth(): Postgrest {
+    fun provideSupabaseDatabase(): Postgrest {
         val postgrest = standaloneSupabaseModule(
             Postgrest,
             url = BuildConfig.SUPABASE_URL,
