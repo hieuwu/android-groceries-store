@@ -8,6 +8,7 @@ import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.repository.CategoryRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertCategoryDocumentToEntity
+import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
@@ -17,7 +18,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CategoryRepositoryImpl @Inject constructor(private val categoryDao: CategoryDao) :
+class CategoryRepositoryImpl @Inject constructor(
+
+    private val categoryDao: CategoryDao,
+    private val supabasePostgrest: Postgrest
+) :
     CategoryRepository {
 
     override suspend fun refreshDatabase() {
