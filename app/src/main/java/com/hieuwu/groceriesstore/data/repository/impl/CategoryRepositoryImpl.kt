@@ -8,6 +8,7 @@ import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.dto.CategoriesDto
 import com.hieuwu.groceriesstore.data.repository.CategoryRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
+import com.hieuwu.groceriesstore.utilities.SupabaseMapper
 import com.hieuwu.groceriesstore.utilities.convertCategoryDocumentToEntity
 import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,7 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
+//@Singleton
 class CategoryRepositoryImpl @Inject constructor(
 
     private val categoryDao: CategoryDao,
@@ -27,22 +28,11 @@ class CategoryRepositoryImpl @Inject constructor(
     CategoryRepository {
 
     override suspend fun refreshDatabase() {
-        val categoriesList = mutableListOf<Category>()
-        val fireStore = Firebase.firestore
         val result = supabasePostgrest[CollectionNames.categories]
             .select()
-        print(result.decodeList<CategoriesDto>())
-        fireStore.collection(CollectionNames.categories).get().addOnSuccessListener { result ->
-            for (document in result) {
-                categoriesList.add(convertCategoryDocumentToEntity(document))
-            }
-        }.addOnFailureListener { exception ->
-            Timber.w("Error getting documents.$exception")
-        }.await()
-
-        withContext(Dispatchers.IO) {
-            categoryDao.insertAll(categoriesList)
-        }
+        val res = result.decodeList<CategoriesDto>()
+        val categories = res.map { SupabaseMapper.mapToEntity(it) }
+        categoryDao.insertAll(categories)
     }
 
     override fun getFromLocal() = categoryDao.getAll().map { it.asDomainModel() }
