@@ -22,7 +22,6 @@ object SupabaseModule {
             url = BuildConfig.SUPABASE_URL,
             apiKey = BuildConfig.API_KEY
         )
-
         return postgrest
     }
 
