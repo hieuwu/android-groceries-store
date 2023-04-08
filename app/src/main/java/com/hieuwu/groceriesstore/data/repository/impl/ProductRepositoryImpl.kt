@@ -14,9 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class ProductRepositoryImpl @Inject constructor(
     private val productDao: ProductDao,
     private val lineItemDao: LineItemDao,
