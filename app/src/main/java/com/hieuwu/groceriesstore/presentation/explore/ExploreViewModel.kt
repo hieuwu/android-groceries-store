@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.presentation.explore
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+//import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
@@ -50,11 +50,12 @@ class ExploreViewModel @Inject constructor(
     }
 
     //TODO convert this to use flow
-    val productList: LiveData<List<ProductModel>> =
-        Transformations.switchMap(searchString) { string ->
-            if (string.isNotEmpty()) searchProduct(name = string).asLiveData()
-            else MutableLiveData()
-        }
+    val productList: LiveData<List<ProductModel>> =MutableLiveData()
+    //TODO Handle filtering list after migrate to Supabase
+//        Transformations.switchMap(searchString) { string ->
+//            if (string.isNotEmpty()) searchProduct(name = string).asLiveData()
+//            else MutableLiveData()
+//        }
 
     private val _navigateToSelectedProperty = MutableLiveData<ProductModel?>()
     val navigateToSelectedProperty: LiveData<ProductModel?>
