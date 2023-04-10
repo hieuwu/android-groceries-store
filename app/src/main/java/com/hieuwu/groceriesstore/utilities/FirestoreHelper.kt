@@ -32,33 +32,6 @@ fun convertOrderEntityToDocument(order: OrderModel): HashMap<String, Any> {
     return document
 }
 
-fun convertProductDocumentToEntity(document: QueryDocumentSnapshot): Product {
-    val id = document.id
-    val name = document.data[ProductDocumentProperties.name]?.toString()
-    val description = document.data[ProductDocumentProperties.description]?.toString()
-    val price = document.data[ProductDocumentProperties.price]?.toString()
-    val image: String = document.data[ProductDocumentProperties.image] as String
-    val nutrition: String = document.data[ProductDocumentProperties.nutrition] as String
-    val category = document.getDocumentReference(ProductDocumentProperties.category)
-
-    return Product(
-        id = id,
-        name = name,
-        description = description,
-        price = price?.toDouble(),
-        image = image,
-        category = category?.id,
-        nutrition = nutrition
-    )
-}
-
-fun convertCategoryDocumentToEntity(document: QueryDocumentSnapshot): Category {
-    val id = document.id
-    val name = document.data[CategoryDocumentProperties.name]?.toString()
-    val image = document.data[CategoryDocumentProperties.image]?.toString()
-    return Category(id = id, name = name, image = image)
-}
-
 fun convertUserDocumentToEntity(id: String, document: DocumentSnapshot): User {
     val name = document.data?.get(UserDocumentProperties.name)?.toString() ?: ""
     val phone = document.data?.get(UserDocumentProperties.phone)?.toString()
