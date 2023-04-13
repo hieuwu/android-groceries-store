@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.data.repository.impl
 
+import android.provider.ContactsContract.CommonDataKinds.Email
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hieuwu.groceriesstore.data.database.dao.UserDao
@@ -10,6 +11,7 @@ import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
 import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
 import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
+import io.github.jan.supabase.gotrue.GoTrue
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
@@ -18,16 +20,25 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-@Singleton
 class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
     private val auth: FirebaseAuth,
-    private val fireStore: FirebaseFirestore
+    private val fireStore: FirebaseFirestore,
+    private val authService: GoTrue
 ) : UserRepository {
 
     override suspend fun createAccount(email: String, password: String, name: String): Boolean {
         var dbUser: User? = null
         var isSucess = false
+//        val config = io.github.jan.supabase.gotrue.providers.builtin.Email.Config(
+//            email = "",
+//            password = ""
+//        )
+        val result = authService.signUpWith(io.github.jan.supabase.gotrue.providers.builtin.Email) {
+            this.email = email
+            this.password = password
+        }
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 Timber.d(task.exception)
