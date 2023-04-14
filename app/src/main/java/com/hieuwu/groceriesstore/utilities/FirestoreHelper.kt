@@ -5,6 +5,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.hieuwu.groceriesstore.data.database.entities.Category
 import com.hieuwu.groceriesstore.data.database.entities.Product
 import com.hieuwu.groceriesstore.data.database.entities.User
+import com.hieuwu.groceriesstore.data.network.dto.UserDto
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 
@@ -46,6 +47,19 @@ fun convertUserDocumentToEntity(id: String, document: DocumentSnapshot): User {
         isOrderCreatedNotiEnabled = false,
         isPromotionNotiEnabled = false,
         isDataRefreshedNotiEnabled = false
+    )
+}
+
+fun mapDtoToEntity(user: UserDto): User {
+    return User(
+        id = user.id,
+        name = user.name,
+        email = user.email,
+        address = user.address,
+        phone = user.phone,
+        isDataRefreshedNotiEnabled = user.isDataRefreshedNotiEnabled,
+        isOrderCreatedNotiEnabled = user.isOrderCreatedNotiEnabled,
+        isPromotionNotiEnabled = user.isPromotionNotiEnabled,
     )
 }
 
