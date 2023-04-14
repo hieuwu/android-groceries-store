@@ -11,6 +11,7 @@ import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
 import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
 import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import io.github.jan.supabase.gotrue.GoTrue
+import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
@@ -26,7 +27,7 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
 
     override suspend fun createAccount(email: String, password: String, name: String): Boolean {
-        val result = authService.signUpWith(io.github.jan.supabase.gotrue.providers.builtin.Email) {
+        val result = authService.signUpWith(Email) {
             this.email = email
             this.password = password
         }
@@ -53,13 +54,11 @@ class UserRepositoryImpl @Inject constructor(
         var isSuccess = false
         var id: String? = null
         try {
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        isSuccess = task.isSuccessful
-                        id = auth.currentUser?.uid!!
-                    }
-                }.addOnFailureListener { ex -> throw ex }.await()
+            val result = authService.loginWith(Email) {
+                this.email = email
+                this.password = password
+                return@loginWith
+            }
         } catch (e: Exception) {
             Timber.d(e.message)
             throw e
@@ -73,10 +72,7 @@ class UserRepositoryImpl @Inject constructor(
                 }
             }
             .addOnFailureListener { e -> Timber.d(e) }.await()
-
-        withContext(Dispatchers.IO) {
-            userDao.insert(user!!)
-        }
+        userDao.insert(user!!)
         return isSuccess
     }
 
