@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.data.repository.impl
 
-import android.provider.ContactsContract.CommonDataKinds.Email
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hieuwu.groceriesstore.data.database.dao.UserDao
@@ -12,13 +11,12 @@ import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
 import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
 import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import io.github.jan.supabase.gotrue.GoTrue
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
@@ -28,51 +26,26 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
 
     override suspend fun createAccount(email: String, password: String, name: String): Boolean {
-        var dbUser: User? = null
-        var isSucess = false
-//        val config = io.github.jan.supabase.gotrue.providers.builtin.Email.Config(
-//            email = "",
-//            password = ""
-//        )
         val result = authService.signUpWith(io.github.jan.supabase.gotrue.providers.builtin.Email) {
             this.email = email
             this.password = password
         }
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                Timber.d(task.exception)
-                if (task.isSuccessful) {
-                    // Create account success, update UI with the signed-in user's information
-                    val userId = auth.currentUser!!.uid
-                    val newUser = hashMapOf(
-                        "name" to name,
-                        "email" to email
-                    )
-                    isSucess = true
-
-                    dbUser = User(
-                        userId, name, email, null, null,
-                        isOrderCreatedNotiEnabled = false,
-                        isPromotionNotiEnabled = false,
-                        isDataRefreshedNotiEnabled = false
-                    )
-                    fireStore.collection(CollectionNames.users).document(userId)
-                        .set(newUser)
-                        .addOnSuccessListener {
-                            // Handle success
-                            isSucess = true
-                        }
-                        .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
-                }
-            }.addOnFailureListener { Exception -> Timber.d(Exception) }
-            .await()
-        if (isSucess) {
-            withContext(Dispatchers.IO) {
-                userDao.insert(dbUser!!)
-            }
-            return true
-        } else return false
+        return if (result != null) {
+            val user = User(
+                id = result.id,
+                name = name,
+                email = email,
+                address = null,
+                phone = null,
+                isOrderCreatedNotiEnabled = false,
+                isPromotionNotiEnabled = false,
+                isDataRefreshedNotiEnabled = false
+            )
+            userDao.insert(user)
+            true
+        } else {
+            false
+        }
     }
 
     override suspend fun authenticate(email: String, password: String): Boolean {
