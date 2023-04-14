@@ -6,8 +6,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.jan.supabase.gotrue.GoTrue
-import io.github.jan.supabase.gotrue.GoTrueConfig
-import io.github.jan.supabase.gotrue.GoTrueConfigDefaults
 import io.github.jan.supabase.plugins.standaloneSupabaseModule
 import io.github.jan.supabase.postgrest.Postgrest
 import io.ktor.client.plugins.*
