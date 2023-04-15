@@ -5,13 +5,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.hieuwu.groceriesstore.data.database.dao.UserDao
 import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.network.dto.CategoriesDto
+import com.hieuwu.groceriesstore.data.network.dto.UserDto
 import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
+import com.hieuwu.groceriesstore.utilities.SupabaseMapper
 import com.hieuwu.groceriesstore.utilities.convertUserDocumentToEntity
 import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
 import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.gotrue.providers.builtin.Email
+import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
@@ -23,7 +27,8 @@ class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
     private val auth: FirebaseAuth,
     private val fireStore: FirebaseFirestore,
-    private val authService: GoTrue
+    private val authService: GoTrue,
+    private val postgrest: Postgrest,
 ) : UserRepository {
 
     override suspend fun createAccount(email: String, password: String, name: String): Boolean {
@@ -50,30 +55,23 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun authenticate(email: String, password: String): Boolean {
-        //TODO Make this method smaller by separating the concerns
-        var isSuccess = false
-        var id: String? = null
-        try {
-            val result = authService.loginWith(Email) {
-                this.email = email
-                this.password = password
-                return@loginWith
-            }
-        } catch (e: Exception) {
-            Timber.d(e.message)
-            throw e
+        authService.loginWith(Email) {
+            this.email = email
+            this.password = password
         }
 
-        var user: User? = null
-        fireStore.collection(CollectionNames.users).document(auth.currentUser?.uid!!).get()
-            .addOnSuccessListener {
-                it?.let {
-                    user = convertUserDocumentToEntity(id!!, it)
-                }
-            }
-            .addOnFailureListener { e -> Timber.d(e) }.await()
-        userDao.insert(user!!)
-        return isSuccess
+//        val userDto = postgrest[CollectionNames.users].select().decodeSingle<UserDto>()
+//        val user = SupabaseMapper.mapDtoToEntity(userDto)
+//        userDao.insert(user)
+        return true
+//        fireStore.collection(CollectionNames.users).document(auth.currentUser?.uid!!).get()
+//            .addOnSuccessListener {
+//                it?.let {
+//                    user = convertUserDocumentToEntity(id!!, it)
+//                }
+//            }
+//            .addOnFailureListener { e -> Timber.d(e) }.await()
+
     }
 
     override suspend fun updateUserProfile(
