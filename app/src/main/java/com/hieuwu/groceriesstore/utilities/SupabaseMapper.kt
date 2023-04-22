@@ -25,12 +25,25 @@ object SupabaseMapper {
             image = productDto.image,
             price = productDto.price,
             category = productDto.category,
-            )
+        )
     }
 
 
     fun mapDtoToEntity(user: UserDto): User {
         return User(
+            id = user.id,
+            name = user.name,
+            email = user.email,
+            address = user.address,
+            phone = user.phone,
+            isDataRefreshedNotiEnabled = user.isDataRefreshedNotiEnabled,
+            isOrderCreatedNotiEnabled = user.isOrderCreatedNotiEnabled,
+            isPromotionNotiEnabled = user.isPromotionNotiEnabled,
+        )
+    }
+
+    fun mapEntityToDto(user: User): UserDto {
+        return UserDto(
             id = user.id,
             name = user.name,
             email = user.email,
