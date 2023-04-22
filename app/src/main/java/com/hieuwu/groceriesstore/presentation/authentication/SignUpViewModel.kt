@@ -49,7 +49,7 @@ class SignUpViewModel @Inject constructor(private val userRepository: UserReposi
 
     fun createAccount() {
         viewModelScope.launch {
-            _isSignUpSuccessful.value = userRepository!!.createAccount(_email!!, _password!!, _name!!)
+            _isSignUpSuccessful.value = userRepository.createAccount(_email!!, _password!!, _name!!)
         }
     }
 }

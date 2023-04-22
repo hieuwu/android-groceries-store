@@ -5,8 +5,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.github.jan.supabase.plugins.standaloneSupabaseModule
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.gotrue.GoTrue
+import io.github.jan.supabase.gotrue.gotrue
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.postgrest.postgrest
 import io.ktor.client.plugins.*
 import javax.inject.Singleton
 
@@ -16,13 +20,26 @@ object SupabaseModule {
 
     @Provides
     @Singleton
-    fun provideSupabaseDatabase(): Postgrest {
-        val postgrest = standaloneSupabaseModule(
-            Postgrest,
-            url = BuildConfig.SUPABASE_URL,
-            apiKey = BuildConfig.API_KEY
-        )
-        return postgrest
+    fun provideSupabaseClient(): SupabaseClient {
+        return createSupabaseClient(
+            supabaseUrl = BuildConfig.SUPABASE_URL,
+            supabaseKey = BuildConfig.API_KEY
+        ) {
+            install(Postgrest)
+            install(GoTrue)
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideSupabaseDatabase(client: SupabaseClient): Postgrest {
+        return client.postgrest
+    }
+
+    @Provides
+    @Singleton
+    fun provideSupabaseGoTrue(client: SupabaseClient): GoTrue {
+        return client.gotrue
     }
 
 }
