@@ -9,7 +9,8 @@
  [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
 
 
-![Groceries Store](https://i.imgur.com/Wn6ZcZl.jpeg)
+![Groceries Store](https://user-images.githubusercontent.com/43868345/233767546-ba25566b-7926-4140-82fe-12346a1f357e.png)
+
 <img src="https://github.com/hieuwu/hieuwu.github.io/blob/master/assets/img/rocket.gif" align="right" height="330px">
 
 <!-- [![Kotlin](https://img.shields.io/badge/kotlin-%23FF5722.svg?&style=for-the-badge&logo=kotlin&logoColor=white)](https://github.com/hieuwu/android-groceries-store)
