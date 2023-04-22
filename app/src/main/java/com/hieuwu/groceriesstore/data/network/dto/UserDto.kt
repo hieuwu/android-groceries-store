@@ -27,5 +27,6 @@ data class UserDto(
     val isPromotionNotiEnabled: Boolean,
 
     @SerialName("isDataRefreshedNotiEnabled")
-    val isDataRefreshedNotiEnabled: Boolean
+    val isDataRefreshedNotiEnabled: Boolean,
+
 )

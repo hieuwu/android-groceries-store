@@ -8,7 +8,6 @@ import com.hieuwu.groceriesstore.data.network.dto.UserDto
 import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.SupabaseMapper
-import com.hieuwu.groceriesstore.utilities.convertUserEntityToDocument
 import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.gotrue.providers.builtin.Email
@@ -75,24 +74,19 @@ class UserRepositoryImpl @Inject constructor(
             isPromotionNotiEnabled = false,
             isDataRefreshedNotiEnabled = false
         )
-        val newUser = convertUserEntityToDocument(dbUser)
-        var isSuccess = false
         try {
-            fireStore.collection(CollectionNames.users).document(userId)
-                .set(newUser)
-                .addOnSuccessListener {
-                    isSuccess = true
+            postgrest[CollectionNames.users].update(
+                {
+                    UserDto::phone setTo phone
+                    UserDto::email setTo email
+                    UserDto::address setTo address
                 }
-                .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }.await()
-        } catch (e: Exception) {
-            isSuccess = false
-            Timber.e(e)
-        }
-
-        if (isSuccess) {
-            withContext(Dispatchers.IO) {
-                userDao.insert(dbUser)
+            ) {
+                UserDto::id eq userId
             }
+            userDao.insert(dbUser)
+        } catch (e: Exception) {
+            Timber.e(e)
         }
     }
 
