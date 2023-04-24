@@ -3,9 +3,6 @@
  ⚠️ This project is in the progress of migrating from Firebase to Supabase
  [Wiki](https://github.com/hieuwu/android-groceries-store/wiki)
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
  [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
 
 
@@ -71,7 +68,9 @@ Support it by joining __[stargazers](https://github.com/hieuwu/android-groceries
 Also, __[follow me](https://github.com/hieuwu)__ on GitHub for my next creations! 🤩
 
 ## Contributors ✨
-
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
