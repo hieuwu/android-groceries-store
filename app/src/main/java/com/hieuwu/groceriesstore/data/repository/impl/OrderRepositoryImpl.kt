@@ -48,21 +48,9 @@ class OrderRepositoryImpl @Inject constructor(
         }
 
     override suspend fun sendOrderToServer(order: OrderModel): Boolean {
-        val orderMap = convertOrderEntityToDocument(order)
         val orderDto = SupabaseMapper.mapModelToDto(order)
-        var isSuccess = false
-        val db = Firebase.firestore
-
         postgrest[CollectionNames.orders].insert(orderDto)
-        db.collection(CollectionNames.orders).document(orderDto.id)
-            .set(orderMap)
-            .addOnSuccessListener {
-                isSuccess = true
-            }
-            .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
-            .await()
         orderDao.clear()
-        isSuccess = true
-        return isSuccess
+        return true
     }
 }
