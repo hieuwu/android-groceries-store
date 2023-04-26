@@ -4,8 +4,10 @@ import com.hieuwu.groceriesstore.data.database.entities.Category
 import com.hieuwu.groceriesstore.data.database.entities.Product
 import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.data.network.dto.CategoriesDto
+import com.hieuwu.groceriesstore.data.network.dto.OrderDto
 import com.hieuwu.groceriesstore.data.network.dto.ProductDto
 import com.hieuwu.groceriesstore.data.network.dto.UserDto
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 
 object SupabaseMapper {
     fun mapToEntity(category: CategoriesDto): Category {
@@ -53,5 +55,14 @@ object SupabaseMapper {
             isOrderCreatedNotiEnabled = user.isOrderCreatedNotiEnabled,
             isPromotionNotiEnabled = user.isPromotionNotiEnabled,
         )
+    }
+
+    fun mapModelToDto(order: OrderModel): OrderDto {
+        return OrderDto(
+            id = order.id,
+            orderId = order.id,
+            address = order.address,
+            status = order.status ?: "",
+            )
     }
 }
