@@ -11,7 +11,9 @@ import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.OrderStatus
+import com.hieuwu.groceriesstore.utilities.SupabaseMapper
 import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument
+import io.github.jan.supabase.postgrest.Postgrest
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +26,8 @@ import timber.log.Timber
 @Singleton
 class OrderRepositoryImpl @Inject constructor(
     private val orderDao: OrderDao,
-    private val lineItemDao: LineItemDao
+    private val lineItemDao: LineItemDao,
+    private val postgrest: Postgrest
 ) : OrderRepository {
 
     override suspend fun createOrUpdate(order: Order) {
@@ -46,21 +49,20 @@ class OrderRepositoryImpl @Inject constructor(
 
     override suspend fun sendOrderToServer(order: OrderModel): Boolean {
         val orderMap = convertOrderEntityToDocument(order)
+        val orderDto = SupabaseMapper.mapModelToDto(order)
         var isSuccess = false
         val db = Firebase.firestore
 
-        db.collection(CollectionNames.orders).document(order.id)
+        postgrest[CollectionNames.orders].insert(orderDto)
+        db.collection(CollectionNames.orders).document(orderDto.id)
             .set(orderMap)
             .addOnSuccessListener {
                 isSuccess = true
             }
             .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }
             .await()
-        if (isSuccess) {
-            withContext(Dispatchers.IO) {
-                orderDao.clear()
-            }
-        }
+        orderDao.clear()
+        isSuccess = true
         return isSuccess
     }
 }
