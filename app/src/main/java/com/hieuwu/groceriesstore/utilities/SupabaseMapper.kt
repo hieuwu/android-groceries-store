@@ -1,7 +1,6 @@
 package com.hieuwu.groceriesstore.utilities
 
 import com.hieuwu.groceriesstore.data.database.entities.Category
-import com.hieuwu.groceriesstore.data.database.entities.OrderWithLineItems
 import com.hieuwu.groceriesstore.data.database.entities.Product
 import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.data.network.dto.CategoriesDto
@@ -62,18 +61,21 @@ object SupabaseMapper {
 
     fun mapModelToDto(order: OrderModel): OrderDto {
         return OrderDto(
-            id = order.id,
             orderId = order.id,
             address = order.address,
             status = order.status ?: "",
         )
     }
 
-    fun mapModelToDto(lineItemModel: LineItemModel): LineItemDto {
+    fun mapModelListToDto(order: OrderModel): List<LineItemDto> {
+        return order.lineItemList.map { mapModelToDto(it, order.id) }
+    }
+
+    private fun mapModelToDto(lineItemModel: LineItemModel, orderId: String): LineItemDto {
         return LineItemDto(
             id = lineItemModel.id ?: 0,
             productId = lineItemModel.productId ?: "",
-            orderId = "",
+            orderId = orderId,
             quantity = lineItemModel.quantity ?: 0,
             subtotal = lineItemModel.subtotal ?: 0.0,
             lineItemId = lineItemModel.id ?: 0
