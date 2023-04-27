@@ -49,7 +49,9 @@ class OrderRepositoryImpl @Inject constructor(
 
     override suspend fun sendOrderToServer(order: OrderModel): Boolean {
         val orderDto = SupabaseMapper.mapModelToDto(order)
+        val lineItems = SupabaseMapper.mapModelListToDto(order)
         postgrest[CollectionNames.orders].insert(orderDto)
+        postgrest[CollectionNames.lineItems].insert(lineItems)
         orderDao.clear()
         return true
     }
