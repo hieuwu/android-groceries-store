@@ -5,8 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class OrderDto(
-    @SerialName("id")
-    val id: String,
     @SerialName("orderId")
     val orderId: String,
     @SerialName("status")
