@@ -12,7 +12,7 @@ data class LineItemDto(
     @SerialName("lineItemId")
     val lineItemId: Long,
 
-    @SerialName("productId")
+    @SerialName("productid")
     val productId: String,
 
     @SerialName("orderId")
