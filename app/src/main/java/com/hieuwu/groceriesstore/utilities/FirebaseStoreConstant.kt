@@ -5,6 +5,7 @@ object CollectionNames {
     const val categories = "categories"
     const val orders = "orders"
     const val users = "users"
+    const val lineItems = "line_items"
 }
 
 object UserDocumentProperties {
