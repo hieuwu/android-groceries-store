@@ -1,7 +1,5 @@
 package com.hieuwu.groceriesstore.data.repository.impl
 
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.hieuwu.groceriesstore.data.database.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.database.dao.OrderDao
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
@@ -12,16 +10,15 @@ import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import com.hieuwu.groceriesstore.utilities.SupabaseMapper
-import com.hieuwu.groceriesstore.utilities.convertOrderEntityToDocument
 import io.github.jan.supabase.postgrest.Postgrest
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class OrderRepositoryImpl @Inject constructor(
@@ -31,28 +28,47 @@ class OrderRepositoryImpl @Inject constructor(
 ) : OrderRepository {
 
     override suspend fun createOrUpdate(order: Order) {
-        withContext(Dispatchers.IO) {
-            orderDao.insert(order)
+        try {
+            withContext(Dispatchers.IO) {
+                orderDao.insert(order)
+            }
+        } catch (e: Exception) {
+            Timber.e(e.message)
         }
     }
 
     override suspend fun addLineItem(lineItem: LineItem) {
-        withContext(Dispatchers.IO) {
-            lineItemDao.insert(lineItem)
+        try {
+            withContext(Dispatchers.IO) {
+                lineItemDao.insert(lineItem)
+            }
+        } catch (e: Exception) {
+            Timber.e(e.message)
         }
     }
 
-    override fun getOneOrderByStatus(status: OrderStatus): Flow<OrderModel?> =
-        orderDao.getCartWithLineItems(status.value).map {
-            it?.asDomainModel()
+    override fun getOneOrderByStatus(status: OrderStatus): Flow<OrderModel?> {
+        return try {
+            return orderDao.getCartWithLineItems(status.value).map {
+                it?.asDomainModel()
+            }
+        } catch (e: Exception) {
+            Timber.e(e.message)
+            flow {}
         }
+    }
 
     override suspend fun sendOrderToServer(order: OrderModel): Boolean {
         val orderDto = SupabaseMapper.mapModelToDto(order)
         val lineItems = SupabaseMapper.mapModelListToDto(order)
-        postgrest[CollectionNames.orders].insert(orderDto)
-        postgrest[CollectionNames.lineItems].insert(lineItems)
-        orderDao.clear()
-        return true
+        return try {
+            postgrest[CollectionNames.orders].insert(orderDto)
+            postgrest[CollectionNames.lineItems].insert(lineItems)
+            orderDao.clear()
+            true
+        } catch (e: Exception) {
+            Timber.e(e.message)
+            false
+        }
     }
 }
