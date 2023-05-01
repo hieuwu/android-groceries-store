@@ -27,7 +27,6 @@ class CategoryRepositoryImpl @Inject constructor(
             categoryDao.insertAll(categories)
         } catch (e: Exception) {
             Timber.e(e.message)
-            throw e
         }
     }
 
