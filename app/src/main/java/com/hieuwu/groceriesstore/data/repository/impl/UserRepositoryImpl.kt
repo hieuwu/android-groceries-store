@@ -28,37 +28,46 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
 
     override suspend fun createAccount(email: String, password: String, name: String): Boolean {
-        authService.signUpWith(Email) {
-            this.email = email
-            this.password = password
+        return try {
+            authService.signUpWith(Email) {
+                this.email = email
+                this.password = password
+            }
+            val userDto = UserDto(
+                id = UUID.randomUUID().toString(),
+                name = name,
+                email = email,
+                address = null,
+                phone = null,
+                isOrderCreatedNotiEnabled = false,
+                isPromotionNotiEnabled = false,
+                isDataRefreshedNotiEnabled = false
+            )
+            postgrest[CollectionNames.users].insert(value = userDto, upsert = true)
+            val user = SupabaseMapper.mapDtoToEntity(userDto)
+            userDao.insert(user)
+            true
+        } catch (e: Exception) {
+            Timber.e(e.message)
+            false
         }
-        val userDto = UserDto(
-            id = UUID.randomUUID().toString(),
-            name = name,
-            email = email,
-            address = null,
-            phone = null,
-            isOrderCreatedNotiEnabled = false,
-            isPromotionNotiEnabled = false,
-            isDataRefreshedNotiEnabled = false
-        )
-        postgrest[CollectionNames.users].insert(value = userDto, upsert = true)
-        val user = SupabaseMapper.mapDtoToEntity(userDto)
-        userDao.insert(user)
-        return true
     }
 
     override suspend fun authenticate(email: String, password: String): Boolean {
-        authService.loginWith(Email) {
-            this.email = email
-            this.password = password
+        return try {
+            authService.loginWith(Email) {
+                this.email = email
+                this.password = password
+            }
+
+            val userDto = postgrest[CollectionNames.users].select().decodeSingle<UserDto>()
+            val user = SupabaseMapper.mapDtoToEntity(userDto)
+            userDao.insert(user)
+            true
+        } catch (e: Exception) {
+            Timber.e(e.message)
+            false
         }
-
-        val userDto = postgrest[CollectionNames.users].select().decodeSingle<UserDto>()
-        val user = SupabaseMapper.mapDtoToEntity(userDto)
-        userDao.insert(user)
-        return true
-
     }
 
     override suspend fun updateUserProfile(
@@ -91,9 +100,7 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun clearUser() {
-        withContext(Dispatchers.IO) {
-            userDao.clear()
-        }
+        userDao.clear()
     }
 
     override suspend fun updateUserSettings(
