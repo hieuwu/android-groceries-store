@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LineItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(lineItem: LineItem)
+    suspend fun insert(lineItem: LineItem)
 
     @Query("SELECT * FROM $LINE_ITEM_TABLE WHERE lineItemId = :id")
     fun getById(id: Long): Flow<LineItem>
