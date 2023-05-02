@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.data.repository.impl
 
-import com.google.firebase.firestore.FirebaseFirestore
 import com.hieuwu.groceriesstore.data.database.dao.UserDao
 import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
@@ -8,21 +7,16 @@ import com.hieuwu.groceriesstore.data.network.dto.UserDto
 import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.SupabaseMapper
-import com.hieuwu.groceriesstore.utilities.createUpdateUserRequest
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.postgrest.Postgrest
 import java.util.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
-    private val fireStore: FirebaseFirestore,
     private val authService: GoTrue,
     private val postgrest: Postgrest,
 ) : UserRepository {
@@ -109,27 +103,24 @@ class UserRepositoryImpl @Inject constructor(
         isDatabaseRefreshedEnabled: Boolean,
         isPromotionEnabled: Boolean
     ) {
-        val updateRequest = createUpdateUserRequest(
-            isOrderCreatedEnabled,
-            isDatabaseRefreshedEnabled,
-            isPromotionEnabled
-        )
-        var isSuccess = false
-        fireStore.collection(CollectionNames.users).document(id)
-            .set(updateRequest)
-            .addOnSuccessListener {
-                isSuccess = true
+        try {
+            postgrest[CollectionNames.users].update(
+                {
+                    UserDto::isOrderCreatedNotiEnabled setTo isOrderCreatedEnabled
+                    UserDto::isDataRefreshedNotiEnabled setTo isDatabaseRefreshedEnabled
+                    UserDto::isPromotionNotiEnabled setTo isPromotionEnabled
+                }
+            ) {
+                UserDto::id eq id
             }
-            .addOnFailureListener { e -> Timber.d("Error writing document%s", e) }.await()
-        if (isSuccess) {
-            withContext(Dispatchers.IO) {
-                userDao.updateUserSettings(
-                    id,
-                    isOrderCreatedEnabled,
-                    isDatabaseRefreshedEnabled,
-                    isPromotionEnabled
-                )
-            }
+            userDao.updateUserSettings(
+                id,
+                isOrderCreatedEnabled,
+                isDatabaseRefreshedEnabled,
+                isPromotionEnabled
+            )
+        } catch (e: Exception) {
+            Timber.e(e.message)
         }
     }
 
