@@ -11,11 +11,9 @@ import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import com.hieuwu.groceriesstore.utilities.SupabaseMapper
 import io.github.jan.supabase.postgrest.Postgrest
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -29,9 +27,7 @@ class OrderRepositoryImpl @Inject constructor(
 
     override suspend fun createOrUpdate(order: Order) {
         try {
-            withContext(Dispatchers.IO) {
-                orderDao.insert(order)
-            }
+            orderDao.insert(order)
         } catch (e: Exception) {
             Timber.e(e.message)
         }
@@ -39,9 +35,7 @@ class OrderRepositoryImpl @Inject constructor(
 
     override suspend fun addLineItem(lineItem: LineItem) {
         try {
-            withContext(Dispatchers.IO) {
-                lineItemDao.insert(lineItem)
-            }
+            lineItemDao.insert(lineItem)
         } catch (e: Exception) {
             Timber.e(e.message)
         }
