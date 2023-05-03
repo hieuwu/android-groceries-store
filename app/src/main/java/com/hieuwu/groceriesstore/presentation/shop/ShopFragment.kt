@@ -108,7 +108,7 @@ class ShopFragment : Fragment() {
                     viewModel.navigateToSelectedProperty.collect {
                         it?.let {
                             navigateToProductDetail(it.id)
-                            viewModel.displayPropertyDetailsComplete()
+                            viewModel.displayProductDetailsComplete()
                         }
                     }
                 }
@@ -134,7 +134,7 @@ class ShopFragment : Fragment() {
     private fun setUpRecyclerView() {
         gridListItemAdapter = GridListItemAdapter(
             GridListItemAdapter.OnClickListener(
-                clickListener = { viewModel.displayPropertyDetails(it) },
+                clickListener = { viewModel.displayProductDetails(it) },
                 addToCartListener = { addToCart(it) }
             )
         )
