@@ -45,11 +45,11 @@ class ShopViewModel @Inject constructor(
     var currentCart: StateFlow<OrderModel?> = getCurrentCart()
         ?.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT), null)!!
 
-    fun displayPropertyDetails(marsProperty: ProductModel) {
-        _navigateToSelectedProperty.value = marsProperty
+    fun displayProductDetails(product: ProductModel) {
+        _navigateToSelectedProperty.value = product
     }
 
-    fun displayPropertyDetailsComplete() {
+    fun displayProductDetailsComplete() {
         _navigateToSelectedProperty.value = null
     }
 

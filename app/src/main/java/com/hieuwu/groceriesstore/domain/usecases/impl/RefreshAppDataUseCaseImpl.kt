@@ -4,6 +4,8 @@ import com.hieuwu.groceriesstore.data.repository.CategoryRepository
 import com.hieuwu.groceriesstore.data.repository.ProductRepository
 import com.hieuwu.groceriesstore.data.repository.RecipeRepository
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RefreshAppDataUseCaseImpl @Inject constructor(
@@ -12,8 +14,10 @@ class RefreshAppDataUseCaseImpl @Inject constructor(
     private val recipeRepository: RecipeRepository
 ) : RefreshAppDataUseCase {
     override suspend fun execute(input: Unit) {
-        categoryRepository.refreshDatabase()
-        productRepository.refreshDatabase()
-        recipeRepository.refreshDatabase()
+        withContext(Dispatchers.IO) {
+            categoryRepository.refreshDatabase()
+            productRepository.refreshDatabase()
+            recipeRepository.refreshDatabase()
+        }
     }
 }

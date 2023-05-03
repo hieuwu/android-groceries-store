@@ -8,6 +8,7 @@ import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.SupabaseMapper
 import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.flow.map
+import timber.log.Timber
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
@@ -18,11 +19,15 @@ class CategoryRepositoryImpl @Inject constructor(
     CategoryRepository {
 
     override suspend fun refreshDatabase() {
-        val result = supabasePostgrest[CollectionNames.categories]
-            .select()
-        val res = result.decodeList<CategoriesDto>()
-        val categories = res.map { SupabaseMapper.mapToEntity(it) }
-        categoryDao.insertAll(categories)
+        try {
+            val result = supabasePostgrest[CollectionNames.categories]
+                .select()
+            val res = result.decodeList<CategoriesDto>()
+            val categories = res.map { SupabaseMapper.mapToEntity(it) }
+            categoryDao.insertAll(categories)
+        } catch (e: Exception) {
+            Timber.e(e.message)
+        }
     }
 
     override fun getFromLocal() = categoryDao.getAll().map { it.asDomainModel() }

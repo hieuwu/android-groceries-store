@@ -9,10 +9,10 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.SupabaseMapper
 import io.github.jan.supabase.postgrest.Postgrest
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
@@ -27,37 +27,56 @@ class ProductRepositoryImpl @Inject constructor(
         }
 
     override suspend fun refreshDatabase() {
-        val result = supabasePostgrest[CollectionNames.products]
-            .select().decodeList<ProductDto>()
-        val products = result.map { SupabaseMapper.mapToEntity(it) }
-        productDao.insertAll(products)
+        try {
+            val result = supabasePostgrest[CollectionNames.products]
+                .select().decodeList<ProductDto>()
+            val products = result.map { SupabaseMapper.mapToEntity(it) }
+            productDao.insertAll(products)
+        } catch (e: Exception) {
+            Timber.e(e.message)
+        }
     }
 
     override suspend fun updateLineItemQuantityById(quantity: Int, id: Long) {
-        withContext(Dispatchers.IO) {
+        try {
             lineItemDao.updateQuantityById(quantity, id)
+        } catch (e: Exception) {
+            Timber.e(e.message)
         }
     }
 
     override suspend fun removeLineItemById(id: Long) {
-        withContext(Dispatchers.IO) {
+        try {
             lineItemDao.removeLineItemById(id)
+        } catch (e: Exception) {
+            Timber.e(e.message)
         }
     }
 
     override fun searchProductsListByName(name: String?) =
         productDao.searchProductByName(name).map { it.asDomainModel() }
 
-    override fun getAllProductsByCategory(categoryId: String) =
-        productDao.getAllByCategory(categoryId).map {
-            it.asDomainModel()
+    override fun getAllProductsByCategory(categoryId: String): Flow<List<ProductModel>> {
+        return try {
+            productDao.getAllByCategory(categoryId).map {
+                it.asDomainModel()
+            }
+        } catch (e: Exception) {
+            Timber.e(e.message)
+            flow {}
         }
+    }
 
     override fun getProductById(productId: String): Flow<ProductModel> {
-        val productFlow = productDao.getById(productId)
-        return productFlow.map {
-            it.asDomainModel()
+        try {
+            val productFlow = productDao.getById(productId)
+            return productFlow.map {
+                it.asDomainModel()
+            }
+        } catch (e: Exception) {
+            Timber.e(e)
         }
+        return flow {}
     }
 
 }
