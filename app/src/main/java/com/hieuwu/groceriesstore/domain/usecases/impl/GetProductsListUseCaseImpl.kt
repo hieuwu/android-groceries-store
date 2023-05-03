@@ -9,9 +9,7 @@ import javax.inject.Inject
 class GetProductsListUseCaseImpl @Inject constructor(private val productRepository: ProductRepository) :
     GetProductsListUseCase {
     override suspend fun execute(input: GetProductsListUseCase.Input): GetProductsListUseCase.Output {
-        return withContext(Dispatchers.IO) {
-            val result = productRepository.products
-            GetProductsListUseCase.Output(result)
-        }
+        val result = productRepository.products
+        return GetProductsListUseCase.Output(result)
     }
 }
