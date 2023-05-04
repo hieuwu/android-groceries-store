@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.presentation.notificationsettings
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.UserModel
