@@ -11,4 +11,6 @@ interface OrderRepository {
     suspend fun addLineItem(lineItem: LineItem)
     fun getOneOrderByStatus(status: OrderStatus): Flow<OrderModel?>
     suspend fun sendOrderToServer(order: OrderModel): Boolean
+
+    suspend fun getOrders(): List<OrderModel>
 }

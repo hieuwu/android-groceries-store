@@ -5,6 +5,7 @@ import com.hieuwu.groceriesstore.data.database.dao.OrderDao
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.network.dto.OrderDto
 import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.utilities.CollectionNames
@@ -64,5 +65,11 @@ class OrderRepositoryImpl @Inject constructor(
             Timber.e(e.message)
             false
         }
+    }
+
+    override suspend fun getOrders(): List<OrderModel> {
+        val result = postgrest[CollectionNames.orders].select().decodeList<OrderDto>()
+        val orders = result.map { SupabaseMapper.mapToModel(it) }
+        return orders
     }
 }
