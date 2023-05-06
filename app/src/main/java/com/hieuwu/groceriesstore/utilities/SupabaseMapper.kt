@@ -81,4 +81,13 @@ object SupabaseMapper {
             lineItemId = lineItemModel.id ?: 0
         )
     }
+
+     fun mapToModel(order: OrderDto): OrderModel {
+        return OrderModel(
+            id = order.orderId,
+            status = order.status,
+            address = order.address,
+            lineItemList = mutableListOf()
+        )
+    }
 }
