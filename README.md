@@ -61,7 +61,29 @@ SDK 23 or later
 
 #### Supabase (In-progress)
 See [Supabase Wiki](https://github.com/hieuwu/android-groceries-store/wiki) to keep track the process
+Database Schema:
 
+**categories**
+id | image | name | _id |
+--- | --- | --- | --- | 
+
+
+**line_items**
+id | lineItemId | productid | quantity | subtotal|orderId|
+--- | --- | --- | --- |  --- |  --- | 
+
+**orders**
+orderId | status |
+--- | --- | 
+
+**products**
+_id | name | description | price | image|category|nutrition|productid
+--- | --- | --- | --- |  --- |  --- | --- | --- | 
+
+
+**users**
+id | name | email | phone | isOrderCreatedNotiEnabled|isPromotionNotiEnabled|isDataRefreshedEnabled|address
+--- | --- | --- | --- |  --- |  --- | --- | --- | 
 
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/hieuwu/android-groceries-store/stargazers)__ for this repository. :star: <br>
