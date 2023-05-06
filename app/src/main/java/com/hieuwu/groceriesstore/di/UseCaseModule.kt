@@ -7,6 +7,7 @@ import com.hieuwu.groceriesstore.domain.usecases.impl.CreateNewOrderUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.GetCategoriesListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
+import com.hieuwu.groceriesstore.domain.usecases.GetOrderListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.GetCurrentCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.GetProductDetailUseCaseImpl
@@ -31,6 +32,7 @@ import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateCartItemUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
+import com.hieuwu.groceriesstore.domain.usecases.impl.GetOrderListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.UserSettingsUseCaseImpl
 import dagger.Binds
 import dagger.Module
@@ -104,4 +106,9 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindSearchProductUseCase(impl: SearchProductUseCaseImpl): SearchProductUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindGetOrdersUseCase(impl: GetOrderListUseCaseImpl): GetOrderListUseCase
+
 }
