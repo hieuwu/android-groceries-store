@@ -115,6 +115,10 @@ dependencies {
     implementation "com.google.accompanist:accompanist-themeadapter-material:0.28.0"
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+
+    def nav_version = "2.5.3"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
     implementation libs.caruilib
 
     testImplementation libs.junit
