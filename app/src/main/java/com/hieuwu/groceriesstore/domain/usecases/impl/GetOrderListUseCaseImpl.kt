@@ -10,6 +10,6 @@ class GetOrderListUseCaseImpl @Inject constructor(
 ) : GetOrderListUseCase {
     override suspend fun execute(input: GetOrderListUseCase.Input): GetOrderListUseCase.Output {
         val result = orderRepository.getOrders()
-        return GetOrderListUseCase.Output(data = flow { result })
+        return GetOrderListUseCase.Output.Success(data = flow { result })
     }
 }
