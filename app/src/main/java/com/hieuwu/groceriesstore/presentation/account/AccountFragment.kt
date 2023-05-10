@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentAccountBinding
 import com.hieuwu.groceriesstore.presentation.AuthActivity
+import com.hieuwu.groceriesstore.utilities.navigateSingleTopTo
+import com.hieuwu.groceriesstore.utilities.navigation.OrderHistoryDestination
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -62,7 +64,8 @@ class AccountFragment : Fragment() {
         }
 
         binding.notificationSettingLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_accountFragment_to_notificationSettingsFragment)
+//            findNavController().navigate(R.id.action_accountFragment_to_notificationSettingsFragment)
+            findNavController().navigateSingleTopTo(OrderHistoryDestination.route)
         }
 
         binding.signoutButton.setOnClickListener {
