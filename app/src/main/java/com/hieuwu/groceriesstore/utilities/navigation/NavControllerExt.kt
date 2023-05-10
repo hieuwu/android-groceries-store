@@ -1,4 +1,4 @@
-package com.hieuwu.gofocus.presentation.navigation
+package com.hieuwu.groceriesstore.utilities
 
 import androidx.navigation.NavController
 
