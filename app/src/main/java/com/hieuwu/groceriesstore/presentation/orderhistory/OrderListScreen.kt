@@ -12,12 +12,13 @@ import androidx.navigation.NavController
 
 @Composable
 fun OrderHistoryScreen(
-    navController: NavController,
+//    navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: OrderListViewModel = hiltViewModel()
 ) {
     val orderList = viewModel.orderList.collectAsState()
     Column(modifier = modifier) {
+        Text("This his order history screen")
         LazyColumn {
             items(orderList.value) { it ->
                 Text(text = it.total.toString())
