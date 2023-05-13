@@ -17,9 +17,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class OrderRepositoryImpl @Inject constructor(
     private val orderDao: OrderDao,
     private val lineItemDao: LineItemDao,
