@@ -15,8 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.FragmentAccountBinding
 import com.hieuwu.groceriesstore.presentation.AuthActivity
-import com.hieuwu.groceriesstore.utilities.navigateSingleTopTo
-import com.hieuwu.groceriesstore.utilities.navigation.OrderHistoryDestination
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -73,7 +71,7 @@ class AccountFragment : Fragment() {
             }
 
             signoutButton.setOnClickListener {
-                viewModel.signOut()
+                viewModel?.signOut()
             }
 
             signinButton.setOnClickListener {
