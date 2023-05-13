@@ -8,7 +8,7 @@ import com.hieuwu.groceriesstore.presentation.orderhistory.OrderHistoryScreen
 fun NavGraphBuilder.navRegistration(navController: NavController) {
     composable(OrderHistoryDestination.route) {
         OrderHistoryScreen(
-            navController = navController,
+//            navController = navController,
         )
     }
 }
