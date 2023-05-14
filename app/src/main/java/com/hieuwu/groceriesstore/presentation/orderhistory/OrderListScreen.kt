@@ -1,14 +1,30 @@
 package com.hieuwu.groceriesstore.presentation.orderhistory
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import com.hieuwu.groceriesstore.R
 
 @Composable
 fun OrderHistoryScreen(
@@ -16,14 +32,42 @@ fun OrderHistoryScreen(
     modifier: Modifier = Modifier,
     viewModel: OrderListViewModel = hiltViewModel()
 ) {
-    val orderList = viewModel.orderList.collectAsState()
-    Column(modifier = modifier) {
-        Text("This his order history screen")
-        LazyColumn {
-            items(orderList.value) { it ->
-                Text(text = it.total.toString())
+    Box(modifier = modifier.background(colorResource(id = R.color.colorPrimary))) {
+        Spacer(modifier = modifier.height(80.dp))
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(top = 80.dp)
+                .clip(RoundedCornerShape(topStartPercent = 8, topEndPercent = 8))
+                .background(Color.White),
+        ) {
+            val orderList = viewModel.orderList.collectAsState()
+            LazyColumn(contentPadding = PaddingValues(20.dp)) {
+                items(orderList.value) {
+                    Card(
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        elevation = 3.dp
+                    ) {
+                        Column(modifier = modifier.padding(8.dp)) {
+                            Text(text = "Created at " + "Mon June 29 2020")
+                            Text(text = "shipped to " + it.address.toString())
+                            Card(
+                                backgroundColor = colorResource(id = R.color.colorPrimary),
+                            ) {
+                                Text(
+                                    modifier = modifier.padding(4.dp),
+                                    text = it.total.toString(),
+                                    color = Color.White,
+                                    style = MaterialTheme.typography.body1
+                                )
+                            }
+                        }
+                    }
+
+                }
             }
         }
     }
-
 }
