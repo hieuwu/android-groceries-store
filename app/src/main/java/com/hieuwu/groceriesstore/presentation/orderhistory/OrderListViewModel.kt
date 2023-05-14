@@ -5,9 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.GetOrderListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,20 +21,17 @@ class OrderListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _orderList = MutableStateFlow<List<OrderModel>>(listOf())
-    val orderList = _orderList
+    val orderList: StateFlow<List<OrderModel>> = _orderList
 
     init {
-//        getOrderList()
-        Timber.d("Run this")
+        getOrderList()
     }
 
     private fun getOrderList() {
         viewModelScope.launch {
             when (val result = getOrderListUseCase.execute(GetOrderListUseCase.Input())) {
                 is GetOrderListUseCase.Output.Success -> {
-                    result.data.collect {
-                        _orderList.value = it
-                    }
+                    _orderList.emit(result.data)
                 }
                 else -> {
 
