@@ -59,7 +59,7 @@ fun OrderHistoryScreen(
                         elevation = 3.dp
                     ) {
                         Column(modifier = modifier.padding(8.dp)) {
-                            Text(text = "Created at " + "Mon June 29 2020")
+                            Text(text = "Created at " + it.createdAt)
                             Text(text = "Shipped to " + it.address.toString())
                             Card(
                                 modifier = modifier.padding(top = 8.dp),
