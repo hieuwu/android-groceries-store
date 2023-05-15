@@ -1,7 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.orderhistory
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.hieuwu.groceriesstore.R
@@ -33,11 +34,18 @@ fun OrderHistoryScreen(
     viewModel: OrderListViewModel = hiltViewModel()
 ) {
     Box(modifier = modifier.background(colorResource(id = R.color.colorPrimary))) {
-        Spacer(modifier = modifier.height(80.dp))
+        Text(
+            modifier = modifier.fillMaxWidth().padding(vertical = 12.dp),
+            text = "Order history",
+            color = Color.White,
+            style = MaterialTheme.typography.h5,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = modifier.height(72.dp))
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(top = 80.dp)
+                .padding(top = 64.dp)
                 .clip(RoundedCornerShape(topStartPercent = 8, topEndPercent = 8))
                 .background(Color.White),
         ) {
@@ -52,20 +60,21 @@ fun OrderHistoryScreen(
                     ) {
                         Column(modifier = modifier.padding(8.dp)) {
                             Text(text = "Created at " + "Mon June 29 2020")
-                            Text(text = "shipped to " + it.address.toString())
+                            Text(text = "Shipped to " + it.address.toString())
                             Card(
+                                modifier = modifier.padding(top = 8.dp),
                                 backgroundColor = colorResource(id = R.color.colorPrimary),
                             ) {
                                 Text(
                                     modifier = modifier.padding(4.dp),
                                     text = it.total.toString(),
                                     color = Color.White,
-                                    style = MaterialTheme.typography.body1
+                                    style = MaterialTheme.typography.body1,
+                                    fontWeight = FontWeight.SemiBold
                                 )
                             }
                         }
                     }
-
                 }
             }
         }
