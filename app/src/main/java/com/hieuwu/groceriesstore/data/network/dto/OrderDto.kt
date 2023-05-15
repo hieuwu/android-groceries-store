@@ -11,6 +11,7 @@ data class OrderDto(
     val status: String,
     @SerialName("address")
     val address: String?,
-
+    @SerialName("created_at")
+    val createdAt: String,
 
     )

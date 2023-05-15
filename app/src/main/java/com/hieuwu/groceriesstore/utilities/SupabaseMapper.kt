@@ -64,6 +64,7 @@ object SupabaseMapper {
             orderId = order.id,
             address = order.address,
             status = order.status ?: "",
+            createdAt = ""
         )
     }
 
@@ -87,7 +88,8 @@ object SupabaseMapper {
             id = order.orderId,
             status = order.status,
             address = order.address,
-            lineItemList = mutableListOf()
+            lineItemList = mutableListOf(),
+            createdAt = order.createdAt
         )
     }
 }
