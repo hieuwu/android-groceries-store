@@ -69,7 +69,7 @@ fun OrderHistoryScreen(
                             ) {
                                 Text(
                                     modifier = modifier.padding(4.dp),
-                                    text = it.total.toString(),
+                                    text = "$ ${it.totalPrice}",
                                     color = Color.White,
                                     style = MaterialTheme.typography.body1,
                                     fontWeight = FontWeight.SemiBold
