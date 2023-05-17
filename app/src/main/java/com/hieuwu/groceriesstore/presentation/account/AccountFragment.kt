@@ -57,20 +57,26 @@ class AccountFragment : Fragment() {
     }
 
     private fun setEventListener() {
-        binding.profileLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_accountFragment_to_updateProfileFragment)
-        }
+        with(binding) {
+            profileLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_accountFragment_to_updateProfileFragment)
+            }
 
-        binding.notificationSettingLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_accountFragment_to_notificationSettingsFragment)
-        }
+            notificationSettingLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_accountFragment_to_notificationSettingsFragment)
+            }
 
-        binding.signoutButton.setOnClickListener {
-            viewModel.signOut()
-        }
+            orderHistoryLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_accountFragment_to_orderHistoryFragment)
+            }
 
-        binding.signinButton.setOnClickListener {
-            navigateToAuthentication()
+            signoutButton.setOnClickListener {
+                viewModel?.signOut()
+            }
+
+            signinButton.setOnClickListener {
+                navigateToAuthentication()
+            }
         }
     }
 }

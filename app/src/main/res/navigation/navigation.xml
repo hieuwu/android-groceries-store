@@ -19,6 +19,11 @@
         <action
             android:id="@+id/action_accountFragment_to_notificationSettingsFragment"
             app:destination="@id/notificationSettingsFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_orderHistoryFragment"
+            app:destination="@id/orderHistoryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -135,5 +140,9 @@
         android:id="@+id/notificationSettingsFragment"
         android:name="com.hieuwu.groceriesstore.presentation.notificationsettings.NotificationSettingsFragment"
         android:label="NotificationSettingsFragment" />
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="com.hieuwu.groceriesstore.presentation.orderhistory.OrderHistoryFragment"
+        android:label="OrderHistoryFragment" />
 
 </navigation>

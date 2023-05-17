@@ -4,8 +4,10 @@ data class OrderModel(
     var id: String = "",
     var status: String? = null,
     var address: String? = null,
-    val lineItemList: MutableList<LineItemModel>
+    val lineItemList: MutableList<LineItemModel>,
+    val createdAt: String = "",
 ) {
+    var totalPrice: Double = 0.0
     val total: Double
         get() = calculateTotal()
 
@@ -16,12 +18,5 @@ data class OrderModel(
             sum = sum.plus(sub)
         }
         return sum
-    }
-
-    fun isProductAdded(productId: String): Boolean {
-        for (item in lineItemList) {
-            if (item.productId.equals(productId)) return true
-        }
-        return false
     }
 }
