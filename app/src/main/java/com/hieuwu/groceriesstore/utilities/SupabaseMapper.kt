@@ -10,6 +10,7 @@ import com.hieuwu.groceriesstore.data.network.dto.ProductDto
 import com.hieuwu.groceriesstore.data.network.dto.UserDto
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
+import java.util.*
 
 object SupabaseMapper {
     fun mapToEntity(category: CategoriesDto): Category {
@@ -64,7 +65,8 @@ object SupabaseMapper {
             orderId = order.id,
             address = order.address,
             status = order.status ?: "",
-            createdAt = ""
+            createdAt = Date().toString(),
+            total = order.total
         )
     }
 
@@ -83,13 +85,15 @@ object SupabaseMapper {
         )
     }
 
-     fun mapToModel(order: OrderDto): OrderModel {
+    fun mapToModel(order: OrderDto): OrderModel {
         return OrderModel(
             id = order.orderId,
             status = order.status,
             address = order.address,
             lineItemList = mutableListOf(),
             createdAt = order.createdAt
-        )
+        ).apply {
+            totalPrice = order.total
+        }
     }
 }

@@ -13,5 +13,6 @@ data class OrderDto(
     val address: String?,
     @SerialName("created_at")
     val createdAt: String,
-
-    )
+    @SerialName("total")
+    val total: Double,
+)

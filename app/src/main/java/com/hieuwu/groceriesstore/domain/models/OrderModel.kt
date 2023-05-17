@@ -5,8 +5,9 @@ data class OrderModel(
     var status: String? = null,
     var address: String? = null,
     val lineItemList: MutableList<LineItemModel>,
-    val createdAt: String = ""
+    val createdAt: String = "",
 ) {
+    var totalPrice: Double = 0.0
     val total: Double
         get() = calculateTotal()
 
