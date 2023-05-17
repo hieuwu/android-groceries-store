@@ -35,7 +35,9 @@ fun OrderHistoryScreen(
 ) {
     Box(modifier = modifier.background(colorResource(id = R.color.colorPrimary))) {
         Text(
-            modifier = modifier.fillMaxWidth().padding(vertical = 12.dp),
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 12.dp),
             text = "Order history",
             color = Color.White,
             style = MaterialTheme.typography.h5,
