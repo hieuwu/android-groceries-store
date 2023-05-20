@@ -1,6 +1,6 @@
 <h1 align="center"> 🚀 Groceries Store</h1>
 
- ⚠️ This project is in the progress of migrating from Firebase to Supabase
+Progress of migrating from Firebase to Supabase
  [Wiki](https://github.com/hieuwu/android-groceries-store/wiki)
 
  [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
