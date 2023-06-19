@@ -14,21 +14,25 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.R
+import com.hieuwu.groceriesstore.domain.models.ProductModel
 
 @Composable
-fun ProductItem(modifier: Modifier = Modifier) {
+fun ProductItem(
+    modifier: Modifier = Modifier,
+    product: ProductModel
+) {
     Card(modifier = modifier) {
         Column(modifier = modifier) {
             Image(
-                painterResource(R.drawable.car_ui_app_styled_view_background),
+                painterResource(R.drawable.colorful_carrot),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = modifier.width(120.dp)
             )
-            Text(text = "product name")
-            Text(text = "product description")
+            Text(text = product.name ?: "")
+            Text(text = product.description ?: "")
             Row(modifier = modifier) {
-                Text(text = "23.4$")
+                Text(text = "${product.price}$")
                 Button(
                     onClick = { /*TODO*/ },
                     modifier = modifier.size(48.dp)
