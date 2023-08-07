@@ -38,10 +38,6 @@ Groceries Store is a project to help people order grocery online. The main purpo
 - [MVVM Architecture](https://medium.com/swlh/understanding-mvvm-architecture-in-android-aa66f7e1a70b)
 
 
-## MAD Scorecard:
-
-![Caption](https://i.imgur.com/omCNl7x.png)
-
 ## Libraries
 - [Glide](https://github.com/bumptech/glide) - Loading images.
 - [Timber](https://github.com/JakeWharton/timber) - Logging.
