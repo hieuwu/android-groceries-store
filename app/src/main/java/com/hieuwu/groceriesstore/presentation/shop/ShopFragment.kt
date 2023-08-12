@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -23,6 +24,7 @@ import com.hieuwu.groceriesstore.databinding.FragmentShopBinding
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.ViewPagerAdapter
+import com.hieuwu.groceriesstore.presentation.orderhistory.OrderHistoryScreen
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -43,25 +45,30 @@ class ShopFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate<FragmentShopBinding>(
-            inflater, R.layout.fragment_shop, container, false
-        )
-
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-        nonActiveDot =
-            ContextCompat.getDrawable(requireContext(), R.drawable.non_active_dot_shape)!!
-        activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)!!
-        setObserver()
-        setUpRecyclerView()
-        drawSliderDotSymbols()
-        setEventListener()
-
-        val inflater = TransitionInflater.from(requireContext())
-        exitTransition = inflater.inflateTransition(R.transition.fade)
-
-
-        return binding.root
+        return ComposeView(requireContext()).apply {
+            setContent {
+                ShopScreen()
+            }
+        }
+//        binding = DataBindingUtil.inflate<FragmentShopBinding>(
+//            inflater, R.layout.fragment_shop, container, false
+//        )
+//
+//        binding.viewModel = viewModel
+//        binding.lifecycleOwner = this
+//        nonActiveDot =
+//            ContextCompat.getDrawable(requireContext(), R.drawable.non_active_dot_shape)!!
+//        activeDot = ContextCompat.getDrawable(requireContext(), R.drawable.active_dot_shape)!!
+//        setObserver()
+//        setUpRecyclerView()
+//        drawSliderDotSymbols()
+//        setEventListener()
+//
+//        val inflater = TransitionInflater.from(requireContext())
+//        exitTransition = inflater.inflateTransition(R.transition.fade)
+//
+//
+//        return binding.root
     }
 
     private fun drawSliderDotSymbols() {
