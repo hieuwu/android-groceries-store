@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +20,7 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 
 @Composable
 fun ProductCatalogue(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     products: List<ProductModel>,
     title: String,
     onAddToCartClick: (ProductModel) -> Unit
@@ -27,11 +28,14 @@ fun ProductCatalogue(
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
             modifier = modifier
-                .padding(12.dp)
+                .padding(horizontal = 12.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = title)
+            Text(
+                text = title,
+                style = MaterialTheme.typography.subtitle1
+            )
             Text(text = "Show all", modifier = modifier.clickable {
 
             })
@@ -40,7 +44,7 @@ fun ProductCatalogue(
         LazyRow(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
+                .padding(horizontal = 8.dp),
             contentPadding = PaddingValues(8.dp)
         ) {
             items(products) { item ->
