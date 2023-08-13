@@ -42,8 +42,7 @@ fun ProductItem(
     Card(
         modifier = modifier
             .width(180.dp)
-            .height(260.dp)
-            .padding(12.dp),
+            .height(260.dp),
         elevation = 2.dp
     ) {
         Column(
