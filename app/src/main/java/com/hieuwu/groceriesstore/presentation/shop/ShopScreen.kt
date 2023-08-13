@@ -23,7 +23,7 @@ fun ShopScreen(
             .fillMaxSize()
     ) {
         Carousel(modifier = modifier)
-        ProductCatalogue(modifier = modifier,
+        ProductCatalogue(
             products = products.value,
             title = "Best seller",
             onAddToCartClick = { product -> viewModel.addToCart(product) })
