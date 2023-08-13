@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -34,32 +36,51 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 @Composable
 fun ProductItem(
     modifier: Modifier = Modifier,
-    product: ProductModel
+    product: ProductModel,
+    onAddToCartClick: (ProductModel) -> Unit
 ) {
     Card(
         modifier = modifier
             .width(180.dp)
-            .padding(12.dp)
+            .height(260.dp)
+            .padding(12.dp),
+        elevation = 2.dp
     ) {
         Column(
             modifier = modifier
                 .fillMaxWidth()
+                .padding(12.dp),
         ) {
             GlideImage(
                 contentScale = ContentScale.Crop,
                 model = product.image,
                 contentDescription = null,
-                modifier = modifier.fillMaxWidth().height(80.dp)
+                modifier = modifier
+                    .fillMaxWidth()
+                    .height(80.dp)
             )
-            Text(modifier = modifier.fillMaxWidth(), text = product.name ?: "")
-            Text(modifier = modifier.fillMaxWidth(), text = product.description ?: "")
+            Text(
+                modifier = modifier.fillMaxWidth(), text = product.name ?: "",
+                maxLines = 1,
+                style = MaterialTheme.typography.subtitle1
+            )
+            Spacer(modifier = modifier.height(8.dp))
+            Text(
+                modifier = modifier.fillMaxWidth(),
+                text = product.description ?: "",
+                maxLines = 3,
+            )
+            Spacer(modifier = modifier.height(8.dp))
             Row(
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "${product.price}$")
+                Text(
+                    text = "${product.price}$",
+                    style = MaterialTheme.typography.h6
+                )
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { onAddToCartClick(product) },
                     modifier = Modifier.size(48.dp),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = colorResource(id = R.color.colorPrimary)
@@ -89,6 +110,7 @@ private fun ProductItemPreview(modifier: Modifier = Modifier) {
             name = "Groeceries",
             price = 2.4,
             image = "",
-        )
+        ),
+        onAddToCartClick = {}
     )
 }
