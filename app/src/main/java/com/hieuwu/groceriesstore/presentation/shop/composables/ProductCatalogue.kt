@@ -21,7 +21,8 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 fun ProductCatalogue(
     modifier: Modifier,
     products: List<ProductModel>,
-    title: String
+    title: String,
+    onAddToCartClick: (ProductModel) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
@@ -43,7 +44,10 @@ fun ProductCatalogue(
             contentPadding = PaddingValues(8.dp)
         ) {
             items(products) { item ->
-                ProductItem(product = item)
+                ProductItem(
+                    product = item,
+                    onAddToCartClick = onAddToCartClick
+                )
             }
         }
     }
@@ -83,6 +87,7 @@ fun ProductCataloguePreview(modifier: Modifier = Modifier) {
                 price = 2.6,
                 image = "",
             )
-        )
+        ),
+        onAddToCartClick = {}
     )
 }
