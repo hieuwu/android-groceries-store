@@ -17,8 +17,15 @@ fun ShopScreen(
     viewModel: ShopViewModel = hiltViewModel()
 ) {
     val products = viewModel.productList.collectAsState()
-    Column(modifier = modifier.padding(20.dp).fillMaxSize()) {
+    Column(
+        modifier = modifier
+            .padding(20.dp)
+            .fillMaxSize()
+    ) {
         Carousel(modifier = modifier)
-        ProductCatalogue(modifier = modifier, products = products.value, title = "Best seller")
+        ProductCatalogue(modifier = modifier,
+            products = products.value,
+            title = "Best seller",
+            onAddToCartClick = { product -> viewModel.addToCart(product) })
     }
 }
