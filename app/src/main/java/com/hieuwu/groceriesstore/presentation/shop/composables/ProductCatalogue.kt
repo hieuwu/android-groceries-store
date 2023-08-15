@@ -49,6 +49,7 @@ fun ProductCatalogue(
         ) {
             items(products) { item ->
                 ProductItem(
+                    modifier = modifier.padding(4.dp),
                     product = item,
                     onAddToCartClick = onAddToCartClick
                 )

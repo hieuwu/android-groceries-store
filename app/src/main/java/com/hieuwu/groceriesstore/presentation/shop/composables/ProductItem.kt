@@ -48,7 +48,7 @@ fun ProductItem(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .padding(4.dp),
         ) {
             GlideImage(
                 contentScale = ContentScale.Crop,
@@ -63,13 +63,13 @@ fun ProductItem(
                 maxLines = 1,
                 style = MaterialTheme.typography.subtitle1
             )
-            Spacer(modifier = modifier.height(8.dp))
+            Spacer(modifier = modifier.height(4.dp))
             Text(
                 modifier = modifier.fillMaxWidth(),
                 text = product.description ?: "",
-                maxLines = 3,
+                maxLines = 2,
             )
-            Spacer(modifier = modifier.height(8.dp))
+            Spacer(modifier = modifier.height(4.dp))
             Row(
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
