@@ -23,7 +23,8 @@ fun ProductCatalogue(
     modifier: Modifier = Modifier,
     products: List<ProductModel>,
     title: String,
-    onAddToCartClick: (ProductModel) -> Unit
+    onAddToCartClick: (ProductModel) -> Unit,
+    onNavigateToProductDetails: (ProductModel) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
@@ -51,7 +52,8 @@ fun ProductCatalogue(
                 ProductItem(
                     modifier = modifier.padding(4.dp),
                     product = item,
-                    onAddToCartClick = onAddToCartClick
+                    onAddToCartClick = onAddToCartClick,
+                    onNavigateToProductDetails = { onNavigateToProductDetails(item) }
                 )
             }
         }
@@ -93,6 +95,7 @@ fun ProductCataloguePreview(modifier: Modifier = Modifier) {
                 image = "",
             )
         ),
-        onAddToCartClick = {}
+        onAddToCartClick = {},
+        onNavigateToProductDetails = {}
     )
 }
