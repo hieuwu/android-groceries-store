@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -30,18 +31,20 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 
-@OptIn(ExperimentalGlideComposeApi::class)
+@OptIn(ExperimentalGlideComposeApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun ProductItem(
     modifier: Modifier = Modifier,
     product: ProductModel,
-    onAddToCartClick: (ProductModel) -> Unit
+    onAddToCartClick: (ProductModel) -> Unit,
+    onNavigateToProductDetails: (String) -> Unit
 ) {
     Card(
         modifier = modifier
             .width(180.dp)
             .height(260.dp),
-        elevation = 2.dp
+        elevation = 2.dp,
+        onClick = { onNavigateToProductDetails(product.id) }
     ) {
         Column(
             modifier = modifier
@@ -108,6 +111,7 @@ private fun ProductItemPreview(modifier: Modifier = Modifier) {
             price = 2.4,
             image = "",
         ),
-        onAddToCartClick = {}
+        onAddToCartClick = {},
+        onNavigateToProductDetails = {}
     )
 }
