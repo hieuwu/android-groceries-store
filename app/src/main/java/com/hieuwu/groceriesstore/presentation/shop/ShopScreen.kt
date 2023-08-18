@@ -16,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +35,8 @@ import com.hieuwu.groceriesstore.presentation.shop.composables.ProductCatalogue
 @Composable
 fun ShopScreen(
     modifier: Modifier = Modifier,
-    viewModel: ShopViewModel = hiltViewModel()
+    viewModel: ShopViewModel = hiltViewModel(),
+    navigateToProductDetails: (String) -> Unit
 ) {
     val products = viewModel.productList.collectAsState()
     Box(modifier = modifier.background(colorResource(id = R.color.colorPrimary))) {
@@ -56,6 +58,14 @@ fun ShopScreen(
                 .clip(RoundedCornerShape(topStartPercent = 8, topEndPercent = 8))
                 .background(Color.White)
         ) {
+
+            val selectedProduct = viewModel.navigateToSelectedProperty.collectAsState().value
+            LaunchedEffect(key1 = selectedProduct) {
+                selectedProduct?.let {
+                    navigateToProductDetails(selectedProduct.id)
+                    viewModel.displayProductDetailsComplete()
+                }
+            }
             Image(
                 modifier = modifier
                     .padding(top = 8.dp)
@@ -72,19 +82,22 @@ fun ShopScreen(
             ProductCatalogue(
                 products = products.value,
                 title = "Best seller",
-                onAddToCartClick = { product -> viewModel.addToCart(product) }
+                onAddToCartClick = { product -> viewModel.addToCart(product) },
+                onNavigateToProductDetails = { id -> viewModel.displayProductDetails(id) }
             )
             Spacer(modifier = modifier.height(12.dp))
             ProductCatalogue(
                 products = products.value,
                 title = "Hot deal",
-                onAddToCartClick = { product -> viewModel.addToCart(product) }
+                onAddToCartClick = { product -> viewModel.addToCart(product) },
+                onNavigateToProductDetails = { id -> viewModel.displayProductDetails(id) }
             )
             Spacer(modifier = modifier.height(12.dp))
             ProductCatalogue(
                 products = products.value,
                 title = "Exclusive offer",
-                onAddToCartClick = { product -> viewModel.addToCart(product) }
+                onAddToCartClick = { product -> viewModel.addToCart(product) },
+                onNavigateToProductDetails = { id -> viewModel.displayProductDetails(id) }
             )
         }
     }
