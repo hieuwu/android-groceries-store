@@ -41,7 +41,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun ProductDetailScreen(
     modifier: Modifier = Modifier,
-    viewModel: ProductDetailViewModel = hiltViewModel()
+    viewModel: ProductDetailViewModel = hiltViewModel(),
+    onNavigateBack: () -> Unit
 ) {
     val product = viewModel.product.collectAsState().value
     val snackbarHostState = remember { SnackbarHostState() }
@@ -56,9 +57,7 @@ fun ProductDetailScreen(
                 backgroundColor = colorResource(id = R.color.colorPrimary),
                 contentColor = Color.White,
                 navigationIcon = {
-                    IconButton(onClick = {
-
-                    }) {
+                    IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.Filled.NavigateBefore,
                             contentDescription = null
@@ -156,5 +155,6 @@ fun ProductDetailScreen(
 @Composable
 fun ProductDetailScreenPreview() {
     ProductDetailScreen(
+        onNavigateBack = {}
     )
 }
