@@ -49,20 +49,24 @@ class ProductDetailViewModel @Inject constructor(
             notifyPropertyChanged(BR.qty)
         }
 
+    private val _quantity = MutableStateFlow(1)
+    val quantity: StateFlow<Int>
+        get() = _quantity
+
     private val _showSnackbarEvent = MutableStateFlow(false)
     val showSnackBarEvent: StateFlow<Boolean>
         get() = _showSnackbarEvent.asStateFlow()
 
     fun addToCart() {
         viewModelScope.launch {
-            val subtotal = product.value?.price?.times(qty) ?: 0.0
+            val subtotal = product.value?.price?.times(_quantity.value) ?: 0.0
             if (currentCart.value != null) {
                 // Add to cart
                 val cartId = currentCart.value!!.id
                 val lineItem = LineItem(
                     productId = product.value!!.id,
                     orderId = cartId,
-                    quantity = _qty,
+                    quantity = _quantity.value,
                     subtotal = subtotal
                 )
                 orderRepository.addLineItem(lineItem)
@@ -77,7 +81,7 @@ class ProductDetailViewModel @Inject constructor(
                 val lineItem = LineItem(
                     productId = product.value!!.id,
                     orderId = id,
-                    quantity = _qty,
+                    quantity = _quantity.value,
                     subtotal = subtotal
                 )
                 orderRepository.addLineItem(lineItem)
@@ -87,12 +91,12 @@ class ProductDetailViewModel @Inject constructor(
     }
 
     fun increaseQty() {
-        qty++
+        _quantity.value++
     }
 
     fun decreaseQty() {
-        if (qty <= 1) return
-        qty--
+        if (_quantity.value <= 1) return
+        _quantity.value--
     }
 
     fun doneShowingSnackbar() {
