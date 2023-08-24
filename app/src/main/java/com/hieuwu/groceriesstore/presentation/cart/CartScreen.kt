@@ -50,7 +50,7 @@ fun CartScreen(
                 CartItem(
                     onIncrease = { viewModel.increaseQty(item) },
                     onDecrease = { viewModel.decreaseQty(item) },
-                    onRemove = { /*TODO*/ },
+                    onRemove = { viewModel.removeItem(item) },
                     lineItem = item
                 )
             }
