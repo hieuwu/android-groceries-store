@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -18,6 +21,7 @@ import com.hieuwu.groceriesstore.databinding.FragmentCartBinding
 import com.hieuwu.groceriesstore.presentation.adapters.LineListItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.SwipeToDeleteCallback
 import com.hieuwu.groceriesstore.presentation.shop.ShopFragmentDirections
+import com.hieuwu.groceriesstore.presentation.shop.ShopScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,6 +35,14 @@ class CartFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return ComposeView(requireContext()).apply {
+            setContent {
+                CartScreen(
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+
         binding = DataBindingUtil.inflate<FragmentCartBinding>(
             inflater, R.layout.fragment_cart, container, false
         )
