@@ -41,6 +41,12 @@ class ProductDetailViewModel @Inject constructor(
     val quantity: StateFlow<Int>
         get() = _quantity
 
+    init {
+        viewModelScope.launch {
+            currentCart.collect{}
+        }
+    }
+
     fun addToCart() {
         viewModelScope.launch {
             val subtotal = product.value?.price?.times(_quantity.value) ?: 0.0
