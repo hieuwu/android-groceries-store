@@ -30,14 +30,18 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.hieuwu.groceriesstore.R
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ProductDetailScreen(
     modifier: Modifier = Modifier,
@@ -72,12 +76,13 @@ fun ProductDetailScreen(
                 .padding(paddingValues)
                 .padding(horizontal = 20.dp)
         ) {
-            Image(
+            GlideImage(
+                contentScale = ContentScale.Crop,
+                model = product?.image,
+                contentDescription = null,
                 modifier = modifier
                     .fillMaxWidth()
-                    .height(230.dp),
-                painter = painterResource(id = R.drawable.banner),
-                contentDescription = null
+                    .height(230.dp)
             )
             Row(
                 modifier = modifier.fillMaxWidth(),
