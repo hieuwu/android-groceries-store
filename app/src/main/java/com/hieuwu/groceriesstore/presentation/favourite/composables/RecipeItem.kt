@@ -1,6 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.favourite.composables
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,18 +29,16 @@ fun RecipeItem(
             .padding(8.dp)
     ) {
         Column(
-            modifier = modifier.fillMaxWidth()
+            modifier = modifier.fillMaxSize().padding(16.dp)
         ) {
             GlideImage(
                 contentScale = ContentScale.Crop,
                 model = recipe.image,
                 contentDescription = null,
-                modifier = modifier
-                    .fillMaxWidth()
-                    .height(80.dp)
+                modifier = modifier.weight(1f)
             )
             Text(
-                modifier = modifier,
+                modifier = modifier.padding(vertical = 6.dp),
                 text = recipe.name,
                 style = MaterialTheme.typography.labelLarge
             )
