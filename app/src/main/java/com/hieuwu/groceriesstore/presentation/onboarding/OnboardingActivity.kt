@@ -28,15 +28,6 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
-
-        sharedPreferences =
-            getSharedPreferences(getString(R.string.sync_status_pref_name), Context.MODE_PRIVATE)
-
-        val isSyncedSuccessful =
-            sharedPreferences.getBoolean(getString(R.string.sync_success), false)
-
-        if (isSyncedSuccessful) navigateToMainInitialScreen()
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -58,10 +49,6 @@ class OnboardingActivity : AppCompatActivity() {
                 .flowWithLifecycle(lifecycle)
                 .collect {
                     if (it) {
-                        with(sharedPreferences.edit()) {
-                            putBoolean(getString(R.string.sync_success), true)
-                            apply()
-                        }
                         binding.getStartedButton.isEnabled = true
                     }
                 }
@@ -79,8 +66,7 @@ class OnboardingActivity : AppCompatActivity() {
         })
 
         binding.getStartedButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            navigateToMainInitialScreen()
         }
     }
 }
