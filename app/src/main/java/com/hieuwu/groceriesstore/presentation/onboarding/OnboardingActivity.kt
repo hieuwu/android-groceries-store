@@ -1,14 +1,12 @@
 package com.hieuwu.groceriesstore.presentation.onboarding
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.hieuwu.groceriesstore.MainActivity
@@ -23,7 +21,6 @@ class OnboardingActivity : AppCompatActivity() {
     lateinit var binding: ActivityOnboardingBinding
 
     private val viewModel: OnboardingViewModel by viewModels()
-    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
