@@ -1,25 +1,22 @@
 package com.hieuwu.groceriesstore.presentation.productdetail
 
-import androidx.databinding.Bindable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
-import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.data.repository.OrderRepository
+import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.UUID
+import java.util.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
@@ -40,29 +37,26 @@ class ProductDetailViewModel @Inject constructor(
         orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
-    private var _qty: Int = 1
-    var qty: Int
-        @Bindable
-        get() = _qty
-        set(value) {
-            _qty = value
-            notifyPropertyChanged(BR.qty)
-        }
+    private val _quantity = MutableStateFlow(1)
+    val quantity: StateFlow<Int>
+        get() = _quantity
 
-    private val _showSnackbarEvent = MutableStateFlow(false)
-    val showSnackBarEvent: StateFlow<Boolean>
-        get() = _showSnackbarEvent.asStateFlow()
+    init {
+        viewModelScope.launch {
+            currentCart.collect{}
+        }
+    }
 
     fun addToCart() {
         viewModelScope.launch {
-            val subtotal = product.value?.price?.times(qty) ?: 0.0
+            val subtotal = product.value?.price?.times(_quantity.value) ?: 0.0
             if (currentCart.value != null) {
                 // Add to cart
                 val cartId = currentCart.value!!.id
                 val lineItem = LineItem(
                     productId = product.value!!.id,
                     orderId = cartId,
-                    quantity = _qty,
+                    quantity = _quantity.value,
                     subtotal = subtotal
                 )
                 orderRepository.addLineItem(lineItem)
@@ -77,25 +71,21 @@ class ProductDetailViewModel @Inject constructor(
                 val lineItem = LineItem(
                     productId = product.value!!.id,
                     orderId = id,
-                    quantity = _qty,
+                    quantity = _quantity.value,
                     subtotal = subtotal
                 )
                 orderRepository.addLineItem(lineItem)
             }
-            _showSnackbarEvent.value = true
         }
     }
 
     fun increaseQty() {
-        qty++
+        _quantity.value++
     }
 
     fun decreaseQty() {
-        if (qty <= 1) return
-        qty--
+        if (_quantity.value <= 1) return
+        _quantity.value--
     }
 
-    fun doneShowingSnackbar() {
-        _showSnackbarEvent.value = false
-    }
 }

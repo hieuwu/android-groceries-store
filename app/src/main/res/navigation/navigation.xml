@@ -72,8 +72,7 @@
     <fragment
         android:id="@+id/shopFragment"
         android:name="com.hieuwu.groceriesstore.presentation.shop.ShopFragment"
-        android:label="fragment_shop"
-        tools:layout="@layout/fragment_shop">
+        android:label="fragment_shop">
         <action
             android:id="@+id/action_shopFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
@@ -94,8 +93,7 @@
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.hieuwu.groceriesstore.presentation.productdetail.ProductDetailFragment"
-        android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail">
+        android:label="fragment_product_detail">
         <argument
             android:name="id"
             app:argType="string" />

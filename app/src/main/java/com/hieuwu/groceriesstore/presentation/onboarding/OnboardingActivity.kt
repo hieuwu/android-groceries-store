@@ -1,14 +1,12 @@
 package com.hieuwu.groceriesstore.presentation.onboarding
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.hieuwu.groceriesstore.MainActivity
@@ -23,20 +21,10 @@ class OnboardingActivity : AppCompatActivity() {
     lateinit var binding: ActivityOnboardingBinding
 
     private val viewModel: OnboardingViewModel by viewModels()
-    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
-
-        sharedPreferences =
-            getSharedPreferences(getString(R.string.sync_status_pref_name), Context.MODE_PRIVATE)
-
-        val isSyncedSuccessful =
-            sharedPreferences.getBoolean(getString(R.string.sync_success), false)
-
-        if (isSyncedSuccessful) navigateToMainInitialScreen()
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -58,10 +46,6 @@ class OnboardingActivity : AppCompatActivity() {
                 .flowWithLifecycle(lifecycle)
                 .collect {
                     if (it) {
-                        with(sharedPreferences.edit()) {
-                            putBoolean(getString(R.string.sync_success), true)
-                            apply()
-                        }
                         binding.getStartedButton.isEnabled = true
                     }
                 }
@@ -79,8 +63,7 @@ class OnboardingActivity : AppCompatActivity() {
         })
 
         binding.getStartedButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            navigateToMainInitialScreen()
         }
     }
 }
