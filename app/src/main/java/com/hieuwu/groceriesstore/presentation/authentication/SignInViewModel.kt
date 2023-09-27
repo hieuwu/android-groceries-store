@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.authentication
 
+import androidx.compose.runtime.MutableState
 import androidx.databinding.Bindable
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.BR
@@ -7,7 +8,9 @@ import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
 import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,34 +25,30 @@ class SignInViewModel @Inject constructor(
     private val _showAccountNotExistedError = MutableSharedFlow<Boolean>()
     val showAccountNotExistedError: SharedFlow<Boolean> = _showAccountNotExistedError
 
-    private var _email: String? = null
-    var email: String?
-        @Bindable
-        get() {
-            return _email
-        }
-        set(value) {
-            _email = value
-            notifyPropertyChanged(BR.email)
-        }
 
-    private var _password: String? = null
-    var password: String?
-        @Bindable
-        get() {
-            return _password
-        }
-        set(value) {
-            _password = value
-            notifyPropertyChanged(BR.password)
-        }
+    private val _email = MutableStateFlow("")
+    val email: StateFlow<String> = _email
 
+    private val _password = MutableStateFlow("")
+    val password: StateFlow<String> = _password
+
+    fun onEmailChange(newEmail: String) {
+        _email.value = newEmail
+    }
+
+    fun onRemoveText() {
+        _email.value = ""
+    }
+
+    fun onPasswordChange(newPassword: String) {
+        _password.value = newPassword
+    }
     fun signIn() {
         viewModelScope.launch {
             val res = signInUseCase.execute(
                 SignInUseCase.Input(
-                    email = _email!!,
-                    password = _password!!
+                    email = _email.value,
+                    password = _password.value
                 )
             )
 
