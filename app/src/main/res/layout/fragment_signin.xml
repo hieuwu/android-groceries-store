@@ -65,8 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="monospace"
-                        android:hint="@string/email"
-                        android:text="@={signInViewModel.email}"/>
+                        android:hint="@string/email"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,7 +92,7 @@
                         android:fontFamily="monospace"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:text="@={signInViewModel.password}"/>
+                     />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
