@@ -1,11 +1,8 @@
 package com.hieuwu.groceriesstore.presentation.authentication
 
-import androidx.compose.runtime.MutableState
-import androidx.databinding.Bindable
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
-import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase
-) : ObservableViewModel() {
+) : ViewModel(){
 
     private val _isSignUpSuccessful = MutableSharedFlow<Boolean?>()
     val isSignUpSuccessful: SharedFlow<Boolean?> = _isSignUpSuccessful
