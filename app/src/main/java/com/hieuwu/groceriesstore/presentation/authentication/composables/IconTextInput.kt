@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.R
@@ -27,10 +29,13 @@ fun IconTextInput(
     modifier: Modifier = Modifier,
     value: String,
     placeholder: String,
+    type: KeyboardType = KeyboardType.Email,
+    shouldShowTrailingIcon: Boolean = true,
     onValueChange: (String) -> Unit,
     onTrailingIconClick: () -> Unit
 ) {
     TextField(
+        keyboardOptions = KeyboardOptions(keyboardType = type),
         modifier = modifier
             .fillMaxWidth()
             .border(
