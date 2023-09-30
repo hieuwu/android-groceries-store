@@ -3,6 +3,7 @@ package com.hieuwu.groceriesstore.presentation.authentication.composables
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -30,14 +31,16 @@ fun IconTextInput(
     onTrailingIconClick: () -> Unit
 ) {
     TextField(
-        modifier = modifier.border(
-            border = BorderStroke(
-                width = 1.dp,
-                color = colorResource(id = R.color.colorPrimary),
+        modifier = modifier
+            .fillMaxWidth()
+            .border(
+                border = BorderStroke(
+                    width = 1.dp,
+                    color = colorResource(id = R.color.colorPrimary),
 
-                ),
-            shape = RoundedCornerShape(6.dp)
-        ),
+                    ),
+                shape = RoundedCornerShape(6.dp)
+            ),
         value = value,
         onValueChange = { text -> onValueChange(text) },
         leadingIcon = {
