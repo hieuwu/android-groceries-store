@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -16,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Backspace
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.HideSource
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.RemoveRedEye
 import androidx.compose.material3.ButtonDefaults
@@ -23,11 +25,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,11 +44,15 @@ fun SignInScreen(
     modifier: Modifier = Modifier,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        contentAlignment = Alignment.TopCenter
+    ) {
         Image(
-            modifier = modifier
-                .fillMaxWidth()
-                .weight(1.0f),
+            modifier = Modifier
+                .fillMaxWidth(),
             painter = painterResource(id = R.drawable.login_background), contentDescription = null
         )
 
@@ -52,11 +61,12 @@ fun SignInScreen(
 
         Column(
             modifier = Modifier
-                .padding(horizontal = 20.dp)
+                .padding(top = 320.dp, start = 20.dp, end = 20.dp)
                 .fillMaxWidth()
-                .fillMaxHeight()
-                .weight(1.0f)
-                .background(color = Color.White, RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
+                .background(
+                    color = Color.White,
+                    shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp)
+                )
         ) {
             Text(
                 text = "Sign In",
@@ -76,15 +86,20 @@ fun SignInScreen(
                 },
             )
             Spacer(modifier = Modifier.height(12.dp))
+            val showPassword = remember { mutableStateOf(false) }
             IconTextInput(
                 leadingIcon = Icons.Filled.Lock,
-                trailingIcon = Icons.Filled.RemoveRedEye,
+                trailingIcon = if (showPassword.value) Icons.Filled.RemoveRedEye else Icons.Filled.HideSource,
                 value = password.value,
                 placeholder = "Password",
+                type =KeyboardType.Password,
+                shouldShowTrailingIcon = showPassword.value,
                 onValueChange = {
                     viewModel.onPasswordChange(it)
                 },
-                onTrailingIconClick = {},
+                onTrailingIconClick = {
+                    showPassword.value = !showPassword.value
+                },
             )
             Spacer(modifier = Modifier.height(12.dp))
             Button(
