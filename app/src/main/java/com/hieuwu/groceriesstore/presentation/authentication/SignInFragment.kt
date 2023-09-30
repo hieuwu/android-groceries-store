@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,57 +25,49 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
 
-    private lateinit var binding: FragmentSigninBinding
-
-    private val viewModel: SignInViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate<FragmentSigninBinding>(
-            inflater, R.layout.fragment_signin, container, false
-        )
-
-        binding.signInViewModel = viewModel
-        binding.lifecycleOwner = this
-
-        setObserver()
-        setEventListener()
-
-        return binding.root
-    }
-
-    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun setObserver() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.showAccountNotExistedError.collect {
-                        showMessageSnackBar("Account is not existed")
-                    }
-                }
-
-                launch {
-                    viewModel.isSignUpSuccessful.collect {
-                        if (it == true) {
-                            activity?.finish()
-                        }
-                    }
-                }
+        return ComposeView(requireContext()).apply {
+            setContent {
+                SignInScreen(
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }
-
-    private fun setEventListener() {
-        with(binding) {
-            signUpTextview.setOnClickListener {
-                view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
-            }
-            signinButton.setOnClickListener {
-                viewModel.signIn()
-            }
-        }
-    }
+//
+//    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+//    private fun setObserver() {
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                launch {
+//                    viewModel.showAccountNotExistedError.collect {
+//                        showMessageSnackBar("Account is not existed")
+//                    }
+//                }
+//
+//                launch {
+//                    viewModel.isSignUpSuccessful.collect {
+//                        if (it == true) {
+//                            activity?.finish()
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    private fun setEventListener() {
+//        with(binding) {
+//            signUpTextview.setOnClickListener {
+//                view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpFragment)
+//            }
+//            signinButton.setOnClickListener {
+//                viewModel.signIn()
+//            }
+//        }
+//    }
 }
