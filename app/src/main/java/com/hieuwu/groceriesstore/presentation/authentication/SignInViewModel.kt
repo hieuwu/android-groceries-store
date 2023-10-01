@@ -60,7 +60,6 @@ class SignInViewModel @Inject constructor(
                     _isSignUpSuccessful.emit(Unit)
                 }
             }
-
         }
     }
 }
