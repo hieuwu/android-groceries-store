@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -66,13 +67,13 @@ fun SignInScreen(
                 .background(
                     color = Color.White,
                     shape = RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp)
-                )
+                ),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
                 text = "Sign In",
                 style = MaterialTheme.typography.headlineMedium
             )
-            Spacer(modifier = Modifier.height(12.dp))
             IconTextInput(
                 leadingIcon = Icons.Filled.Email,
                 trailingIcon = Icons.Filled.Backspace,
@@ -85,7 +86,6 @@ fun SignInScreen(
                     viewModel.onRemoveText()
                 },
             )
-            Spacer(modifier = Modifier.height(12.dp))
             val showPassword = remember { mutableStateOf(false) }
             IconTextInput(
                 leadingIcon = Icons.Filled.Lock,
@@ -101,11 +101,9 @@ fun SignInScreen(
                     showPassword.value = !showPassword.value
                 },
             )
-            Spacer(modifier = Modifier.height(12.dp))
             Button(
                 modifier = Modifier.fillMaxWidth(), onClick = { /*TODO*/ },
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.colorPrimary)),
-                border = BorderStroke(width = 3.dp, color = Color.Transparent)
             ) {
                 Text("Sign in")
             }
