@@ -76,4 +76,6 @@
     <string name="promotion_sent_notification_channel_name" translatable="true">Promotion sent</string>
     <string name="notification_title">Groceries Store</string>
     <string name="delete">Delete</string>
+    <string name="welcome_to_our_store">Welcome to our store</string>
+    <string name="get_your_gorceries_in_as_fast_as_one_hour">Get your gorceries in as fast as one hour</string>
 </resources>
