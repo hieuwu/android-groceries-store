@@ -62,6 +62,7 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "
 kotlin-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinCoroutinePlayServicesVersion" }
 legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacySupportVersion" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottieVersion" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieVersion" }
 material-components = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiVersion" }
 navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationVersion" }

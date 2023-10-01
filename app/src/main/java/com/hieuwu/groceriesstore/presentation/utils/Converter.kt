@@ -20,9 +20,7 @@ object Converter {
 
     @InverseMethod("stringToEmpTy")
     @JvmStatic
-    fun stringToEmpTy(
-        value: String?
-    ): String? {
+    fun stringToEmpTy(value: String?): String {
         return if (value.isNullOrEmpty()) return "Not signed in" else value
     }
 
