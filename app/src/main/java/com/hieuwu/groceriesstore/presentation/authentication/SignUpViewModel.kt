@@ -1,55 +1,63 @@
 package com.hieuwu.groceriesstore.presentation.authentication
 
-import androidx.databinding.Bindable
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.BR
 import com.hieuwu.groceriesstore.data.repository.UserRepository
-import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(private val userRepository: UserRepository) : ObservableViewModel() {
+class SignUpViewModel @Inject constructor(private val userRepository: UserRepository) :
+    ViewModel() {
 
-    private var _email: String? = null
-    var email: String?
-        @Bindable
-        get() = _email
-        set(value) {
-            _email = value
-            notifyPropertyChanged(BR.email)
-        }
+    private var _email = MutableStateFlow("")
+    var email: StateFlow<String> = _email
 
-    private var _password: String? = null
-    var password: String?
-        @Bindable
-        get() = _password
-        set(value) {
-            _password = value
-            notifyPropertyChanged(BR.password)
-        }
+    private var _password = MutableStateFlow("")
+    var password: StateFlow<String> = _password
 
-    private var _name: String? = null
-    var name: String?
-        @Bindable
-        get() = _name
-        set(value) {
-            _name = value
-            notifyPropertyChanged(BR.name)
-        }
+    private var _name = MutableStateFlow("")
+    var name: StateFlow<String> = _name
 
-    // Declare check variable as live data, set it when create success fully
-    // In fragment observe it
-    private val _isSignUpSuccessful = MutableLiveData<Boolean?>()
-    val isSignUpSuccessful: LiveData<Boolean?>
-        get() = _isSignUpSuccessful
+    private val _showSignUpSuccessMessage = MutableSharedFlow<Unit>()
+    val showSignUpSuccessMessage: SharedFlow<Unit> = _showSignUpSuccessMessage
+
+    private val _showSignUpErrorMessage = MutableSharedFlow<Unit>()
+    val showSignUpErrorMessage: SharedFlow<Unit> = _showSignUpErrorMessage
+
+    fun onEmailChange(text: String) {
+        _email.value = text
+    }
+
+    fun onEmailRemove() {
+        _email.value = ""
+    }
+
+    fun onNameRemove() {
+        _name.value = ""
+    }
+
+    fun onPasswordChange(text: String) {
+        _password.value = text
+    }
+
+    fun onNameChange(text: String) {
+        _name.value = text
+    }
 
     fun createAccount() {
         viewModelScope.launch {
-            _isSignUpSuccessful.value = userRepository.createAccount(_email!!, _password!!, _name!!)
+            val result = userRepository.createAccount(_email.value, _password.value, _name.value)
+            if (result) {
+                _showSignUpSuccessMessage.emit(Unit)
+            } else {
+                _showSignUpErrorMessage.emit(Unit)
+            }
         }
     }
 }
