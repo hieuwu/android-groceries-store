@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.authentication
+package com.hieuwu.groceriesstore.presentation.authentication.signup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

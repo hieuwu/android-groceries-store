@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.authentication
+package com.hieuwu.groceriesstore.presentation.authentication.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
