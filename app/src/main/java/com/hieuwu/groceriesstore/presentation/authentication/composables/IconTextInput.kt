@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.R
@@ -30,7 +31,7 @@ fun IconTextInput(
     value: String,
     placeholder: String,
     type: KeyboardType = KeyboardType.Email,
-    shouldShowTrailingIcon: Boolean = true,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChange: (String) -> Unit,
     onTrailingIconClick: () -> Unit
 ) {
@@ -48,6 +49,7 @@ fun IconTextInput(
             ),
         value = value,
         onValueChange = { text -> onValueChange(text) },
+        visualTransformation = visualTransformation,
         leadingIcon = {
             Icon(
                 imageVector = leadingIcon,
