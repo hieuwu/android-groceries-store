@@ -18,6 +18,7 @@ import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -44,6 +45,7 @@ import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTex
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,
+    onSignUpClick: () -> Unit,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -74,7 +76,8 @@ fun SignInScreen(
             Image(
                 modifier = Modifier
                     .fillMaxWidth(),
-                painter = painterResource(id = R.drawable.login_background), contentDescription = null
+                painter = painterResource(id = R.drawable.login_background),
+                contentDescription = null
             )
 
             val email = viewModel.email.collectAsState()
@@ -112,7 +115,7 @@ fun SignInScreen(
                     trailingIcon = if (showPassword.value) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
                     value = password.value,
                     placeholder = "Password",
-                    type =KeyboardType.Password,
+                    type = KeyboardType.Password,
                     visualTransformation = if (showPassword.value) VisualTransformation.None else PasswordVisualTransformation(),
                     onValueChange = {
                         viewModel.onPasswordChange(it)
@@ -122,10 +125,20 @@ fun SignInScreen(
                     },
                 )
                 Button(
-                    modifier = Modifier.fillMaxWidth(), onClick = { viewModel.signIn() },
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { viewModel.signIn() },
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.colorPrimary)),
                 ) {
                     Text("Sign in")
+                }
+                OutlinedButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onSignUpClick,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = colorResource(id = R.color.colorPrimary)),
+                ) {
+                    Text("Sign up")
                 }
             }
         }
@@ -136,5 +149,5 @@ fun SignInScreen(
 @Preview
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen()
+    SignInScreen(onSignUpClick = {})
 }
