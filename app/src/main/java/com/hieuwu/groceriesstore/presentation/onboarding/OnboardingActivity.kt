@@ -2,35 +2,25 @@ package com.hieuwu.groceriesstore.presentation.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.hieuwu.groceriesstore.MainActivity
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.databinding.ActivityOnboardingBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
-    lateinit var binding: ActivityOnboardingBinding
-
-    private val viewModel: OnboardingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
+        setContent {
+            OnboardingScreen(navigateToMainInitialScreen = ::navigateToMainInitialScreen)
+        }
         setEvenListener()
-        setObserver()
     }
 
     private fun navigateToMainInitialScreen() {
@@ -38,18 +28,6 @@ class OnboardingActivity : AppCompatActivity() {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         startActivity(intent)
-    }
-
-    private fun setObserver() {
-        lifecycleScope.launch {
-            viewModel.isSyncedSuccessful
-                .flowWithLifecycle(lifecycle)
-                .collect {
-                    if (it) {
-                        binding.getStartedButton.isEnabled = true
-                    }
-                }
-        }
     }
 
     private fun setEvenListener() {
@@ -61,9 +39,5 @@ class OnboardingActivity : AppCompatActivity() {
             val token = task.result
             Timber.d(token)
         })
-
-        binding.getStartedButton.setOnClickListener {
-            navigateToMainInitialScreen()
-        }
     }
 }
