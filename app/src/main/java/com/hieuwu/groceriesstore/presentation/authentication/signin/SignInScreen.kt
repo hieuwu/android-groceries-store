@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.authentication
+package com.hieuwu.groceriesstore.presentation.authentication.signin
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
