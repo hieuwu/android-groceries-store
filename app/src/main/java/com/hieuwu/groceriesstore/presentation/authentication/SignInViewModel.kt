@@ -14,14 +14,13 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase
-) : ViewModel(){
+) : ViewModel() {
 
-    private val _isSignUpSuccessful = MutableSharedFlow<Boolean?>()
-    val isSignUpSuccessful: SharedFlow<Boolean?> = _isSignUpSuccessful
+    private val _isSignUpSuccessful = MutableSharedFlow<Unit>()
+    val isSignUpSuccessful: SharedFlow<Unit> = _isSignUpSuccessful
 
-    private val _showAccountNotExistedError = MutableSharedFlow<Boolean>()
-    val showAccountNotExistedError: SharedFlow<Boolean> = _showAccountNotExistedError
-
+    private val _showAccountNotExistedError = MutableSharedFlow<Unit>()
+    val showAccountNotExistedError: SharedFlow<Unit> = _showAccountNotExistedError
 
     private val _email = MutableStateFlow("")
     val email: StateFlow<String> = _email
@@ -40,25 +39,25 @@ class SignInViewModel @Inject constructor(
     fun onPasswordChange(newPassword: String) {
         _password.value = newPassword
     }
+
     fun signIn() {
         viewModelScope.launch {
-            val res = signInUseCase.execute(
+            when (signInUseCase.execute(
                 SignInUseCase.Input(
                     email = _email.value,
                     password = _password.value
                 )
-            )
-
-            when (res) {
+            )) {
                 is SignInUseCase.Output.Error -> {
                     //TODO Handle show general error
                 }
+
                 is SignInUseCase.Output.AccountNotExistedError -> {
-                    _showAccountNotExistedError.emit(true)
-                    _isSignUpSuccessful.emit(false)
+                    _showAccountNotExistedError.emit(Unit)
                 }
+
                 else -> {
-                    _isSignUpSuccessful.emit(true)
+                    _isSignUpSuccessful.emit(Unit)
                 }
             }
 
