@@ -1,12 +1,13 @@
 package com.hieuwu.groceriesstore.presentation.account.widgets
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -66,7 +67,8 @@ fun AccountContentSignedInView(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(top = dimensionResource(id = R.dimen.margin_small)),
+                .padding(top = dimensionResource(id = R.dimen.margin_small))
+                .clickable(onClick = action.second),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -76,7 +78,7 @@ fun AccountContentSignedInView(
                 color = Color(0xFF808080),
                 maxLines = 1
             )
-            Image(
+            Icon(
                 modifier = Modifier.size(dimensionResource(id = R.dimen.icon_small)),
                 painter = painterResource(id = R.drawable.ic_baseline_chevron_right_24),
                 contentDescription = null,
