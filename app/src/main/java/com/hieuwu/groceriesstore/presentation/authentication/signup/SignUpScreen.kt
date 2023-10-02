@@ -77,6 +77,7 @@ fun SignUpScreen(modifier: Modifier = Modifier,
                 contentDescription = null
             )
 
+            val name = viewModel.name.collectAsState()
             val email = viewModel.email.collectAsState()
             val password = viewModel.password.collectAsState()
 
@@ -97,7 +98,7 @@ fun SignUpScreen(modifier: Modifier = Modifier,
                 IconTextInput(
                     leadingIcon = Icons.Filled.Person,
                     trailingIcon = Icons.Filled.Backspace,
-                    value = email.value,
+                    value = name.value,
                     placeholder = "Name",
                     onValueChange = {
                         viewModel.onNameChange(it)
