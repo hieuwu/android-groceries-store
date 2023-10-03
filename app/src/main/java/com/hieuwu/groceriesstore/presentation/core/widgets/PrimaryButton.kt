@@ -28,7 +28,7 @@ fun PrimaryButton(
         onClick = onClick,
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = colorResource(id = R.color.colorPrimaryDark),
+            containerColor = colorResource(id = R.color.colorPrimary),
             disabledContainerColor = colorResource(id = R.color.light_gray),
             contentColor = Color.White,
         ),

@@ -82,6 +82,7 @@ dependencies {
     implementation libs.glide
     annotationProcessor libs.glide.compiler
     implementation libs.lottie
+    implementation libs.lottie.compose
 
     implementation libs.bundles.retrofit
     implementation libs.gson
