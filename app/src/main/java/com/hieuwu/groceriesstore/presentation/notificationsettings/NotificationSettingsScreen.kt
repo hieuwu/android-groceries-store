@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -40,15 +41,15 @@ fun NotificationSettingsScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "Notifications", color = Color.White) },
+                title = { Text(text = "Notifications", color = Color.White, fontWeight = FontWeight.Medium) },
                 actions = {
                     ClickableText(
                         text = AnnotatedString("SAVE"),
-                        style = TextStyle(color = Color.White),
+                        style = TextStyle(color = Color.White, fontWeight = FontWeight.Medium),
                         onClick = {
                             viewModel.updateNotificationSettings()
                         },
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 },
                 navigationIcon = {
