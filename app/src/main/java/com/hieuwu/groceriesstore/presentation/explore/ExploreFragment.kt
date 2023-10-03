@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatImageView
@@ -20,7 +21,6 @@ import com.hieuwu.groceriesstore.databinding.FragmentExploreBinding
 import com.hieuwu.groceriesstore.presentation.adapters.CategoryItemAdapter
 import com.hieuwu.groceriesstore.presentation.adapters.GridListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -36,7 +36,7 @@ class ExploreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate<FragmentExploreBinding>(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_explore, container, false
         )
         binding.viewModel = viewModel
@@ -93,8 +93,8 @@ class ExploreFragment : Fragment() {
             if (it.isEmpty()) {
                 Timber.d("Empty")
             } else {
-                binding.productRecyclerview.visibility = View.VISIBLE
-                binding.animationLayout.visibility = View.GONE
+                binding.productRecyclerview.visibility = VISIBLE
+                binding.animationLayout.visibility = GONE
                 Timber.d("Has item")
             }
         }
@@ -130,14 +130,14 @@ class ExploreFragment : Fragment() {
             Timber.d("Search focused")
             // Hide category list
             // Show search result list with empty list product
-            binding.categoryRecyclerview.visibility = View.GONE
+            binding.categoryRecyclerview.visibility = GONE
         }
 
         binding.searchView.setOnQueryTextFocusChangeListener { _, _ ->
             Timber.d("Search focused")
             // Hide category list
             // Show search result list with empty list product
-            binding.categoryRecyclerview.visibility = View.GONE
+            binding.categoryRecyclerview.visibility = GONE
         }
 
         val closeSearchButton =
@@ -149,9 +149,9 @@ class ExploreFragment : Fragment() {
             // Show category list
             // Clear search result
             // Hide search result
-            binding.productRecyclerview.visibility = View.GONE
-            binding.categoryRecyclerview.visibility = View.VISIBLE
-            binding.animationLayout.visibility = View.GONE
+            binding.productRecyclerview.visibility = GONE
+            binding.categoryRecyclerview.visibility = VISIBLE
+            binding.animationLayout.visibility = GONE
         }
     }
 }

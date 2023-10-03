@@ -10,7 +10,6 @@ plugins {
     id "org.jetbrains.kotlin.plugin.serialization" version "1.7.0"
 
 }
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 33

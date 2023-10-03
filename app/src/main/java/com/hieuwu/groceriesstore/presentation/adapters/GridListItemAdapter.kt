@@ -1,18 +1,19 @@
 package com.hieuwu.groceriesstore.presentation.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.databinding.LayoutGridListItemBinding
 import com.hieuwu.groceriesstore.domain.models.ProductModel
-import kotlinx.android.synthetic.main.layout_grid_list_item.view.*
 
-class GridListItemAdapter(val onClickListener: OnClickListener) :
+class GridListItemAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<ProductModel, GridListItemAdapter.ProductGridViewHolder>(DiffCallback) {
 
-    class ProductGridViewHolder(private var binding: LayoutGridListItemBinding) :
+    class ProductGridViewHolder(private val binding: LayoutGridListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(productModel: ProductModel) {
             binding.product = productModel
@@ -26,7 +27,7 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
             onClickListener.onClick(product)
         }
 
-        holder.itemView.product_add_button.setOnClickListener {
+        holder.itemView.findViewById<View>(R.id.product_add_button).setOnClickListener {
             onClickListener.addToCartListener(product)
         }
 
@@ -34,7 +35,8 @@ class GridListItemAdapter(val onClickListener: OnClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductGridViewHolder {
-        return ProductGridViewHolder(LayoutGridListItemBinding.inflate(LayoutInflater.from(parent.context)))
+        val binding = LayoutGridListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ProductGridViewHolder(binding)
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<ProductModel>() {

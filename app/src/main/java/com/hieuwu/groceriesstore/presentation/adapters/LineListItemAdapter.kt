@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hieuwu.groceriesstore.databinding.LayoutLineListItemBinding
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
-import kotlinx.android.synthetic.main.layout_line_list_item.view.*
 
 class LineListItemAdapter(val onClickListener: OnClickListener, val context: Context) :
     ListAdapter<LineItemModel, LineListItemAdapter.LineItemViewHolder>(DiffCallback) {
 
-    class LineItemViewHolder(private var binding: LayoutLineListItemBinding) :
+    class LineItemViewHolder(val binding: LayoutLineListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(lineItemModel: LineItemModel) {
             binding.lineItem = lineItemModel
@@ -28,15 +27,15 @@ class LineListItemAdapter(val onClickListener: OnClickListener, val context: Con
 
     override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
         val lineItem = getItem(position)
-        holder.itemView.plus_btn.setOnClickListener {
+        holder.binding.plusBtn.setOnClickListener {
             onClickListener.onPlusClick(lineItem)
         }
 
-        holder.itemView.minus_btn.setOnClickListener {
+        holder.binding.minusBtn.setOnClickListener {
             onClickListener.onMinusClick(lineItem)
         }
 
-        holder.itemView.delete_btn.setOnClickListener {
+        holder.binding.deleteBtn.setOnClickListener {
             onClickListener.onRemoveItem(lineItem)
         }
 
@@ -44,7 +43,8 @@ class LineListItemAdapter(val onClickListener: OnClickListener, val context: Con
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineItemViewHolder {
-        return LineItemViewHolder(LayoutLineListItemBinding.inflate(LayoutInflater.from(parent.context)))
+        val binding = LayoutLineListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return LineItemViewHolder(binding)
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<LineItemModel>() {
