@@ -55,8 +55,6 @@ class ProductListViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(),
         initialValue = ProductListViewState.Empty
     )
-    val productList: StateFlow<List<ProductModel>> = _productList
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     var currentCart: StateFlow<OrderModel?> =
         getCurrentCart()
