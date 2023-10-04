@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/checkOutFragment"
-        android:name="com.hieuwu.groceriesstore.presentation.checkout.CheckOutFragment"
+        android:name="com.hieuwu.groceriesstore.presentation.checkout.CheckOutFrag"
         android:label="CheckOutFragment"
         tools:layout="@layout/fragment_check_out">
         <argument

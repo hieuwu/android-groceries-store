@@ -32,11 +32,6 @@ class CheckOutViewModel @Inject constructor(
     val order: StateFlow<OrderModel?> =
         getCurrentCard()!!.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
-    // TODO: check for type
-    private var _address = MutableStateFlow(0.0)
-    val address: StateFlow<Double>
-        get() = _address.asStateFlow()
-
     private var _totalPrice = MutableStateFlow(0.0)
     val totalPrice: StateFlow<Double>
         get() = _totalPrice.asStateFlow()
