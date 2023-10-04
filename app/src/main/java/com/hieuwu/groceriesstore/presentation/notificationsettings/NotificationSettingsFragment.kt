@@ -8,73 +8,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.databinding.FragmentNotificationSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class NotificationSettingsFragment : Fragment() {
 
-    private lateinit var binding: FragmentNotificationSettingsBinding
-    private val viewModel: NotificationSettingsViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate<FragmentNotificationSettingsBinding>(
-            inflater, R.layout.fragment_notification_settings, container, false
-        )
-
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        setEventListeners()
-        setObservers()
-
-        return binding.root
-    }
-
-    private fun setObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.user.collect { viewModel.initializeSwitchValue(it) }
-                }
-            }
-        }
-
-        viewModel.isOrderCreatedNotiEnabled.observe(viewLifecycleOwner) {}
-        viewModel.isDatabaseRefreshedNotiEnabled.observe(viewLifecycleOwner) {}
-        viewModel.isPromotionNotiEnabled.observe(viewLifecycleOwner) {}
-    }
-
-    private fun setEventListeners() {
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
-
         createChannel(
             getString(R.string.order_created_notification_channel_id),
             getString(R.string.order_created_notification_channel_name)
         )
-
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_save -> {
-                    // Update user data to backend
-                    viewModel.updateNotificationSettings()
-                    true
-                }
-                else -> false
+        return ComposeView(requireContext()).apply {
+            setContent {
+                NotificationSettingsScreen(
+                   onNavigateUp = { findNavController().navigateUp() }
+                )
             }
         }
     }
