@@ -80,4 +80,6 @@
     <string name="get_your_gorceries_in_as_fast_as_one_hour">Get your gorceries in as fast as one hour</string>
     <string name="update_profile">Update Profile</string>
     <string name="save">Save</string>
+    <string name="cd_navigate_back">Navigate back</string>
+    <string name="cd_save">Save</string>
 </resources>

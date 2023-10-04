@@ -15,12 +15,12 @@ import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
+import kotlinx.collections.immutable.toImmutableList
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -36,32 +36,31 @@ class ProductListViewModel @Inject constructor(
 
     private val args = ProductListFragmentArgs.fromSavedStateHandle(savedStateHandle)
     private val categoryId = args.categoryId
+    private val categoryName = args.categoryName
 
     // TODO: check type for categoryId
-    private val _productList: Flow<List<ProductModel>>? = if (categoryId == null) {
+    private val _productList: Flow<List<ProductModel>> = if (categoryId == null) {
         getProductLists()
     } else {
         getProductLists(categoryId)
     }
+
+    val state = _productList.map {
+        ProductListViewState(
+            categoryName,
+            it.toImmutableList()
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = ProductListViewState.Empty
+    )
     val productList: StateFlow<List<ProductModel>> = _productList
-        ?.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())!!
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     var currentCart: StateFlow<OrderModel?> =
         getCurrentCart()
             ?.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)!!
-
-    private val _navigateToSelectedProperty = MutableStateFlow<ProductModel?>(null)
-
-    val navigateToSelectedProperty: StateFlow<ProductModel?>
-        get() = _navigateToSelectedProperty.asStateFlow()
-
-    fun displayProductDetail(product: ProductModel) {
-        _navigateToSelectedProperty.value = product
-    }
-
-    fun displayProductDetailComplete() {
-        _navigateToSelectedProperty.value = null
-    }
 
     private fun getCurrentCart(): Flow<OrderModel?>? {
         var res: Flow<OrderModel?>? = null
@@ -71,21 +70,12 @@ class ProductListViewModel @Inject constructor(
         return res
     }
 
-    private fun getProductLists(): Flow<List<ProductModel>>? {
-        var res: Flow<List<ProductModel>>? = null
-        viewModelScope.launch {
-            res = getProductsListUseCase.execute(GetProductsListUseCase.Input()).result
-        }
-        return res
+    private fun getProductLists(): Flow<List<ProductModel>> {
+        return getProductsListUseCase.execute(GetProductsListUseCase.Input()).result
     }
 
-    private fun getProductLists(categoryId: String): Flow<List<ProductModel>>? {
-        var res: Flow<List<ProductModel>>? = null
-        viewModelScope.launch {
-            res =
-                getProductsByCategoryUseCase.execute(GetProductsByCategoryUseCase.Input(categoryId)).result
-        }
-        return res
+    private fun getProductLists(categoryId: String): Flow<List<ProductModel>> {
+        return getProductsByCategoryUseCase.execute(GetProductsByCategoryUseCase.Input(categoryId)).result
     }
 
     fun addToCart(product: ProductModel) {

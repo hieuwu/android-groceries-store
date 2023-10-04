@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-interface UpdateProfileUseCase : UseCase<UpdateProfileUseCase.Input, UpdateProfileUseCase.Output> {
+interface UpdateProfileUseCase : SuspendUseCase<UpdateProfileUseCase.Input, UpdateProfileUseCase.Output> {
     data class Input(
         val userId: String,
         val name: String,
