@@ -4,7 +4,6 @@ import com.hieuwu.groceriesstore.data.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
 import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -57,12 +56,12 @@ class GetCategoriesListUseCaseImplTest {
     @Test
     fun givenCategoriesUnavailable_whenExecute_thenReturnCorrectValue() {
         whenever(mockedCategoryRepository.getFromLocal()).thenReturn(flow {
-            null
+            emit(listOf())
         })
         runBlocking {
             val result = testee.execute(GetCategoriesListUseCase.Input())
             result.result.collect {
-                assertNull(it)
+                assertEquals(it.isEmpty(), true)
             }
         }
     }
