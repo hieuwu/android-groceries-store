@@ -30,7 +30,7 @@ class GetProductsListUseCaseImplTest {
     }
 
     @Test
-    fun givenUserAvailable_whenExecute_thenReturnCorrectValue() {
+    fun givenProductsAvailable_whenExecute_thenReturnCorrectValue() {
         val mockedProducts = listOf(
             ProductModel(id = "1", name = "Apple", price = 1.0, image = "image1.jpg", description = "Fruit", nutrition = "Healthy"),
             ProductModel(id = "2", name = "Fries", price = 5.0, image = "image2.jpg", description = "Junk food", nutrition = "Unhealthy"),
