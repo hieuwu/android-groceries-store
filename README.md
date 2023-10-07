@@ -1,4 +1,4 @@
-<h1 align="center"> 🚀 Groceries Store</h1>
+++<h1 align="center"> 🚀 Groceries Store</h1>
 
 Progress of migrating from Firebase to Supabase
  [Wiki](https://github.com/hieuwu/android-groceries-store/wiki)
