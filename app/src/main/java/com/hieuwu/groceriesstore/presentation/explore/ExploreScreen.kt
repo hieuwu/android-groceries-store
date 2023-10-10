@@ -22,11 +22,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,6 +50,7 @@ import com.hieuwu.groceriesstore.domain.models.CategoryModel
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.explore.composables.CategoryItem
 import com.hieuwu.groceriesstore.presentation.explore.composables.ProductItem
+import kotlinx.coroutines.launch
 
 @Composable
 fun ExploreScreen(
@@ -58,6 +63,9 @@ fun ExploreScreen(
     val categoryList by viewModel.categories.collectAsState()
     val productList by viewModel.productList.collectAsState()
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             SearchBarSection(
@@ -68,7 +76,8 @@ fun ExploreScreen(
                 },
                 onClearInput = viewModel::clearInput
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { contentPadding ->
 
         ProductListSection(
@@ -77,7 +86,14 @@ fun ExploreScreen(
             categoryList = categoryList,
             navigateToProductDetail = navigateToProductDetail,
             navigateToProductList = navigateToProductList,
-            onAddToCartClick = viewModel::addToCart
+            onAddToCartClick = { product ->
+                viewModel.addToCart(product)
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        "Added ${product.name}"
+                    )
+                }
+            }
         )
     }
 
