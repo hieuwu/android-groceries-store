@@ -57,6 +57,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion "1.2.0"
     }
+    namespace 'com.hieuwu.groceriesstore'
 }
 
 dependencies {
@@ -134,7 +135,7 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '7.2'
+    gradleVersion = '7.5'
 }
 
 detekt {
