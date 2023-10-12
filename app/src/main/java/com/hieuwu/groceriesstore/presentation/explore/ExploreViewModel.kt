@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.explore
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
@@ -11,7 +12,6 @@ import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
-import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
@@ -30,7 +30,7 @@ class ExploreViewModel @Inject constructor(
     private val searchProductUseCase: SearchProductUseCase,
     private val createNewOrderUseCase: CreateNewOrderUseCase,
     private val addToCartUseCase: AddToCartUseCase
-) : ObservableViewModel() {
+) : ViewModel() {
 
     private val _currentCart: StateFlow<OrderModel?> =
         getCurrentCard()!!

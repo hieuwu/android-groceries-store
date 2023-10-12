@@ -53,10 +53,6 @@ class ProductListFragment : Fragment() {
     }
 
     private fun showFilterDialog() {
-        val bottomSheetDialogFragment = FilterFragment()
-        bottomSheetDialogFragment.show(
-            activity?.supportFragmentManager!!,
-            bottomSheetDialogFragment.tag
-        )
+        // Do nothing. Add filter feature later
     }
 }
