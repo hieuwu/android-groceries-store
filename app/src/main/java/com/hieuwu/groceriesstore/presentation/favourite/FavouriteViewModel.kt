@@ -2,11 +2,11 @@ package com.hieuwu.groceriesstore.presentation.favourite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.repository.RecipeRepository
 import com.hieuwu.groceriesstore.domain.models.RecipeModel
-import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavouriteViewModel @Inject constructor(private val recipeRepository: RecipeRepository) :
-    ObservableViewModel() {
+    ViewModel() {
 
     private var _recipesList: MutableLiveData<List<RecipeModel>> =
         recipeRepository.getFromLocal().stateIn(

@@ -1,10 +1,10 @@
 package com.hieuwu.groceriesstore.presentation.cart
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
-import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +16,7 @@ import timber.log.Timber
 @HiltViewModel
 class CartViewModel @Inject constructor(
     private val updateCartItemUseCase: UpdateCartItemUseCase
-) : ObservableViewModel() {
+) : ViewModel() {
 
     val order: StateFlow<OrderModel?> =
         updateCartItemUseCase.getCurrentCart()

@@ -1,13 +1,13 @@
 package com.hieuwu.groceriesstore.presentation.productdetail
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
 import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
-import com.hieuwu.groceriesstore.presentation.utils.ObservableViewModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
@@ -23,7 +23,7 @@ class ProductDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getProductDetailUseCase: GetProductDetailUseCase,
     private val orderRepository: OrderRepository
-) : ObservableViewModel() {
+) : ViewModel() {
 
     private val args = ProductDetailFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
