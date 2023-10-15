@@ -13,7 +13,7 @@ import com.hieuwu.groceriesstore.databinding.FragmentDeliveryBinding
 import com.hieuwu.groceriesstore.utilities.KeyData
 
 class DeliveryFragment : Fragment() {
-    lateinit var binding: FragmentDeliveryBinding
+    private lateinit var binding: FragmentDeliveryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +21,7 @@ class DeliveryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate<FragmentDeliveryBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_delivery,
             container,

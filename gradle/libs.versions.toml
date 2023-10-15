@@ -1,8 +1,8 @@
 [versions]
-appCompatVersion = "1.4.2"
+appCompatVersion = "1.6.1"
 buildGradleVersion = "7.4.2"
 cardViewVersion = "1.0.0"
-carUiLibVersion = "2.0.0"
+carUiLibVersion = "2.5.1"
 constraintLayoutVersion = "2.1.4"
 coordinatorLayoutVersion = "1.2.0"
 coreTestingVersion = "2.1.0"
