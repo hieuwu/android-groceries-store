@@ -15,6 +15,7 @@ android {
     compileSdk 34
 
     defaultConfig {
+        namespace 'com.hieuwu.groceriesstore'
         applicationId "com.hieuwu.groceriesstore"
         buildToolsVersion = "31.0.0"
 
@@ -46,7 +47,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = "1.8"
     }
 
     buildFeatures {
@@ -58,7 +59,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion "1.2.0"
     }
-    namespace 'com.hieuwu.groceriesstore'
+
 }
 
 dependencies {

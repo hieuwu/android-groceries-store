@@ -5,7 +5,7 @@ cardViewVersion = "1.0.0"
 carUiLibVersion = "2.5.1"
 constraintLayoutVersion = "2.1.4"
 coordinatorLayoutVersion = "1.2.0"
-coreTestingVersion = "2.1.0"
+coreTestingVersion = "2.2.0"
 coreVersion = "1.8.0"
 firebaseBomVersion = "30.3.2"
 fireStoreVersion = "24.2.2"
@@ -13,8 +13,8 @@ firebaseVersion = "23.0.6"
 glideVersion = "4.13.2"
 glideComposeVersion = "1.0.0-beta01"
 googleServicesVersion = "4.3.13"
-gsonVersion = "2.9.0"
-hiltVersion = '2.42'
+gsonVersion = "2.10.1"
+hiltVersion = '2.47'
 jUnitVersion = "4.13.2"
 kotlinVersion = "1.7.0"
 kotlinCoroutineAdapter = "0.9.2"
@@ -34,7 +34,7 @@ rxJavaVersion = "3.1.5"
 spotlessVersion = "6.8.0"
 testRunnerVersion = "1.4.0"
 timberVersion = "5.0.1"
-workVersion = "2.7.1"
+workVersion = "2.8.1"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompatVersion" }
