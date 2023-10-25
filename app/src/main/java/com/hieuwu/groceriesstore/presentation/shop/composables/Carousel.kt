@@ -142,7 +142,8 @@ fun Carousel(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.Center,
         ) {
             itemsIndexed(bannerImages) { curentIndex, image ->
-                IndicatorDot(isSelected = currentVisibleIndex.value == curentIndex)
+                val currentlyVisibleIndex = (sectionItemListState.layoutInfo.visibleItemsInfo.firstOrNull()?.index ?: 0)
+                IndicatorDot(isSelected = currentlyVisibleIndex== curentIndex)
             }
         }
     }
