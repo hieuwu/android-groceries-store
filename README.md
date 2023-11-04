@@ -1,7 +1,5 @@
 <h1 align="center"> 🚀 Groceries Store</h1>
 
-Progress of migrating from Firebase to Supabase
- [Wiki](https://github.com/hieuwu/android-groceries-store/wiki)
 
  [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
 
@@ -55,7 +53,7 @@ Groceries Store is a project to help people order grocery online. The main purpo
 Android Studio Bumblebee or later
 SDK 23 or later
 
-#### Supabase (In-progress)
+#### Supabase
 See [Supabase Wiki](https://github.com/hieuwu/android-groceries-store/wiki) to keep track the process
 Database Schema:
 
