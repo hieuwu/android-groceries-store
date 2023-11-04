@@ -2,7 +2,7 @@
 
 
  [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
-
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hieuwu_android-groceries-store&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hieuwu_android-groceries-store)
 
 ![Groceries Store](https://user-images.githubusercontent.com/43868345/233767546-ba25566b-7926-4140-82fe-12346a1f357e.png)
 
