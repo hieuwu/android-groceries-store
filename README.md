@@ -1,10 +1,8 @@
 <h1 align="center"> 🚀 Groceries Store</h1>
 
-Progress of migrating from Firebase to Supabase
- [Wiki](https://github.com/hieuwu/android-groceries-store/wiki)
 
  [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
-
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hieuwu_android-groceries-store&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hieuwu_android-groceries-store)
 
 ![Groceries Store](https://user-images.githubusercontent.com/43868345/233767546-ba25566b-7926-4140-82fe-12346a1f357e.png)
 
@@ -16,6 +14,7 @@ Progress of migrating from Firebase to Supabase
 ![SQLite](https://img.shields.io/badge/SQLite-003B57.svg?&style=for-the-badge&logo=sqlite&logoColor=0772de)
 ![Firebase](https://img.shields.io/badge/Firebase-b0b0b0.svg?&style=for-the-badge&logo=firebase&logoColor=FFCA28)
 ![Github Action](https://img.shields.io/badge/Github%20Actions-424a53.svg?&style=for-the-badge&logo=githubactions&logoColor=white) -->
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=ARK-Builders_arklib-android)
 
 [Download on Google Play Store](https://play.google.com/store/apps/details?id=com.hieuwu.groceriesstore)
 
@@ -55,7 +54,7 @@ Groceries Store is a project to help people order grocery online. The main purpo
 Android Studio Bumblebee or later
 SDK 23 or later
 
-#### Supabase (In-progress)
+#### Supabase
 See [Supabase Wiki](https://github.com/hieuwu/android-groceries-store/wiki) to keep track the process
 Database Schema:
 
