@@ -12,7 +12,6 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
-
     private val categoryDao: CategoryDao,
     private val supabasePostgrest: Postgrest
 ) :
