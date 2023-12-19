@@ -66,7 +66,8 @@ class ExploreViewModel @Inject constructor(
     fun searchProduct(name: String) {
         if (name.isNotBlank()) {
             viewModelScope.launch {
-                val res = searchProductUseCase.execute(SearchProductUseCase.Input(name = name.trim()))
+                val res =
+                    searchProductUseCase.execute(SearchProductUseCase.Input(name = name.trim()))
                 res.result.collect {
                     _productList.value = it
                 }
@@ -96,7 +97,10 @@ class ExploreViewModel @Inject constructor(
             val cartId = _currentCart.value!!.id
             viewModelScope.launch {
                 val lineItem = LineItem(
-                    product.id, cartId, 1, product.price!!
+                    productId = product.id,
+                    orderId = cartId,
+                    quantity = 1,
+                    subtotal = product.price!!
                 )
                 addToCartUseCase.execute(AddToCartUseCase.Input(lineItem = lineItem))
             }
@@ -106,7 +110,10 @@ class ExploreViewModel @Inject constructor(
             viewModelScope.launch {
                 createNewOrderUseCase.execute(CreateNewOrderUseCase.Input(order = newOrder))
                 val lineItem = LineItem(
-                    product.id, id, 1, product.price!!
+                    productId = product.id,
+                    orderId = id,
+                    quantity = 1,
+                    subtotal = product.price!!
                 )
                 addToCartUseCase.execute(AddToCartUseCase.Input(lineItem = lineItem))
             }

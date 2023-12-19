@@ -7,8 +7,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.gotrue.GoTrue
-import io.github.jan.supabase.gotrue.gotrue
+import io.github.jan.supabase.gotrue.Auth
+import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.postgrest
 import io.ktor.client.plugins.*
@@ -26,7 +26,7 @@ object SupabaseModule {
             supabaseKey = BuildConfig.API_KEY
         ) {
             install(Postgrest)
-            install(GoTrue)
+            install(Auth)
         }
     }
 
@@ -38,8 +38,8 @@ object SupabaseModule {
 
     @Provides
     @Singleton
-    fun provideSupabaseGoTrue(client: SupabaseClient): GoTrue {
-        return client.gotrue
+    fun provideSupabaseGoTrue(client: SupabaseClient): Auth {
+        return client.auth
     }
 
 }

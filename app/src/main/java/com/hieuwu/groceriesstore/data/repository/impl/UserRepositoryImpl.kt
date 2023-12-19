@@ -7,7 +7,7 @@ import com.hieuwu.groceriesstore.data.network.dto.UserDto
 import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.SupabaseMapper
-import io.github.jan.supabase.gotrue.GoTrue
+import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.postgrest.Postgrest
 import java.util.*
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
-    private val authService: GoTrue,
+    private val authService: Auth,
     private val postgrest: Postgrest,
 ) : UserRepository {
 
@@ -37,7 +37,7 @@ class UserRepositoryImpl @Inject constructor(
                 isPromotionNotiEnabled = false,
                 isDataRefreshedNotiEnabled = false
             )
-            postgrest[CollectionNames.users].insert(value = userDto, upsert = true)
+            postgrest[CollectionNames.users].upsert(value = userDto)
             val user = SupabaseMapper.mapDtoToEntity(userDto)
             userDao.insert(user)
             true
@@ -49,7 +49,7 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun authenticate(email: String, password: String): Boolean {
         return try {
-            authService.loginWith(Email) {
+            authService.signInWith(Email) {
                 this.email = email
                 this.password = password
             }
@@ -85,7 +85,7 @@ class UserRepositoryImpl @Inject constructor(
                     UserDto::address setTo address
                 }
             ) {
-                UserDto::id eq userId
+                UserDto::id to userId
             }
             userDao.insert(dbUser)
         } catch (e: Exception) {
@@ -94,7 +94,7 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun clearUser() {
-        userDao.clear()
+        userDao.clearUser()
     }
 
     override suspend fun updateUserSettings(
@@ -111,7 +111,9 @@ class UserRepositoryImpl @Inject constructor(
                     UserDto::isPromotionNotiEnabled setTo isPromotionEnabled
                 }
             ) {
-                UserDto::id eq id
+                filter {
+                    UserDto::id eq id
+                }
             }
             userDao.updateUserSettings(
                 id,
