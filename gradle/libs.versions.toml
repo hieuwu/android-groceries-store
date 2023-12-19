@@ -5,18 +5,18 @@ cardViewVersion = "1.0.0"
 carUiLibVersion = "2.0.0"
 constraintLayoutVersion = "2.1.4"
 coordinatorLayoutVersion = "1.2.0"
-coreTestingVersion = "2.1.0"
-coreVersion = "1.8.0"
-firebaseBomVersion = "30.3.2"
-fireStoreVersion = "24.2.2"
-firebaseVersion = "23.0.6"
+coreTestingVersion = "2.2.0"
+coreVersion = "1.12.0"
+firebaseBomVersion = "32.7.0"
+fireStoreVersion = "24.10.0"
+firebaseVersion = "23.4.0"
 glideVersion = "4.13.2"
 glideComposeVersion = "1.0.0-beta01"
 googleServicesVersion = "4.3.13"
 gsonVersion = "2.9.0"
-hiltVersion = '2.42'
+hiltVersion = '2.48'
 jUnitVersion = "4.13.2"
-kotlinVersion = "1.7.0"
+kotlinVersion = "1.9.0"
 kotlinCoroutineAdapter = "0.9.2"
 kotlinCoroutinePlayServicesVersion = "1.6.4"
 kotlinxImmutable = "0.3.5"
@@ -30,7 +30,6 @@ moshiVersion = "1.12.0"
 navigationVersion = "2.5.0"
 retrofitVersion = "2.9.0"
 roomVersion = "2.5.0"
-rxJavaVersion = "3.1.5"
 spotlessVersion = "6.8.0"
 testRunnerVersion = "1.4.0"
 timberVersion = "5.0.1"
@@ -74,7 +73,6 @@ navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "moshiConverterVersion" }
 retrofit-coroutines-adapter = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "kotlinCoroutineAdapter" }
-rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxJavaVersion" }
 room = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
