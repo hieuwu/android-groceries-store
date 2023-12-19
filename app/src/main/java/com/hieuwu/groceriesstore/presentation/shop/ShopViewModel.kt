@@ -50,6 +50,7 @@ class ShopViewModel @Inject constructor(
             currentCart.collect {}
         }
     }
+
     fun displayProductDetails(product: ProductModel) {
         _navigateToSelectedProperty.value = product
     }
@@ -82,10 +83,10 @@ class ShopViewModel @Inject constructor(
                 addToCartUseCase.execute(
                     AddToCartUseCase.Input(
                         LineItem(
-                            product.id,
-                            cartId,
-                            1,
-                            product.price!!
+                            productId = product.id,
+                            orderId = cartId,
+                            quantity = 1,
+                            subtotal = product.price!!
                         )
                     )
                 )
@@ -96,15 +97,20 @@ class ShopViewModel @Inject constructor(
                 createNewOrderUseCase.execute(
                     CreateNewOrderUseCase.Input(
                         Order(
-                            id,
-                            OrderStatus.IN_CART.value,
-                            ""
+                            id = id,
+                            status = OrderStatus.IN_CART.value,
+                            address = ""
                         )
                     )
                 )
                 addToCartUseCase.execute(
                     AddToCartUseCase.Input(
-                        LineItem(product.id, id, 1, product.price!!)
+                        LineItem(
+                            productId = product.id,
+                            orderId = id,
+                            quantity = 1,
+                            subtotal = product.price!!
+                        )
                     )
                 )
             }

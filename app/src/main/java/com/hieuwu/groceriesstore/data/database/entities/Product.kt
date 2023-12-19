@@ -10,7 +10,6 @@ import com.hieuwu.groceriesstore.utilities.PRODUCT_TABLE
 @Entity(tableName = PRODUCT_TABLE)
 data class Product(
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "productId")
     val id: String,
 

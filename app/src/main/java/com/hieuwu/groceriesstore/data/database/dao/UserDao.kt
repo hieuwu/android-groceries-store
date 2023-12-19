@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(user: User)
+    fun insert(user: User)
 
     @Query("SELECT * FROM $USER_TABLE WHERE id = :id")
     fun getById(id: String): Flow<User>
@@ -21,10 +21,10 @@ interface UserDao {
     fun getCurrentUser(): Flow<User?>
 
     @Query("DELETE FROM  $USER_TABLE")
-    suspend fun clear()
+    fun clearUser()
 
     @Query("UPDATE  $USER_TABLE SET isOrderCreatedNotiEnabled = :isOrderCreatedEnabled, isDataRefreshedNotiEnabled =:isDatabaseRefreshedEnabled, isPromotionNotiEnabled =:isPromotionEnabled WHERE id = :id")
-    suspend fun updateUserSettings(
+    fun updateUserSettings(
         id: String,
         isOrderCreatedEnabled: Boolean,
         isDatabaseRefreshedEnabled: Boolean,

@@ -9,7 +9,7 @@ import com.hieuwu.groceriesstore.utilities.LINE_ITEM_TABLE
 data class LineItem(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "lineItemId")
-    val id: Long,
+    val id: Long = 0,
 
     @ColumnInfo(name = "productId")
     val productId: String,
@@ -23,12 +23,4 @@ data class LineItem(
     @ColumnInfo(name = "subtotal")
     var subtotal: Double
 
-) {
-    constructor(productId: String, orderId: String, quantity: Int, subtotal: Double) : this(
-        0,
-        productId,
-        orderId,
-        quantity,
-        subtotal
-    )
-}
+)

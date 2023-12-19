@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LineItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(lineItem: LineItem)
+    fun insert(lineItem: LineItem)
 
     @Query("SELECT * FROM $LINE_ITEM_TABLE WHERE lineItemId = :id")
     fun getById(id: Long): Flow<LineItem>
@@ -24,10 +24,10 @@ interface LineItemDao {
     fun updateQuantityById(quantity: Int, id: Long)
 
     @Delete
-    suspend fun remove(lineItem: LineItem)
+    fun remove(lineItem: LineItem)
 
     @Update
-    suspend fun update(lineItem: LineItem)
+    fun update(lineItem: LineItem)
 
     @Transaction
     @Query("SELECT * FROM $LINE_ITEM_TABLE ")
