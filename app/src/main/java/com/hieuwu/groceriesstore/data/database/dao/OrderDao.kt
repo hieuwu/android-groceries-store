@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.data.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -20,7 +19,7 @@ interface OrderDao {
     fun update(order: Order)
 
     @Query("DELETE FROM `$ORDER_TABLE`")
-    suspend fun clear()
+    fun clear()
 
     @Transaction
     @Query("SELECT * FROM `$ORDER_TABLE` WHERE orderId = :id")
