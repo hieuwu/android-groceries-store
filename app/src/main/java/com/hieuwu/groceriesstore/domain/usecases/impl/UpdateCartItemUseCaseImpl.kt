@@ -19,16 +19,20 @@ class UpdateCartItemUseCaseImpl @Inject constructor(
 ) : UpdateCartItemUseCase {
     override suspend fun updateLineItem(lineItemModel: LineItemModel) {
         withContext(ioDispatcher) {
-            productRepository.updateLineItemQuantityById(
-                lineItemModel.quantity!!,
-                lineItemModel.id!!
-            )
+            if (lineItemModel.quantity != null && lineItemModel.id != null) {
+                productRepository.updateLineItemQuantityById(
+                    lineItemModel.quantity!!,
+                    lineItemModel.id!!
+                )
+            }
         }
     }
 
     override suspend fun removeLineItem(lineItemModel: LineItemModel) {
         withContext(ioDispatcher) {
-            productRepository.removeLineItemById(lineItemModel.id!!)
+            if (lineItemModel.id != null) {
+                productRepository.removeLineItemById(lineItemModel.id!!)
+            }
         }
     }
 

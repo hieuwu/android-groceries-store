@@ -8,6 +8,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import junit.framework.TestCase.assertEquals
+import kotlinx.coroutines.Dispatchers
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.whenever
@@ -23,7 +24,8 @@ class SignInUseCaseImplTest {
     @Before
     fun setUp() {
         testee = SignInUseCaseImpl(
-            userRepository = mockedUserRepository
+            userRepository = mockedUserRepository,
+            ioDispatcher = Dispatchers.IO
         )
     }
 
