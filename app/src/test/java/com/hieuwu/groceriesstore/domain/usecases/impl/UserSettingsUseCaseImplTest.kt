@@ -3,6 +3,7 @@ package com.hieuwu.groceriesstore.domain.usecases.impl
 import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import java.util.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +22,10 @@ class UserSettingsUseCaseImplTest {
 
     @Before
     fun setUp() {
-        testee = UserSettingsUseCaseImpl(userRepository = mockedUserRepository)
+        testee = UserSettingsUseCaseImpl(
+            userRepository = mockedUserRepository,
+            ioDispatcher = Dispatchers.IO
+        )
     }
 
     @Test
