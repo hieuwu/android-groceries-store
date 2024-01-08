@@ -1,6 +1,6 @@
 [versions]
 appCompatVersion = "1.4.2"
-buildGradleVersion = "8.1.1"
+buildGradleVersion = "8.2.0"
 cardViewVersion = "1.0.0"
 carUiLibVersion = "2.0.0"
 constraintLayoutVersion = "2.1.4"
