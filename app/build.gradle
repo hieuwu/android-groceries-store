@@ -28,8 +28,6 @@ android {
         buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
         buildConfigField("String", "SECRET", "\"${properties.getProperty("SECRET")}\"")
         buildConfigField("String", "SUPABASE_URL", "\"${properties.getProperty("SUPABASE_URL")}\"")
-
-
     }
 
     buildTypes {
@@ -37,8 +35,24 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
 
+    }
+    flavorDimensions "environment"
+    productFlavors {
+        dev {
+            dimension "environment"
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file("local.properties").newDataInputStream())
+            buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY_DEBUG")}\"")
+            buildConfigField("String", "SECRET", "\"${properties.getProperty("SECRET_DEBUG")}\"")
+            buildConfigField("String", "SUPABASE_URL", "\"${properties.getProperty("SUPABASE_URL_DEBUG")}\"")
+        }
+        prod {
+            dimension "environment"
+            applicationIdSuffix ".prod"
+            versionNameSuffix "-prod"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -93,12 +107,12 @@ dependencies {
 //    implementation 'io.supabase:postgrest-kt:0.9.0-alpha-4'
 
 //    implementation("io.github.jan-tennert.supabase:postgrest-kt:0.2.0")
-    implementation("io.ktor:ktor-client-cio:1.6.0")
-    implementation("io.github.jan-tennert.supabase:postgrest-kt-android:2.0.0")
-    implementation "io.ktor:ktor-client-android:2.2.1"
-    implementation "io.ktor:ktor-utils-jvm:1.6.0"
-    implementation "io.ktor:ktor-client-logging-jvm:1.6.0"
-    implementation("io.ktor:ktor-client-core:2.2.4")
+    implementation(libs.ktor.client.cio)
+    implementation(libs.postgrest.kt.android)
+    implementation libs.ktor.client.android
+    implementation libs.ktor.utils.jvm
+    implementation libs.ktor.client.logging.jvm
+    implementation(libs.ktor.client.core)
 
     def composeBom = platform('androidx.compose:compose-bom:2023.09.02')
     implementation(composeBom)
@@ -111,20 +125,20 @@ dependencies {
     implementation "androidx.compose.material:material"
     implementation "androidx.compose.runtime:runtime-livedata"
     implementation "androidx.compose.ui:ui-tooling"
-    implementation "com.google.accompanist:accompanist-themeadapter-material:0.28.0"
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
-    implementation "androidx.compose.material3:material3:1.1.1"
-    testImplementation("org.mockito:mockito-core:2.1.0")
+    implementation libs.accompanist.themeadapter.material
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation libs.glide.compose
+    implementation libs.androidx.material3
+    testImplementation libs.mockito.core
 
-    debugImplementation "androidx.compose.ui:ui-tooling:1.4.2"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.4.2"
+    debugImplementation libs.androidx.ui.tooling
+    implementation libs.androidx.ui.tooling.preview
     def nav_version = "2.5.3"
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation "androidx.compose.material:material-icons-extended:1.0.0"
+    implementation(libs.androidx.navigation.compose)
+    implementation libs.androidx.material.icons.extended
 
     implementation libs.caruilib
-    testImplementation "org.mockito.kotlin:mockito-kotlin:5.1.0"
+    testImplementation libs.mockito.kotlin
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.runner
