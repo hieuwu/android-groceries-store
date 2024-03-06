@@ -41,6 +41,8 @@ android {
     productFlavors {
         dev {
             dimension "environment"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
             Properties properties = new Properties()
             properties.load(project.rootProject.file("local.properties").newDataInputStream())
             buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY_DEBUG")}\"")
