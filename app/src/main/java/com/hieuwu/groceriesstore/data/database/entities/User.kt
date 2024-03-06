@@ -4,9 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.hieuwu.groceriesstore.domain.models.UserModel
+import com.hieuwu.groceriesstore.utilities.USER_TABLE
 
-@Entity
-
+@Entity(tableName = USER_TABLE)
 class User(
     @PrimaryKey
     var id: String,
