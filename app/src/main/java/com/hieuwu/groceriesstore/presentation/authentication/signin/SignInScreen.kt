@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.authentication.signin
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -56,10 +58,11 @@ fun SignInScreen(
                 snackbarHostState.showSnackbar("Account not existed!")
             }
     }
-
+    val context = LocalContext.current  as Activity
     LaunchedEffect(Unit) {
         viewModel.isSignUpSuccessful.collect {
             snackbarHostState.showSnackbar("Sign in successfully!")
+            context.finish()
         }
     }
 
