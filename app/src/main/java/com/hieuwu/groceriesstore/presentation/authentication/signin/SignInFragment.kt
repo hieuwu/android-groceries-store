@@ -25,8 +25,10 @@ class SignInFragment : Fragment() {
                 SignInScreen(
                     modifier = Modifier.fillMaxSize(),
                     onSignUpClick = {
-                        view?.findNavController()
-                            ?.navigate(R.id.action_signInFragment_to_signUpFragment)
+                        findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+                    },
+                    onSignInSuccess = {
+                        requireActivity().finish()
                     }
                 )
             }

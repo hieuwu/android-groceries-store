@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.presentation.authentication.signin
 
-import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -32,7 +31,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -48,6 +46,7 @@ import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTex
 fun SignInScreen(
     modifier: Modifier = Modifier,
     onSignUpClick: () -> Unit,
+    onSignInSuccess: () -> Unit,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -58,11 +57,10 @@ fun SignInScreen(
                 snackbarHostState.showSnackbar("Account not existed!")
             }
     }
-    val context = LocalContext.current  as Activity
     LaunchedEffect(Unit) {
         viewModel.isSignUpSuccessful.collect {
             snackbarHostState.showSnackbar("Sign in successfully!")
-            context.finish()
+            onSignInSuccess()
         }
     }
 
@@ -139,7 +137,8 @@ fun SignInScreen(
                     onClick = onSignUpClick,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent,
-                        contentColor = colorResource(id = R.color.colorPrimary)),
+                        contentColor = colorResource(id = R.color.colorPrimary)
+                    ),
                 ) {
                     Text("Sign up")
                 }
@@ -152,5 +151,5 @@ fun SignInScreen(
 @Preview
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen(onSignUpClick = {})
+    SignInScreen(onSignUpClick = {}, onSignInSuccess = {})
 }
