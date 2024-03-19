@@ -74,15 +74,20 @@ fun OverViewScreen(
                 }
             }
         }
-        LineTextButton(modifier = modifier,
+        LineTextButton(
+            modifier = modifier,
             textTitle = "Breakfast",
-            onButtonClick = {}
+            onButtonClick = { viewModel.onAddBreakfast() }
         )
-        Text(
-            text = "Lunch"
+        LineTextButton(
+            modifier = modifier,
+            textTitle = "Lunch",
+            onButtonClick = { viewModel.onAddLunch() }
         )
-        Text(
-            text = "Dinner"
+        LineTextButton(
+            modifier = modifier,
+            textTitle = "Dinner",
+            onButtonClick = { viewModel.onAddDinner() }
         )
     }
 }
