@@ -28,6 +28,18 @@ class OverviewViewModel @Inject constructor() : ViewModel() {
             }
         }
     }
+
+    fun onAddBreakfast() {
+
+    }
+
+    fun onAddLunch() {
+
+    }
+
+    fun onAddDinner() {
+
+    }
 }
 
 data class WeekDay(
