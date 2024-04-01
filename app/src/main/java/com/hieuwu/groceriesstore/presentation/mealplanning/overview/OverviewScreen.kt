@@ -73,7 +73,7 @@ fun OverViewScreen(
     val dinnerMeals = viewModel.dinnerMeals.collectAsState().value
     val showBottomSheet = remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
-
+    val mealType = remember { mutableStateOf(MealType.BREAKFAST) }
     Scaffold(topBar = {
         TopAppBar(
             title = {
@@ -98,8 +98,8 @@ fun OverViewScreen(
     }
     ) { contentPadding ->
         val scope = rememberCoroutineScope()
+        val mealAddState = remember { mutableStateOf(MealAddingState()) }
         if (showBottomSheet.value) {
-            val mealAddState = remember { mutableStateOf(MealAddingState()) }
             ModalBottomSheet(
                 onDismissRequest = {
                     showBottomSheet.value = false
@@ -170,7 +170,13 @@ fun OverViewScreen(
                     Button(
                         modifier = Modifier.fillMaxWidth(),
                         onClick = {
-                            viewModel.onAddBreakfast()
+                            viewModel.onAddMeal(
+                                mealType = mealType.value,
+                                name = mealAddState.value.name.value,
+                                ingredients = mealAddState.value.ingredients.value
+                            )
+                            mealAddState.value.name.value = ""
+                            mealAddState.value.ingredients.value = listOf()
                             scope.launch { sheetState.hide() }.invokeOnCompletion {
                                 if (!sheetState.isVisible) {
                                     showBottomSheet.value = false
@@ -212,8 +218,8 @@ fun OverViewScreen(
                     modifier = modifier,
                     textTitle = "Breakfast",
                     onButtonClick = {
+                        mealType.value = MealType.BREAKFAST
                         showBottomSheet.value = true
-                        viewModel.onAddBreakfast()
                     }
                 )
             }
@@ -225,7 +231,10 @@ fun OverViewScreen(
                 LineTextButton(
                     modifier = modifier,
                     textTitle = "Lunch",
-                    onButtonClick = { viewModel.onAddLunch() }
+                    onButtonClick = {
+                        mealType.value = MealType.LUNCH
+                        showBottomSheet.value = true
+                    }
                 )
             }
 
@@ -237,7 +246,10 @@ fun OverViewScreen(
                 LineTextButton(
                     modifier = modifier,
                     textTitle = "Dinner",
-                    onButtonClick = { viewModel.onAddDinner() }
+                    onButtonClick = {
+                        mealType.value = MealType.DINNER
+                        showBottomSheet.value = true
+                    }
                 )
             }
             items(dinnerMeals) { meal ->

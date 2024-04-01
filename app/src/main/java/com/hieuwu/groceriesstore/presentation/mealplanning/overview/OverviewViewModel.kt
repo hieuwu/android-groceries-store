@@ -50,7 +50,6 @@ class OverviewViewModel @Inject constructor() : ViewModel() {
 
     val dinnerMeals: StateFlow<List<Meal>> = _dinnerMeals
 
-
     fun onWeekDaySelected(index: Int) {
         viewModelScope.launch {
             for (i in 0 until _days.value.size) {
@@ -59,16 +58,50 @@ class OverviewViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun onAddBreakfast() {
+    fun onAddMeal(mealType: MealType, name: String, ingredients: List<String>) {
+        when (mealType) {
+            MealType.BREAKFAST -> {
+                onAddBreakfast(name, ingredients)
+            }
 
+            MealType.DINNER -> {
+                onAddDinner(name, ingredients)
+
+            }
+
+            MealType.LUNCH -> {
+                onAddLunch(name, ingredients)
+            }
+        }
     }
 
-    fun onAddLunch() {
-
+    private fun onAddBreakfast(name: String, ingredients: List<String>) {
+        _breakfastMeals.value = addMealToList(
+            mealList = _breakfastMeals.value,
+            newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients)
+        )
     }
 
-    fun onAddDinner() {
+    private fun onAddLunch(name: String, ingredients: List<String>) {
+        _lunchMeals.value = addMealToList(
+            mealList = _lunchMeals.value,
+            newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients)
+        )
+    }
 
+    private fun onAddDinner(name: String, ingredients: List<String>) {
+        _dinnerMeals.value = addMealToList(
+            mealList = _dinnerMeals.value,
+            newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients)
+        )
+    }
+
+    private fun addMealToList(mealList: List<Meal>, newMeal: Meal): List<Meal> {
+        val newList = mutableListOf<Meal>().apply {
+            addAll(mealList)
+            add(newMeal)
+        }
+        return newList
     }
 }
 
@@ -80,4 +113,9 @@ data class WeekDay(
 data class Meal(
     val name: String,
     val imageUrl: String,
+    val ingredients: List<String> = listOf(),
 )
+
+enum class MealType {
+    LUNCH, BREAKFAST, DINNER
+}
