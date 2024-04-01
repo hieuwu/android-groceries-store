@@ -19,10 +19,10 @@
 [Download on Google Play Store](https://play.google.com/store/apps/details?id=com.hieuwu.groceriesstore)
 
 
-## About
+## 👋 About
 Groceries Store is a project to help people order grocery online. The main purpose of this project is to demonstrate modern Android development skills in real production environment, reduce the learning curve when jump into Android development world.
 
-## UI Design & Architecture
+## 🎨 UI Design & Architecture
 <img src="https://github.com/hieuwu/hieuwu.github.io/blob/master/assets/img/real-estate.gif" align="left" height="280px">
 
 
@@ -37,7 +37,7 @@ Groceries Store is a project to help people order grocery online. The main purpo
 - [MVVM Architecture](https://medium.com/swlh/understanding-mvvm-architecture-in-android-aa66f7e1a70b)
 
 
-## Libraries
+## 🛠️ Libraries
 - [Glide](https://github.com/bumptech/glide) - Loading images.
 - [Timber](https://github.com/JakeWharton/timber) - Logging.
 - [Retrofit2](https://github.com/square/retrofit) - Construct the REST APIs and paging network data.
@@ -48,7 +48,7 @@ Groceries Store is a project to help people order grocery online. The main purpo
   - ViewModel - UI related data holder, lifecycle aware.
   - Room Persistence - construct a database using the abstract layer.
 
-## Setup
+## ⚙️ Setup
 
 #### Android Studio
 Android Studio Bumblebee or later
@@ -80,11 +80,11 @@ _id | name | description | price | image|category|nutrition|productid
 id | name | email | phone | isOrderCreatedNotiEnabled|isPromotionNotiEnabled|isDataRefreshedEnabled|address
 --- | --- | --- | --- |  --- |  --- | --- | --- | 
 
-## Find this repository useful? :heart:
+## 🎯 Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/hieuwu/android-groceries-store/stargazers)__ for this repository. :star: <br>
 Also, __[follow me](https://github.com/hieuwu)__ on GitHub for my next creations! 🤩
 
-## Contributors ✨
+## 👨‍💻 Contributors ✨
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
