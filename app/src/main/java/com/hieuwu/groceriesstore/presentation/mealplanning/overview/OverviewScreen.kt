@@ -51,6 +51,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -223,8 +224,21 @@ fun OverViewScreen(
                     }
                 )
             }
-            items(breakfastList) { meal ->
-                MealItem(meal = meal, modifier = modifier)
+            if (breakfastList.isNotEmpty()) {
+                items(breakfastList) { meal ->
+                    MealItem(meal = meal, modifier = modifier)
+                }
+            } else {
+                item {
+                    Text(
+                        text = "There is no meal. Add a meal to your plan",
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
 
             item {
@@ -237,6 +251,25 @@ fun OverViewScreen(
                     }
                 )
             }
+
+            if (lunchMeals.isNotEmpty()) {
+                items(lunchMeals) { meal ->
+                    MealItem(meal = meal, modifier = modifier)
+                }
+            } else {
+                item {
+                    Text(
+                        text = "There is no meal. Add a meal to your plan",
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+
+
 
             items(lunchMeals) { meal ->
                 MealItem(meal = meal, modifier = modifier)
@@ -252,13 +285,26 @@ fun OverViewScreen(
                     }
                 )
             }
-            items(dinnerMeals) { meal ->
-                MealItem(meal = meal, modifier = modifier)
+
+            if (dinnerMeals.isNotEmpty()) {
+                items(dinnerMeals) { meal ->
+                    MealItem(meal = meal, modifier = modifier)
+                }
+            } else {
+                item {
+                    Text(
+                        text = "There is no meal. Add a meal to your plan",
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
 
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
