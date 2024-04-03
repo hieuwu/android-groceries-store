@@ -1,9 +1,13 @@
 package com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -32,19 +36,27 @@ fun MealItem(
         elevation = CardDefaults.elevatedCardElevation(),
         shape = MaterialTheme.shapes.medium,
     ) {
-        Row(modifier = modifier.fillMaxWidth()) {
-            WebImage(
-                model = meal.imageUrl,
-                contentDescription = "",
-                contentScale = ContentScale.FillBounds,
-                modifier = modifier.size(124.dp)
-            )
-            Text(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(12.dp),
-                text = meal.name
-            )
+        LazyColumn(modifier = modifier.fillMaxWidth().height(132.dp)) {
+            item {
+                Row(modifier = modifier) {
+                    WebImage(
+                        model = meal.imageUrl,
+                        contentDescription = "",
+                        contentScale = ContentScale.FillBounds,
+                        modifier = modifier.size(124.dp)
+                    )
+
+                    Text(
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        text = meal.name
+                    )
+                }
+            }
+//            items(meal.ingredients) { item ->
+//                IngredientChip(text = item, onDismiss = {})
+//            }
         }
     }
 }
