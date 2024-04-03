@@ -30,24 +30,6 @@ class OverviewViewModel @Inject constructor() : ViewModel() {
 
     private val _dinnerMeals = MutableStateFlow<List<Meal>>(value = emptyList())
 
-    init {
-        viewModelScope.launch {
-            val meals = listOf(
-                Meal(
-                    name = "Chicken Fried Rice",
-                    imageUrl = ""
-                ),
-                Meal(
-                    name = "Chicken Fried Rice",
-                    imageUrl = ""
-                )
-            )
-            _breakfastMeals.emit(meals)
-            _lunchMeals.emit(meals)
-            _dinnerMeals.emit(meals)
-        }
-    }
-
     val dinnerMeals: StateFlow<List<Meal>> = _dinnerMeals
 
     fun onWeekDaySelected(index: Int) {
