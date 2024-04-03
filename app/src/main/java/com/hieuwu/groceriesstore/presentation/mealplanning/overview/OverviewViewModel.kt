@@ -3,11 +3,9 @@ package com.hieuwu.groceriesstore.presentation.mealplanning.overview
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,36 +22,23 @@ class OverviewViewModel @Inject constructor() : ViewModel() {
     private val _breakfastMeals = MutableStateFlow<List<Meal>>(value = emptyList())
     val breakfastMeals: StateFlow<List<Meal>> = _breakfastMeals
 
-
     private val _lunchMeals = MutableStateFlow<List<Meal>>(value = emptyList())
     val lunchMeals: StateFlow<List<Meal>> = _lunchMeals
 
     private val _dinnerMeals = MutableStateFlow<List<Meal>>(value = emptyList())
-
     val dinnerMeals: StateFlow<List<Meal>> = _dinnerMeals
 
     fun onWeekDaySelected(index: Int) {
-        viewModelScope.launch {
-            for (i in 0 until _days.value.size) {
-                _days.value[i].isSelected.value = i == index
-            }
+        for (i in 0 until _days.value.size) {
+            _days.value[i].isSelected.value = i == index
         }
     }
 
     fun onAddMeal(mealType: MealType, name: String, ingredients: List<String>) {
         when (mealType) {
-            MealType.BREAKFAST -> {
-                onAddBreakfast(name, ingredients)
-            }
-
-            MealType.DINNER -> {
-                onAddDinner(name, ingredients)
-
-            }
-
-            MealType.LUNCH -> {
-                onAddLunch(name, ingredients)
-            }
+            MealType.BREAKFAST -> onAddBreakfast(name, ingredients)
+            MealType.DINNER -> onAddDinner(name, ingredients)
+            MealType.LUNCH -> onAddLunch(name, ingredients)
         }
     }
 
