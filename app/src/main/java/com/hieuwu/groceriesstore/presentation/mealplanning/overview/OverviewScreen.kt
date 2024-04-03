@@ -57,6 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
+import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.IngredientChip
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.LineTextButton
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.MealItem
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.WeekDayItem
@@ -139,7 +140,7 @@ fun OverViewScreen(
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                         content = {
                             items(mealAddState.value.ingredients.value) { photo ->
-                                InputChipExample(text = photo, onDismiss = {
+                                IngredientChip(text = photo, onDismiss = {
                                     val newList = mutableListOf<String>().apply {
                                         addAll(mealAddState.value.ingredients.value)
                                         remove(photo)
@@ -269,8 +270,6 @@ fun OverViewScreen(
                 }
             }
 
-
-
             items(lunchMeals) { meal ->
                 MealItem(meal = meal, modifier = modifier)
             }
@@ -305,44 +304,6 @@ fun OverViewScreen(
 
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun InputChipExample(
-    text: String,
-    onDismiss: () -> Unit,
-) {
-    var enabled by remember { mutableStateOf(true) }
-    if (!enabled) return
-
-    InputChip(
-        colors = InputChipDefaults.inputChipColors(
-            labelColor = colorResource(id = R.color.colorPrimary).copy(
-                alpha = 0.2f
-            )
-        ),
-        onClick = {
-            onDismiss()
-            enabled = !enabled
-        },
-        label = { Text(text) },
-        selected = enabled,
-        avatar = {
-            Icon(
-                Icons.Filled.Dining,
-                contentDescription = "Localized description",
-                Modifier.size(12.dp)
-            )
-        },
-        trailingIcon = {
-            Icon(
-                Icons.Default.Close,
-                contentDescription = "Localized description",
-                Modifier.size(12.dp)
-            )
-        },
-    )
 }
 
 private data class MealAddingState(
