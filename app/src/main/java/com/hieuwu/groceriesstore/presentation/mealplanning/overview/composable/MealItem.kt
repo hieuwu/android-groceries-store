@@ -1,12 +1,14 @@
 package com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.material3.Card
@@ -30,13 +32,17 @@ fun MealItem(
     Card(
         onClick = { /*TODO*/ },
         modifier = modifier
-            .padding(8.dp)
+            .padding(12.dp)
+            .height(164.dp)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.elevatedCardElevation(),
         shape = MaterialTheme.shapes.medium,
     ) {
-        LazyColumn(modifier = modifier.fillMaxWidth().height(132.dp)) {
+        LazyColumn(
+            modifier = modifier
+                .fillMaxWidth()
+        ) {
             item {
                 Row(modifier = modifier) {
                     WebImage(
@@ -54,9 +60,13 @@ fun MealItem(
                     )
                 }
             }
-//            items(meal.ingredients) { item ->
-//                IngredientChip(text = item, onDismiss = {})
-//            }
+            item {
+                LazyRow(contentPadding = PaddingValues(horizontal = 4.dp)) {
+                    items(meal.ingredients) { item ->
+                        IngredientChip(text = item, onDismiss = {})
+                    }
+                }
+            }
         }
     }
 }
