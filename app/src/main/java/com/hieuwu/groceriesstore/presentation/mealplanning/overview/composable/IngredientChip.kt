@@ -25,6 +25,7 @@ import com.hieuwu.groceriesstore.R
 fun IngredientChip(
     text: String,
     onDismiss: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var enabled by remember { mutableStateOf(true) }
     if (!enabled) return
