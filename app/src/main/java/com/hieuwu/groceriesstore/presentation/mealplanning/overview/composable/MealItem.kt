@@ -1,13 +1,21 @@
 package com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.material3.Card
@@ -22,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.presentation.core.widgets.WebImage
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.Meal
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun MealItem(
     modifier: Modifier = Modifier,
@@ -31,38 +39,48 @@ fun MealItem(
     Card(
         onClick = { /*TODO*/ },
         modifier = modifier
-            .padding(12.dp)
             .height(164.dp)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.elevatedCardElevation(),
         shape = MaterialTheme.shapes.medium,
     ) {
-        LazyColumn(
+        LazyRow(
             modifier = modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .fillMaxHeight()
         ) {
             item {
-                Row(modifier = modifier) {
+                Row() {
                     WebImage(
                         model = meal.imageUrl,
                         contentDescription = "",
                         contentScale = ContentScale.FillBounds,
                         modifier = modifier.size(124.dp)
                     )
-
-                    Text(
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        text = meal.name
-                    )
                 }
             }
             item {
-                LazyRow(contentPadding = PaddingValues(horizontal = 4.dp)) {
+                LazyColumn(
+                    contentPadding = PaddingValues(horizontal = 4.dp),
+                    modifier = modifier
+                        .fillMaxWidth()
+                ) {
+                    stickyHeader {
+                        Text(
+                            modifier = modifier
+                                .fillMaxWidth()
+                                .background(Color.White)
+                                .padding(12.dp),
+                            text = meal.name
+                        )
+                    }
                     items(meal.ingredients) { item ->
-                        IngredientChip(text = item, onDismiss = {})
+                        IngredientChip(
+                            text = item,
+                            onDismiss = {},
+                            modifier = modifier.padding(8.dp)
+                        )
                     }
                 }
             }
