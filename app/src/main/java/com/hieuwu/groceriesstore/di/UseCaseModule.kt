@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.di
 
+import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.AddToCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
@@ -32,6 +33,7 @@ import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateCartItemUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
+import com.hieuwu.groceriesstore.domain.usecases.impl.AddMealToPlanUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.GetOrderListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.UserSettingsUseCaseImpl
 import dagger.Binds
@@ -110,5 +112,9 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindGetOrdersUseCase(impl: GetOrderListUseCaseImpl): GetOrderListUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindAddMealToPlan(impl: AddMealToPlanUseCaseImpl): AddMealToPlanUseCase
 
 }

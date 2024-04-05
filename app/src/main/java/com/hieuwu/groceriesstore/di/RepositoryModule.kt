@@ -6,10 +6,12 @@ import com.hieuwu.groceriesstore.data.repository.impl.ProductRepositoryImpl
 import com.hieuwu.groceriesstore.data.repository.impl.RecipeRepositoryImpl
 import com.hieuwu.groceriesstore.data.repository.impl.UserRepositoryImpl
 import com.hieuwu.groceriesstore.data.repository.CategoryRepository
+import com.hieuwu.groceriesstore.data.repository.MealPlanRepository
 import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.data.repository.ProductRepository
 import com.hieuwu.groceriesstore.data.repository.RecipeRepository
 import com.hieuwu.groceriesstore.data.repository.UserRepository
+import com.hieuwu.groceriesstore.data.repository.impl.MealPlanRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -39,4 +41,8 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindRecipeRepository(impl: RecipeRepositoryImpl): RecipeRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindMealRepository(impl: MealPlanRepositoryImpl): MealPlanRepository
 }
