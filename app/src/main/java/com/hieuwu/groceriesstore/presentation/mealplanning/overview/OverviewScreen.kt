@@ -196,7 +196,8 @@ fun OverViewScreen(
             modifier = modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .padding(20.dp)
+                .padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
                 LazyVerticalGrid(
@@ -227,7 +228,7 @@ fun OverViewScreen(
             }
             if (breakfastList.isNotEmpty()) {
                 items(breakfastList) { meal ->
-                    MealItem(meal = meal, modifier = modifier)
+                    MealItem(meal = meal)
                 }
             } else {
                 item {
