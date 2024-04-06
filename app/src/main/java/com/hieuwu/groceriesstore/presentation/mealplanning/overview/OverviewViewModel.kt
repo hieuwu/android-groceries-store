@@ -3,13 +3,18 @@ package com.hieuwu.groceriesstore.presentation.mealplanning.overview
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OverviewViewModel @Inject constructor() : ViewModel() {
+class OverviewViewModel @Inject constructor(
+    private val addMealToPlanUseCase: AddMealToPlanUseCase
+) : ViewModel() {
 
     private val _days = MutableStateFlow(
         mutableListOf(
@@ -43,10 +48,18 @@ class OverviewViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun onAddBreakfast(name: String, ingredients: List<String>) {
-        _breakfastMeals.value = addMealToList(
-            mealList = _breakfastMeals.value,
-            newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients)
-        )
+        viewModelScope.launch {
+            addMealToPlanUseCase.execute(
+                AddMealToPlanUseCase.Input(
+                    name = name,
+                    ingredients = ingredients
+                )
+            )
+            _breakfastMeals.value = addMealToList(
+                mealList = _breakfastMeals.value,
+                newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients)
+            )
+        }
     }
 
     private fun onAddLunch(name: String, ingredients: List<String>) {
