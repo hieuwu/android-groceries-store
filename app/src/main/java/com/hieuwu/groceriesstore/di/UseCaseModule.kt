@@ -19,6 +19,7 @@ import com.hieuwu.groceriesstore.domain.usecases.impl.GetProductsListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.GetProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
+import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.RefreshAppDataUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.SearchProductUseCaseImpl
@@ -35,6 +36,7 @@ import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.AddMealToPlanUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.GetOrderListUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.impl.RetrieveMealByTypeUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.UserSettingsUseCaseImpl
 import dagger.Binds
 import dagger.Module
@@ -116,5 +118,9 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindAddMealToPlan(impl: AddMealToPlanUseCaseImpl): AddMealToPlanUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindRetrieveMealByType(impl: RetrieveMealByTypeUseCaseImpl): RetrieveMealByTypeUseCase
 
 }
