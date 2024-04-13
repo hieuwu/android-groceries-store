@@ -1,7 +1,10 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
+import com.hieuwu.groceriesstore.presentation.mealplanning.overview.MealType
+
 interface AddMealToPlanUseCase :
     SuspendUseCase<AddMealToPlanUseCase.Input, AddMealToPlanUseCase.Output> {
-    class Input(val name: String, val ingredients: List<String>)
+    class Input(val name: String, val weekDay: String, val ingredients: List<String>,
+        val mealType: MealType)
     object Output
 }

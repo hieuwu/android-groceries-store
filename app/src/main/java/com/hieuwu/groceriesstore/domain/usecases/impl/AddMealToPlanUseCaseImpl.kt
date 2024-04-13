@@ -8,7 +8,12 @@ class AddMealToPlanUseCaseImpl @Inject constructor(
     private val mealPlanRepository: MealPlanRepository
 ) : AddMealToPlanUseCase {
     override suspend fun execute(input: AddMealToPlanUseCase.Input): AddMealToPlanUseCase.Output {
-        mealPlanRepository.addMealToPlan(input.name, input.ingredients)
+        mealPlanRepository.addMealToPlan(
+            weekDay = input.weekDay,
+            name = input.name,
+            ingredients = input.ingredients,
+            mealType = input.mealType.value
+        )
         return AddMealToPlanUseCase.Output
     }
 }
