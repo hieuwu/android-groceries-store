@@ -19,4 +19,7 @@ data class Meal(
 
     @SerialName("creator")
     val creatorId: String,
+
+    @SerialName("meal_type")
+    val mealType: String,
 )
