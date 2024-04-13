@@ -1,10 +1,9 @@
 package com.hieuwu.groceriesstore.presentation.mealplanning.overview
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
+import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,14 +12,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OverviewViewModel @Inject constructor(
-    private val addMealToPlanUseCase: AddMealToPlanUseCase
+    private val addMealToPlanUseCase: AddMealToPlanUseCase,
+    private val retrieveMealByTypeUseCase: RetrieveMealByTypeUseCase,
 ) : ViewModel() {
 
     private val _days = MutableStateFlow(
-        mutableListOf(
-            WeekDay("Mon"), WeekDay("Tue"), WeekDay("Wed"),
-            WeekDay("Thu"), WeekDay("Fri"), WeekDay("Sat"), WeekDay("Sun")
-        )
+        WeekDayValue.entries.map {
+            WeekDay(it.dayValue)
+        }.toMutableList()
     )
     val day: StateFlow<List<WeekDay>> = _days
 
@@ -33,7 +32,24 @@ class OverviewViewModel @Inject constructor(
     private val _dinnerMeals = MutableStateFlow<List<Meal>>(value = emptyList())
     val dinnerMeals: StateFlow<List<Meal>> = _dinnerMeals
 
+    private val initialSelectedDay: Int = 0
+    private var selectedDayIndex = initialSelectedDay
+
+    init {
+        viewModelScope.launch {
+            val result = retrieveMealByTypeUseCase.execute(
+                RetrieveMealByTypeUseCase.Input(
+                    dayValue = WeekDayValue.Mon,
+                    mealType = MealType.BREAKFAST
+                )
+            )
+            val a = 5
+        }
+        _days.value[initialSelectedDay].isSelected.value = true
+    }
+
     fun onWeekDaySelected(index: Int) {
+        selectedDayIndex = index
         for (i in 0 until _days.value.size) {
             _days.value[i].isSelected.value = i == index
         }
@@ -52,7 +68,9 @@ class OverviewViewModel @Inject constructor(
             addMealToPlanUseCase.execute(
                 AddMealToPlanUseCase.Input(
                     name = name,
-                    ingredients = ingredients
+                    weekDay = _days.value[selectedDayIndex].name,
+                    ingredients = ingredients,
+                    mealType = MealType.BREAKFAST
                 )
             )
             _breakfastMeals.value = addMealToList(
@@ -85,17 +103,3 @@ class OverviewViewModel @Inject constructor(
     }
 }
 
-data class WeekDay(
-    val name: String,
-    val isSelected: MutableState<Boolean> = mutableStateOf(false),
-)
-
-data class Meal(
-    val name: String,
-    val imageUrl: String,
-    val ingredients: List<String> = listOf(),
-)
-
-enum class MealType {
-    LUNCH, BREAKFAST, DINNER
-}
