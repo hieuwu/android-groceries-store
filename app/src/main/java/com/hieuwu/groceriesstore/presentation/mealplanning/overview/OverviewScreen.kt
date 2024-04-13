@@ -16,9 +16,9 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Cookie
 import androidx.compose.material.icons.filled.NavigateBefore
@@ -180,7 +180,7 @@ fun OverViewScreen(
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.colorPrimary)),
                     ) {
-                        androidx.compose.material3.Text("Add this meal")
+                        Text("Add this meal")
                     }
                 }
             }
