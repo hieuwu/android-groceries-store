@@ -1,6 +1,5 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import com.hieuwu.groceriesstore.data.network.dto.Meal
 import com.hieuwu.groceriesstore.domain.models.MealModel
 
 interface MealPlanRepository {

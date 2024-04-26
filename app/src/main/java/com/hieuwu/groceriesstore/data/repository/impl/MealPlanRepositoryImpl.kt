@@ -8,6 +8,7 @@ import com.hieuwu.groceriesstore.domain.models.MealModel
 import io.github.jan.supabase.postgrest.Postgrest
 import java.util.UUID
 import kotlinx.coroutines.flow.first
+import timber.log.Timber
 import javax.inject.Inject
 
 class MealPlanRepositoryImpl @Inject constructor(
@@ -42,6 +43,7 @@ class MealPlanRepositoryImpl @Inject constructor(
                 eq("meal_type", type)
             }
         }.decodeList<Meal>().map {
+            Timber.d(it.toString())
             MealModel(
                 id = it.id,
                 name = it.name,
