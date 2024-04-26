@@ -2,11 +2,13 @@ package com.hieuwu.groceriesstore.presentation.mealplanning.overview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hieuwu.groceriesstore.domain.models.MealModel
 import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
 import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,16 +39,72 @@ class OverviewViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val result = retrieveMealByTypeUseCase.execute(
-                RetrieveMealByTypeUseCase.Input(
-                    dayValue = WeekDayValue.Mon,
-                    mealType = MealType.BREAKFAST
+            launch {
+                onRetrieveMealByType(
+                    weekDayValue = WeekDayValue.Mon,
+                    mealType = MealType.BREAKFAST,
                 )
-            )
-            val a = 5
+            }
+
+//            launch {
+//                onRetrieveMealByType(
+//                    weekDayValue = WeekDayValue.Mon,
+//                    mealType = MealType.LUNCH,
+//                )
+//            }
+//
+//            launch {
+//                onRetrieveMealByType(
+//                    weekDayValue = WeekDayValue.Mon,
+//                    mealType = MealType.DINNER,
+//                )
+//            }
+
         }
         _days.value[initialSelectedDay].isSelected.value = true
     }
+
+    private suspend fun onRetrieveMealByType(
+        weekDayValue: WeekDayValue,
+        mealType: MealType,
+    ) {
+        val result = retrieveMealByTypeUseCase.execute(
+            RetrieveMealByTypeUseCase.Input(
+                dayValue = weekDayValue,
+                mealType = mealType
+            )
+        )
+        when (result) {
+            is RetrieveMealByTypeUseCase.Output.Success -> {
+                result.data.collect {
+                    when (mealType) {
+                        MealType.BREAKFAST -> {
+                            _breakfastMeals.emit(it.map { it.asDomain() })
+                        }
+
+                        MealType.LUNCH -> {
+                            _lunchMeals.emit(it.map { it.asDomain() })
+                        }
+
+                        MealType.DINNER -> {
+                            _dinnerMeals.emit(it.map { it.asDomain() })
+                        }
+                    }
+                }
+            }
+
+            is RetrieveMealByTypeUseCase.Output.Failure -> {
+                _breakfastMeals.value = listOf()
+            }
+        }
+    }
+
+    private fun MealModel.asDomain(): Meal = Meal(
+        id = id,
+        name = name,
+        imageUrl = "",
+        ingredients = ingredients.toList()
+    )
 
     fun onWeekDaySelected(index: Int) {
         selectedDayIndex = index
@@ -75,23 +133,43 @@ class OverviewViewModel @Inject constructor(
             )
             _breakfastMeals.value = addMealToList(
                 mealList = _breakfastMeals.value,
-                newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients)
+                newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients, id = "")
             )
         }
     }
 
     private fun onAddLunch(name: String, ingredients: List<String>) {
-        _lunchMeals.value = addMealToList(
-            mealList = _lunchMeals.value,
-            newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients)
-        )
+        viewModelScope.launch {
+            addMealToPlanUseCase.execute(
+                AddMealToPlanUseCase.Input(
+                    name = name,
+                    weekDay = _days.value[selectedDayIndex].name,
+                    ingredients = ingredients,
+                    mealType = MealType.LUNCH
+                )
+            )
+            _lunchMeals.value = addMealToList(
+                mealList = _lunchMeals.value,
+                newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients, id = "")
+            )
+        }
     }
 
     private fun onAddDinner(name: String, ingredients: List<String>) {
-        _dinnerMeals.value = addMealToList(
-            mealList = _dinnerMeals.value,
-            newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients)
-        )
+        viewModelScope.launch {
+            addMealToPlanUseCase.execute(
+                AddMealToPlanUseCase.Input(
+                    name = name,
+                    weekDay = _days.value[selectedDayIndex].name,
+                    ingredients = ingredients,
+                    mealType = MealType.DINNER
+                )
+            )
+            _dinnerMeals.value = addMealToList(
+                mealList = _dinnerMeals.value,
+                newMeal = Meal(name = name, imageUrl = "", ingredients = ingredients, id = "")
+            )
+        }
     }
 
     private fun addMealToList(mealList: List<Meal>, newMeal: Meal): List<Meal> {
