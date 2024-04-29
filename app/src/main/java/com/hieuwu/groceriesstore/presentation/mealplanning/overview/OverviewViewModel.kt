@@ -41,30 +41,33 @@ class OverviewViewModel @Inject constructor(
     private var selectedDayIndex = initialSelectedDay
 
     init {
+        retrieveMeal()
+        _days.value[initialSelectedDay].isSelected.value = true
+    }
+
+    private fun retrieveMeal() {
         viewModelScope.launch {
             launch {
                 onRetrieveMealByType(
-                    weekDayValue = WeekDayValue.Mon,
+                    weekDayValue = WeekDayValue.valueOf(_days.value[selectedDayIndex].name),
                     mealType = MealType.BREAKFAST,
                 )
             }
 
             launch {
                 onRetrieveMealByType(
-                    weekDayValue = WeekDayValue.Mon,
+                    weekDayValue = WeekDayValue.valueOf(_days.value[selectedDayIndex].name),
                     mealType = MealType.LUNCH,
                 )
             }
 
             launch {
                 onRetrieveMealByType(
-                    weekDayValue = WeekDayValue.Mon,
+                    weekDayValue = WeekDayValue.valueOf(_days.value[selectedDayIndex].name),
                     mealType = MealType.DINNER,
                 )
             }
-
         }
-        _days.value[initialSelectedDay].isSelected.value = true
     }
 
     private suspend fun onRetrieveMealByType(
@@ -116,6 +119,7 @@ class OverviewViewModel @Inject constructor(
         for (i in 0 until _days.value.size) {
             _days.value[i].isSelected.value = i == index
         }
+        retrieveMeal()
     }
 
     fun onAddMeal(mealType: MealType, name: String, ingredients: List<String>) {
