@@ -55,4 +55,12 @@ class MealPlanRepositoryImpl @Inject constructor(
         }
         return result
     }
+
+    override suspend fun removeMealFromPlan(id: String) {
+        postgrest["meal_plans"].delete {
+            filter {
+                eq("id", id)
+            }
+        }
+    }
 }

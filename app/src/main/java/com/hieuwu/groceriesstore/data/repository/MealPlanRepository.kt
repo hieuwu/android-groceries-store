@@ -11,4 +11,5 @@ interface MealPlanRepository {
     )
 
     suspend fun retrieveMealByType(type: String, weekDayValue: String): List<MealModel>
+    suspend fun removeMealFromPlan(id: String)
 }
