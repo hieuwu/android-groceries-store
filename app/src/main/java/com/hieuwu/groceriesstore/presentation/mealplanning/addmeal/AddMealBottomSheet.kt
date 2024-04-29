@@ -36,7 +36,6 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.MealAddingState
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.IngredientChip
-import kotlinx.coroutines.launch
 
 @Composable
 fun AddMealBottomSheet(
