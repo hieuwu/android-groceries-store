@@ -45,19 +45,19 @@ class OverviewViewModel @Inject constructor(
                 )
             }
 
-//            launch {
-//                onRetrieveMealByType(
-//                    weekDayValue = WeekDayValue.Mon,
-//                    mealType = MealType.LUNCH,
-//                )
-//            }
-//
-//            launch {
-//                onRetrieveMealByType(
-//                    weekDayValue = WeekDayValue.Mon,
-//                    mealType = MealType.DINNER,
-//                )
-//            }
+            launch {
+                onRetrieveMealByType(
+                    weekDayValue = WeekDayValue.Mon,
+                    mealType = MealType.LUNCH,
+                )
+            }
+
+            launch {
+                onRetrieveMealByType(
+                    weekDayValue = WeekDayValue.Mon,
+                    mealType = MealType.DINNER,
+                )
+            }
 
         }
         _days.value[initialSelectedDay].isSelected.value = true
@@ -75,10 +75,7 @@ class OverviewViewModel @Inject constructor(
         )
         when (result) {
             is RetrieveMealByTypeUseCase.Output.Success -> {
-
-                result.data.collect {
-                    mapMealByType(mealType = mealType, meals = it)
-                }
+                mapMealByType(mealType = mealType, meals = result.data)
             }
 
             is RetrieveMealByTypeUseCase.Output.Failure -> {
@@ -94,18 +91,18 @@ class OverviewViewModel @Inject constructor(
         ingredients = ingredients.toList()
     )
 
-    private suspend fun mapMealByType(mealType: MealType, meals: List<MealModel>) {
+    private fun mapMealByType(mealType: MealType, meals: List<MealModel>) {
         when (mealType) {
             MealType.BREAKFAST -> {
-                _breakfastMeals.emit(meals.map { meal -> meal.asDomain() })
+                _breakfastMeals.value = meals.map { meal -> meal.asDomain() }
             }
 
             MealType.LUNCH -> {
-                _lunchMeals.emit(meals.map { it.asDomain() })
+                _lunchMeals.value = meals.map { meal -> meal.asDomain() }
             }
 
             MealType.DINNER -> {
-                _dinnerMeals.emit(meals.map { it.asDomain() })
+                _dinnerMeals.value = meals.map { meal -> meal.asDomain() }
             }
         }
     }
