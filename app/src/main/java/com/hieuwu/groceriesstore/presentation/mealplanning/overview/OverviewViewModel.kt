@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.MealModel
 import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
+import com.hieuwu.groceriesstore.domain.usecases.RemoveMealFromPlanUseCase
 import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.Meal
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class OverviewViewModel @Inject constructor(
     private val addMealToPlanUseCase: AddMealToPlanUseCase,
     private val retrieveMealByTypeUseCase: RetrieveMealByTypeUseCase,
+    private val removeMealFromPlanUseCase: RemoveMealFromPlanUseCase
 ) : ViewModel() {
 
     private val _days = MutableStateFlow(
@@ -120,6 +122,16 @@ class OverviewViewModel @Inject constructor(
             _days.value[i].isSelected.value = i == index
         }
         retrieveMeal(WeekDayValue.valueOf(_days.value[selectedDayIndex].name))
+    }
+
+    fun onRemoveMeal(id: String) {
+        viewModelScope.launch {
+            removeMealFromPlanUseCase.execute(
+                RemoveMealFromPlanUseCase.Input(
+                    id = id
+                )
+            )
+        }
     }
 
     fun onAddMeal(mealType: MealType, name: String, ingredients: List<String>) {

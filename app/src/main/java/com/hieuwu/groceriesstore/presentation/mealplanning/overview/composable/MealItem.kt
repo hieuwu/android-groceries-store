@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,14 +25,13 @@ import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.presentation.core.widgets.WebImage
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.Meal
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MealItem(
     modifier: Modifier = Modifier,
     meal: Meal
 ) {
     Card(
-        onClick = { /*TODO*/ },
         modifier = modifier
             .height(164.dp)
             .fillMaxWidth(),
