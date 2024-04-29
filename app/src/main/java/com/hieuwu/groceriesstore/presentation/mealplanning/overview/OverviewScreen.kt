@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.NavigateBefore
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -30,12 +29,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.mealplanning.addmeal.AddMealBottomSheet
+import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.EmptyListIndicatorText
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.LineTextButton
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.MealItem
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.WeekDayItem
@@ -45,7 +44,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun OverViewScreen(
     modifier: Modifier = Modifier,
-    viewModel: OverviewViewModel = hiltViewModel()
+    viewModel: OverviewViewModel = hiltViewModel(),
+    onNavigateUpClick: () -> Unit
 ) {
     val breakfastList = viewModel.breakfastMeals.collectAsState().value
     val weekDays = viewModel.day.collectAsState().value
@@ -66,7 +66,7 @@ fun OverViewScreen(
                 containerColor = colorResource(id = R.color.colorPrimary)
             ),
             navigationIcon = {
-                IconButton(onClick = { }) {
+                IconButton(onClick = onNavigateUpClick) {
                     Icon(
                         imageVector = Icons.Filled.NavigateBefore,
                         contentDescription = null,
@@ -142,14 +142,7 @@ fun OverViewScreen(
                 }
             } else {
                 item {
-                    Text(
-                        text = "There is no meal. Add a meal to your plan",
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        textAlign = TextAlign.Center
-                    )
+                    EmptyListIndicatorText()
                 }
             }
 
@@ -170,14 +163,7 @@ fun OverViewScreen(
                 }
             } else {
                 item {
-                    Text(
-                        text = "There is no meal. Add a meal to your plan",
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        textAlign = TextAlign.Center
-                    )
+                    EmptyListIndicatorText()
                 }
             }
 
@@ -202,22 +188,14 @@ fun OverViewScreen(
                 }
             } else {
                 item {
-                    Text(
-                        text = "There is no meal. Add a meal to your plan",
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        textAlign = TextAlign.Center
-                    )
+                    EmptyListIndicatorText()
                 }
             }
-
         }
     }
 }
 
- data class MealAddingState(
+data class MealAddingState(
     val name: MutableState<String> = mutableStateOf(""),
     val ingredients: MutableState<List<String>> = mutableStateOf(listOf())
 )
@@ -225,5 +203,5 @@ fun OverViewScreen(
 @Composable
 @Preview
 fun OverViewScreenPreview(modifier: Modifier = Modifier) {
-    OverViewScreen(modifier)
+    OverViewScreen(modifier, onNavigateUpClick = {})
 }

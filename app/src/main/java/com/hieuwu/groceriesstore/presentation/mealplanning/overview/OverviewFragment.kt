@@ -7,19 +7,22 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OverviewFragment : Fragment() {
-//    val viewModel: OverviewViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                OverViewScreen()
+                OverViewScreen(
+                    onNavigateUpClick = { findNavController().navigateUp() }
+                )
             }
         }
     }
+
 }
