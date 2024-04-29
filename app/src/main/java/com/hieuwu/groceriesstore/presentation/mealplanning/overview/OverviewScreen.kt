@@ -37,6 +37,7 @@ import com.hieuwu.groceriesstore.presentation.mealplanning.addmeal.AddMealBottom
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.EmptyListIndicatorText
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.LineTextButton
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.MealItem
+import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.SwipeToDeleteContainer
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.WeekDayItem
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
 import kotlinx.coroutines.launch
@@ -138,8 +139,15 @@ fun OverViewScreen(
                 )
             }
             if (breakfastList.isNotEmpty()) {
-                items(breakfastList) { meal ->
-                    MealItem(meal = meal)
+                items(breakfastList, key = { it.id }) { meal ->
+                    SwipeToDeleteContainer(
+                        item = meal,
+                        onDelete = {
+                            viewModel.onRemoveMeal(meal.id)
+                        }
+                    ) { meal ->
+                        MealItem(meal = meal, modifier = modifier.padding(16.dp))
+                    }
                 }
             } else {
                 item {
@@ -159,17 +167,20 @@ fun OverViewScreen(
             }
 
             if (lunchMeals.isNotEmpty()) {
-                items(lunchMeals) { meal ->
-                    MealItem(meal = meal, modifier = modifier)
+                items(lunchMeals, key = { it.id }) { meal ->
+                    SwipeToDeleteContainer(
+                        item = meal,
+                        onDelete = {
+                            viewModel.onRemoveMeal(meal.id)
+                        }
+                    ) { meal ->
+                        MealItem(meal = meal, modifier = modifier.padding(16.dp))
+                    }
                 }
             } else {
                 item {
                     EmptyListIndicatorText()
                 }
-            }
-
-            items(lunchMeals) { meal ->
-                MealItem(meal = meal, modifier = modifier)
             }
 
             item {
@@ -184,8 +195,15 @@ fun OverViewScreen(
             }
 
             if (dinnerMeals.isNotEmpty()) {
-                items(dinnerMeals) { meal ->
-                    MealItem(meal = meal, modifier = modifier)
+                items(dinnerMeals, key = { it.id }) { meal ->
+                    SwipeToDeleteContainer(
+                        item = meal,
+                        onDelete = {
+                            viewModel.onRemoveMeal(meal.id)
+                        }
+                    ) { meal ->
+                        MealItem(meal = meal, modifier = modifier.padding(16.dp))
+                    }
                 }
             } else {
                 item {
