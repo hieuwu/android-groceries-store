@@ -6,12 +6,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.rounded.Backspace
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IconTextInput(
     leadingIcon: ImageVector,
@@ -43,8 +46,7 @@ fun IconTextInput(
                 border = BorderStroke(
                     width = 1.dp,
                     color = colorResource(id = R.color.colorPrimary),
-
-                    ),
+                ),
                 shape = RoundedCornerShape(6.dp)
             ),
         value = value,
@@ -57,6 +59,11 @@ fun IconTextInput(
                 tint = colorResource(id = R.color.primary_button)
             )
         },
+        colors = TextFieldDefaults.textFieldColors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        ),
         trailingIcon = {
             Icon(
                 modifier = modifier.clickable {

@@ -23,9 +23,6 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-var rapidApiHost = "tasty.p.rapidapi.com"
-var rapidApiKey = "25623d5122mshdf7d5b25fc85d92p16d42bjsn846c1ccf5e93"
-
 interface RecipesApiService {
     @Headers(
         "x-rapidapi-host: tasty.p.rapidapi.com",

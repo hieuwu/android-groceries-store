@@ -59,6 +59,8 @@
     <string name="update_profile_failed">Update profile failed!</string>
     <string name="notification_settings">Notification settings</string>
     <string name="order_history_settings">Order history</string>
+    <string name="meal_planning_settings">Meal Planning</string>
+
 
     <string name="notifications">Notifications</string>
     <string name="show_when_order_created">Show when order created</string>

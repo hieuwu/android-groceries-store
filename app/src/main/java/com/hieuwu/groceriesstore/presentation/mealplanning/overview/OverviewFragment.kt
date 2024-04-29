@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.orderhistory
+package com.hieuwu.groceriesstore.presentation.mealplanning.overview
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,19 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OrderHistoryFragment : Fragment() {
-
+class OverviewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                OrderHistoryScreen()
+                OverViewScreen(
+                    onNavigateUpClick = { findNavController().navigateUp() }
+                )
             }
         }
     }
+
 }

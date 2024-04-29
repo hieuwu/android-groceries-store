@@ -46,6 +46,7 @@ import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTex
 fun SignInScreen(
     modifier: Modifier = Modifier,
     onSignUpClick: () -> Unit,
+    onSignInSuccess: () -> Unit,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -56,10 +57,10 @@ fun SignInScreen(
                 snackbarHostState.showSnackbar("Account not existed!")
             }
     }
-
     LaunchedEffect(Unit) {
         viewModel.isSignUpSuccessful.collect {
             snackbarHostState.showSnackbar("Sign in successfully!")
+            onSignInSuccess()
         }
     }
 
@@ -136,7 +137,8 @@ fun SignInScreen(
                     onClick = onSignUpClick,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent,
-                        contentColor = colorResource(id = R.color.colorPrimary)),
+                        contentColor = colorResource(id = R.color.colorPrimary)
+                    ),
                 ) {
                     Text("Sign up")
                 }
@@ -149,5 +151,5 @@ fun SignInScreen(
 @Preview
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen(onSignUpClick = {})
+    SignInScreen(onSignUpClick = {}, onSignInSuccess = {})
 }

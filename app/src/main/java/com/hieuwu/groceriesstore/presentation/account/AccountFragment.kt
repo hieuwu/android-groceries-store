@@ -28,6 +28,7 @@ class AccountFragment : Fragment() {
                     onProfileSettingsClick = ::navigateToProfileSettings,
                     onNotificationSettingsClick = ::navigateToNotificationsSettings,
                     onOrderHistorySettingsClick = ::navigateToOrderHistory,
+                    onMealPlanningClick = ::navigateToMealPlanning,
                 )
             }
         }
@@ -48,5 +49,9 @@ class AccountFragment : Fragment() {
 
     private fun navigateToOrderHistory() {
         findNavController().navigate(R.id.action_accountFragment_to_orderHistoryFragment)
+    }
+
+    private fun navigateToMealPlanning() {
+        findNavController().navigate(R.id.action_accountFragment_to_overviewFragment)
     }
 }

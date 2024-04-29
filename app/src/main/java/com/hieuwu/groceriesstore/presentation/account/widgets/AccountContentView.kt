@@ -32,6 +32,7 @@ fun AccountContentView(
     onProfileSettingsClick: () -> Unit,
     onNotificationSettingsClick: () -> Unit,
     onOrderHistorySettingsClick: () -> Unit,
+    onMealPlanningClick: () -> Unit,
     onSignOutClick: () -> Unit,
 ) {
     if (user != null) {
@@ -41,6 +42,7 @@ fun AccountContentView(
             onNotificationSettingsClick = onNotificationSettingsClick,
             onOrderHistorySettingsClick = onOrderHistorySettingsClick,
             onSignOutClick = onSignOutClick,
+            onMealPlanningClick = onMealPlanningClick
         )
     } else {
         AccountContentSignedOutView(
@@ -56,12 +58,14 @@ fun AccountContentSignedInView(
     onProfileSettingsClick: (() -> Unit),
     onNotificationSettingsClick: (() -> Unit),
     onOrderHistorySettingsClick: (() -> Unit),
+    onMealPlanningClick: (() -> Unit),
     onSignOutClick: (() -> Unit),
 ) {
     val actions = listOf(
         R.string.profile_information to onProfileSettingsClick,
         R.string.notification_settings to onNotificationSettingsClick,
         R.string.order_history_settings to onOrderHistorySettingsClick,
+        R.string.meal_planning_settings to onMealPlanningClick,
     )
     for (action in actions) {
         Row(
@@ -120,6 +124,7 @@ private fun AccountContentViewSignedInStatePreview() {
             onProfileSettingsClick = {},
             onNotificationSettingsClick = {},
             onOrderHistorySettingsClick = {},
+            onMealPlanningClick = {}
         ) {}
     }
 }
@@ -134,6 +139,7 @@ private fun AccountContentViewSignedOutStatePreview() {
             onProfileSettingsClick = {},
             onNotificationSettingsClick = {},
             onOrderHistorySettingsClick = {},
+            onMealPlanningClick = {}
         ) {}
     }
 }

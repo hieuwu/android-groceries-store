@@ -23,7 +23,9 @@ fun AccountScreen(
     onProfileSettingsClick: (() -> Unit),
     onNotificationSettingsClick: (() -> Unit),
     onOrderHistorySettingsClick: (() -> Unit),
-) {
+    onMealPlanningClick: (() -> Unit),
+
+    ) {
     val user = viewModel.user.collectAsState()
 
     AccountScreenView(
@@ -34,6 +36,7 @@ fun AccountScreen(
         onNotificationSettingsClick = onNotificationSettingsClick,
         onOrderHistorySettingsClick = onOrderHistorySettingsClick,
         onSignOutClick = { viewModel.signOut() },
+        onMealPlanningClick = onMealPlanningClick
     )
 }
 
@@ -45,6 +48,7 @@ private fun AccountScreenView(
     onProfileSettingsClick: () -> Unit,
     onNotificationSettingsClick: () -> Unit,
     onOrderHistorySettingsClick: () -> Unit,
+    onMealPlanningClick: () -> Unit,
     onSignOutClick: () -> Unit,
 ) {
     Scaffold { contentPadding ->
@@ -62,6 +66,7 @@ private fun AccountScreenView(
                 onNotificationSettingsClick = onNotificationSettingsClick,
                 onOrderHistorySettingsClick = onOrderHistorySettingsClick,
                 onSignOutClick = onSignOutClick,
+                onMealPlanningClick = onMealPlanningClick,
             )
         }
     }
@@ -86,6 +91,7 @@ private fun SignedInAccountScreen() {
         onNotificationSettingsClick = { /*TODO*/ },
         onOrderHistorySettingsClick = { /*TODO*/ },
         onSignOutClick = { /*TODO*/ },
+        onMealPlanningClick = {}
     )
 }
 
@@ -98,5 +104,6 @@ private fun SignedOutAccountScreen() {
         onNotificationSettingsClick = { /*TODO*/ },
         onOrderHistorySettingsClick = { /*TODO*/ },
         onSignOutClick = { /*TODO*/ },
+        onMealPlanningClick = {}
     )
 }

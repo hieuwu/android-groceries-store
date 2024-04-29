@@ -11,7 +11,9 @@ import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.serializer.KotlinXSerializer
 import io.ktor.client.plugins.*
+import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -23,8 +25,9 @@ object SupabaseModule {
     fun provideSupabaseClient(): SupabaseClient {
         return createSupabaseClient(
             supabaseUrl = BuildConfig.SUPABASE_URL,
-            supabaseKey = BuildConfig.API_KEY
+            supabaseKey = BuildConfig.API_KEY,
         ) {
+            defaultSerializer = KotlinXSerializer(Json { ignoreUnknownKeys = true })
             install(Postgrest)
             install(Auth)
         }

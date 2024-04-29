@@ -54,7 +54,13 @@ class UserRepositoryImpl @Inject constructor(
                 this.password = password
             }
 
-            val userDto = postgrest[CollectionNames.users].select().decodeSingle<UserDto>()
+            val userDto = postgrest[CollectionNames.users].select()
+            {
+                filter {
+                    UserDto::email eq email
+                }
+            }
+                .decodeSingle<UserDto>()
             val user = SupabaseMapper.mapDtoToEntity(userDto)
             userDao.insert(user)
             true

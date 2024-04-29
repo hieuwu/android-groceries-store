@@ -13,6 +13,10 @@
             app:destination="@id/updateProfileFragment" />
 
         <action
+            android:id="@+id/action_accountFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
+
+        <action
             android:id="@+id/action_shopFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
         <action
@@ -23,6 +27,12 @@
             app:destination="@id/orderHistoryFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.hieuwu.groceriesstore.presentation.mealplanning.overview.OverviewFragment"
+        android:label="fragment_overview">
+
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -49,7 +59,7 @@
         android:id="@+id/exploreFragment"
         android:name="com.hieuwu.groceriesstore.presentation.explore.ExploreFragment"
         android:label="fragment_explore"
-        tools:layout="@layout/fragment_explore" >
+        tools:layout="@layout/fragment_explore">
         <action
             android:id="@+id/action_exploreFragment_to_productListFragment"
             app:destination="@id/productListFragment" />
@@ -104,7 +114,7 @@
     <fragment
         android:id="@+id/deliveryFragment"
         android:name="com.hieuwu.groceriesstore.presentation.delivery.DeliveryFragment"
-        android:label="DeliveryFragment" >
+        android:label="DeliveryFragment">
         <action
             android:id="@+id/action_deliveryFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
@@ -112,7 +122,7 @@
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.hieuwu.groceriesstore.presentation.productlist.ProductListFragment"
-        android:label="ProductListFragment" >
+        android:label="ProductListFragment">
         <argument
             android:name="categoryName"
             app:argType="string" />

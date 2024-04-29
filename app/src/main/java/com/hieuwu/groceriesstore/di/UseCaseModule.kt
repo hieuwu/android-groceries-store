@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.di
 
+import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.AddToCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
@@ -18,6 +19,8 @@ import com.hieuwu.groceriesstore.domain.usecases.impl.GetProductsListUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.GetProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
+import com.hieuwu.groceriesstore.domain.usecases.RemoveMealFromPlanUseCase
+import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.RefreshAppDataUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.SearchProductUseCaseImpl
@@ -32,7 +35,10 @@ import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateCartItemUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateProfileUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
+import com.hieuwu.groceriesstore.domain.usecases.impl.AddMealToPlanUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.GetOrderListUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.impl.RemoveMealFromPlanUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.impl.RetrieveMealByTypeUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.UserSettingsUseCaseImpl
 import dagger.Binds
 import dagger.Module
@@ -110,5 +116,18 @@ abstract class UseCaseModule {
     @ViewModelScoped
     @Binds
     abstract fun bindGetOrdersUseCase(impl: GetOrderListUseCaseImpl): GetOrderListUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindAddMealToPlan(impl: AddMealToPlanUseCaseImpl): AddMealToPlanUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindRetrieveMealByType(impl: RetrieveMealByTypeUseCaseImpl): RetrieveMealByTypeUseCase
+
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindRemoveMealFromPlan(impl: RemoveMealFromPlanUseCaseImpl): RemoveMealFromPlanUseCase
 
 }
