@@ -8,7 +8,6 @@ import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -76,20 +75,9 @@ class OverviewViewModel @Inject constructor(
         )
         when (result) {
             is RetrieveMealByTypeUseCase.Output.Success -> {
+
                 result.data.collect {
-                    when (mealType) {
-                        MealType.BREAKFAST -> {
-                            _breakfastMeals.emit(it.map { it.asDomain() })
-                        }
-
-                        MealType.LUNCH -> {
-                            _lunchMeals.emit(it.map { it.asDomain() })
-                        }
-
-                        MealType.DINNER -> {
-                            _dinnerMeals.emit(it.map { it.asDomain() })
-                        }
-                    }
+                    mapMealByType(mealType = mealType, meals = it)
                 }
             }
 
@@ -105,6 +93,22 @@ class OverviewViewModel @Inject constructor(
         imageUrl = "",
         ingredients = ingredients.toList()
     )
+
+    private suspend fun mapMealByType(mealType: MealType, meals: List<MealModel>) {
+        when (mealType) {
+            MealType.BREAKFAST -> {
+                _breakfastMeals.emit(meals.map { meal -> meal.asDomain() })
+            }
+
+            MealType.LUNCH -> {
+                _lunchMeals.emit(meals.map { it.asDomain() })
+            }
+
+            MealType.DINNER -> {
+                _dinnerMeals.emit(meals.map { it.asDomain() })
+            }
+        }
+    }
 
     fun onWeekDaySelected(index: Int) {
         selectedDayIndex = index
