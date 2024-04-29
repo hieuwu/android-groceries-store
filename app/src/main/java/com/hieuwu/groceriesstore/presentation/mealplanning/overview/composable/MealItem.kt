@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.presentation.core.widgets.WebImage
-import com.hieuwu.groceriesstore.presentation.mealplanning.overview.Meal
+import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.Meal
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable

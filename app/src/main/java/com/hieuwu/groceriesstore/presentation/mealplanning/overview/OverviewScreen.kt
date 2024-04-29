@@ -38,6 +38,7 @@ import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.E
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.LineTextButton
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.MealItem
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.WeekDayItem
+import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

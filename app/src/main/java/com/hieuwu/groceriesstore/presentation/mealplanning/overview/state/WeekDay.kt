@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.mealplanning.overview
+package com.hieuwu.groceriesstore.presentation.mealplanning.overview.state
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

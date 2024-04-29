@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.mealplanning.overview
+package com.hieuwu.groceriesstore.presentation.mealplanning.overview.state
 
 enum class WeekDayValue(val dayValue: String) {
     Mon("Mon"),

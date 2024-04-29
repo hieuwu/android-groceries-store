@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.presentation.mealplanning.overview
+package com.hieuwu.groceriesstore.presentation.mealplanning.overview.state
 
 data class Meal(
     val id: String,

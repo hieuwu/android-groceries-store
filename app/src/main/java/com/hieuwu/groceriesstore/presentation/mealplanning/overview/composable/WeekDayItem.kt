@@ -18,7 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.presentation.mealplanning.overview.WeekDay
+import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.WeekDay
 
 @Composable
 fun WeekDayItem(
