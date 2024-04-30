@@ -7,7 +7,8 @@ interface MealPlanRepository {
         weekDay: String,
         name: String,
         ingredients: List<String>,
-        mealType: String
+        mealType: String,
+        mealImageUri: ByteArray
     )
 
     suspend fun retrieveMealByType(type: String, weekDayValue: String): List<MealModel>
