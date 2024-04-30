@@ -1,5 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.mealplanning.overview
 
+import android.content.ContentResolver
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,6 +43,8 @@ import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.M
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.SwipeToDeleteContainer
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.WeekDayItem
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -82,6 +87,7 @@ fun OverViewScreen(
         val scope = rememberCoroutineScope()
         val mealAddState = remember { mutableStateOf(MealAddingState()) }
         if (showBottomSheet.value) {
+            val contentResolver = LocalContext.current.contentResolver
             AddMealBottomSheet(
                 onDismissRequest = {
                     showBottomSheet.value = false
@@ -89,10 +95,12 @@ fun OverViewScreen(
                 sheetState = sheetState,
                 mealAddState = mealAddState,
                 onAddMealClick = {
+                    val image = uriToByteArray(contentResolver, mealAddState.value.imageUri.value ?: Uri.parse(""))
                     viewModel.onAddMeal(
                         mealType = mealType.value,
                         name = mealAddState.value.name.value,
-                        ingredients = mealAddState.value.ingredients.value
+                        ingredients = mealAddState.value.ingredients.value,
+                        mealImageUri = image
                     )
                     mealAddState.value.name.value = ""
                     mealAddState.value.ingredients.value = listOf()
@@ -216,11 +224,37 @@ fun OverViewScreen(
 
 data class MealAddingState(
     val name: MutableState<String> = mutableStateOf(""),
-    val ingredients: MutableState<List<String>> = mutableStateOf(listOf())
+    val ingredients: MutableState<List<String>> = mutableStateOf(listOf()),
+    val imageUri: MutableState<Uri?> = mutableStateOf(null)
 )
 
 @Composable
 @Preview
 fun OverViewScreenPreview(modifier: Modifier = Modifier) {
     OverViewScreen(modifier, onNavigateUpClick = {})
+}
+
+
+
+private fun getBytes(inputStream: InputStream): ByteArray {
+    val byteBuffer = ByteArrayOutputStream()
+    val bufferSize = 1024
+    val buffer = ByteArray(bufferSize)
+    var len = 0
+    while (inputStream.read(buffer).also { len = it } != -1) {
+        byteBuffer.write(buffer, 0, len)
+    }
+    return byteBuffer.toByteArray()
+}
+
+
+private fun uriToByteArray(contentResolver: ContentResolver, uri: Uri): ByteArray {
+    if (uri == Uri.EMPTY) {
+        return byteArrayOf()
+    }
+    val inputStream = contentResolver.openInputStream(uri)
+    if (inputStream != null) {
+        return getBytes(inputStream)
+    }
+    return byteArrayOf()
 }
