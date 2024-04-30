@@ -2,23 +2,32 @@
 
 package com.hieuwu.groceriesstore.presentation.mealplanning.addmeal
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircleOutline
 import androidx.compose.material.icons.filled.Cookie
 import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.Backspace
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
@@ -27,16 +36,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.MealAddingState
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.IngredientChip
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun AddMealBottomSheet(
     modifier: Modifier = Modifier,
@@ -45,6 +59,15 @@ fun AddMealBottomSheet(
     onDismissRequest: () -> Unit,
     onAddMealClick: () -> Unit,
 ) {
+    val pickMedia =
+        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                mealAddState.value.imageUri.value = uri
+
+            } else {
+                // no-op
+            }
+        }
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = sheetState
@@ -56,11 +79,42 @@ fun AddMealBottomSheet(
                 .height(350.dp)
                 .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
         ) {
-            Text(
-                text = "Add a meal",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold
-            )
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Add a meal",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = modifier.width(24.dp))
+                if (mealAddState.value.imageUri.value == null) {
+                    Icon(
+                        imageVector = Icons.Default.AddCircleOutline, contentDescription = null,
+                        tint = colorResource(
+                            id = R.color.colorPrimary,
+                        ),
+                        modifier = modifier
+                            .size(24.dp)
+                            .clickable {
+                                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            },
+                    )
+                } else {
+                    GlideImage(
+                        contentScale = ContentScale.Crop,
+                        model = mealAddState.value.imageUri.value,
+                        contentDescription = null,
+                        modifier = modifier
+                            .size(64.dp)
+                            .clip(RoundedCornerShape(6.dp))
+                            .clickable {
+                                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            }
+                    )
+                }
+            }
             Spacer(modifier = modifier.height(24.dp))
             IconTextInput(
                 leadingIcon = Icons.Default.Cookie,
