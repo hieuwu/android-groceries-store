@@ -96,7 +96,7 @@ class OverviewViewModel @Inject constructor(
     private fun MealModel.asDomain(): Meal = Meal(
         id = id,
         name = name,
-        imageUrl = "",
+        imageUrl = imageUrl,
         ingredients = ingredients.toList()
     )
 
@@ -134,22 +134,28 @@ class OverviewViewModel @Inject constructor(
         }
     }
 
-    fun onAddMeal(mealType: MealType, name: String, ingredients: List<String>) {
+    fun onAddMeal(
+        mealType: MealType,
+        name: String,
+        ingredients: List<String>,
+        mealImageUri: ByteArray
+    ) {
         when (mealType) {
-            MealType.BREAKFAST -> onAddBreakfast(name, ingredients)
-            MealType.DINNER -> onAddDinner(name, ingredients)
-            MealType.LUNCH -> onAddLunch(name, ingredients)
+            MealType.BREAKFAST -> onAddBreakfast(name, ingredients, mealImageUri)
+            MealType.DINNER -> onAddDinner(name, ingredients, mealImageUri)
+            MealType.LUNCH -> onAddLunch(name, ingredients, mealImageUri)
         }
     }
 
-    private fun onAddBreakfast(name: String, ingredients: List<String>) {
+    private fun onAddBreakfast(name: String, ingredients: List<String>, mealImageUri: ByteArray) {
         viewModelScope.launch {
             addMealToPlanUseCase.execute(
                 AddMealToPlanUseCase.Input(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,
                     ingredients = ingredients,
-                    mealType = MealType.BREAKFAST
+                    mealType = MealType.BREAKFAST,
+                    mealImageUri = mealImageUri
                 )
             )
             _breakfastMeals.value = addMealToList(
@@ -159,14 +165,15 @@ class OverviewViewModel @Inject constructor(
         }
     }
 
-    private fun onAddLunch(name: String, ingredients: List<String>) {
+    private fun onAddLunch(name: String, ingredients: List<String>, mealImageUri: ByteArray) {
         viewModelScope.launch {
             addMealToPlanUseCase.execute(
                 AddMealToPlanUseCase.Input(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,
                     ingredients = ingredients,
-                    mealType = MealType.LUNCH
+                    mealType = MealType.LUNCH,
+                    mealImageUri = mealImageUri,
                 )
             )
             _lunchMeals.value = addMealToList(
@@ -176,14 +183,15 @@ class OverviewViewModel @Inject constructor(
         }
     }
 
-    private fun onAddDinner(name: String, ingredients: List<String>) {
+    private fun onAddDinner(name: String, ingredients: List<String>, mealImageUri: ByteArray) {
         viewModelScope.launch {
             addMealToPlanUseCase.execute(
                 AddMealToPlanUseCase.Input(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,
                     ingredients = ingredients,
-                    mealType = MealType.DINNER
+                    mealType = MealType.DINNER,
+                    mealImageUri = mealImageUri,
                 )
             )
             _dinnerMeals.value = addMealToList(

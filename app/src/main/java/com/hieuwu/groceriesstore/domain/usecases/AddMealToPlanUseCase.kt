@@ -4,8 +4,13 @@ import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealTy
 
 interface AddMealToPlanUseCase :
     SuspendUseCase<AddMealToPlanUseCase.Input, AddMealToPlanUseCase.Output> {
-    class Input(val name: String, val weekDay: String, val ingredients: List<String>,
-        val mealType: MealType
+    class Input(
+        val name: String,
+        val weekDay: String,
+        val ingredients: List<String>,
+        val mealType: MealType,
+        val mealImageUri: ByteArray,
     )
+
     object Output
 }

@@ -1,8 +1,6 @@
 package com.hieuwu.groceriesstore.utilities
 
 enum class OrderStatus(val value: String) { IN_CART("cart"), COMPLETED("completed") }
-enum class ProductListMode(val value: String) { CATEGORY("category"), DEFAULT("product") }
-enum class FilterOrder(val value: String) { ASC("asc"), DESC("desc") }
 
 const val PRODUCT_TABLE = "product"
 const val CATEGORY_TABLE = "category"
@@ -11,7 +9,6 @@ const val ORDER_TABLE = "order"
 const val LINE_ITEM_TABLE = "lineItem"
 const val RECIPE_TABLE = "recipe"
 
-const val DATABASE_NAME = ""
 
 object KeyData {
     const val RESULT_KEY = "CHECKOUT_TO_DELIVERY_UPDATE"

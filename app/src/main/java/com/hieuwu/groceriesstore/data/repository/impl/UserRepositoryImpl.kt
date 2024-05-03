@@ -5,12 +5,11 @@ import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.dto.UserDto
 import com.hieuwu.groceriesstore.data.repository.UserRepository
-import com.hieuwu.groceriesstore.utilities.CollectionNames
-import com.hieuwu.groceriesstore.utilities.SupabaseMapper
+import com.hieuwu.groceriesstore.data.network.RemoteTable
 import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.postgrest.Postgrest
-import java.util.*
+import java.util.UUID
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import javax.inject.Inject
@@ -37,8 +36,8 @@ class UserRepositoryImpl @Inject constructor(
                 isPromotionNotiEnabled = false,
                 isDataRefreshedNotiEnabled = false
             )
-            postgrest[CollectionNames.users].upsert(value = userDto)
-            val user = SupabaseMapper.mapDtoToEntity(userDto)
+            postgrest[RemoteTable.Users.tableName].upsert(value = userDto)
+            val user = userDto.asEntity()
             userDao.insert(user)
             true
         } catch (e: Exception) {
@@ -54,14 +53,14 @@ class UserRepositoryImpl @Inject constructor(
                 this.password = password
             }
 
-            val userDto = postgrest[CollectionNames.users].select()
+            val userDto = postgrest[RemoteTable.Users.tableName].select()
             {
                 filter {
                     UserDto::email eq email
                 }
             }
                 .decodeSingle<UserDto>()
-            val user = SupabaseMapper.mapDtoToEntity(userDto)
+            val user = userDto.asEntity()
             userDao.insert(user)
             true
         } catch (e: Exception) {
@@ -84,7 +83,7 @@ class UserRepositoryImpl @Inject constructor(
             isDataRefreshedNotiEnabled = false
         )
         try {
-            postgrest[CollectionNames.users].update(
+            postgrest[RemoteTable.Users.tableName].update(
                 {
                     UserDto::phone setTo phone
                     UserDto::email setTo email
@@ -110,7 +109,7 @@ class UserRepositoryImpl @Inject constructor(
         isPromotionEnabled: Boolean
     ) {
         try {
-            postgrest[CollectionNames.users].update(
+            postgrest[RemoteTable.Users.tableName].update(
                 {
                     UserDto::isOrderCreatedNotiEnabled setTo isOrderCreatedEnabled
                     UserDto::isDataRefreshedNotiEnabled setTo isDatabaseRefreshedEnabled
@@ -136,4 +135,14 @@ class UserRepositoryImpl @Inject constructor(
         it?.asDomainModel()
     }
 
+    private fun UserDto.asEntity(): User = User(
+        id = id,
+        name = name,
+        email = email,
+        address = address,
+        phone = phone,
+        isDataRefreshedNotiEnabled = isDataRefreshedNotiEnabled,
+        isOrderCreatedNotiEnabled = isOrderCreatedNotiEnabled,
+        isPromotionNotiEnabled = isPromotionNotiEnabled,
+    )
 }

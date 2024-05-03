@@ -12,7 +12,8 @@ class AddMealToPlanUseCaseImpl @Inject constructor(
             weekDay = input.weekDay,
             name = input.name,
             ingredients = input.ingredients,
-            mealType = input.mealType.value
+            mealType = input.mealType.value,
+            mealImageUri = input.mealImageUri
         )
         return AddMealToPlanUseCase.Output
     }
