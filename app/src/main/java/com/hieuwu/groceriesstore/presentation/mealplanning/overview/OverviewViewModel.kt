@@ -96,7 +96,7 @@ class OverviewViewModel @Inject constructor(
     private fun MealModel.asDomain(): Meal = Meal(
         id = id,
         name = name,
-        imageUrl = "",
+        imageUrl = imageUrl,
         ingredients = ingredients.toList()
     )
 
