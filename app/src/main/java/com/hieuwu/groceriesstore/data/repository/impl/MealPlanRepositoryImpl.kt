@@ -4,6 +4,7 @@ import com.hieuwu.groceriesstore.data.network.dto.Meal
 import com.hieuwu.groceriesstore.data.repository.MealPlanRepository
 import com.hieuwu.groceriesstore.data.repository.UserRepository
 import com.hieuwu.groceriesstore.domain.models.MealModel
+import com.hieuwu.groceriesstore.utilities.SupabaseHelper
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.storage.Storage
 import java.util.UUID
@@ -33,20 +34,21 @@ class MealPlanRepositoryImpl @Inject constructor(
                 creatorId = userId,
                 weekDay = weekDay,
                 mealType = mealType,
+                image = null,
             )
         )
-
         val imageKey =
             storage.from("meals").upload(path = "$mealId.png", data = mealImageUri, upsert = true)
-
+        val imageUrl = SupabaseHelper.buildImageUrl(imageKey)
         postgrest["meal_plans"].update({
-            set("image", imageKey)
+            set("image", imageUrl)
         }) {
             filter {
                 eq("id", mealId)
             }
         }
     }
+
 
     override suspend fun retrieveMealByType(type: String, weekDayValue: String): List<MealModel> {
         val userId = userRepository.getCurrentUser().first()?.id ?: ""
@@ -64,7 +66,8 @@ class MealPlanRepositoryImpl @Inject constructor(
                 ingredients = it.ingredients,
                 weekDay = it.weekDay,
                 creatorId = it.creatorId,
-                mealType = it.mealType
+                mealType = it.mealType,
+                imageUrl = it.image ?: ""
             )
         }
         return result
