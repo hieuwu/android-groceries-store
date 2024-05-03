@@ -29,7 +29,6 @@ import com.hieuwu.groceriesstore.R
 
 @Composable
 fun OrderHistoryScreen(
-//    navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: OrderListViewModel = hiltViewModel()
 ) {
