@@ -22,4 +22,8 @@ data class Meal(
 
     @SerialName("meal_type")
     val mealType: String,
+
+    @SerialName("image")
+    val image: String?,
+
 )

@@ -7,4 +7,5 @@ data class MealModel(
     val weekDay: String,
     val creatorId: String,
     val mealType: String,
+    val imageUrl: String,
 )
