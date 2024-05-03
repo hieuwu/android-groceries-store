@@ -2,12 +2,12 @@ package com.hieuwu.groceriesstore.data.repository.impl
 
 import com.hieuwu.groceriesstore.data.database.dao.LineItemDao
 import com.hieuwu.groceriesstore.data.database.dao.ProductDao
+import com.hieuwu.groceriesstore.data.database.entities.Product
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.network.RemoteTable
 import com.hieuwu.groceriesstore.data.network.dto.ProductDto
 import com.hieuwu.groceriesstore.data.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.models.ProductModel
-import com.hieuwu.groceriesstore.utilities.CollectionNames
-import com.hieuwu.groceriesstore.utilities.SupabaseMapper
 import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -28,9 +28,9 @@ class ProductRepositoryImpl @Inject constructor(
 
     override suspend fun refreshDatabase() {
         try {
-            val result = supabasePostgrest[CollectionNames.products]
+            val result = supabasePostgrest[RemoteTable.Product.tableName]
                 .select().decodeList<ProductDto>()
-            val products = result.map { SupabaseMapper.mapToEntity(it) }
+            val products = result.map { it.asEntity() }
             productDao.insertAll(products)
         } catch (e: Exception) {
             Timber.e(e.message)
@@ -78,5 +78,15 @@ class ProductRepositoryImpl @Inject constructor(
         }
         return flow {}
     }
+
+    private fun ProductDto.asEntity(): Product = Product(
+        id = productId,
+        name = name,
+        nutrition = nutrition,
+        description = description,
+        image = image,
+        price = price,
+        category = category,
+    )
 
 }

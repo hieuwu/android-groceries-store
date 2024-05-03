@@ -1,11 +1,11 @@
 package com.hieuwu.groceriesstore.data.repository.impl
 
 import com.hieuwu.groceriesstore.data.database.dao.CategoryDao
+import com.hieuwu.groceriesstore.data.database.entities.Category
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
+import com.hieuwu.groceriesstore.data.network.RemoteTable
 import com.hieuwu.groceriesstore.data.network.dto.CategoriesDto
 import com.hieuwu.groceriesstore.data.repository.CategoryRepository
-import com.hieuwu.groceriesstore.utilities.CollectionNames
-import com.hieuwu.groceriesstore.utilities.SupabaseMapper
 import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
@@ -19,10 +19,10 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun refreshDatabase() {
         try {
-            val result = supabasePostgrest[CollectionNames.categories]
+            val result = supabasePostgrest[RemoteTable.Categories.tableName]
                 .select()
             val res = result.decodeList<CategoriesDto>()
-            val categories = res.map { SupabaseMapper.mapToEntity(it) }
+            val categories = res.map { it.asEntity() }
             categoryDao.insertAll(categories)
         } catch (e: Exception) {
             Timber.e(e.message)
@@ -30,5 +30,11 @@ class CategoryRepositoryImpl @Inject constructor(
     }
 
     override fun getFromLocal() = categoryDao.getAll().map { it.asDomainModel() }
+
+    private fun CategoriesDto.asEntity(): Category = Category(
+        id = id,
+        name = name,
+        image = image,
+    )
 
 }

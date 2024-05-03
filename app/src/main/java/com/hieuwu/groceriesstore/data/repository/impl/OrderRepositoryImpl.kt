@@ -8,10 +8,12 @@ import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.dto.OrderDto
 import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.models.OrderModel
-import com.hieuwu.groceriesstore.utilities.CollectionNames
 import com.hieuwu.groceriesstore.utilities.OrderStatus
-import com.hieuwu.groceriesstore.utilities.SupabaseMapper
+import com.hieuwu.groceriesstore.data.network.RemoteTable
+import com.hieuwu.groceriesstore.data.network.dto.LineItemDto
+import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import io.github.jan.supabase.postgrest.Postgrest
+import java.util.Date
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -52,11 +54,11 @@ class OrderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun sendOrderToServer(order: OrderModel): Boolean {
-        val orderDto = SupabaseMapper.mapModelToDto(order)
-        val lineItems = SupabaseMapper.mapModelListToDto(order)
+        val orderDto = mapModelToDto(order)
+        val lineItems = mapModelListToDto(order)
         return try {
-            postgrest[CollectionNames.orders].insert(orderDto)
-            postgrest[CollectionNames.lineItems].insert(lineItems)
+            postgrest[RemoteTable.Orders.tableName].insert(orderDto)
+            postgrest[RemoteTable.LineItems.tableName].insert(lineItems)
             orderDao.clear()
             true
         } catch (e: Exception) {
@@ -67,10 +69,47 @@ class OrderRepositoryImpl @Inject constructor(
 
     override suspend fun getOrders(): List<OrderModel> {
         return try {
-            val result = postgrest[CollectionNames.orders].select().decodeList<OrderDto>()
-            result.map { SupabaseMapper.mapToModel(it) }
+            val result = postgrest[RemoteTable.Orders.tableName].select().decodeList<OrderDto>()
+            result.map { mapToModel(it) }
         } catch (e: Exception) {
             listOf()
         }
+    }
+
+    private fun mapToModel(order: OrderDto): OrderModel {
+        return OrderModel(
+            id = order.orderId,
+            status = order.status,
+            address = order.address,
+            lineItemList = mutableListOf(),
+            createdAt = order.createdAt
+        ).apply {
+            totalPrice = order.total
+        }
+    }
+
+    private fun mapModelToDto(order: OrderModel): OrderDto {
+        return OrderDto(
+            orderId = order.id,
+            address = order.address,
+            status = order.status ?: "",
+            createdAt = Date().toString(),
+            total = order.total
+        )
+    }
+
+    private fun mapModelToDto(lineItemModel: LineItemModel, orderId: String): LineItemDto {
+        return LineItemDto(
+            id = lineItemModel.id ?: 0,
+            productId = lineItemModel.productId ?: "",
+            orderId = orderId,
+            quantity = lineItemModel.quantity ?: 0,
+            subtotal = lineItemModel.subtotal ?: 0.0,
+            lineItemId = lineItemModel.id ?: 0
+        )
+    }
+
+    private fun mapModelListToDto(order: OrderModel): List<LineItemDto> {
+        return order.lineItemList.map { mapModelToDto(it, order.id) }
     }
 }
