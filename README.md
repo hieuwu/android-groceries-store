@@ -55,30 +55,10 @@ Android Studio Bumblebee or later
 SDK 23 or later
 
 #### Supabase
-See [Supabase Wiki](https://github.com/hieuwu/android-groceries-store/wiki) to keep track the process
+See [Supabase Wiki](https://github.com/hieuwu/android-groceries-store/wiki) 
 Database Schema:
+<img width="730" alt="Screenshot 2024-05-16 at 22 17 45" src="https://github.com/hieuwu/android-groceries-store/assets/43868345/2be292c1-d0ea-4396-9661-6bbe9f322ff7">
 
-**categories**
-id | image | name | _id |
---- | --- | --- | --- | 
-
-
-**line_items**
-id | lineItemId | productid | quantity | subtotal|orderId|
---- | --- | --- | --- |  --- |  --- | 
-
-**orders**
-orderId | status |
---- | --- | 
-
-**products**
-_id | name | description | price | image|category|nutrition|productid
---- | --- | --- | --- |  --- |  --- | --- | --- | 
-
-
-**users**
-id | name | email | phone | isOrderCreatedNotiEnabled|isPromotionNotiEnabled|isDataRefreshedEnabled|address
---- | --- | --- | --- |  --- |  --- | --- | --- | 
 
 ## 🎯 Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/hieuwu/android-groceries-store/stargazers)__ for this repository. :star: <br>
