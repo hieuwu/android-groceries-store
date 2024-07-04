@@ -107,13 +107,17 @@ dependencies {
     implementation platform(libs.firebase.bom)
     implementation libs.bundles.firebase
     implementation(libs.ktor.client.cio)
-    implementation(libs.postgrest.kt.android)
+//    implementation(libs.postgrest.kt.android)
     implementation libs.ktor.client.android
     implementation libs.ktor.utils.jvm
     implementation libs.ktor.client.logging.jvm
     implementation(libs.ktor.client.core)
 
-    implementation("io.github.jan-tennert.supabase:storage-kt:2.4.0")
+    implementation(platform("io.github.jan-tennert.supabase:bom:2.4.0"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt")
+    implementation("io.github.jan-tennert.supabase:storage-kt")
+
     def composeBom = platform('androidx.compose:compose-bom:2023.09.02')
     implementation(composeBom)
     androidTestImplementation(composeBom)
