@@ -31,7 +31,7 @@ class SignOutUseCaseImplTest {
         val input = SignOutUseCase.Input()
 
         runBlocking {
-            testee.execute(input)
+            testee(input)
 
             verify(mockedUserRepository).clearUser()
         }

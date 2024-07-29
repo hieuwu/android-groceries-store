@@ -12,7 +12,7 @@ class SignOutUseCaseImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) :
     SignOutUseCase {
-    override suspend fun execute(input: SignOutUseCase.Input): SignOutUseCase.Output {
+    override suspend fun invoke(input: SignOutUseCase.Input): SignOutUseCase.Output {
         return withContext(ioDispatcher) {
             userRepository.clearUser()
             SignOutUseCase.Output()
