@@ -16,7 +16,7 @@ class RetrieveMealByTypeUseCaseImpl @Inject constructor(
     private val mealPlanRepository: MealPlanRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : RetrieveMealByTypeUseCase {
-    override suspend fun execute(input: RetrieveMealByTypeUseCase.Input): RetrieveMealByTypeUseCase.Output {
+    override suspend fun invoke(input: RetrieveMealByTypeUseCase.Input): RetrieveMealByTypeUseCase.Output {
         return withContext(ioDispatcher) {
             try {
                 val result = mealPlanRepository.retrieveMealByType(
