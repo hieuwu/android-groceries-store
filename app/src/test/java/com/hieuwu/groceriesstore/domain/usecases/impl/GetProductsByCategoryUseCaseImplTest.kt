@@ -36,7 +36,7 @@ class GetProductsByCategoryUseCaseImplTest {
         })
 
         runBlocking {
-            val result = testee.execute(input)
+            val result = testee(input)
             result.result.collect {
                 TestCase.assertTrue(it.isNotEmpty())
                 TestCase.assertEquals(mockedProducts[0], it[0])
@@ -55,7 +55,7 @@ class GetProductsByCategoryUseCaseImplTest {
         })
 
         runBlocking {
-            val result = testee.execute(input)
+            val result = testee(input)
             result.result.collect {
                 TestCase.assertTrue(it.isEmpty())
             }
