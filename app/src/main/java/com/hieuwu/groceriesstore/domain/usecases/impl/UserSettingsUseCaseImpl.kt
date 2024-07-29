@@ -13,7 +13,7 @@ class UserSettingsUseCaseImpl @Inject constructor(
 ) :
     UserSettingsUseCase {
 
-    override suspend fun execute(input: UserSettingsUseCase.Input): UserSettingsUseCase.Output {
+    override suspend fun invoke(input: UserSettingsUseCase.Input): UserSettingsUseCase.Output {
         withContext(ioDispatcher) {
             userRepository.updateUserSettings(
                 input.id,
