@@ -67,7 +67,7 @@ class ExploreViewModel @Inject constructor(
         if (name.isNotBlank()) {
             viewModelScope.launch {
                 val res =
-                    searchProductUseCase.execute(SearchProductUseCase.Input(name = name.trim()))
+                    searchProductUseCase(SearchProductUseCase.Input(name = name.trim()))
                 res.result.collect {
                     _productList.value = it
                 }
@@ -78,7 +78,7 @@ class ExploreViewModel @Inject constructor(
     private fun getCurrentCard(): Flow<OrderModel?>? {
         var res: Flow<OrderModel?>? = null
         viewModelScope.launch {
-            res = getCurrentCartUseCase.execute(GetCurrentCartUseCase.Input()).result
+            res = getCurrentCartUseCase(GetCurrentCartUseCase.Input()).result
         }
         return res
     }
@@ -86,7 +86,7 @@ class ExploreViewModel @Inject constructor(
     private fun getCategoriesList(): Flow<List<CategoryModel>>? {
         var res: Flow<List<CategoryModel>>? = null
         viewModelScope.launch {
-            res = getCategoriesListUseCase.execute(GetCategoriesListUseCase.Input()).result
+            res = getCategoriesListUseCase(GetCategoriesListUseCase.Input()).result
         }
         return res
     }
@@ -102,20 +102,20 @@ class ExploreViewModel @Inject constructor(
                     quantity = 1,
                     subtotal = product.price!!
                 )
-                addToCartUseCase.execute(AddToCartUseCase.Input(lineItem = lineItem))
+                addToCartUseCase(AddToCartUseCase.Input(lineItem = lineItem))
             }
         } else {
             val id = UUID.randomUUID().toString()
             val newOrder = Order(id, OrderStatus.IN_CART.value, "")
             viewModelScope.launch {
-                createNewOrderUseCase.execute(CreateNewOrderUseCase.Input(order = newOrder))
+                createNewOrderUseCase(CreateNewOrderUseCase.Input(order = newOrder))
                 val lineItem = LineItem(
                     productId = product.id,
                     orderId = id,
                     quantity = 1,
                     subtotal = product.price!!
                 )
-                addToCartUseCase.execute(AddToCartUseCase.Input(lineItem = lineItem))
+                addToCartUseCase(AddToCartUseCase.Input(lineItem = lineItem))
             }
         }
     }
