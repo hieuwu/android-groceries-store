@@ -11,7 +11,7 @@ class SubmitOrderUseCaseImpl @Inject constructor(
     private val orderRepository: OrderRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : SubmitOrderUseCase {
-    override suspend fun execute(input: SubmitOrderUseCase.Input): SubmitOrderUseCase.Output {
+    override suspend fun invoke(input: SubmitOrderUseCase.Input): SubmitOrderUseCase.Output {
         return withContext(ioDispatcher) {
             val result = orderRepository.sendOrderToServer(input.order)
             SubmitOrderUseCase.Output(result)
