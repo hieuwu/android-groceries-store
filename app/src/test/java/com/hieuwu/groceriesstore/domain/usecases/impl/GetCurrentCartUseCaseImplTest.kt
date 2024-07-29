@@ -44,7 +44,7 @@ class GetCurrentCartUseCaseImplTest {
             emit(mockOrder)
         })
         runBlocking {
-            val result = testee.execute(GetCurrentCartUseCase.Input())
+            val result = testee(GetCurrentCartUseCase.Input())
 
             result.result.collect { order ->
                 assertEquals(order?.id, "")
@@ -62,7 +62,7 @@ class GetCurrentCartUseCaseImplTest {
             null
         })
         runBlocking {
-            val result = testee.execute(GetCurrentCartUseCase.Input())
+            val result = testee(GetCurrentCartUseCase.Input())
             result.result.collect {
                 assertNull(it)
             }
