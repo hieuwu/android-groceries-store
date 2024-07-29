@@ -46,7 +46,7 @@ roomVersion = "2.5.0"
 spotlessVersion = "6.8.0"
 testRunnerVersion = "1.4.0"
 timberVersion = "5.0.1"
-uiToolingPreviewVersion = "1.6.1"
+uiToolingPreviewVersion = "1.6.8"
 uiToolingVersion = "1.4.2"
 workVersion = "2.7.1"
 
