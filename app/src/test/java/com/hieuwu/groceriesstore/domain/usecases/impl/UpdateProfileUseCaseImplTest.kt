@@ -35,7 +35,7 @@ class UpdateProfileUseCaseImplTest {
             )
 
         runBlocking {
-            testee.execute(input)
+            testee(input)
 
             verify(mockedUserRepository)
                 .updateUserProfile(
