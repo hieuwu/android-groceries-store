@@ -57,7 +57,7 @@ class CheckOutViewModel @Inject constructor(
     private fun getCurrentCard(): Flow<OrderModel?>? {
         var res: Flow<OrderModel?>? = null
         viewModelScope.launch {
-            res = getCurrentCartUseCase.execute(GetCurrentCartUseCase.Input()).result
+            res = getCurrentCartUseCase(GetCurrentCartUseCase.Input()).result
         }
         return res
     }
@@ -65,7 +65,7 @@ class CheckOutViewModel @Inject constructor(
     private fun getCurrentUser(): Flow<UserModel?>? {
         var res: Flow<UserModel?>? = null
         viewModelScope.launch {
-            res = getProfileUseCase.execute(GetProfileUseCase.Input()).result
+            res = getProfileUseCase(GetProfileUseCase.Input()).result
         }
         return res
     }
@@ -75,7 +75,7 @@ class CheckOutViewModel @Inject constructor(
         setOrderAddress()
         viewModelScope.launch {
             _isOrderSentSuccessful.value =
-                submitOrderUseCase.execute(SubmitOrderUseCase.Input(order.value!!)).result
+                submitOrderUseCase(SubmitOrderUseCase.Input(order.value!!)).result
         }
     }
 }

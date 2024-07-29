@@ -12,7 +12,7 @@ class AddToCartUseCaseImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) :
     AddToCartUseCase {
-    override suspend fun execute(input: AddToCartUseCase.Input): AddToCartUseCase.Output {
+    override suspend fun invoke(input: AddToCartUseCase.Input): AddToCartUseCase.Output {
         withContext(ioDispatcher) {
             orderRepository.addLineItem(input.lineItem)
         }
