@@ -41,7 +41,7 @@ class GetCategoriesListUseCaseImplTest {
             emit(mockCategories)
         })
         runBlocking {
-            val result = testee.execute(GetCategoriesListUseCase.Input())
+            val result = testee(GetCategoriesListUseCase.Input())
 
             result.result.collect { categories ->
                 assertEquals(mockCategories[0], categories[0])
@@ -59,7 +59,7 @@ class GetCategoriesListUseCaseImplTest {
             emit(listOf())
         })
         runBlocking {
-            val result = testee.execute(GetCategoriesListUseCase.Input())
+            val result = testee(GetCategoriesListUseCase.Input())
             result.result.collect {
                 assertEquals(it.isEmpty(), true)
             }
