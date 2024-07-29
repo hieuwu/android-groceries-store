@@ -63,7 +63,7 @@ class ProductListViewModel @Inject constructor(
     private fun getCurrentCart(): Flow<OrderModel?>? {
         var res: Flow<OrderModel?>? = null
         viewModelScope.launch {
-            res = getCurrentCartUseCase.execute(GetCurrentCartUseCase.Input()).result
+            res = getCurrentCartUseCase(GetCurrentCartUseCase.Input()).result
         }
         return res
     }
@@ -80,7 +80,7 @@ class ProductListViewModel @Inject constructor(
         viewModelScope.launch {
             if (currentCart.value != null) {
                 // Add to cart
-                addToCartUseCase.execute(
+                addToCartUseCase(
                     AddToCartUseCase.Input(
                         LineItem(
                             productId = product.id,
@@ -94,8 +94,8 @@ class ProductListViewModel @Inject constructor(
                 // TODO: Move order creation to repository layer, at this point only pass domain object
                 val id = UUID.randomUUID().toString()
                 val newOrder = Order(id, OrderStatus.IN_CART.value, "")
-                createNewOrderUseCase.execute(CreateNewOrderUseCase.Input(newOrder))
-                addToCartUseCase.execute(
+                createNewOrderUseCase(CreateNewOrderUseCase.Input(newOrder))
+                addToCartUseCase(
                     AddToCartUseCase.Input(
                         LineItem(
                             productId = product.id,

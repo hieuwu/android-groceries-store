@@ -15,7 +15,7 @@ class RefreshAppDataUseCaseImpl @Inject constructor(
     private val recipeRepository: RecipeRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     ) : RefreshAppDataUseCase {
-    override suspend fun execute(input: Unit) {
+    override suspend fun invoke(input: Unit) {
         withContext(ioDispatcher) {
             categoryRepository.refreshDatabase()
             productRepository.refreshDatabase()
