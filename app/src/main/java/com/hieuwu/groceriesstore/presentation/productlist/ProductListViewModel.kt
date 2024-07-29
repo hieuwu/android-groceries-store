@@ -69,11 +69,11 @@ class ProductListViewModel @Inject constructor(
     }
 
     private fun getProductLists(): Flow<List<ProductModel>> {
-        return getProductsListUseCase.execute(GetProductsListUseCase.Input()).result
+        return getProductsListUseCase(GetProductsListUseCase.Input()).result
     }
 
     private fun getProductLists(categoryId: String): Flow<List<ProductModel>> {
-        return getProductsByCategoryUseCase.execute(GetProductsByCategoryUseCase.Input(categoryId)).result
+        return getProductsByCategoryUseCase(GetProductsByCategoryUseCase.Input(categoryId)).result
     }
 
     fun addToCart(product: ProductModel) {

@@ -5,5 +5,5 @@ interface SuspendUseCase<Input, Output> {
 }
 
 interface UseCase<Input, Output> {
-    fun execute(input: Input): Output
+    operator fun invoke(input: Input): Output
 }
