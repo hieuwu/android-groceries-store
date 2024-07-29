@@ -70,7 +70,7 @@ class ShopViewModel @Inject constructor(
     private fun getCurrentCart(): Flow<OrderModel?>? {
         var res: Flow<OrderModel?>? = null
         viewModelScope.launch {
-            res = getCurrentCartUseCase.execute(GetCurrentCartUseCase.Input()).result
+            res = getCurrentCartUseCase(GetCurrentCartUseCase.Input()).result
         }
         return res
     }
@@ -80,7 +80,7 @@ class ShopViewModel @Inject constructor(
             // Add to cart
             val cartId = currentCart.value!!.id
             viewModelScope.launch {
-                addToCartUseCase.execute(
+                addToCartUseCase(
                     AddToCartUseCase.Input(
                         LineItem(
                             productId = product.id,
@@ -94,7 +94,7 @@ class ShopViewModel @Inject constructor(
         } else {
             val id = UUID.randomUUID().toString()
             viewModelScope.launch {
-                createNewOrderUseCase.execute(
+                createNewOrderUseCase(
                     CreateNewOrderUseCase.Input(
                         Order(
                             id = id,
@@ -103,7 +103,7 @@ class ShopViewModel @Inject constructor(
                         )
                     )
                 )
-                addToCartUseCase.execute(
+                addToCartUseCase(
                     AddToCartUseCase.Input(
                         LineItem(
                             productId = product.id,
