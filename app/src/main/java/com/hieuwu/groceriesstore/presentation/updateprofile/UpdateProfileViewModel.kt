@@ -39,7 +39,7 @@ class UpdateProfileViewModel @Inject constructor(
 
     private fun getCurrentUser() {
         viewModelScope.launch {
-            getProfileUseCase.execute(GetProfileUseCase.Input()).result.collect {
+            getProfileUseCase(GetProfileUseCase.Input()).result.collect {
                 setUserProperties(it)
                 _user.value = it
             }
@@ -57,7 +57,7 @@ class UpdateProfileViewModel @Inject constructor(
         val id = _user.value!!.id
         try {
             viewModelScope.launch {
-                updateProfileUseCase.execute(
+                updateProfileUseCase(
                     UpdateProfileUseCase.Input(
                         userId = id,
                         name = name!!,
