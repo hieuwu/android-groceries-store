@@ -12,7 +12,7 @@ class CreateNewOrderUseCaseImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) :
     CreateNewOrderUseCase {
-    override suspend fun execute(input: CreateNewOrderUseCase.Input): CreateNewOrderUseCase.Output {
+    override suspend fun invoke(input: CreateNewOrderUseCase.Input): CreateNewOrderUseCase.Output {
         return withContext(ioDispatcher) {
             val result = orderRepository.createOrUpdate(input.order)
             CreateNewOrderUseCase.Output(result)

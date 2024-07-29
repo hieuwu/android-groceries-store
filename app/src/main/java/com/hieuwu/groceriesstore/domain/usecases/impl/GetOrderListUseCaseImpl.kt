@@ -11,7 +11,7 @@ class GetOrderListUseCaseImpl @Inject constructor(
     private val orderRepository: OrderRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : GetOrderListUseCase {
-    override suspend fun execute(input: GetOrderListUseCase.Input): GetOrderListUseCase.Output {
+    override suspend fun invoke(input: GetOrderListUseCase.Input): GetOrderListUseCase.Output {
         return withContext(ioDispatcher) {
             val result = orderRepository.getOrders()
             GetOrderListUseCase.Output.Success(data = result)

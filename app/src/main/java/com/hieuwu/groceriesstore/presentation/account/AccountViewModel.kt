@@ -26,7 +26,7 @@ class AccountViewModel @Inject constructor(
 
     private fun getCurrentUser() {
         viewModelScope.launch {
-            getProfileUseCase.execute(GetProfileUseCase.Input()).result.collect {
+            getProfileUseCase(GetProfileUseCase.Input()).result.collect {
                 _user.value = it
             }
         }
@@ -34,7 +34,7 @@ class AccountViewModel @Inject constructor(
 
     fun signOut() {
         viewModelScope.launch {
-            signOutUseCase.execute(SignOutUseCase.Input())
+            signOutUseCase(SignOutUseCase.Input())
         }
     }
 }

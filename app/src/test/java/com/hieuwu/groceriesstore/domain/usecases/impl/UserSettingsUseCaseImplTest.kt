@@ -39,7 +39,7 @@ class UserSettingsUseCaseImplTest {
             )
 
         runBlocking {
-            testee.execute(input)
+            testee(input)
 
             verify(mockedUserRepository)
                 .updateUserSettings(

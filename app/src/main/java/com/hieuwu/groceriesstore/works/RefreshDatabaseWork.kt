@@ -15,7 +15,7 @@ class RefreshDatabaseWork(appContext: Context, params: WorkerParameters) :
     override suspend fun doWork(): Result {
         return try {
             Timber.d("Refreshing database")
-            refreshAppDataUseCase.execute(Unit)
+            refreshAppDataUseCase(Unit)
             Result.success()
         } catch (e: Exception) {
             Result.retry()

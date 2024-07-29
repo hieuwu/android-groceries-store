@@ -76,7 +76,7 @@ class OverviewViewModel @Inject constructor(
         weekDayValue: WeekDayValue,
         mealType: MealType,
     ) {
-        val result = retrieveMealByTypeUseCase.execute(
+        val result = retrieveMealByTypeUseCase(
             RetrieveMealByTypeUseCase.Input(
                 dayValue = weekDayValue,
                 mealType = mealType
@@ -126,7 +126,7 @@ class OverviewViewModel @Inject constructor(
 
     fun onRemoveMeal(id: String) {
         viewModelScope.launch {
-            removeMealFromPlanUseCase.execute(
+            removeMealFromPlanUseCase(
                 RemoveMealFromPlanUseCase.Input(
                     id = id
                 )
@@ -149,7 +149,7 @@ class OverviewViewModel @Inject constructor(
 
     private fun onAddBreakfast(name: String, ingredients: List<String>, mealImageUri: ByteArray) {
         viewModelScope.launch {
-            addMealToPlanUseCase.execute(
+            addMealToPlanUseCase(
                 AddMealToPlanUseCase.Input(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,
@@ -167,7 +167,7 @@ class OverviewViewModel @Inject constructor(
 
     private fun onAddLunch(name: String, ingredients: List<String>, mealImageUri: ByteArray) {
         viewModelScope.launch {
-            addMealToPlanUseCase.execute(
+            addMealToPlanUseCase(
                 AddMealToPlanUseCase.Input(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,
@@ -185,7 +185,7 @@ class OverviewViewModel @Inject constructor(
 
     private fun onAddDinner(name: String, ingredients: List<String>, mealImageUri: ByteArray) {
         viewModelScope.launch {
-            addMealToPlanUseCase.execute(
+            addMealToPlanUseCase(
                 AddMealToPlanUseCase.Input(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,

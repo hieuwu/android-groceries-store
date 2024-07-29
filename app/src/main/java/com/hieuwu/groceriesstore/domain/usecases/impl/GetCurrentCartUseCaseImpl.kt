@@ -9,7 +9,7 @@ class GetCurrentCartUseCaseImpl @Inject constructor(
     private val orderRepository: OrderRepository,
 ) : GetCurrentCartUseCase {
 
-    override suspend fun execute(input: GetCurrentCartUseCase.Input): GetCurrentCartUseCase.Output {
+    override suspend fun invoke(input: GetCurrentCartUseCase.Input): GetCurrentCartUseCase.Output {
         val res = orderRepository.getOneOrderByStatus(OrderStatus.IN_CART)
         return GetCurrentCartUseCase.Output(res)
 

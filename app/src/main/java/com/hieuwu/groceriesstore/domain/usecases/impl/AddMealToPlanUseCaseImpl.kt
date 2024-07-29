@@ -7,7 +7,7 @@ import javax.inject.Inject
 class AddMealToPlanUseCaseImpl @Inject constructor(
     private val mealPlanRepository: MealPlanRepository
 ) : AddMealToPlanUseCase {
-    override suspend fun execute(input: AddMealToPlanUseCase.Input): AddMealToPlanUseCase.Output {
+    override suspend fun invoke(input: AddMealToPlanUseCase.Input): AddMealToPlanUseCase.Output {
         mealPlanRepository.addMealToPlan(
             weekDay = input.weekDay,
             name = input.name,

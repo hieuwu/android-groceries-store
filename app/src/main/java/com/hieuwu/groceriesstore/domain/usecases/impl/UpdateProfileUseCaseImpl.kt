@@ -10,7 +10,7 @@ class UpdateProfileUseCaseImpl @Inject constructor(
     private val userRepository: UserRepository,
 ) :
     UpdateProfileUseCase {
-    override suspend fun execute(input: UpdateProfileUseCase.Input): UpdateProfileUseCase.Output {
+    override suspend fun invoke(input: UpdateProfileUseCase.Input): UpdateProfileUseCase.Output {
         userRepository.updateUserProfile(
             input.userId, input.name, input.email, input.phone, input.address
         )

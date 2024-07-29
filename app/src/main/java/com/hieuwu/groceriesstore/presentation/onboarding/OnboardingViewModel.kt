@@ -28,7 +28,7 @@ class OnboardingViewModel @Inject constructor(
         } else {
             try {
                 viewModelScope.launch {
-                    refreshAppDataUseCase.execute(Unit)
+                    refreshAppDataUseCase(Unit)
                     with(sharedPreferences.edit()) {
                         putBoolean("PRODUCT_SYNC_SUCCESS", true)
                         apply()

@@ -40,7 +40,7 @@ class SearchProductUseCaseImplTest {
         })
 
         runBlocking {
-            val result = testee.execute(input)
+            val result = testee(input)
             result.result.collect {
                 TestCase.assertTrue(it.isNotEmpty())
                 TestCase.assertEquals(mockProducts[0], it[0])
@@ -59,7 +59,7 @@ class SearchProductUseCaseImplTest {
         })
 
         runBlocking {
-            val result = testee.execute(input)
+            val result = testee(input)
             result.result.collect {
                 TestCase.assertTrue(it.isEmpty())
             }

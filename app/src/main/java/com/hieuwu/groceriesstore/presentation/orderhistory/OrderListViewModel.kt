@@ -24,7 +24,7 @@ class OrderListViewModel @Inject constructor(
 
     private fun getOrderList() {
         viewModelScope.launch {
-            when (val result = getOrderListUseCase.execute(GetOrderListUseCase.Input())) {
+            when (val result = getOrderListUseCase(GetOrderListUseCase.Input())) {
                 is GetOrderListUseCase.Output.Success -> {
                     _orderList.emit(result.data)
                 }

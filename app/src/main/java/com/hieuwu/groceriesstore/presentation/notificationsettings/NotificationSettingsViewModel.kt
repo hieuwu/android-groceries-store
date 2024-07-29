@@ -48,7 +48,7 @@ class NotificationSettingsViewModel @Inject constructor(
 
     private fun getCurrentUser() {
         viewModelScope.launch {
-            getProfileUseCase.execute(GetProfileUseCase.Input()).result.collect {
+            getProfileUseCase(GetProfileUseCase.Input()).result.collect {
                 _user.value = it
             }
         }
@@ -65,7 +65,7 @@ class NotificationSettingsViewModel @Inject constructor(
     fun updateNotificationSettings() {
         Timber.d("promo: $isPromotionNotiEnabled, ord: $isOrderCreatedNotiEnabled, db: $isDatabaseRefreshedNotiEnabled")
         viewModelScope.launch {
-            userSettingsUseCase.execute(
+            userSettingsUseCase(
                 UserSettingsUseCase.Input(
                     user.value?.id!!,
                     isOrderCreatedNotiEnabled.value!!,

@@ -41,7 +41,7 @@ class SignInUseCaseImplTest {
             whenever(mockedUserRepository.authenticate(input.email, input.password))
                 .thenReturn(authenticationResult)
 
-            val output = testee.execute(input)
+            val output = testee(input)
             assertEquals(authenticationResult, output.result)
         }
     }
@@ -57,7 +57,7 @@ class SignInUseCaseImplTest {
             whenever(mockedUserRepository.authenticate(input.email, input.password))
                 .thenThrow(RuntimeException())
 
-            val output = testee.execute(input)
+            val output = testee(input)
             assertEquals(SignInUseCase.Output.AccountNotExistedError, output)
         }
     }

@@ -42,7 +42,7 @@ class SignInViewModel @Inject constructor(
 
     fun signIn() {
         viewModelScope.launch {
-            when (signInUseCase.execute(
+            when (signInUseCase(
                 SignInUseCase.Input(
                     email = _email.value,
                     password = _password.value

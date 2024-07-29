@@ -14,7 +14,7 @@ class SignInUseCaseImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) :
     SignInUseCase {
-    override suspend fun execute(input: SignInUseCase.Input): SignInUseCase.Output {
+    override suspend fun invoke(input: SignInUseCase.Input): SignInUseCase.Output {
         return withContext(ioDispatcher) {
             try {
                 val res = userRepository.authenticate(input.email, input.password)

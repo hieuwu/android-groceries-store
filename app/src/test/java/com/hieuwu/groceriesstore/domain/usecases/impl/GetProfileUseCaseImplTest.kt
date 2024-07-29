@@ -47,7 +47,7 @@ class GetProfileUseCaseImplTest {
             )
         })
         runBlocking {
-            val result = testee.execute(GetProfileUseCase.Input())
+            val result = testee(GetProfileUseCase.Input())
 
             result.result.collect {
                 assertEquals("", it?.id)
@@ -66,7 +66,7 @@ class GetProfileUseCaseImplTest {
         })
 
         runBlocking {
-            val result = testee.execute(GetProfileUseCase.Input())
+            val result = testee(GetProfileUseCase.Input())
             result.result.collect {
                 assertNull(it)
             }

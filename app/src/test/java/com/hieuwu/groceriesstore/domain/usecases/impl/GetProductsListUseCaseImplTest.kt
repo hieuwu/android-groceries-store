@@ -40,7 +40,7 @@ class GetProductsListUseCaseImplTest {
             emit(mockedProducts)
         })
         runBlocking {
-            val result = testee.execute(GetProductsListUseCase.Input())
+            val result = testee(GetProductsListUseCase.Input())
 
             result.result.collect { products ->
                 assertEquals(mockedProducts[0], products[0])
@@ -58,7 +58,7 @@ class GetProductsListUseCaseImplTest {
         })
 
         runBlocking {
-            val result = testee.execute(GetProductsListUseCase.Input())
+            val result = testee(GetProductsListUseCase.Input())
             result.result.collect {
                 assertEquals(it.isEmpty(), true)
             }

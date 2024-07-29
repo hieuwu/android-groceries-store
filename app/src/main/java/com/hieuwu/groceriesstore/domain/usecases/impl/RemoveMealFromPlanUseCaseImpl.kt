@@ -11,7 +11,7 @@ class RemoveMealFromPlanUseCaseImpl @Inject constructor(
     private val mealPlanRepository: MealPlanRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : RemoveMealFromPlanUseCase {
-    override suspend fun execute(input: RemoveMealFromPlanUseCase.Input): RemoveMealFromPlanUseCase.Output {
+    override suspend fun invoke(input: RemoveMealFromPlanUseCase.Input): RemoveMealFromPlanUseCase.Output {
         return withContext(ioDispatcher) {
             try {
                 mealPlanRepository.removeMealFromPlan(input.id)

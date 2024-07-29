@@ -33,7 +33,7 @@ class SubmitOrderUseCaseImplTest {
     fun whenExecute_thenSubmitOrderSuccessfully() {
         runBlocking {
             whenever(mockedOrderRepository.sendOrderToServer(any())).thenReturn(true)
-            testee.execute(
+            testee(
                 SubmitOrderUseCase.Input(
                     order = OrderModel(
                         lineItemList = mutableListOf()
