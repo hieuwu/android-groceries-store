@@ -12,7 +12,7 @@ class SearchProductUseCaseImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) :
     SearchProductUseCase {
-    override suspend fun execute(input: SearchProductUseCase.Input): SearchProductUseCase.Output {
+    override suspend fun invoke(input: SearchProductUseCase.Input): SearchProductUseCase.Output {
         return withContext(ioDispatcher) {
             val result = productRepository.searchProductsListByName(input.name)
             SearchProductUseCase.Output(result)
