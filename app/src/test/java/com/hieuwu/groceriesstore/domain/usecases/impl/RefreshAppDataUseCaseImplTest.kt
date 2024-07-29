@@ -40,7 +40,7 @@ class RefreshAppDataUseCaseImplTest {
     @Test
     fun whenExecute_thenCallRepositories() {
         runBlocking {
-            testee.execute(Unit)
+            testee(Unit)
 
             verify(mockedProductRepository).refreshDatabase()
             verify(mockedCategoryRepository).refreshDatabase()
