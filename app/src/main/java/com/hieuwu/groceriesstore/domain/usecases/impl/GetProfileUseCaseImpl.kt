@@ -8,7 +8,7 @@ class GetProfileUseCaseImpl @Inject constructor(
     private val userRepository: UserRepository,
 ) :
     GetProfileUseCase {
-    override suspend fun execute(input: GetProfileUseCase.Input): GetProfileUseCase.Output {
+    override suspend fun invoke(input: GetProfileUseCase.Input): GetProfileUseCase.Output {
         val user = userRepository.getCurrentUser()
         return GetProfileUseCase.Output(user)
     }
