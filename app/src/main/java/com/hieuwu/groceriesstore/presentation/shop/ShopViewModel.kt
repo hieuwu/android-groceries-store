@@ -62,7 +62,7 @@ class ShopViewModel @Inject constructor(
     private fun getProductLists(): Flow<List<ProductModel>>? {
         var res: Flow<List<ProductModel>>? = null
         viewModelScope.launch {
-            res = getProductsListUseCase.execute(GetProductsListUseCase.Input()).result
+            res = getProductsListUseCase(GetProductsListUseCase.Input()).result
         }
         return res
     }
