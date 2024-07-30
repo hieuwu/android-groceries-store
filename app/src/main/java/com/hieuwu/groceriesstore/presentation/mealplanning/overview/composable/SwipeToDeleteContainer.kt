@@ -8,15 +8,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.DismissDirection
+import androidx.compose.material.DismissState
+import androidx.compose.material.DismissValue
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.DismissDirection
-import androidx.compose.material3.DismissState
-import androidx.compose.material3.DismissValue
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.rememberDismissState
 import androidx.compose.material3.Icon
-import androidx.compose.material3.SwipeToDismiss
-import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun <T> SwipeToDeleteContainer(
     item: T,
@@ -42,7 +41,7 @@ fun <T> SwipeToDeleteContainer(
         mutableStateOf(false)
     }
     val state = rememberDismissState(
-        confirmValueChange = { value ->
+        confirmStateChange = { value ->
             if (value == DismissValue.DismissedToStart) {
                 isRemoved = true
                 true
@@ -66,7 +65,7 @@ fun <T> SwipeToDeleteContainer(
             shrinkTowards = Alignment.Top
         ) + fadeOut()
     ) {
-        SwipeToDismiss(
+        androidx.compose.material.SwipeToDismiss(
             state = state,
             background = {
                 DeleteBackground(swipeDismissState = state)
@@ -77,7 +76,7 @@ fun <T> SwipeToDeleteContainer(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DeleteBackground(
     swipeDismissState: DismissState
