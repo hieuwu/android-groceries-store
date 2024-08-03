@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hieuwu.groceriesstore.domain.models.LineItemModel
+import com.hieuwu.groceriesstore.core.models.LineItemModel
 import com.hieuwu.groceriesstore.presentation.checkout.composables.CartItem
 
 @Composable

@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.presentation.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.domain.models.UserModel
+import com.hieuwu.groceriesstore.core.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
