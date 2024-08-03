@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import com.hieuwu.groceriesstore.domain.models.MealModel
+import com.hieuwu.groceriesstore.core.models.MealModel
 
 interface MealPlanRepository {
     suspend fun addMealToPlan(

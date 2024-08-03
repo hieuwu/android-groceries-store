@@ -2,8 +2,8 @@ package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.data.repository.ProductRepository
-import com.hieuwu.groceriesstore.domain.models.LineItemModel
-import com.hieuwu.groceriesstore.domain.models.OrderModel
+import com.hieuwu.groceriesstore.core.models.LineItemModel
+import com.hieuwu.groceriesstore.core.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import junit.framework.TestCase

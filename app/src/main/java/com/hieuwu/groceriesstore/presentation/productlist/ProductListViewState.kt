@@ -1,7 +1,7 @@
 package com.hieuwu.groceriesstore.presentation.productlist
 
 import androidx.compose.runtime.Immutable
-import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.core.models.ProductModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

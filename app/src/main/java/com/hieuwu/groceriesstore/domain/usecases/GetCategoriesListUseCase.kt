@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-import com.hieuwu.groceriesstore.domain.models.CategoryModel
+import com.hieuwu.groceriesstore.core.models.CategoryModel
 import kotlinx.coroutines.flow.Flow
 
 interface GetCategoriesListUseCase :

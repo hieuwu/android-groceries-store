@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.domain.models
+package com.hieuwu.groceriesstore.core.models
 
 data class MealModel(
     val id: String,

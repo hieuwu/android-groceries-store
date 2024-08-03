@@ -3,7 +3,7 @@ package com.hieuwu.groceriesstore.data.repository.impl
 import com.hieuwu.groceriesstore.data.network.dto.Meal
 import com.hieuwu.groceriesstore.data.repository.MealPlanRepository
 import com.hieuwu.groceriesstore.data.repository.UserRepository
-import com.hieuwu.groceriesstore.domain.models.MealModel
+import com.hieuwu.groceriesstore.core.models.MealModel
 import com.hieuwu.groceriesstore.utilities.SupabaseHelper
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.storage.Storage

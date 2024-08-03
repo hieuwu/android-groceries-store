@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.data.database.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.hieuwu.groceriesstore.domain.models.LineItemModel
+import com.hieuwu.groceriesstore.core.models.LineItemModel
 
 data class ProductAndLineItem(
     @Embedded val lineItem: LineItem?,
