@@ -4,7 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.hieuwu.groceriesstore.domain.models.CategoryModel
+import com.hieuwu.groceriesstore.core.models.CategoryModel
 import com.hieuwu.groceriesstore.utilities.CATEGORY_TABLE
 
 @Entity(tableName = CATEGORY_TABLE)
