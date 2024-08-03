@@ -3,7 +3,7 @@ package com.hieuwu.groceriesstore.presentation.notificationsettings
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.core.models.UserModel
+import com.hieuwu.groceriesstore.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

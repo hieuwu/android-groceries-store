@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.presentation.orderhistory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.core.models.OrderModel
+import com.hieuwu.groceriesstore.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.GetOrderListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
