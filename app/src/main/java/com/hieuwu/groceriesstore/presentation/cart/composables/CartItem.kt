@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.core.models.LineItemModel
+import com.hieuwu.groceriesstore.models.LineItemModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
