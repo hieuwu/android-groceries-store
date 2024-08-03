@@ -75,6 +75,7 @@ android {
 }
 
 dependencies {
+    implementation project(':models')
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation libs.bundles.androidx
@@ -87,7 +88,6 @@ dependencies {
     implementation libs.timber
 
     implementation libs.bundles.room
-    implementation project(':models')
     kapt libs.room.compiler
 
     implementation libs.hilt
