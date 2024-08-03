@@ -87,6 +87,7 @@ dependencies {
     implementation libs.timber
 
     implementation libs.bundles.room
+    implementation project(':models')
     kapt libs.room.compiler
 
     implementation libs.hilt
