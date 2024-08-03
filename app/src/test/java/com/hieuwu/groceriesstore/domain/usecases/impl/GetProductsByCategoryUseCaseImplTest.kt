@@ -1,7 +1,7 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.ProductRepository
-import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.core.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductsByCategoryUseCase
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow

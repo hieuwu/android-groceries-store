@@ -1,7 +1,7 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.UserRepository
-import com.hieuwu.groceriesstore.domain.models.UserModel
+import com.hieuwu.groceriesstore.core.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
