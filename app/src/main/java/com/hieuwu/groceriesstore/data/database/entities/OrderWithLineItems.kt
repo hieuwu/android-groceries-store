@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.data.database.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.hieuwu.groceriesstore.core.models.OrderModel
+import com.hieuwu.groceriesstore.models.OrderModel
 
 data class OrderWithLineItems(
     @Embedded var order: Order,

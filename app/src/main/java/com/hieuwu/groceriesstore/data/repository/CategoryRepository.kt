@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.data.repository
 
-import com.hieuwu.groceriesstore.core.models.CategoryModel
+import com.hieuwu.groceriesstore.models.CategoryModel
 import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {

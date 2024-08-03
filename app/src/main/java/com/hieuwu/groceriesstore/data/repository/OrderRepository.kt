@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.data.repository
 
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
-import com.hieuwu.groceriesstore.core.models.OrderModel
+import com.hieuwu.groceriesstore.models.OrderModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import kotlinx.coroutines.flow.Flow
 
