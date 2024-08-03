@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-import com.hieuwu.groceriesstore.core.models.OrderModel
+import com.hieuwu.groceriesstore.models.OrderModel
 
 interface SubmitOrderUseCase : SuspendUseCase<SubmitOrderUseCase.Input, SubmitOrderUseCase.Output> {
     class Input(val order: OrderModel)

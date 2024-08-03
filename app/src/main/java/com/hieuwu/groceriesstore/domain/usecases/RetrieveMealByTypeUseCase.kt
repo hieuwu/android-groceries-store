@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-import com.hieuwu.groceriesstore.core.models.MealModel
+import com.hieuwu.groceriesstore.models.MealModel
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.WeekDayValue
 

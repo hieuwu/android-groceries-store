@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.MealPlanRepository
 import com.hieuwu.groceriesstore.di.IoDispatcher
-import com.hieuwu.groceriesstore.core.models.MealModel
+import com.hieuwu.groceriesstore.models.MealModel
 import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.first

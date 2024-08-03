@@ -1,7 +1,7 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-import com.hieuwu.groceriesstore.core.models.LineItemModel
-import com.hieuwu.groceriesstore.core.models.OrderModel
+import com.hieuwu.groceriesstore.models.LineItemModel
+import com.hieuwu.groceriesstore.models.OrderModel
 import kotlinx.coroutines.flow.Flow
 
 interface UpdateCartItemUseCase {
