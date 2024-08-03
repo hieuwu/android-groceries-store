@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.presentation.mealplanning.overview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.core.models.MealModel
+import com.hieuwu.groceriesstore.models.MealModel
 import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
 import com.hieuwu.groceriesstore.domain.usecases.RemoveMealFromPlanUseCase
 import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase

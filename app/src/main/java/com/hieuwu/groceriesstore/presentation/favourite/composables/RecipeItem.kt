@@ -14,7 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.hieuwu.groceriesstore.core.models.RecipeModel
+import com.hieuwu.groceriesstore.models.RecipeModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable

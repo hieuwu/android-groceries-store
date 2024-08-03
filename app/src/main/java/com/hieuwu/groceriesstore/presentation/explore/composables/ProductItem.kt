@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.core.models.ProductModel
+import com.hieuwu.groceriesstore.models.ProductModel
 
 @OptIn(ExperimentalGlideComposeApi::class, ExperimentalMaterialApi::class)
 @Composable
