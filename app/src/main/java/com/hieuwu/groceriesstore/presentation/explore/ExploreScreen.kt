@@ -46,8 +46,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.domain.models.CategoryModel
-import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.core.models.CategoryModel
+import com.hieuwu.groceriesstore.core.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.explore.composables.CategoryItem
 import com.hieuwu.groceriesstore.presentation.explore.composables.ProductItem
 import kotlinx.coroutines.launch

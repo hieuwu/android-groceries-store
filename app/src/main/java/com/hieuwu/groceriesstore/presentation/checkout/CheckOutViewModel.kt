@@ -2,8 +2,8 @@ package com.hieuwu.groceriesstore.presentation.checkout
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.domain.models.OrderModel
-import com.hieuwu.groceriesstore.domain.models.UserModel
+import com.hieuwu.groceriesstore.core.models.OrderModel
+import com.hieuwu.groceriesstore.core.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
