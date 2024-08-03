@@ -1,7 +1,7 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.ProductRepository
-import com.hieuwu.groceriesstore.core.models.ProductModel
+import com.hieuwu.groceriesstore.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers
