@@ -8,7 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.hieuwu.groceriesstore.core.models.UserModel
+import com.hieuwu.groceriesstore.models.UserModel
 import com.hieuwu.groceriesstore.presentation.account.DemoUser
 import com.hieuwu.groceriesstore.presentation.updateprofile.widgets.UpdateProfileAppBar
 import com.hieuwu.groceriesstore.presentation.updateprofile.widgets.UpdateProfileScreenContent

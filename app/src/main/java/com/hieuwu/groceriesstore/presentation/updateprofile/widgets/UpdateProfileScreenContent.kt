@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.core.models.UserModel
+import com.hieuwu.groceriesstore.models.UserModel
 import com.hieuwu.groceriesstore.presentation.account.DemoUser
 
 @Composable
