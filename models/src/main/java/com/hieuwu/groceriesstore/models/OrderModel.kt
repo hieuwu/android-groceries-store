@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.core.models
+package com.hieuwu.groceriesstore.models
 
 data class OrderModel(
     var id: String = "",

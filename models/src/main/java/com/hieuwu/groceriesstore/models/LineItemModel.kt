@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.core.models
+package com.hieuwu.groceriesstore.models
 
 data class LineItemModel(
     var id: Long? = null,
