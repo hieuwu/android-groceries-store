@@ -82,12 +82,11 @@ class ShopViewModel @Inject constructor(
             viewModelScope.launch {
                 addToCartUseCase(
                     AddToCartUseCase.Input(
-                        LineItem(
+
                             productId = product.id,
                             orderId = cartId,
                             quantity = 1,
                             subtotal = product.price!!
-                        )
                     )
                 )
             }
@@ -96,21 +95,17 @@ class ShopViewModel @Inject constructor(
             viewModelScope.launch {
                 createNewOrderUseCase(
                     CreateNewOrderUseCase.Input(
-                        Order(
                             id = id,
                             status = OrderStatus.IN_CART.value,
                             address = ""
-                        )
                     )
                 )
                 addToCartUseCase(
                     AddToCartUseCase.Input(
-                        LineItem(
                             productId = product.id,
                             orderId = id,
                             quantity = 1,
                             subtotal = product.price!!
-                        )
                     )
                 )
             }

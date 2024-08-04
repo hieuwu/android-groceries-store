@@ -12,6 +12,7 @@ import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
+import com.hieuwu.groceriesstore.models.LineItemModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
@@ -96,26 +97,33 @@ class ExploreViewModel @Inject constructor(
             // Add to cart
             val cartId = _currentCart.value!!.id
             viewModelScope.launch {
-                val lineItem = LineItem(
-                    productId = product.id,
-                    orderId = cartId,
-                    quantity = 1,
-                    subtotal = product.price!!
+                addToCartUseCase(
+                    AddToCartUseCase.Input(
+                        productId = product.id,
+                        orderId = cartId,
+                        quantity = 1,
+                        subtotal = product.price!!
+                    )
                 )
-                addToCartUseCase(AddToCartUseCase.Input(lineItem = lineItem))
             }
         } else {
             val id = UUID.randomUUID().toString()
-            val newOrder = Order(id, OrderStatus.IN_CART.value, "")
             viewModelScope.launch {
-                createNewOrderUseCase(CreateNewOrderUseCase.Input(order = newOrder))
-                val lineItem = LineItem(
-                    productId = product.id,
-                    orderId = id,
-                    quantity = 1,
-                    subtotal = product.price!!
+                createNewOrderUseCase(
+                    CreateNewOrderUseCase.Input(
+                        id = id,
+                        status = OrderStatus.IN_CART.value,
+                        address = ""
+                    )
                 )
-                addToCartUseCase(AddToCartUseCase.Input(lineItem = lineItem))
+                addToCartUseCase(
+                    AddToCartUseCase.Input(
+                        productId = product.id,
+                        orderId = id,
+                        quantity = 1,
+                        subtotal = product.price!!
+                    )
+                )
             }
         }
     }

@@ -3,7 +3,6 @@ package com.hieuwu.groceriesstore.presentation.productdetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
 import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.models.OrderModel
@@ -43,7 +42,7 @@ class ProductDetailViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            currentCart.collect{}
+            currentCart.collect {}
         }
     }
 
@@ -53,28 +52,25 @@ class ProductDetailViewModel @Inject constructor(
             if (currentCart.value != null) {
                 // Add to cart
                 val cartId = currentCart.value!!.id
-                val lineItem = LineItem(
+                orderRepository.addLineItem(
                     productId = product.value!!.id,
                     orderId = cartId,
                     quantity = _quantity.value,
                     subtotal = subtotal
                 )
-                orderRepository.addLineItem(lineItem)
             } else {
                 val id = UUID.randomUUID().toString()
-                val newOrder = Order(
+                orderRepository.createOrUpdate(
                     id = id,
                     status = OrderStatus.IN_CART.value,
                     address = ""
                 )
-                orderRepository.createOrUpdate(newOrder)
-                val lineItem = LineItem(
+                orderRepository.addLineItem(
                     productId = product.value!!.id,
                     orderId = id,
                     quantity = _quantity.value,
                     subtotal = subtotal
                 )
-                orderRepository.addLineItem(lineItem)
             }
         }
     }

@@ -82,27 +82,29 @@ class ProductListViewModel @Inject constructor(
                 // Add to cart
                 addToCartUseCase(
                     AddToCartUseCase.Input(
-                        LineItem(
-                            productId = product.id,
-                            orderId = currentCart.value!!.id,
-                            quantity = 1,
-                            subtotal = product.price!!
-                        )
+                        productId = product.id,
+                        orderId = currentCart.value!!.id,
+                        quantity = 1,
+                        subtotal = product.price!!
                     )
                 )
             } else {
                 // TODO: Move order creation to repository layer, at this point only pass domain object
                 val id = UUID.randomUUID().toString()
-                val newOrder = Order(id, OrderStatus.IN_CART.value, "")
-                createNewOrderUseCase(CreateNewOrderUseCase.Input(newOrder))
+                createNewOrderUseCase(
+                    CreateNewOrderUseCase.Input(
+                        id = id,
+                        status = OrderStatus.IN_CART.value,
+                        address = ""
+                    )
+                )
                 addToCartUseCase(
                     AddToCartUseCase.Input(
-                        LineItem(
-                            productId = product.id,
-                            orderId = id,
-                            quantity = 1,
-                            subtotal = product.price!!
-                        )
+                        productId = product.id,
+                        orderId = id,
+                        quantity = 1,
+                        subtotal = product.price!!
+
                     )
                 )
             }
