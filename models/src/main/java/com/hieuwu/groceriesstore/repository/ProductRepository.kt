@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.domain.repository
+package com.hieuwu.groceriesstore.repository
 
 import com.hieuwu.groceriesstore.models.ProductModel
 import kotlinx.coroutines.flow.Flow

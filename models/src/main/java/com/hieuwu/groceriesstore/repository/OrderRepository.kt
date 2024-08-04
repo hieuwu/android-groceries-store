@@ -1,7 +1,7 @@
-package com.hieuwu.groceriesstore.domain.repository
+package com.hieuwu.groceriesstore.repository
 
 import com.hieuwu.groceriesstore.models.OrderModel
-import com.hieuwu.groceriesstore.utilities.OrderStatus
+import com.hieuwu.groceriesstore.models.OrderStatus
 import kotlinx.coroutines.flow.Flow
 
 interface OrderRepository {
