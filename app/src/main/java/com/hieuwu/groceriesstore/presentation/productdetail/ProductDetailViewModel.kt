@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
-import com.hieuwu.groceriesstore.data.repository.OrderRepository
+import com.hieuwu.groceriesstore.domain.repository.OrderRepository
 import com.hieuwu.groceriesstore.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus

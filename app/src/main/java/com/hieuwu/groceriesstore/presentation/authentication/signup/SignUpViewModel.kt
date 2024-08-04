@@ -2,7 +2,7 @@ package com.hieuwu.groceriesstore.presentation.authentication.signup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.repository.UserRepository
+import com.hieuwu.groceriesstore.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
