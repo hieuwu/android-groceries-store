@@ -151,11 +151,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = '7.5'
 }
 
-detekt {
-    config = files("${project.rootDir.absolutePath}/config/detekt/detekt.yml")
-    buildUponDefaultConfig = true
-}
-
 ktlint {
 //    android.set(true)
 //    reporters {
