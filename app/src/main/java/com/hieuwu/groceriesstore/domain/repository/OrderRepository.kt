@@ -1,14 +1,24 @@
 package com.hieuwu.groceriesstore.domain.repository
 
-import com.hieuwu.groceriesstore.data.database.entities.LineItem
-import com.hieuwu.groceriesstore.data.database.entities.Order
 import com.hieuwu.groceriesstore.models.OrderModel
 import com.hieuwu.groceriesstore.utilities.OrderStatus
 import kotlinx.coroutines.flow.Flow
 
 interface OrderRepository {
-    suspend fun createOrUpdate(order: Order)
-    suspend fun addLineItem(lineItem: LineItem)
+    suspend fun createOrUpdate(
+        id: String,
+        status: String,
+        address: String
+    )
+
+    suspend fun addLineItem(
+        id: Long = 0,
+        productId: String,
+        orderId: String,
+        quantity: Int,
+        subtotal: Double
+    )
+
     fun getOneOrderByStatus(status: OrderStatus): Flow<OrderModel?>
     suspend fun sendOrderToServer(order: OrderModel): Boolean
 

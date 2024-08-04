@@ -14,7 +14,11 @@ class CreateNewOrderUseCaseImpl @Inject constructor(
     CreateNewOrderUseCase {
     override suspend fun invoke(input: CreateNewOrderUseCase.Input): CreateNewOrderUseCase.Output {
         return withContext(ioDispatcher) {
-            val result = orderRepository.createOrUpdate(input.order)
+            val result = orderRepository.createOrUpdate(
+                id = input.id,
+                status = input.status,
+                address = input.address
+            )
             CreateNewOrderUseCase.Output(result)
         }
     }

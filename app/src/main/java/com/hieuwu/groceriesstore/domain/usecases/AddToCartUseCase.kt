@@ -1,9 +1,13 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-import com.hieuwu.groceriesstore.data.database.entities.LineItem
-
 interface AddToCartUseCase: SuspendUseCase<AddToCartUseCase.Input, AddToCartUseCase.Output> {
-    class Input (val lineItem: LineItem)
+    class Input (
+        val id: Long = 0,
+        val productId: String,
+        val orderId: String,
+        var quantity: Int,
+        var subtotal: Double
+    )
 
     class Output
 }

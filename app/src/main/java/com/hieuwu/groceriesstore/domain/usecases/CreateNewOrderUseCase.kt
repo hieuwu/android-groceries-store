@@ -1,10 +1,12 @@
 package com.hieuwu.groceriesstore.domain.usecases
 
-import com.hieuwu.groceriesstore.data.database.entities.Order
-
 interface CreateNewOrderUseCase :
     SuspendUseCase<CreateNewOrderUseCase.Input, CreateNewOrderUseCase.Output> {
-    class Input(val order: Order)
+    class Input(
+        val id: String,
+        var status: String,
+        var address: String
+    )
 
     class Output(result: Unit)
 }

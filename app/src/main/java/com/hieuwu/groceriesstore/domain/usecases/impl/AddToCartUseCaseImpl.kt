@@ -14,7 +14,13 @@ class AddToCartUseCaseImpl @Inject constructor(
     AddToCartUseCase {
     override suspend fun invoke(input: AddToCartUseCase.Input): AddToCartUseCase.Output {
         withContext(ioDispatcher) {
-            orderRepository.addLineItem(input.lineItem)
+
+            orderRepository.addLineItem(
+                productId = input.productId,
+                orderId = input.orderId,
+                quantity = input.quantity,
+                subtotal = input.subtotal
+            )
         }
         return AddToCartUseCase.Output()
     }
