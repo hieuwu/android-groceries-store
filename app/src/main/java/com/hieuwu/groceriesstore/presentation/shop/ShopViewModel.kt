@@ -2,15 +2,13 @@ package com.hieuwu.groceriesstore.presentation.shop
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.database.entities.LineItem
-import com.hieuwu.groceriesstore.data.database.entities.Order
-import com.hieuwu.groceriesstore.domain.models.OrderModel
-import com.hieuwu.groceriesstore.domain.models.ProductModel
-import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
-import com.hieuwu.groceriesstore.utilities.OrderStatus
+import com.hieuwu.groceriesstore.models.OrderModel
+import com.hieuwu.groceriesstore.models.ProductModel
+import com.hieuwu.groceriesstore.models.OrderStatus
+import com.hieuwu.groceriesstore.usecase.AddToCartUseCase
+import com.hieuwu.groceriesstore.usecase.CreateNewOrderUseCase
+import com.hieuwu.groceriesstore.usecase.GetCurrentCartUseCase
+import com.hieuwu.groceriesstore.usecase.GetProductsListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import kotlinx.coroutines.flow.Flow
@@ -82,12 +80,11 @@ class ShopViewModel @Inject constructor(
             viewModelScope.launch {
                 addToCartUseCase(
                     AddToCartUseCase.Input(
-                        LineItem(
+
                             productId = product.id,
                             orderId = cartId,
                             quantity = 1,
                             subtotal = product.price!!
-                        )
                     )
                 )
             }
@@ -96,21 +93,17 @@ class ShopViewModel @Inject constructor(
             viewModelScope.launch {
                 createNewOrderUseCase(
                     CreateNewOrderUseCase.Input(
-                        Order(
                             id = id,
                             status = OrderStatus.IN_CART.value,
                             address = ""
-                        )
                     )
                 )
                 addToCartUseCase(
                     AddToCartUseCase.Input(
-                        LineItem(
                             productId = product.id,
                             orderId = id,
                             quantity = 1,
                             subtotal = product.price!!
-                        )
                     )
                 )
             }

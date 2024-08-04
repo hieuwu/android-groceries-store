@@ -3,16 +3,14 @@ package com.hieuwu.groceriesstore.presentation.productlist
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.database.entities.LineItem
-import com.hieuwu.groceriesstore.data.database.entities.Order
-import com.hieuwu.groceriesstore.domain.models.OrderModel
-import com.hieuwu.groceriesstore.domain.models.ProductModel
-import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetProductsByCategoryUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
-import com.hieuwu.groceriesstore.utilities.OrderStatus
+import com.hieuwu.groceriesstore.models.OrderModel
+import com.hieuwu.groceriesstore.models.ProductModel
+import com.hieuwu.groceriesstore.models.OrderStatus
+import com.hieuwu.groceriesstore.usecase.AddToCartUseCase
+import com.hieuwu.groceriesstore.usecase.CreateNewOrderUseCase
+import com.hieuwu.groceriesstore.usecase.GetCurrentCartUseCase
+import com.hieuwu.groceriesstore.usecase.GetProductsByCategoryUseCase
+import com.hieuwu.groceriesstore.usecase.GetProductsListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
 import kotlinx.collections.immutable.toImmutableList
@@ -82,27 +80,29 @@ class ProductListViewModel @Inject constructor(
                 // Add to cart
                 addToCartUseCase(
                     AddToCartUseCase.Input(
-                        LineItem(
-                            productId = product.id,
-                            orderId = currentCart.value!!.id,
-                            quantity = 1,
-                            subtotal = product.price!!
-                        )
+                        productId = product.id,
+                        orderId = currentCart.value!!.id,
+                        quantity = 1,
+                        subtotal = product.price!!
                     )
                 )
             } else {
                 // TODO: Move order creation to repository layer, at this point only pass domain object
                 val id = UUID.randomUUID().toString()
-                val newOrder = Order(id, OrderStatus.IN_CART.value, "")
-                createNewOrderUseCase(CreateNewOrderUseCase.Input(newOrder))
+                createNewOrderUseCase(
+                    CreateNewOrderUseCase.Input(
+                        id = id,
+                        status = OrderStatus.IN_CART.value,
+                        address = ""
+                    )
+                )
                 addToCartUseCase(
                     AddToCartUseCase.Input(
-                        LineItem(
-                            productId = product.id,
-                            orderId = id,
-                            quantity = 1,
-                            subtotal = product.price!!
-                        )
+                        productId = product.id,
+                        orderId = id,
+                        quantity = 1,
+                        subtotal = product.price!!
+
                     )
                 )
             }

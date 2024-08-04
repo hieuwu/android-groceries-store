@@ -1,9 +1,7 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.data.repository.ProductRepository
-import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.hieuwu.groceriesstore.repository.ProductRepository
+import com.hieuwu.groceriesstore.usecase.GetProductsListUseCase
 import javax.inject.Inject
 
 class GetProductsListUseCaseImpl @Inject constructor(private val productRepository: ProductRepository) :

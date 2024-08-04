@@ -54,7 +54,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.hieuwu.groceriesstore.R
-import com.hieuwu.groceriesstore.domain.models.ProductModel
+import com.hieuwu.groceriesstore.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.core.widgets.PrimarySquareIconButton
 import com.hieuwu.groceriesstore.presentation.core.widgets.WebImage
 import kotlinx.collections.immutable.ImmutableList

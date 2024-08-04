@@ -1,8 +1,8 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.data.repository.OrderRepository
+import com.hieuwu.groceriesstore.repository.OrderRepository
 import com.hieuwu.groceriesstore.di.IoDispatcher
-import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
+import com.hieuwu.groceriesstore.usecase.SubmitOrderUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

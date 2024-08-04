@@ -2,17 +2,15 @@ package com.hieuwu.groceriesstore.presentation.explore
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.database.entities.LineItem
-import com.hieuwu.groceriesstore.data.database.entities.Order
-import com.hieuwu.groceriesstore.domain.models.CategoryModel
-import com.hieuwu.groceriesstore.domain.models.OrderModel
-import com.hieuwu.groceriesstore.domain.models.ProductModel
-import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
-import com.hieuwu.groceriesstore.utilities.OrderStatus
+import com.hieuwu.groceriesstore.models.CategoryModel
+import com.hieuwu.groceriesstore.models.OrderModel
+import com.hieuwu.groceriesstore.models.ProductModel
+import com.hieuwu.groceriesstore.models.OrderStatus
+import com.hieuwu.groceriesstore.usecase.AddToCartUseCase
+import com.hieuwu.groceriesstore.usecase.CreateNewOrderUseCase
+import com.hieuwu.groceriesstore.usecase.GetCategoriesListUseCase
+import com.hieuwu.groceriesstore.usecase.GetCurrentCartUseCase
+import com.hieuwu.groceriesstore.usecase.SearchProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import kotlinx.coroutines.flow.Flow
@@ -96,26 +94,33 @@ class ExploreViewModel @Inject constructor(
             // Add to cart
             val cartId = _currentCart.value!!.id
             viewModelScope.launch {
-                val lineItem = LineItem(
-                    productId = product.id,
-                    orderId = cartId,
-                    quantity = 1,
-                    subtotal = product.price!!
+                addToCartUseCase(
+                    AddToCartUseCase.Input(
+                        productId = product.id,
+                        orderId = cartId,
+                        quantity = 1,
+                        subtotal = product.price!!
+                    )
                 )
-                addToCartUseCase(AddToCartUseCase.Input(lineItem = lineItem))
             }
         } else {
             val id = UUID.randomUUID().toString()
-            val newOrder = Order(id, OrderStatus.IN_CART.value, "")
             viewModelScope.launch {
-                createNewOrderUseCase(CreateNewOrderUseCase.Input(order = newOrder))
-                val lineItem = LineItem(
-                    productId = product.id,
-                    orderId = id,
-                    quantity = 1,
-                    subtotal = product.price!!
+                createNewOrderUseCase(
+                    CreateNewOrderUseCase.Input(
+                        id = id,
+                        status = OrderStatus.IN_CART.value,
+                        address = ""
+                    )
                 )
-                addToCartUseCase(AddToCartUseCase.Input(lineItem = lineItem))
+                addToCartUseCase(
+                    AddToCartUseCase.Input(
+                        productId = product.id,
+                        orderId = id,
+                        quantity = 1,
+                        subtotal = product.price!!
+                    )
+                )
             }
         }
     }

@@ -1,8 +1,7 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.data.repository.CategoryRepository
-import com.hieuwu.groceriesstore.domain.models.CategoryModel
-import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
+import com.hieuwu.groceriesstore.repository.CategoryRepository
+import com.hieuwu.groceriesstore.models.CategoryModel
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking

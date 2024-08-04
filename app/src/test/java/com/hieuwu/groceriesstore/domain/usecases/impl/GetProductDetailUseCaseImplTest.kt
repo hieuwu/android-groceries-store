@@ -1,8 +1,7 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.data.repository.ProductRepository
-import com.hieuwu.groceriesstore.domain.models.ProductModel
-import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
+import com.hieuwu.groceriesstore.repository.ProductRepository
+import com.hieuwu.groceriesstore.models.ProductModel
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking

@@ -1,7 +1,7 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.data.repository.ProductRepository
-import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
+import com.hieuwu.groceriesstore.repository.ProductRepository
+import com.hieuwu.groceriesstore.usecase.GetProductDetailUseCase
 import javax.inject.Inject
 
 class GetProductDetailUseCaseImpl @Inject constructor(

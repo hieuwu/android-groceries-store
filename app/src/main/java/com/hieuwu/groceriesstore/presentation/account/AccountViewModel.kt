@@ -2,9 +2,9 @@ package com.hieuwu.groceriesstore.presentation.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
-import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
+import com.hieuwu.groceriesstore.models.UserModel
+import com.hieuwu.groceriesstore.usecase.GetProfileUseCase
+import com.hieuwu.groceriesstore.usecase.SignOutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

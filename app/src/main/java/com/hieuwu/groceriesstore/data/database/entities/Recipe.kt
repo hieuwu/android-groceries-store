@@ -3,7 +3,7 @@ package com.hieuwu.groceriesstore.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.hieuwu.groceriesstore.domain.models.RecipeModel
+import com.hieuwu.groceriesstore.models.RecipeModel
 import com.hieuwu.groceriesstore.utilities.RECIPE_TABLE
 
 @Entity(tableName = RECIPE_TABLE)

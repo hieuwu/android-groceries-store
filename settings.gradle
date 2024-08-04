@@ -8,3 +8,4 @@ pluginManagement {
 
 include ':app'
 rootProject.name = "Groceries Store"
+include ':models'

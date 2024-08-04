@@ -40,7 +40,6 @@ moshiConverterVersion = "2.9.0"
 moshiVersion = "1.12.0"
 navigationComposeVersion = "2.5.3"
 navigationVersion = "2.5.0"
-postgrestKtAndroidVersion = "2.0.0"
 retrofitVersion = "2.9.0"
 roomVersion = "2.5.0"
 spotlessVersion = "6.8.0"
@@ -49,6 +48,7 @@ timberVersion = "5.0.1"
 uiToolingPreviewVersion = "1.6.1"
 uiToolingVersion = "1.4.2"
 workVersion = "2.7.1"
+jetbrainsKotlinJvmVersion = "1.9.0"
 
 [libraries]
 accompanist-themeadapter-material = { module = "com.google.accompanist:accompanist-themeadapter-material", version.ref = "accompanistThemeadapterMaterialVersion" }
@@ -99,7 +99,6 @@ mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "
 moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiVersion" }
 navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationVersion" }
 navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationVersion" }
-postgrest-kt-android = { module = "io.github.jan-tennert.supabase:postgrest-kt-android", version.ref = "postgrestKtAndroidVersion" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "moshiConverterVersion" }
 retrofit-coroutines-adapter = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "kotlinCoroutineAdapter" }
@@ -107,7 +106,6 @@ room = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
-
 [bundles]
 androidx = [
     "androidx-core",
@@ -137,3 +135,4 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinVersion" 
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradleVersion" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigationVersion"}
 spotless = { id = "com.diffplug.spotless", version.ref = "spotlessVersion" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvmVersion" }

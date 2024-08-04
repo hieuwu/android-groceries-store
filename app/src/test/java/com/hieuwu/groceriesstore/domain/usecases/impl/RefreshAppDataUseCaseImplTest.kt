@@ -1,9 +1,8 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.data.repository.CategoryRepository
-import com.hieuwu.groceriesstore.data.repository.ProductRepository
-import com.hieuwu.groceriesstore.data.repository.RecipeRepository
-import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
+import com.hieuwu.groceriesstore.repository.CategoryRepository
+import com.hieuwu.groceriesstore.repository.ProductRepository
+import com.hieuwu.groceriesstore.repository.RecipeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
