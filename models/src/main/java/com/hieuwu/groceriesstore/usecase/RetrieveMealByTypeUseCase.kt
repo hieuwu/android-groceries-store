@@ -1,8 +1,8 @@
-package com.hieuwu.groceriesstore.domain.usecases
+package com.hieuwu.groceriesstore.usecase
 
 import com.hieuwu.groceriesstore.models.MealModel
-import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
-import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.WeekDayValue
+import com.hieuwu.groceriesstore.models.MealType
+import com.hieuwu.groceriesstore.models.WeekDayValue
 
 interface RetrieveMealByTypeUseCase :
     SuspendUseCase<RetrieveMealByTypeUseCase.Input, RetrieveMealByTypeUseCase.Output> {

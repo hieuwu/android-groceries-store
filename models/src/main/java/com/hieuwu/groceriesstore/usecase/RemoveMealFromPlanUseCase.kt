@@ -1,4 +1,4 @@
-package com.hieuwu.groceriesstore.domain.usecases
+package com.hieuwu.groceriesstore.usecase
 
 interface RemoveMealFromPlanUseCase :
     SuspendUseCase<RemoveMealFromPlanUseCase.Input, RemoveMealFromPlanUseCase.Output> {

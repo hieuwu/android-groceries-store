@@ -1,6 +1,7 @@
-package com.hieuwu.groceriesstore.domain.usecases
+package com.hieuwu.groceriesstore.usecase
 
-import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
+import com.hieuwu.groceriesstore.models.MealType
+
 
 interface AddMealToPlanUseCase :
     SuspendUseCase<AddMealToPlanUseCase.Input, AddMealToPlanUseCase.Output> {
