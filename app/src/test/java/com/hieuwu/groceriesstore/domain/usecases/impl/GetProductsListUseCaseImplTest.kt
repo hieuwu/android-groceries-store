@@ -2,7 +2,6 @@ package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.repository.ProductRepository
 import com.hieuwu.groceriesstore.models.ProductModel
-import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking

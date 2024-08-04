@@ -1,7 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.repository.UserRepository
-import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

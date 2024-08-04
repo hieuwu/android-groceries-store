@@ -2,7 +2,6 @@ package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.repository.OrderRepository
 import com.hieuwu.groceriesstore.models.OrderModel
-import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

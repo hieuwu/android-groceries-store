@@ -4,7 +4,6 @@ import com.hieuwu.groceriesstore.repository.OrderRepository
 import com.hieuwu.groceriesstore.repository.ProductRepository
 import com.hieuwu.groceriesstore.models.LineItemModel
 import com.hieuwu.groceriesstore.models.OrderModel
-import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.models.OrderStatus
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers

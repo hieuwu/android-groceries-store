@@ -2,7 +2,6 @@ package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.repository.OrderRepository
 import com.hieuwu.groceriesstore.models.OrderModel
-import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.models.OrderStatus
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
