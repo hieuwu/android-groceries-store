@@ -25,18 +25,38 @@ class OrderRepositoryImpl @Inject constructor(
     private val lineItemDao: LineItemDao,
     private val postgrest: Postgrest
 ) : OrderRepository {
-
-    override suspend fun createOrUpdate(order: Order) {
+    override suspend fun createOrUpdate(
+        id: String,
+        status: String,
+        address: String
+    ) {
         try {
+            val order = Order(
+                id = id,
+                status = status,
+                address = address
+            )
             orderDao.insert(order)
         } catch (e: Exception) {
             Timber.e(e.message)
         }
     }
 
-    override suspend fun addLineItem(lineItem: LineItem) {
+    override suspend fun addLineItem(
+        id: Long,
+        productId: String,
+        orderId: String,
+        quantity: Int,
+        subtotal: Double
+    ) {
         try {
-            lineItemDao.insert(lineItem)
+            val newLineItem = LineItem(
+                productId = productId,
+                orderId = orderId,
+                quantity = quantity,
+                subtotal = subtotal
+            )
+            lineItemDao.insert(newLineItem)
         } catch (e: Exception) {
             Timber.e(e.message)
         }
