@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.repository.ProductRepository
 import com.hieuwu.groceriesstore.models.ProductModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductsListUseCase
 import junit.framework.TestCase.assertEquals

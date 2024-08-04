@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.repository.UserRepository
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import java.util.*
 import kotlinx.coroutines.runBlocking
