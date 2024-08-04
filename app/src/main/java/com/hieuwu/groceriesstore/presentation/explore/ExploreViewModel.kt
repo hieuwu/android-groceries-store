@@ -13,7 +13,7 @@ import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
 import com.hieuwu.groceriesstore.models.LineItemModel
-import com.hieuwu.groceriesstore.utilities.OrderStatus
+import com.hieuwu.groceriesstore.models.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import kotlinx.coroutines.flow.Flow

@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
+import com.hieuwu.groceriesstore.repository.OrderRepository
 import com.hieuwu.groceriesstore.di.IoDispatcher
 import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
 import kotlinx.coroutines.CoroutineDispatcher

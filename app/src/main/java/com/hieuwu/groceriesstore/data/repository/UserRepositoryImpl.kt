@@ -4,7 +4,7 @@ import com.hieuwu.groceriesstore.data.database.dao.UserDao
 import com.hieuwu.groceriesstore.data.database.entities.User
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.dto.UserDto
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.repository.UserRepository
 import com.hieuwu.groceriesstore.data.network.RemoteTable
 import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email

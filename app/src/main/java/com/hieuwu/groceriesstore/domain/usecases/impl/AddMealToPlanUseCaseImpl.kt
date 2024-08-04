@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.domain.repository.MealPlanRepository
+import com.hieuwu.groceriesstore.repository.MealPlanRepository
 import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
 import javax.inject.Inject
 

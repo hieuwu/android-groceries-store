@@ -1,8 +1,8 @@
 package com.hieuwu.groceriesstore.data.repository
 
 import com.hieuwu.groceriesstore.data.network.dto.Meal
-import com.hieuwu.groceriesstore.domain.repository.MealPlanRepository
-import com.hieuwu.groceriesstore.domain.repository.UserRepository
+import com.hieuwu.groceriesstore.repository.MealPlanRepository
+import com.hieuwu.groceriesstore.repository.UserRepository
 import com.hieuwu.groceriesstore.models.MealModel
 import com.hieuwu.groceriesstore.utilities.SupabaseHelper
 import io.github.jan.supabase.postgrest.Postgrest

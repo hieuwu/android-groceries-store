@@ -5,7 +5,7 @@ import com.hieuwu.groceriesstore.data.database.entities.Category
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.RemoteTable
 import com.hieuwu.groceriesstore.data.network.dto.CategoriesDto
-import com.hieuwu.groceriesstore.domain.repository.CategoryRepository
+import com.hieuwu.groceriesstore.repository.CategoryRepository
 import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.flow.map
 import timber.log.Timber

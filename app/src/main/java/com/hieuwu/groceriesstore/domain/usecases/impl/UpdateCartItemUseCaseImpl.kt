@@ -1,12 +1,12 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.repository.OrderRepository
+import com.hieuwu.groceriesstore.repository.ProductRepository
 import com.hieuwu.groceriesstore.di.IoDispatcher
 import com.hieuwu.groceriesstore.models.LineItemModel
 import com.hieuwu.groceriesstore.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
-import com.hieuwu.groceriesstore.utilities.OrderStatus
+import com.hieuwu.groceriesstore.models.OrderStatus
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

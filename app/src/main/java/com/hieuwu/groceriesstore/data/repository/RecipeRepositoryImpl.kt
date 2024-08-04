@@ -4,7 +4,7 @@ import com.hieuwu.groceriesstore.data.database.dao.RecipeDao
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.Api
 import com.hieuwu.groceriesstore.data.network.dto.asEntity
-import com.hieuwu.groceriesstore.domain.repository.RecipeRepository
+import com.hieuwu.groceriesstore.repository.RecipeRepository
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import javax.inject.Inject

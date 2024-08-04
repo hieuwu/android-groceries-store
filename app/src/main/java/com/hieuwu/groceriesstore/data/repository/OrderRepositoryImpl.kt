@@ -6,12 +6,12 @@ import com.hieuwu.groceriesstore.data.database.entities.LineItem
 import com.hieuwu.groceriesstore.data.database.entities.Order
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.dto.OrderDto
-import com.hieuwu.groceriesstore.domain.repository.OrderRepository
+import com.hieuwu.groceriesstore.repository.OrderRepository
 import com.hieuwu.groceriesstore.models.OrderModel
-import com.hieuwu.groceriesstore.utilities.OrderStatus
 import com.hieuwu.groceriesstore.data.network.RemoteTable
 import com.hieuwu.groceriesstore.data.network.dto.LineItemDto
 import com.hieuwu.groceriesstore.models.LineItemModel
+import com.hieuwu.groceriesstore.models.OrderStatus
 import io.github.jan.supabase.postgrest.Postgrest
 import java.util.Date
 import kotlinx.coroutines.flow.Flow

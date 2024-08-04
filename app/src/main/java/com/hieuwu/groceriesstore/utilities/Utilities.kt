@@ -1,7 +1,5 @@
 package com.hieuwu.groceriesstore.utilities
 
-enum class OrderStatus(val value: String) { IN_CART("cart"), COMPLETED("completed") }
-
 const val PRODUCT_TABLE = "product"
 const val CATEGORY_TABLE = "category"
 const val USER_TABLE = "user"

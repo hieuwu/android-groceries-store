@@ -6,7 +6,7 @@ import com.hieuwu.groceriesstore.data.database.entities.Product
 import com.hieuwu.groceriesstore.data.database.entities.asDomainModel
 import com.hieuwu.groceriesstore.data.network.RemoteTable
 import com.hieuwu.groceriesstore.data.network.dto.ProductDto
-import com.hieuwu.groceriesstore.domain.repository.ProductRepository
+import com.hieuwu.groceriesstore.repository.ProductRepository
 import com.hieuwu.groceriesstore.models.ProductModel
 import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.flow.Flow
