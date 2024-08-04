@@ -1,6 +1,6 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
-import com.hieuwu.groceriesstore.data.repository.MealPlanRepository
+import com.hieuwu.groceriesstore.domain.repository.MealPlanRepository
 import com.hieuwu.groceriesstore.di.IoDispatcher
 import com.hieuwu.groceriesstore.domain.usecases.RemoveMealFromPlanUseCase
 import kotlinx.coroutines.CoroutineDispatcher
