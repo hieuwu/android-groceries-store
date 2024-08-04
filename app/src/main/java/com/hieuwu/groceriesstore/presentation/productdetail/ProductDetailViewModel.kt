@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.repository.OrderRepository
 import com.hieuwu.groceriesstore.models.OrderModel
-import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.models.OrderStatus
+import com.hieuwu.groceriesstore.usecase.GetProductDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import kotlinx.coroutines.flow.MutableStateFlow

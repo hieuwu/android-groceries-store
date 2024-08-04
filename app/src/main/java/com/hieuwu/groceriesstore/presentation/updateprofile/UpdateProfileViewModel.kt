@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.models.UserModel
-import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
-import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
+import com.hieuwu.groceriesstore.usecase.GetProfileUseCase
+import com.hieuwu.groceriesstore.usecase.UpdateProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

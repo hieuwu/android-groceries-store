@@ -3,7 +3,7 @@ package com.hieuwu.groceriesstore.presentation.onboarding
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
+import com.hieuwu.groceriesstore.usecase.RefreshAppDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

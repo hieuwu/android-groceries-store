@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.models.OrderModel
 import com.hieuwu.groceriesstore.models.UserModel
-import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
-import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
+import com.hieuwu.groceriesstore.usecase.GetCurrentCartUseCase
+import com.hieuwu.groceriesstore.usecase.GetProfileUseCase
+import com.hieuwu.groceriesstore.usecase.SubmitOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

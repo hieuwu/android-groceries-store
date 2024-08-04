@@ -3,18 +3,20 @@ package com.hieuwu.groceriesstore.presentation.mealplanning.overview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.models.MealModel
-import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
-import com.hieuwu.groceriesstore.domain.usecases.RemoveMealFromPlanUseCase
-import com.hieuwu.groceriesstore.domain.usecases.RetrieveMealByTypeUseCase
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.Meal
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.WeekDay
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.WeekDayValue
+import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.fromStateToDomain
+import com.hieuwu.groceriesstore.usecase.AddMealToPlanUseCase
+import com.hieuwu.groceriesstore.usecase.RemoveMealFromPlanUseCase
+import com.hieuwu.groceriesstore.usecase.RetrieveMealByTypeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.hieuwu.groceriesstore.models.MealType as MealTypeDomain
 
 @HiltViewModel
 class OverviewViewModel @Inject constructor(
@@ -78,8 +80,8 @@ class OverviewViewModel @Inject constructor(
     ) {
         val result = retrieveMealByTypeUseCase(
             RetrieveMealByTypeUseCase.Input(
-                dayValue = weekDayValue,
-                mealType = mealType
+                dayValue = weekDayValue.fromStateToDomain(weekDayValue),
+                mealType = mealType.fromStateToDomain()
             )
         )
         when (result) {
@@ -154,7 +156,7 @@ class OverviewViewModel @Inject constructor(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,
                     ingredients = ingredients,
-                    mealType = MealType.BREAKFAST,
+                    mealType = MealTypeDomain.BREAKFAST,
                     mealImageUri = mealImageUri
                 )
             )
@@ -172,7 +174,7 @@ class OverviewViewModel @Inject constructor(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,
                     ingredients = ingredients,
-                    mealType = MealType.LUNCH,
+                    mealType = MealTypeDomain.LUNCH,
                     mealImageUri = mealImageUri,
                 )
             )
@@ -190,7 +192,7 @@ class OverviewViewModel @Inject constructor(
                     name = name,
                     weekDay = _days.value[selectedDayIndex].name,
                     ingredients = ingredients,
-                    mealType = MealType.DINNER,
+                    mealType = MealTypeDomain.DINNER,
                     mealImageUri = mealImageUri,
                 )
             )

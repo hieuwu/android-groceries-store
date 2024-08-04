@@ -3,7 +3,7 @@ package com.hieuwu.groceriesstore.works
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
+import com.hieuwu.groceriesstore.usecase.RefreshAppDataUseCase
 import javax.inject.Inject
 import timber.log.Timber
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.models.LineItemModel
 import com.hieuwu.groceriesstore.models.OrderModel
-import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
+import com.hieuwu.groceriesstore.usecase.UpdateCartItemUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

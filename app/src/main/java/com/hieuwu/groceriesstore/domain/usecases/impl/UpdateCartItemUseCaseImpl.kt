@@ -5,8 +5,8 @@ import com.hieuwu.groceriesstore.repository.ProductRepository
 import com.hieuwu.groceriesstore.di.IoDispatcher
 import com.hieuwu.groceriesstore.models.LineItemModel
 import com.hieuwu.groceriesstore.models.OrderModel
-import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.models.OrderStatus
+import com.hieuwu.groceriesstore.usecase.UpdateCartItemUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

@@ -2,18 +2,15 @@ package com.hieuwu.groceriesstore.presentation.explore
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.data.database.entities.LineItem
-import com.hieuwu.groceriesstore.data.database.entities.Order
 import com.hieuwu.groceriesstore.models.CategoryModel
 import com.hieuwu.groceriesstore.models.OrderModel
 import com.hieuwu.groceriesstore.models.ProductModel
-import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.CreateNewOrderUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
-import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
-import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
-import com.hieuwu.groceriesstore.models.LineItemModel
 import com.hieuwu.groceriesstore.models.OrderStatus
+import com.hieuwu.groceriesstore.usecase.AddToCartUseCase
+import com.hieuwu.groceriesstore.usecase.CreateNewOrderUseCase
+import com.hieuwu.groceriesstore.usecase.GetCategoriesListUseCase
+import com.hieuwu.groceriesstore.usecase.GetCurrentCartUseCase
+import com.hieuwu.groceriesstore.usecase.SearchProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import kotlinx.coroutines.flow.Flow
