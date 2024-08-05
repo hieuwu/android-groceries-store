@@ -1,54 +1,53 @@
 [versions]
 accompanistThemeadapterMaterialVersion = "0.28.0"
-appCompatVersion = "1.4.2"
-buildGradleVersion = "8.2.2"
+appCompatVersion = "1.7.0"
+buildGradleVersion = "8.3.0"
 cardViewVersion = "1.0.0"
-carUiLibVersion = "2.0.0"
 constraintLayoutVersion = "2.1.4"
 coordinatorLayoutVersion = "1.2.0"
 coreTestingVersion = "2.2.0"
-coreVersion = "1.12.0"
-firebaseBomVersion = "32.7.0"
-fireStoreVersion = "24.10.0"
-firebaseVersion = "23.4.0"
+coreVersion = "1.13.1"
+firebaseBomVersion = "33.1.2"
+fireStoreVersion = "25.0.0"
+firebaseVersion = "24.0.0"
 glideVersion = "4.13.2"
 glideComposeVersion = "1.0.0-beta01"
-googleServicesVersion = "4.3.13"
-gsonVersion = "2.9.0"
-hiltNavigationComposeVersion = "1.0.0"
-hiltVersion = '2.48'
+googleServicesVersion = "4.4.2"
+gsonVersion = "2.10.1"
+hiltNavigationComposeVersion = "1.2.0"
+hiltVersion = '2.49'
 jUnitVersion = "4.13.2"
-kotlinVersion = "1.9.0"
+kotlinVersion = "1.9.24"
 kotlinCoroutineAdapter = "0.9.2"
-kotlinCoroutinePlayServicesVersion = "1.6.4"
+kotlinCoroutinePlayServicesVersion = "1.8.0"
 kotlinxImmutable = "0.3.5"
 ktlintGradleVersion = "11.0.0"
 ktorClientAndroidVersion = "2.3.0"
-ktorClientCioVersion = "1.6.0"
-ktorClientCoreVersion = "2.2.4"
+ktorClientCioVersion = "2.3.10"
+ktorClientCoreVersion = "2.3.10"
 ktorClientLoggingJvmVersion = "1.6.0"
-ktorUtilsJvmVersion = "1.6.0"
+ktorUtilsJvmVersion = "2.3.10"
 legacySupportVersion = "1.0.0"
-lifecycleVersion = "2.5.0"
+lifecycleVersion = "2.8.4"
 lottieVersion = "5.2.0"
-material3Version = "1.1.1"
-materialIconsExtendedVersion = "1.0.0"
-materialVersion = "1.6.1"
-mockitoCoreVersion = "2.1.0"
+material3Version = "1.2.1"
+materialIconsExtendedVersion = "1.6.8"
+materialVersion = "1.12.0"
+mockitoCoreVersion = "5.11.0"
 mockitoKotlinVersion = "5.1.0"
 moshiConverterVersion = "2.9.0"
 moshiVersion = "1.12.0"
-navigationComposeVersion = "2.5.3"
-navigationVersion = "2.5.0"
+navigationComposeVersion = "2.7.7"
+navigationVersion = "2.7.7"
 postgrestKtAndroidVersion = "2.0.0"
-retrofitVersion = "2.9.0"
-roomVersion = "2.5.0"
+retrofitVersion = "2.11.0"
+roomVersion = "2.6.1"
 spotlessVersion = "6.8.0"
-testRunnerVersion = "1.4.0"
+testRunnerVersion = "1.6.1"
 timberVersion = "5.0.1"
-uiToolingPreviewVersion = "1.6.1"
-uiToolingVersion = "1.4.2"
-workVersion = "2.7.1"
+uiToolingPreviewVersion = "1.6.8"
+uiToolingVersion = "1.6.8"
+workVersion = "2.9.0"
 
 [libraries]
 accompanist-themeadapter-material = { module = "com.google.accompanist:accompanist-themeadapter-material", version.ref = "accompanistThemeadapterMaterialVersion" }
@@ -66,7 +65,6 @@ androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref =
 androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreviewVersion" }
 androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "workVersion" }
 cardview = { module = "androidx.cardview:cardview", version.ref = "cardViewVersion" }
-caruilib = { module = "com.android.car.ui:car-ui-lib", version.ref = "carUiLibVersion" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayoutVersion" }
 coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorLayoutVersion" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
@@ -99,7 +97,6 @@ mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "
 moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiVersion" }
 navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationVersion" }
 navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationVersion" }
-postgrest-kt-android = { module = "io.github.jan-tennert.supabase:postgrest-kt-android", version.ref = "postgrestKtAndroidVersion" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "moshiConverterVersion" }
 retrofit-coroutines-adapter = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "kotlinCoroutineAdapter" }

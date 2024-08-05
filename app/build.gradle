@@ -8,7 +8,6 @@ plugins {
     alias libs.plugins.spotless
     alias libs.plugins.navigation.safeargs
     id "org.jetbrains.kotlin.plugin.serialization" version "1.7.0"
-    id "io.gitlab.arturbosch.detekt" version "1.22.0"
 }
 
 android {
@@ -17,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.hieuwu.groceriesstore"
-        minSdkVersion 22
+        minSdkVersion 29
         targetSdkVersion 33
         versionCode 5
         versionName "1.0"
@@ -69,7 +68,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion "1.5.2"
+        kotlinCompilerExtensionVersion "1.5.14"
     }
     namespace 'com.hieuwu.groceriesstore'
 }
@@ -117,6 +116,8 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:gotrue-kt")
     implementation("io.github.jan-tennert.supabase:storage-kt")
+    implementation("io.github.jan-tennert.supabase:compose-auth-ui")
+
 
     def composeBom = platform('androidx.compose:compose-bom:2023.09.02')
     implementation(composeBom)
@@ -140,8 +141,6 @@ dependencies {
     def nav_version = "2.5.3"
     implementation(libs.androidx.navigation.compose)
     implementation libs.androidx.material.icons.extended
-
-    implementation libs.caruilib
     testImplementation libs.mockito.kotlin
 
     testImplementation libs.junit
@@ -151,11 +150,6 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '7.5'
-}
-
-detekt {
-    config = files("${project.rootDir.absolutePath}/config/detekt/detekt.yml")
-    buildUponDefaultConfig = true
 }
 
 ktlint {
