@@ -13,9 +13,9 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            👨‍💻 *New PR Updates*
+            👨‍💻 *New PR Updates from ${{ github.actor }}*
             
-            ⭐️ Latest commit message*: ${{ github.event.commits[0].message }}
+            ⭐️ *Latest commit*: ${{ github.event.commits[0].message }}
             
             🚀 *PR*: https://github.com/${{ github.repository }}
             
