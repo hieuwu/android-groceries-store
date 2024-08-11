@@ -12,8 +12,8 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ⭐️ **${{ github.actor }}** created commit with message: ${{ github.event.commits[0].message }}
+            ⭐️ ${{ github.actor }} created commit with message: ${{ github.event.commits[0].message }}
             
-            🚀 **PR**: https://github.com/${{ github.repository }}/${{ github.event.number }}
+            🚀 PR: https://github.com/${{ github.repository }}/${{ github.event.pull_request.number }}
             
-            🛠️ **Changes**: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            🛠️ Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
