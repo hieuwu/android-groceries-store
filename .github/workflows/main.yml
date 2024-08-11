@@ -13,9 +13,5 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             ⭐️ ${{ github.actor }} created commit with message: ${{ github.event.commits[0].message }}
-            
-            🚀 **PR** : https://github.com/${{ github.repository }}
-
-            ${{ github.event.pull_request.html_url }}
-            
-            🛠️ **Changes** : https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            🚀 PR: https://github.com/${{ github.repository }}
+            🛠️ Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
