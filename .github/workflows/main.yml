@@ -11,7 +11,12 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          parse-mode: markdown
           message: |
+            **PR Updates**
+            
             ⭐️ ${{ github.actor }} created commit with message: ${{ github.event.commits[0].message }}
+            
             🚀 PR: https://github.com/${{ github.repository }}
+            
             🛠️ Changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
