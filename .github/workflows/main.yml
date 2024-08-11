@@ -13,7 +13,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            👨‍💻 *${{ github.actor }} just made a PR Updates*
+            👨‍💻 *New PR Updates*
             
             ⭐️ Latest commit message*: ${{ github.event.commits[0].message }}
             
