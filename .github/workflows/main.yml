@@ -11,7 +11,7 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
+          format: MarkdownV2
           message: |
             ⭐️ ${{ github.actor }} created commit with message: ${{ github.event.commits[0].message }}
             
