@@ -9,6 +9,6 @@ jobs:
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
+          to: ${{ secrets.TEGRAM_HIEU }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: Sent from GitHub
