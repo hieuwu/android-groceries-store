@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: View github environment
-      - run: |
+        run: |
           echo github.event.number = ${{ github.event.number  }}
           echo github.event.pull_request.number = ${{ github.event.pull_request.number }}
           echo github.event.issue.number = ${{ github.event.issue.number }}
