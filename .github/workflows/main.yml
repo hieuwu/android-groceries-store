@@ -17,6 +17,8 @@ jobs:
             
             ⭐️ *Latest commit*: ${{ github.event.commits[0].message }}
             
+             ${{ github.event.number }}
+             
             🚀 *PR*: https://github.com/${{ github.repository }}
             
             🛠️ *Changes*: https://github.com/${{ github.repository }}/commit/${{github.sha}}
