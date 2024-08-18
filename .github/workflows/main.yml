@@ -26,6 +26,6 @@ jobs:
             
             🚀 *PR*: https://github.com/${{ github.repository }}
             ${{ github.event.workflow_run.head_commit.message }}
-
+            ${{ github.event.head_commit.message }}
             🛠️ *Changes*: https://github.com/${{ github.repository }}/commit/${{github.sha}}
              ${{ github.event.pull_request.head.sha }}
