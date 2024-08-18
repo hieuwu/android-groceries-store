@@ -22,9 +22,8 @@ jobs:
           message: |
             👨‍💻 *New PR Updates from ${{ github.actor }}*
             
-            ⭐️ *Latest commit*: ${{ github.event.commits[0].message }}     ${{github.event.issue.number}}
-            ${{github.event.number}}
+            ⭐️ *Latest commit*: ${{ github.event.commits[0].message }}
             
             🚀 *PR*: https://github.com/${{ github.repository }}
-            
+            ${{ github.event.commit[0].message }}
             🛠️ *Changes*: https://github.com/${{ github.repository }}/commit/${{github.sha}}
