@@ -40,6 +40,10 @@ class SignInViewModel @Inject constructor(
         _password.value = newPassword
     }
 
+    fun isValidEmail(): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(_email.value).matches()
+    }
+
     fun signIn() {
         viewModelScope.launch {
             when (signInUseCase(
