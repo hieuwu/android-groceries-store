@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.authentication.signin
 
+import android.util.Patterns.EMAIL_ADDRESS
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
@@ -41,7 +42,7 @@ class SignInViewModel @Inject constructor(
     }
 
     fun isValidEmail(): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(_email.value).matches()
+        return EMAIL_ADDRESS.matcher(_email.value).matches()
     }
 
     fun signIn() {

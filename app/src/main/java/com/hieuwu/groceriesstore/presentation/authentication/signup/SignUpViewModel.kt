@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.authentication.signup
 
+import android.util.Patterns.EMAIL_ADDRESS
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.repository.UserRepository
@@ -51,7 +52,7 @@ class SignUpViewModel @Inject constructor(private val userRepository: UserReposi
     }
 
     fun isValidEmail(): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(_email.value).matches()
+        return EMAIL_ADDRESS.matcher(_email.value).matches()
     }
 
     fun createAccount() {

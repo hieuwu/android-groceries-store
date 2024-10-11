@@ -28,6 +28,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,6 +45,7 @@ import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTex
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun SignInScreen(
@@ -53,6 +55,8 @@ fun SignInScreen(
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
     LaunchedEffect(Unit) {
         viewModel
             .showAccountNotExistedError
@@ -134,8 +138,10 @@ fun SignInScreen(
                         if (viewModel.isValidEmail())
                             viewModel.signIn()
                         else {
-                            CoroutineScope(Dispatchers.Main).launch {
-                                snackbarHostState.showSnackbar("Invalid Email address!!")
+                            coroutineScope.launch {
+                                withContext(Dispatchers.Main){
+                                    snackbarHostState.showSnackbar("Invalid Email address!")
+                                }
                             }
                         }
                     },
