@@ -50,6 +50,10 @@ class SignUpViewModel @Inject constructor(private val userRepository: UserReposi
         _name.value = text
     }
 
+    fun isValidEmail(): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(_email.value).matches()
+    }
+
     fun createAccount() {
         viewModelScope.launch {
             val result = userRepository.createAccount(_email.value, _password.value, _name.value)

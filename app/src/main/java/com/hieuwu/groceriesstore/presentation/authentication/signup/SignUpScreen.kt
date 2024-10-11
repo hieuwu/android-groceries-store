@@ -40,10 +40,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier,
-                 viewModel: SignUpViewModel = hiltViewModel()) {
+fun SignUpScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SignUpViewModel = hiltViewModel()
+) {
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -137,7 +142,15 @@ fun SignUpScreen(modifier: Modifier = Modifier,
                 )
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { viewModel.createAccount() },
+                    onClick = {
+                        if (viewModel.isValidEmail()) {
+                            viewModel.createAccount()
+                        } else {
+                            CoroutineScope(Dispatchers.Main).launch {
+                                snackbarHostState.showSnackbar("Invalid Email address!!")
+                            }
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.colorPrimary)),
                 ) {
                     Text("Sign up")
