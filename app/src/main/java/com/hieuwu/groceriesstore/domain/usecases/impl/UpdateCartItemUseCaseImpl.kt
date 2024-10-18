@@ -18,6 +18,16 @@ class UpdateCartItemUseCaseImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : UpdateCartItemUseCase {
     override suspend fun updateLineItem(lineItemModel: LineItemModel) {
+        // Check if the quantity is valid
+        if (lineItemModel.quantity == null || lineItemModel.quantity!! <= 0) {
+            throw IllegalArgumentException("Quantity must be greater than zero.")
+        }
+
+        // Check if the ID is valid
+        if (lineItemModel.id == null) {
+            throw IllegalArgumentException("Line item ID cannot be null.")
+        }
+
         withContext(ioDispatcher) {
             if (lineItemModel.quantity != null && lineItemModel.id != null) {
                 productRepository.updateLineItemQuantityById(
@@ -29,6 +39,11 @@ class UpdateCartItemUseCaseImpl @Inject constructor(
     }
 
     override suspend fun removeLineItem(lineItemModel: LineItemModel) {
+        // Check if the ID is valid
+        if (lineItemModel.id == null) {
+            throw IllegalArgumentException("Line item ID cannot be null.")
+        }
+
         withContext(ioDispatcher) {
             if (lineItemModel.id != null) {
                 productRepository.removeLineItemById(lineItemModel.id!!)
