@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.hieuwu.groceriesstore.domain.usecases.RefreshAppDataUseCase
-import javax.inject.Inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import timber.log.Timber
 
 class RefreshDatabaseWork(appContext: Context, params: WorkerParameters) :
-    CoroutineWorker(appContext, params) {
-    @Inject
-    lateinit var refreshAppDataUseCase: RefreshAppDataUseCase
+    CoroutineWorker(appContext, params) , KoinComponent {
+     val refreshAppDataUseCase: RefreshAppDataUseCase by inject()
 
     override suspend fun doWork(): Result {
         return try {
