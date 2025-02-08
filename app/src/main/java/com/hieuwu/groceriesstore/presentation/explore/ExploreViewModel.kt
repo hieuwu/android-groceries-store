@@ -21,10 +21,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class ExploreViewModel @Inject constructor(
+class ExploreViewModel constructor(
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val getCategoriesListUseCase: GetCategoriesListUseCase,
     private val searchProductUseCase: SearchProductUseCase,

@@ -16,7 +16,7 @@ import com.hieuwu.groceriesstore.utilities.OrderStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
 import kotlinx.collections.immutable.toImmutableList
-import javax.inject.Inject
+
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -24,8 +24,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-@HiltViewModel
-class ProductListViewModel @Inject constructor(
+
+class ProductListViewModel constructor(
     savedStateHandle: SavedStateHandle,
     private val getProductsListUseCase: GetProductsListUseCase,
     private val getProductsByCategoryUseCase: GetProductsByCategoryUseCase,

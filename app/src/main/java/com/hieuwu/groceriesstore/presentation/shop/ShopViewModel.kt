@@ -20,12 +20,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+
 
 private const val STOP_TIMEOUT = 5000L
 
-@HiltViewModel
-class ShopViewModel @Inject constructor(
+
+class ShopViewModel constructor (
     private val getProductsListUseCase: GetProductsListUseCase,
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val addToCartUseCase: AddToCartUseCase,

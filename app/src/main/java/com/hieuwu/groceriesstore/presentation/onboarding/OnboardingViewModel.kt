@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class OnboardingViewModel @Inject constructor(
+
+
+class OnboardingViewModel constructor(
     private val refreshAppDataUseCase: RefreshAppDataUseCase,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
