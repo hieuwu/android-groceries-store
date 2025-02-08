@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.di
 
+import com.hieuwu.groceriesstore.data.repository.ProductRepository
 import com.hieuwu.groceriesstore.domain.usecases.AddMealToPlanUseCase
 import com.hieuwu.groceriesstore.domain.usecases.AddToCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.AddToCartUseCaseImpl
@@ -45,6 +46,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 
 @InstallIn(ViewModelComponent::class)
 @Module
@@ -130,4 +134,25 @@ abstract class UseCaseModule {
     @Binds
     abstract fun bindRemoveMealFromPlan(impl: RemoveMealFromPlanUseCaseImpl): RemoveMealFromPlanUseCase
 
+}
+val usecaseModule = module {
+    singleOf(::GetProductsListUseCaseImpl) { bind<GetProductsListUseCase>() }
+    singleOf(::GetProductDetailUseCaseImpl) { bind<GetProductDetailUseCase>() }
+    singleOf(::UpdateCartItemUseCaseImpl) { bind<UpdateCartItemUseCase>() }
+    singleOf(::RefreshAppDataUseCaseImpl) { bind<RefreshAppDataUseCase>() }
+    singleOf(::SignInUseCaseImpl) { bind<SignInUseCase>() }
+    singleOf(::SignOutUseCaseImpl) { bind<SignOutUseCase>() }
+    singleOf(::GetProfileUseCaseImpl) { bind<GetProfileUseCase>() }
+    singleOf(::GetCurrentCartUseCaseImpl) { bind<GetCurrentCartUseCase>() }
+    singleOf(::AddToCartUseCaseImpl) { bind<AddToCartUseCase>() }
+    singleOf(::CreateNewOrderUseCaseImpl) { bind<CreateNewOrderUseCase>() }
+    singleOf(::GetProductsByCategoryUseCaseImpl) { bind<GetProductsByCategoryUseCase>() }
+    singleOf(::UpdateProfileUseCaseImpl) { bind<UpdateProfileUseCase>() }
+    singleOf(::SubmitOrderUseCaseImpl) { bind<SubmitOrderUseCase>() }
+    singleOf(::GetCategoriesListUseCaseImpl) { bind<GetCategoriesListUseCase>() }
+    singleOf(::SearchProductUseCaseImpl) { bind<SearchProductUseCase>() }
+    singleOf(::GetOrderListUseCaseImpl) { bind<GetOrderListUseCase>() }
+    singleOf(::AddMealToPlanUseCaseImpl) { bind<AddMealToPlanUseCase>() }
+    singleOf(::RetrieveMealByTypeUseCaseImpl) { bind<RetrieveMealByTypeUseCase>() }
+    singleOf(::RemoveMealFromPlanUseCaseImpl) { bind<RemoveMealFromPlanUseCase>() }
 }
