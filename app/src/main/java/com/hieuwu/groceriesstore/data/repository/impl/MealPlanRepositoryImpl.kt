@@ -10,9 +10,9 @@ import io.github.jan.supabase.storage.Storage
 import java.util.UUID
 import kotlinx.coroutines.flow.first
 import timber.log.Timber
-import javax.inject.Inject
 
-class MealPlanRepositoryImpl @Inject constructor(
+
+class MealPlanRepositoryImpl (
     private val postgrest: Postgrest,
     private val userRepository: UserRepository,
     private val storage: Storage

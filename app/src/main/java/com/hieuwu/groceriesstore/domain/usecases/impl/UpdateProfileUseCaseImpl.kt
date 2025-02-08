@@ -1,15 +1,11 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.UserRepository
-import com.hieuwu.groceriesstore.di.IoDispatcher
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
-import kotlinx.coroutines.CoroutineDispatcher
-import javax.inject.Inject
 
-class UpdateProfileUseCaseImpl @Inject constructor(
+class UpdateProfileUseCaseImpl (
     private val userRepository: UserRepository,
-) :
-    UpdateProfileUseCase {
+) : UpdateProfileUseCase {
     override suspend fun invoke(input: UpdateProfileUseCase.Input): UpdateProfileUseCase.Output {
         userRepository.updateUserProfile(
             input.userId, input.name, input.email, input.phone, input.address

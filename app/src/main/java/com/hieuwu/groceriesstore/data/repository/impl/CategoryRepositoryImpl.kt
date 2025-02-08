@@ -9,9 +9,9 @@ import com.hieuwu.groceriesstore.data.repository.CategoryRepository
 import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
-import javax.inject.Inject
 
-class CategoryRepositoryImpl @Inject constructor(
+
+class CategoryRepositoryImpl (
     private val categoryDao: CategoryDao,
     private val supabasePostgrest: Postgrest
 ) :

@@ -2,7 +2,6 @@ package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.data.repository.ProductRepository
-import com.hieuwu.groceriesstore.di.IoDispatcher
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
@@ -10,12 +9,11 @@ import com.hieuwu.groceriesstore.utilities.OrderStatus
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class UpdateCartItemUseCaseImpl @Inject constructor(
+class UpdateCartItemUseCaseImpl (
     private val productRepository: ProductRepository,
     private val orderRepository: OrderRepository,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher
 ) : UpdateCartItemUseCase {
     override suspend fun updateLineItem(lineItemModel: LineItemModel) {
         withContext(ioDispatcher) {

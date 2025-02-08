@@ -2,9 +2,8 @@ package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.CategoryRepository
 import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
-import javax.inject.Inject
 
-class GetCategoriesListUseCaseImpl @Inject constructor(
+class GetCategoriesListUseCaseImpl(
     private val categoryRepository: CategoryRepository
 ) : GetCategoriesListUseCase {
     override suspend fun invoke(input: GetCategoriesListUseCase.Input): GetCategoriesListUseCase.Output {
