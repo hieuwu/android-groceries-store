@@ -10,7 +10,7 @@ import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.Meal
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealType
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.WeekDay
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.WeekDayValue
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

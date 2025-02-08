@@ -7,7 +7,7 @@ import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
