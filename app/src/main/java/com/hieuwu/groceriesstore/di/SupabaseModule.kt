@@ -58,5 +58,26 @@ object SupabaseModule {
 
 
 val supabaseModule = module {
+    single {
+        createSupabaseClient(
+            supabaseUrl = BuildConfig.SUPABASE_URL,
+            supabaseKey = BuildConfig.API_KEY,
+        ) {
+            defaultSerializer = KotlinXSerializer(Json { ignoreUnknownKeys = true })
+            install(Postgrest)
+            install(Auth)
+            install(Storage)
+        }
+    }
 
+    single<Postgrest> {
+        get<SupabaseClient>().postgrest
+    }
+
+    single<Auth> {
+        get<SupabaseClient>().auth
+    }
+    single<Storage> {
+        get<SupabaseClient>().storage
+    }
 }

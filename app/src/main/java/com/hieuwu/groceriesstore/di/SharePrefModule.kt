@@ -8,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import javax.inject.Singleton
 
@@ -26,6 +27,11 @@ object SharePrefModule {
 }
 
 val sharedPrefModule = module {
-
+    single {
+        androidContext().getSharedPreferences(
+            androidContext().getString(R.string.sync_status_pref_name),
+            Context.MODE_PRIVATE
+        )
+    }
 
 }
