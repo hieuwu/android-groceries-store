@@ -35,5 +35,4 @@ val viewModelModule = module {
     viewModelOf(::ProductListViewModel)
     viewModelOf(::OverviewViewModel)
     viewModelOf(::OverviewViewModel)
-
 }
