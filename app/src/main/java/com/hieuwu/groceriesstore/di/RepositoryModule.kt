@@ -16,6 +16,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -45,4 +48,13 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindMealRepository(impl: MealPlanRepositoryImpl): MealPlanRepository
+}
+
+val repositoryModule = module {
+    singleOf(::ProductRepositoryImpl) { bind<ProductRepository>() }
+    singleOf(::OrderRepositoryImpl) { bind<OrderRepository>() }
+    singleOf(::CategoryRepositoryImpl) { bind<CategoryRepository>() }
+    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }
+    singleOf(::UserRepositoryImpl) { bind<UserRepository>() }
+    singleOf(::RecipeRepositoryImpl) { bind<RecipeRepository>() }
 }
