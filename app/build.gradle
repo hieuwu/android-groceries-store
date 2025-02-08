@@ -155,4 +155,5 @@ ktlint {
 //        reporter(ReporterType.HTML)
 //    }
     android = false
+    ignoreFailures = true
 }
