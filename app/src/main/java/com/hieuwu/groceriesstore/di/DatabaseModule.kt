@@ -14,6 +14,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -58,5 +60,33 @@ object DatabaseModule {
     @Provides
     fun provideRecipeDao(database: GroceriesStoreDatabase): RecipeDao {
         return database.recipeDao()
+    }
+}
+
+val databaseModule = module {
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            GroceriesStoreDatabase::class.java,
+            "groceries_store.db"
+        ).fallbackToDestructiveMigration().build()
+    }
+    single<CategoryDao> {
+        get<GroceriesStoreDatabase>().categoryDao()
+    }
+    single<ProductDao> {
+        get<GroceriesStoreDatabase>().productDao()
+    }
+    single<LineItemDao> {
+        get<GroceriesStoreDatabase>().lineItemDao()
+    }
+    single<OrderDao> {
+        get<GroceriesStoreDatabase>().orderDao()
+    }
+    single<UserDao> {
+        get<GroceriesStoreDatabase>().userDao()
+    }
+    single<RecipeDao> {
+        get<GroceriesStoreDatabase>().recipeDao()
     }
 }
