@@ -38,16 +38,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,
     onSignUpClick: () -> Unit,
     onSignInSuccess: () -> Unit,
-    viewModel: SignInViewModel = hiltViewModel()
+    viewModel: SignInViewModel = koinViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     LaunchedEffect(Unit) {

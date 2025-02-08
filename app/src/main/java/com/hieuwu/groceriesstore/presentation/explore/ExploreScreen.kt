@@ -40,7 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -51,10 +51,11 @@ import com.hieuwu.groceriesstore.domain.models.ProductModel
 import com.hieuwu.groceriesstore.presentation.explore.composables.CategoryItem
 import com.hieuwu.groceriesstore.presentation.explore.composables.ProductItem
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ExploreScreen(
-    viewModel: ExploreViewModel = hiltViewModel(),
+    viewModel: ExploreViewModel = koinViewModel(),
     navigateToProductList: (CategoryModel) -> Unit,
     navigateToProductDetail: (ProductModel) -> Unit,
 ) {

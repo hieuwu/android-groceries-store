@@ -37,13 +37,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier,
-                 viewModel: SignUpViewModel = hiltViewModel()) {
+                 viewModel: SignUpViewModel = koinViewModel()) {
 
     val snackbarHostState = remember { SnackbarHostState() }
 

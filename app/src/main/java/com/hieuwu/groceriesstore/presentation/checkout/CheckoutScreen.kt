@@ -28,16 +28,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.checkout.composables.CartDetailList
 import com.hieuwu.groceriesstore.presentation.checkout.composables.CheckoutSuccessDialog
 import com.hieuwu.groceriesstore.presentation.core.widgets.PrimaryButton
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CheckoutScreen(
     modifier: Modifier = Modifier,
-    viewModel: CheckOutViewModel = hiltViewModel(),
+    viewModel: CheckOutViewModel = koinViewModel(),
     address: String = "",
     onSuccessDialogDismiss: () -> Unit,
     onDeliveryEdit: () -> Unit = {},

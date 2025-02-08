@@ -34,7 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.mealplanning.addmeal.AddMealBottomSheet
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.EmptyListIndicatorText
@@ -46,12 +46,13 @@ import com.hieuwu.groceriesstore.presentation.mealplanning.overview.state.MealTy
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OverViewScreen(
     modifier: Modifier = Modifier,
-    viewModel: OverviewViewModel = hiltViewModel(),
+    viewModel: OverviewViewModel = koinViewModel(),
     onNavigateUpClick: () -> Unit
 ) {
     val breakfastList = viewModel.breakfastMeals.collectAsState().value

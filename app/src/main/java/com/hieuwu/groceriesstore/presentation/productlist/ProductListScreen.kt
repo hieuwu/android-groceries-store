@@ -48,7 +48,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -60,13 +60,14 @@ import com.hieuwu.groceriesstore.presentation.core.widgets.WebImage
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ProductListScreen(
     navigateUp: () -> Unit,
     showFilter: () -> Unit,
     openProductDetails: (String) -> Unit,
-    viewModel: ProductListViewModel = hiltViewModel()
+    viewModel: ProductListViewModel = koinViewModel()
 ) {
     val viewState by viewModel.state.collectAsState()
     ProductListScreen(

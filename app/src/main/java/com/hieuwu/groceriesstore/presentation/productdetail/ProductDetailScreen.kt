@@ -33,17 +33,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.hieuwu.groceriesstore.R
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ProductDetailScreen(
     modifier: Modifier = Modifier,
-    viewModel: ProductDetailViewModel = hiltViewModel(),
+    viewModel: ProductDetailViewModel = koinViewModel(),
     onNavigateBack: () -> Unit
 ) {
     val product = viewModel.product.collectAsState().value

@@ -32,16 +32,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.shop.composables.Carousel
 import com.hieuwu.groceriesstore.presentation.shop.composables.ProductCatalogue
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ShopScreen(
     modifier: Modifier = Modifier,
-    viewModel: ShopViewModel = hiltViewModel(),
+    viewModel: ShopViewModel = koinViewModel(),
     navigateToProductDetails: (String) -> Unit
 ) {
 
