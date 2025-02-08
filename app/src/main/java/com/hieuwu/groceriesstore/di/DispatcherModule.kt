@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import javax.inject.Qualifier
 
 @Module
@@ -36,3 +38,17 @@ annotation class IoDispatcher
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
 annotation class MainDispatcher
+
+val dispatchersModule = module {
+    single(named("IoDispatcher")) {
+        Dispatchers.IO
+    }
+
+    single(named("DefaultDispatcher")) {
+        Dispatchers.Default
+    }
+
+    single(named("MainDispatcher")) {
+        Dispatchers.Main
+    }
+}
