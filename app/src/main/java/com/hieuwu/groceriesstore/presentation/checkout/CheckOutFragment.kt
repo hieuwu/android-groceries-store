@@ -11,9 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.AuthActivity
 import com.hieuwu.groceriesstore.utilities.KeyData
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
+
 class CheckOutFragment : Fragment() {
 
     private var deliveryContent: String = ""
