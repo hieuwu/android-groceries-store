@@ -14,8 +14,6 @@ glideVersion = "4.13.2"
 glideComposeVersion = "1.0.0-beta01"
 googleServicesVersion = "4.4.2"
 gsonVersion = "2.10.1"
-hiltNavigationComposeVersion = "1.2.0"
-hiltVersion = '2.49'
 jUnitVersion = "4.13.2"
 kotlinVersion = "1.9.24"
 kotlinCoroutineAdapter = "0.9.2"
@@ -53,7 +51,6 @@ workVersion = "2.9.0"
 accompanist-themeadapter-material = { module = "com.google.accompanist:accompanist-themeadapter-material", version.ref = "accompanistThemeadapterMaterialVersion" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompatVersion" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "coreVersion" }
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleVersion" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleVersion" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtendedVersion" }
@@ -77,8 +74,6 @@ glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersio
 glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glideVersion" }
 glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glideComposeVersion" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
-hilt = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltVersion" }
 junit = { module = "junit:junit", version.ref = "jUnitVersion" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlinVersion" }
 kotlin-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinCoroutinePlayServicesVersion" }
@@ -128,7 +123,6 @@ room = ["room", "room-runtime"]
 [plugins]
 android-application = { id = "com.android.application", version.ref = "buildGradleVersion" }
 gms = { id = "com.google.gms.google-services", version.ref = "googleServicesVersion" }
-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinVersion" }
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradleVersion" }
