@@ -28,6 +28,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,12 +42,17 @@ import androidx.compose.ui.unit.dp
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
 import org.koin.androidx.compose.koinViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier,
                  viewModel: SignUpViewModel = koinViewModel()) {
 
     val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         viewModel.showSignUpSuccessMessage.collect {
@@ -138,7 +144,17 @@ fun SignUpScreen(modifier: Modifier = Modifier,
                 )
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { viewModel.createAccount() },
+                    onClick = {
+                        if (viewModel.isValidEmail()) {
+                            viewModel.createAccount()
+                        } else {
+                            coroutineScope.launch {
+                                withContext(Dispatchers.Main) {
+                                    snackbarHostState.showSnackbar("Invalid Email address!!")
+                                }
+                            }
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.colorPrimary)),
                 ) {
                     Text("Sign up")
