@@ -38,17 +38,22 @@ annotation class IoDispatcher
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
 annotation class MainDispatcher
+object DispatchersName {
+    val IO = "IoDispatcher"
+    val DEFAULT = "DefaultDispatcher"
+    val MAIN = "MainDispatcher"
+}
 
 val dispatchersModule = module {
-    single(named("IoDispatcher")) {
+    single(named(DispatchersName.IO)) {
         Dispatchers.IO
     }
 
-    single(named("DefaultDispatcher")) {
+    single(named(DispatchersName.DEFAULT)) {
         Dispatchers.Default
     }
 
-    single(named("MainDispatcher")) {
+    single(named(DispatchersName.MAIN)) {
         Dispatchers.Main
     }
 }
