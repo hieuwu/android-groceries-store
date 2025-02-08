@@ -15,6 +15,7 @@ import io.github.jan.supabase.serializer.KotlinXSerializer
 import io.github.jan.supabase.storage.Storage
 import io.github.jan.supabase.storage.storage
 import kotlinx.serialization.json.Json
+import org.koin.dsl.module
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -52,5 +53,10 @@ object SupabaseModule {
     fun provideSupabaseStorage(client: SupabaseClient): Storage {
         return client.storage
     }
+
+}
+
+
+val supabaseModule = module {
 
 }
