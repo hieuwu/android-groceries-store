@@ -4,7 +4,6 @@ plugins {
     alias libs.plugins.android.application
     alias libs.plugins.ktlint.gradle
     alias libs.plugins.gms
-    alias libs.plugins.spotless
     alias libs.plugins.navigation.safeargs
     id "org.jetbrains.kotlin.plugin.serialization" version "1.7.0"
 }
@@ -157,4 +156,5 @@ ktlint {
 //        reporter(ReporterType.PLAIN)
 //        reporter(ReporterType.HTML)
 //    }
+    android = false
 }

@@ -37,10 +37,8 @@ moshiConverterVersion = "2.9.0"
 moshiVersion = "1.12.0"
 navigationComposeVersion = "2.7.7"
 navigationVersion = "2.7.7"
-postgrestKtAndroidVersion = "2.0.0"
 retrofitVersion = "2.11.0"
 roomVersion = "2.6.1"
-spotlessVersion = "6.8.0"
 testRunnerVersion = "1.6.1"
 timberVersion = "5.0.1"
 uiToolingPreviewVersion = "1.6.8"
@@ -127,4 +125,3 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVer
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinVersion" }
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradleVersion" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigationVersion"}
-spotless = { id = "com.diffplug.spotless", version.ref = "spotlessVersion" }
