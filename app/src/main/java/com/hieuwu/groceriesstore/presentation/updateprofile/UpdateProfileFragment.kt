@@ -10,9 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.utilities.showMessageSnackBar
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
+
 class UpdateProfileFragment : Fragment() {
 
     private val viewModel: UpdateProfileViewModel by viewModels()

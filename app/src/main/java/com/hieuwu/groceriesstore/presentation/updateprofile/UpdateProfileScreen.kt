@@ -7,17 +7,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.presentation.account.DemoUser
 import com.hieuwu.groceriesstore.presentation.updateprofile.widgets.UpdateProfileAppBar
 import com.hieuwu.groceriesstore.presentation.updateprofile.widgets.UpdateProfileScreenContent
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun UpdateProfileScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit = {},
-    viewModel: UpdateProfileViewModel = hiltViewModel(),
+    viewModel: UpdateProfileViewModel = koinViewModel(),
 ) {
     val user = viewModel.user.collectAsState()
 

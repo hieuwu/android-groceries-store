@@ -5,15 +5,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.core.widgets.PrimaryButton
 import com.hieuwu.groceriesstore.presentation.onboarding.OnboardingViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun OnboardingGetStartedButton(
     modifier: Modifier = Modifier,
-    viewModel: OnboardingViewModel = hiltViewModel(),
+    viewModel: OnboardingViewModel = koinViewModel(),
     navigateToMainInitialScreen: () -> Unit
 ) {
     val enabled = viewModel.isSyncedSuccessful.collectAsState()

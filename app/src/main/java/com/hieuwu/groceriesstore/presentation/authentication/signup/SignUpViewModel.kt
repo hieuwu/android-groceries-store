@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SignUpViewModel @Inject constructor(private val userRepository: UserRepository) :
+
+
+class SignUpViewModel (private val userRepository: UserRepository) :
     ViewModel() {
 
     private var _email = MutableStateFlow("")
