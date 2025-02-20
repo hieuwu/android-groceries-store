@@ -51,7 +51,7 @@ fun ShopScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
 
-        ) { paddingValues ->
+        ) { _ ->
         Box(modifier = modifier.background(colorResource(id = R.color.colorPrimary))) {
             val products = viewModel.productList.collectAsState()
 
