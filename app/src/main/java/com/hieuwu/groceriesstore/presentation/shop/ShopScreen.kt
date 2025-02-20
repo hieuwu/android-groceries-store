@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.shop
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -39,6 +40,7 @@ import com.hieuwu.groceriesstore.presentation.shop.composables.ProductCatalogue
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ShopScreen(
     modifier: Modifier = Modifier,
@@ -51,7 +53,7 @@ fun ShopScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
 
-        ) { _ ->
+        ) {
         Box(modifier = modifier.background(colorResource(id = R.color.colorPrimary))) {
             val products = viewModel.productList.collectAsState()
 
