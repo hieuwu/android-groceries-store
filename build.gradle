@@ -5,10 +5,6 @@ buildscript {
     }
 }
 
-plugins {
-    alias libs.plugins.spotless apply false
-}
-
 allprojects {
     repositories {
         google()
@@ -16,11 +12,6 @@ allprojects {
     }
 }
 
-subprojects {
-    afterEvaluate { project ->
-        project.apply from: '../spotless.gradle'
-    }
-}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

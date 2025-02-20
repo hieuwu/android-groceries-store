@@ -18,9 +18,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
-import javax.inject.Inject
 
-class OrderRepositoryImpl @Inject constructor(
+
+class OrderRepositoryImpl (
     private val orderDao: OrderDao,
     private val lineItemDao: LineItemDao,
     private val postgrest: Postgrest

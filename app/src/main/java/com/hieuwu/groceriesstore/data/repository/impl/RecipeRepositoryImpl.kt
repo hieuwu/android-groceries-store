@@ -7,9 +7,9 @@ import com.hieuwu.groceriesstore.data.network.dto.asEntity
 import com.hieuwu.groceriesstore.data.repository.RecipeRepository
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
-import javax.inject.Inject
 
-class RecipeRepositoryImpl @Inject constructor(
+
+class RecipeRepositoryImpl (
     private val recipeDao: RecipeDao
 ) : RecipeRepository {
     override suspend fun refreshDatabase() {

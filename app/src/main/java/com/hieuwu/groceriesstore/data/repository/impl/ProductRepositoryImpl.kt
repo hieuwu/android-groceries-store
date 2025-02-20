@@ -13,9 +13,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
-import javax.inject.Inject
 
-class ProductRepositoryImpl @Inject constructor(
+
+class ProductRepositoryImpl (
     private val productDao: ProductDao,
     private val lineItemDao: LineItemDao,
     private val supabasePostgrest: Postgrest

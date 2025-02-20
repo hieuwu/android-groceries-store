@@ -1,38 +1,25 @@
 package com.hieuwu.groceriesstore.di
 
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Qualifier
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-class DispatcherModule {
-
-    @DefaultDispatcher
-    @Provides
-    fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
-
-    @IoDispatcher
-    @Provides
-    fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
-
-    @MainDispatcher
-    @Provides
-    fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+object DispatchersName {
+    val IO = "IoDispatcher"
+    val DEFAULT = "DefaultDispatcher"
+    val MAIN = "MainDispatcher"
 }
 
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class DefaultDispatcher
+val dispatchersModule = module {
+    single(named(DispatchersName.IO)) {
+        Dispatchers.IO
+    }
 
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class IoDispatcher
+    single(named(DispatchersName.DEFAULT)) {
+        Dispatchers.Default
+    }
 
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class MainDispatcher
+    single(named(DispatchersName.MAIN)) {
+        Dispatchers.Main
+    }
+}

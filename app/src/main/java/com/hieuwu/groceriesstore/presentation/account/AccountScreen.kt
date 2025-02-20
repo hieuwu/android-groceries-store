@@ -9,16 +9,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.presentation.account.widgets.AccountContentView
 import com.hieuwu.groceriesstore.presentation.account.widgets.AccountHeaderView
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AccountScreen(
     modifier: Modifier = Modifier,
-    viewModel: AccountViewModel = hiltViewModel(),
+    viewModel: AccountViewModel = koinViewModel(),
     onSignInClick: (() -> Unit),
     onProfileSettingsClick: (() -> Unit),
     onNotificationSettingsClick: (() -> Unit),

@@ -7,13 +7,13 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.repository.RecipeRepository
 import com.hieuwu.groceriesstore.domain.models.RecipeModel
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
-import javax.inject.Inject
 
-@HiltViewModel
-class FavouriteViewModel @Inject constructor(private val recipeRepository: RecipeRepository) :
+
+
+class FavouriteViewModel (private val recipeRepository: RecipeRepository) :
     ViewModel() {
 
     private var _recipesList: MutableLiveData<List<RecipeModel>> =

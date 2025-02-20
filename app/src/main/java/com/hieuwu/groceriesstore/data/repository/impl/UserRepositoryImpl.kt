@@ -12,9 +12,8 @@ import io.github.jan.supabase.postgrest.Postgrest
 import java.util.UUID
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
-import javax.inject.Inject
 
-class UserRepositoryImpl @Inject constructor(
+class UserRepositoryImpl (
     private val userDao: UserDao,
     private val authService: Auth,
     private val postgrest: Postgrest,

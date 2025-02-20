@@ -8,10 +8,10 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.hieuwu.groceriesstore.MainActivity
 import com.hieuwu.groceriesstore.R
-import dagger.hilt.android.AndroidEntryPoint
+
 import timber.log.Timber
 
-@AndroidEntryPoint
+
 class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

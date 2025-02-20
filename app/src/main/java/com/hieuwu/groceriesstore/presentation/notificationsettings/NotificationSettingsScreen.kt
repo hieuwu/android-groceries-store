@@ -28,15 +28,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.notificationsettings.composables.NotificationSettingsItem
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotificationSettingsScreen(
     onNavigateUp: () -> Unit,
-    viewModel: NotificationSettingsViewModel = hiltViewModel()
+    viewModel: NotificationSettingsViewModel = koinViewModel()
 ) {
     Scaffold(
         topBar = {

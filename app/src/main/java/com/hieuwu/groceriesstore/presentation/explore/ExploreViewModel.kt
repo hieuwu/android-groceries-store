@@ -13,7 +13,7 @@ import com.hieuwu.groceriesstore.domain.usecases.GetCategoriesListUseCase
 import com.hieuwu.groceriesstore.domain.usecases.GetCurrentCartUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SearchProductUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import java.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,10 +21,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class ExploreViewModel @Inject constructor(
+class ExploreViewModel constructor(
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val getCategoriesListUseCase: GetCategoriesListUseCase,
     private val searchProductUseCase: SearchProductUseCase,

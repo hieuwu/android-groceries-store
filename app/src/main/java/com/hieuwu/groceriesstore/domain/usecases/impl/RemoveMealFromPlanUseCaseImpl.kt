@@ -1,15 +1,13 @@
 package com.hieuwu.groceriesstore.domain.usecases.impl
 
 import com.hieuwu.groceriesstore.data.repository.MealPlanRepository
-import com.hieuwu.groceriesstore.di.IoDispatcher
 import com.hieuwu.groceriesstore.domain.usecases.RemoveMealFromPlanUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class RemoveMealFromPlanUseCaseImpl @Inject constructor(
+class RemoveMealFromPlanUseCaseImpl (
     private val mealPlanRepository: MealPlanRepository,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val ioDispatcher: CoroutineDispatcher,
 ) : RemoveMealFromPlanUseCase {
     override suspend fun invoke(input: RemoveMealFromPlanUseCase.Input): RemoveMealFromPlanUseCase.Output {
         return withContext(ioDispatcher) {

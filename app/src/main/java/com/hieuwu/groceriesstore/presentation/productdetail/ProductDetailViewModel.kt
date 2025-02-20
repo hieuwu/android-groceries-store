@@ -9,17 +9,14 @@ import com.hieuwu.groceriesstore.data.repository.OrderRepository
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProductDetailUseCase
 import com.hieuwu.groceriesstore.utilities.OrderStatus
-import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class ProductDetailViewModel @Inject constructor(
+class ProductDetailViewModel constructor(
     savedStateHandle: SavedStateHandle,
     getProductDetailUseCase: GetProductDetailUseCase,
     private val orderRepository: OrderRepository
@@ -43,7 +40,7 @@ class ProductDetailViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            currentCart.collect{}
+            currentCart.collect {}
         }
     }
 

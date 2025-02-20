@@ -5,16 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 import com.hieuwu.groceriesstore.domain.models.OrderModel
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
-import javax.inject.Inject
+
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-@HiltViewModel
-class CartViewModel @Inject constructor(
+
+class CartViewModel constructor(
     private val updateCartItemUseCase: UpdateCartItemUseCase
 ) : ViewModel() {
 

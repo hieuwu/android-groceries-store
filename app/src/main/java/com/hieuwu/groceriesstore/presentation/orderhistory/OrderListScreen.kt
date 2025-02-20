@@ -24,13 +24,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun OrderHistoryScreen(
     modifier: Modifier = Modifier,
-    viewModel: OrderListViewModel = hiltViewModel()
+    viewModel: OrderListViewModel = koinViewModel()
 ) {
     Box(modifier = modifier.background(colorResource(id = R.color.colorPrimary))) {
         Text(

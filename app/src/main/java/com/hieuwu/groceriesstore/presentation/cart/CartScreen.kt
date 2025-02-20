@@ -29,15 +29,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.cart.composables.CartItem
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CartScreen(
     modifier: Modifier = Modifier,
-    viewModel: CartViewModel = hiltViewModel()
+    viewModel: CartViewModel = koinViewModel()
 ) {
     Column(
         modifier = modifier

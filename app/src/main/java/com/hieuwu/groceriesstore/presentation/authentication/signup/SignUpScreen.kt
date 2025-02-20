@@ -38,19 +38,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
+import org.koin.androidx.compose.koinViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun SignUpScreen(
-    modifier: Modifier = Modifier,
-    viewModel: SignUpViewModel = hiltViewModel()
-) {
+fun SignUpScreen(modifier: Modifier = Modifier,
+                 viewModel: SignUpViewModel = koinViewModel()) {
 
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()

@@ -1,5 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.shop
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -32,16 +33,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.shop.composables.Carousel
 import com.hieuwu.groceriesstore.presentation.shop.composables.ProductCatalogue
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ShopScreen(
     modifier: Modifier = Modifier,
-    viewModel: ShopViewModel = hiltViewModel(),
+    viewModel: ShopViewModel = koinViewModel(),
     navigateToProductDetails: (String) -> Unit
 ) {
 
@@ -50,7 +53,7 @@ fun ShopScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
 
-        ) { paddingValues ->
+        ) {
         Box(modifier = modifier.background(colorResource(id = R.color.colorPrimary))) {
             val products = viewModel.productList.collectAsState()
 

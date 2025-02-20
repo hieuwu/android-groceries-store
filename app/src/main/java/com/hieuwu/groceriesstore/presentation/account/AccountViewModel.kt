@@ -5,13 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class AccountViewModel @Inject constructor(
+
+
+class AccountViewModel constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val signOutUseCase: SignOutUseCase
 ) : ViewModel() {

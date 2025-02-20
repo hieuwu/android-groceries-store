@@ -10,9 +10,9 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.hieuwu.groceriesstore.R
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
+
 class SignInFragment : Fragment() {
 
     override fun onCreateView(
