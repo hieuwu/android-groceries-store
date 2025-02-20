@@ -85,7 +85,7 @@ dependencies {
     kapt libs.room.compiler
 
     implementation libs.glide
-    annotationProcessor libs.glide.compiler
+    kapt 'com.github.bumptech.glide:compiler:4.13.2'
     implementation libs.lottie
     implementation libs.lottie.compose
 
