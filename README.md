@@ -1,9 +1,8 @@
+
+
 <h1 align="center"> 🚀 Groceries Store</h1>
 
-
- [![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hieuwu_android-groceries-store&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hieuwu_android-groceries-store)
-
+[![Made with Supabase](https://supabase.com/badge-made-with-supabase-dark.svg)](https://supabase.com)
 ![Groceries Store](https://user-images.githubusercontent.com/43868345/233767546-ba25566b-7926-4140-82fe-12346a1f357e.png)
 
 <img src="https://github.com/hieuwu/hieuwu.github.io/blob/master/assets/img/rocket.gif" align="right" height="330px">
@@ -14,6 +13,10 @@
 ![SQLite](https://img.shields.io/badge/SQLite-003B57.svg?&style=for-the-badge&logo=sqlite&logoColor=0772de)
 ![Firebase](https://img.shields.io/badge/Firebase-b0b0b0.svg?&style=for-the-badge&logo=firebase&logoColor=FFCA28)
 ![Github Action](https://img.shields.io/badge/Github%20Actions-424a53.svg?&style=for-the-badge&logo=githubactions&logoColor=white) -->
+
+[![Android CI](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml/badge.svg?branch=main)](https://github.com/hieuwu/android-groceries-store/actions/workflows/app-build.yml)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hieuwu_android-groceries-store&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hieuwu_android-groceries-store)
+
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=ARK-Builders_arklib-android)
 
 [Download on Google Play Store](https://play.google.com/store/apps/details?id=com.hieuwu.groceriesstore)
@@ -24,7 +27,6 @@ Groceries Store is a project to help people order grocery online. The main purpo
 
 ## 🎨 UI Design & Architecture
 <img src="https://github.com/hieuwu/hieuwu.github.io/blob/master/assets/img/real-estate.gif" align="left" height="280px">
-
 
 **Design**
 - [Groceries Store Design](https://www.figma.com/file/exhlJtkLIcHvfxd8SDja3T/Online-Groceries-App-UI-(Community)?node-id=1%3A2)
