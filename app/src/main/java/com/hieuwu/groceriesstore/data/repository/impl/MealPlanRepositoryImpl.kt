@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.first
 import timber.log.Timber
 
 
-class MealPlanRepositoryImpl (
+class MealPlanRepositoryImpl constructor(
     private val postgrest: Postgrest,
     private val userRepository: UserRepository,
     private val storage: Storage
