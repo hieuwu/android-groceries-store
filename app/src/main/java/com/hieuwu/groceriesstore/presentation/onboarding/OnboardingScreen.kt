@@ -21,6 +21,7 @@ fun OnboardingScreen(
     Scaffold { paddingValues ->
         Box(
             modifier = Modifier
+                .padding(paddingValues)
                 .padding(
                     WindowInsets.navigationBars.asPaddingValues()
                 )
