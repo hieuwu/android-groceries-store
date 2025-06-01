@@ -9,8 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 
-
-
 class SignUpFragment : Fragment() {
 
     override fun onCreateView(

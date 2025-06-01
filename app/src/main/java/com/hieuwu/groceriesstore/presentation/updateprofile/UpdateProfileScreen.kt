@@ -1,15 +1,13 @@
 package com.hieuwu.groceriesstore.presentation.updateprofile
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-
 import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.presentation.account.DemoUser
+import com.hieuwu.groceriesstore.presentation.account.widgets.DemoUser
 import com.hieuwu.groceriesstore.presentation.updateprofile.widgets.UpdateProfileAppBar
 import com.hieuwu.groceriesstore.presentation.updateprofile.widgets.UpdateProfileScreenContent
 import org.koin.androidx.compose.koinViewModel

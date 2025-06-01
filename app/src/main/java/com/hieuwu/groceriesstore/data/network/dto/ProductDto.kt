@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProductDto(
-    @SerialName("productid")
+    @SerialName("id")
     val productId: String,
     @SerialName("name")
     val name: String,
@@ -19,6 +19,4 @@ data class ProductDto(
     val category: String,
     @SerialName("nutrition")
     val nutrition: String,
-    @SerialName("_id")
-    val _id: Int,
 )

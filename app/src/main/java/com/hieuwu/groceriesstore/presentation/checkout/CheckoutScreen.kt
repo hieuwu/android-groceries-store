@@ -1,9 +1,6 @@
 package com.hieuwu.groceriesstore.presentation.checkout
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,15 +20,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.checkout.composables.CartDetailList
 import com.hieuwu.groceriesstore.presentation.checkout.composables.CheckoutSuccessDialog
+import com.hieuwu.groceriesstore.presentation.checkout.composables.DeliverySection
+import com.hieuwu.groceriesstore.presentation.checkout.composables.PaymentMethodSection
+import com.hieuwu.groceriesstore.presentation.checkout.composables.ShippingFeeSection
+import com.hieuwu.groceriesstore.presentation.checkout.composables.TotalSection
 import com.hieuwu.groceriesstore.presentation.core.widgets.PrimaryButton
 import org.koin.androidx.compose.koinViewModel
 
@@ -136,104 +133,5 @@ fun CheckoutScreen(
                 )
             }
         }
-    }
-}
-
-@Composable
-fun DeliverySection(
-    address: String,
-    modifier: Modifier = Modifier,
-    onEdit: () -> Unit
-) {
-    Column {
-        Row(
-            modifier = modifier.padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = stringResource(id = R.string.delivery),
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
-            )
-
-            Text(
-                text = stringResource(id = R.string.edit),
-                color = colorResource(id = R.color.colorPrimary),
-                modifier = Modifier.clickable { onEdit() }
-            )
-        }
-
-        Text(
-            text = address,
-            fontSize = 16.sp,
-            modifier = modifier
-                .padding(horizontal = 16.dp)
-        )
-    }
-}
-
-@Composable
-fun PaymentMethodSection(
-    modifier: Modifier = Modifier,
-    onEdit: () -> Unit
-) {
-    Row(
-        modifier = modifier.padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = stringResource(id = R.string.payment_method),
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
-        )
-
-        Text(
-            text = stringResource(id = R.string.edit),
-            color = colorResource(id = R.color.colorPrimary),
-            modifier = Modifier.clickable { onEdit() }
-        )
-    }
-}
-
-@Composable
-fun ShippingFeeSection(
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = stringResource(id = R.string.shipping_fee),
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
-        )
-
-        Text(
-            text = "12.3",
-            color = colorResource(id = R.color.colorPrimary)
-        )
-    }
-}
-
-@Composable
-fun TotalSection(
-    totalPrice: Double,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = stringResource(id = R.string.total),
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
-        )
-
-        Text(
-            text = "$totalPrice $",
-            color = colorResource(id = R.color.colorPrimary)
-        )
     }
 }

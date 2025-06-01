@@ -21,11 +21,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-
 private const val STOP_TIMEOUT = 5000L
-
-
-class ShopViewModel constructor (
+class ShopViewModel(
     private val getProductsListUseCase: GetProductsListUseCase,
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val addToCartUseCase: AddToCartUseCase,

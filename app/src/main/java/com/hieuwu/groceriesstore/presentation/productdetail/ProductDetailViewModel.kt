@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class ProductDetailViewModel constructor(
+class ProductDetailViewModel(
     savedStateHandle: SavedStateHandle,
     getProductDetailUseCase: GetProductDetailUseCase,
     private val orderRepository: OrderRepository

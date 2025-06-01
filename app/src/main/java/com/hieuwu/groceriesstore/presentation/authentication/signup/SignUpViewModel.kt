@@ -11,8 +11,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-
-
 class SignUpViewModel (private val userRepository: UserRepository) :
     ViewModel() {
 

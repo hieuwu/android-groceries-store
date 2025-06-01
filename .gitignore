@@ -14,4 +14,4 @@
 .externalNativeBuild
 .cxx
 
-app/local.properties
+local.properties

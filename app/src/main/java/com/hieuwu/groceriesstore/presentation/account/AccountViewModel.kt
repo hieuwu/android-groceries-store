@@ -9,9 +9,7 @@ import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-
-
-class AccountViewModel constructor(
+class AccountViewModel(
     private val getProfileUseCase: GetProfileUseCase,
     private val signOutUseCase: SignOutUseCase
 ) : ViewModel() {

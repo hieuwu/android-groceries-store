@@ -11,8 +11,7 @@ import java.util.UUID
 import kotlinx.coroutines.flow.first
 import timber.log.Timber
 
-
-class MealPlanRepositoryImpl (
+class MealPlanRepositoryImpl(
     private val postgrest: Postgrest,
     private val userRepository: UserRepository,
     private val storage: Storage
@@ -38,7 +37,12 @@ class MealPlanRepositoryImpl (
             )
         )
         val imageKey =
-            storage.from("meals").upload(path = "$mealId.png", data = mealImageUri, upsert = true)
+            storage.from("meals").upload(
+                path = "$mealId.png", data = mealImageUri
+            ) {
+                upsert = true
+            }.key ?: ""
+
         val imageUrl = SupabaseHelper.buildImageUrl(imageKey)
         postgrest["meal_plans"].update({
             set("image", imageUrl)

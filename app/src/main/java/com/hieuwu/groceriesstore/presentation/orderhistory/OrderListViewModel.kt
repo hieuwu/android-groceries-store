@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class OrderListViewModel constructor(
+class OrderListViewModel(
     private val getOrderListUseCase: GetOrderListUseCase
 ) : ViewModel() {
 

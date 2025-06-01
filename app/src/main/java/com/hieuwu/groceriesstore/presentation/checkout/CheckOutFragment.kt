@@ -12,8 +12,6 @@ import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.AuthActivity
 import com.hieuwu.groceriesstore.utilities.KeyData
 
-
-
 class CheckOutFragment : Fragment() {
 
     private var deliveryContent: String = ""

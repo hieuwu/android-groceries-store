@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
-class CartViewModel constructor(
+class CartViewModel(
     private val updateCartItemUseCase: UpdateCartItemUseCase
 ) : ViewModel() {
 

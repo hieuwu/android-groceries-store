@@ -11,9 +11,7 @@ import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-
-
-class UpdateProfileViewModel constructor(
+class UpdateProfileViewModel(
     private val updateProfileUseCase: UpdateProfileUseCase,
     private val getProfileUseCase: GetProfileUseCase,
 ) : ViewModel() {

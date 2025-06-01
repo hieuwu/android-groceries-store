@@ -17,7 +17,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.presentation.account.DemoUser
+import com.hieuwu.groceriesstore.presentation.account.widgets.DemoUser
 
 @Composable
 fun UpdateProfileScreenContent(

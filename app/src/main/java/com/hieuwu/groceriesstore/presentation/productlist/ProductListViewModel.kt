@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 
-class ProductListViewModel constructor(
+class ProductListViewModel(
     savedStateHandle: SavedStateHandle,
     private val getProductsListUseCase: GetProductsListUseCase,
     private val getProductsByCategoryUseCase: GetProductsByCategoryUseCase,

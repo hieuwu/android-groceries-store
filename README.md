@@ -53,14 +53,23 @@ Groceries Store is a project to help people order grocery online. The main purpo
 ## ⚙️ Setup
 
 #### Android Studio
-Android Studio Bumblebee or later
-SDK 23 or later
+Android Studio Meerkat or later
 
 #### Supabase
 See [Supabase Wiki](https://github.com/hieuwu/android-groceries-store/wiki) 
 Database Schema:
-<img width="730" alt="Screenshot 2024-05-16 at 22 17 45" src="https://github.com/hieuwu/android-groceries-store/assets/43868345/2be292c1-d0ea-4396-9661-6bbe9f322ff7">
 
+<img width="650" alt="331267914-2be292c1-d0ea-4396-9661-6bbe9f322ff7" src="https://github.com/user-attachments/assets/dc13dd80-db83-4323-9a9c-3340f50e2c05" />
+
+
+Setup with mock data:
+- Create your Supabase account
+- Open local.properties, update:
+```xml
+API_KEY_DEBUG=YOUR_SUPABASE_SECRET_DEBUG
+SUPABASE_URL_DEBUG=YOUR_SUPABASE_URL_DEBUG
+```
+- Open `supabase/postgrest`, execute each file step by step according to file name
 
 ## 🎯 Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/hieuwu/android-groceries-store/stargazers)__ for this repository. :star: <br>
