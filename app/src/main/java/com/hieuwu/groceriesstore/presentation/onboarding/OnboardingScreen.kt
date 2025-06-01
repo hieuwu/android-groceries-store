@@ -1,7 +1,10 @@
 package com.hieuwu.groceriesstore.presentation.onboarding
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -17,7 +20,10 @@ fun OnboardingScreen(
 ) {
     Scaffold { paddingValues ->
         Box(
-            modifier = modifier.padding(paddingValues)
+            modifier = Modifier
+                .padding(
+                    WindowInsets.navigationBars.asPaddingValues()
+                )
         ) {
             OnboardingScreenBackground(
                 modifier = modifier.fillMaxSize(),
