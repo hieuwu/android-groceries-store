@@ -11,9 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-
-
-class NotificationSettingsViewModel constructor(
+class NotificationSettingsViewModel(
     private val userSettingsUseCase: UserSettingsUseCase,
     private val getProfileUseCase: GetProfileUseCase,
 ) : ViewModel() {

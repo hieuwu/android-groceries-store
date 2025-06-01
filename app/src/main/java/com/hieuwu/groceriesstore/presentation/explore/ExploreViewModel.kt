@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class ExploreViewModel constructor(
+class ExploreViewModel(
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val getCategoriesListUseCase: GetCategoriesListUseCase,
     private val searchProductUseCase: SearchProductUseCase,

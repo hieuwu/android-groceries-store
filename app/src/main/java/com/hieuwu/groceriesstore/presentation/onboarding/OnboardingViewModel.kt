@@ -10,9 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-
-
-class OnboardingViewModel constructor(
+class OnboardingViewModel(
     private val refreshAppDataUseCase: RefreshAppDataUseCase,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {

@@ -11,8 +11,7 @@ import java.util.UUID
 import kotlinx.coroutines.flow.first
 import timber.log.Timber
 
-
-class MealPlanRepositoryImpl constructor(
+class MealPlanRepositoryImpl(
     private val postgrest: Postgrest,
     private val userRepository: UserRepository,
     private val storage: Storage

@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 
 
-class CheckOutViewModel constructor(
+class CheckOutViewModel(
     private val getCurrentCartUseCase: GetCurrentCartUseCase,
     private val getProfileUseCase: GetProfileUseCase,
     private val submitOrderUseCase: SubmitOrderUseCase

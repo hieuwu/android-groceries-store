@@ -23,7 +23,6 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.models.UserModel
-import com.hieuwu.groceriesstore.presentation.account.DemoUser
 import com.hieuwu.groceriesstore.presentation.utils.Converter
 import com.hieuwu.groceriesstore.presentation.utils.textUnit
 

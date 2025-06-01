@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.hieuwu.groceriesstore.R
 
-
-
 class SignInFragment : Fragment() {
 
     override fun onCreateView(

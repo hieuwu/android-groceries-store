@@ -8,8 +8,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
-
-
 class ShopFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
