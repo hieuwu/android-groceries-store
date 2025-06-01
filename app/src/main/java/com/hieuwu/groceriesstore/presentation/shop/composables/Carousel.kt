@@ -68,7 +68,6 @@ fun Carousel(modifier: Modifier = Modifier) {
                         contentDescription = null,
                         modifier = modifier
                             .fillParentMaxWidth()
-                            .animateItemPlacement()
                     )
                 }
             }
