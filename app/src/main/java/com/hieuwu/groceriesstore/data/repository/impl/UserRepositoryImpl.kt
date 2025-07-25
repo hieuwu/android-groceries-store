@@ -89,7 +89,9 @@ class UserRepositoryImpl (
                     UserDto::address setTo address
                 }
             ) {
-                UserDto::id to userId
+                filter {
+                    UserDto::id eq userId
+                }
             }
             userDao.insert(dbUser)
         } catch (e: Exception) {
@@ -98,7 +100,12 @@ class UserRepositoryImpl (
     }
 
     override suspend fun clearUser() {
-        userDao.clearUser()
+        try {
+            authService.signOut()
+            userDao.clearUser()
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
     }
 
     override suspend fun updateUserSettings(
@@ -110,9 +117,9 @@ class UserRepositoryImpl (
         try {
             postgrest[RemoteTable.Users.tableName].update(
                 {
-                    UserDto::isOrderCreatedNotiEnabled setTo isOrderCreatedEnabled
-                    UserDto::isDataRefreshedNotiEnabled setTo isDatabaseRefreshedEnabled
-                    UserDto::isPromotionNotiEnabled setTo isPromotionEnabled
+                    set("isordercreatednotienabled", isOrderCreatedEnabled)
+                    set("isdatarefreshednotienabled", isDatabaseRefreshedEnabled)
+                    set("ispromotionnotienabled", isPromotionEnabled)
                 }
             ) {
                 filter {

@@ -2,14 +2,12 @@ package com.hieuwu.groceriesstore.presentation.updateprofile.widgets
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -26,6 +24,7 @@ fun UpdateProfileScreenContent(
     onNameChanged: (String) -> Unit = {},
     onPhoneChanged: (String) -> Unit = {},
     onEmailChanged: (String) -> Unit = {},
+    isInvalidEmail: Boolean = false,
     onAddressChanged: (String) -> Unit = {},
 ) {
     Column(
@@ -37,52 +36,53 @@ fun UpdateProfileScreenContent(
             dimensionResource(id = R.dimen.margin_small)
         )
     ) {
-
-        var name by remember { mutableStateOf(user?.name) }
-        var phone by remember { mutableStateOf(user?.phone) }
-        var email by remember { mutableStateOf(user?.email) }
-        var address by remember { mutableStateOf(user?.address) }
-
         UpdateProfileEditField(
             modifier = Modifier.fillMaxWidth(),
-            value = name.orEmpty(),
+            value = user?.name.orEmpty(),
             placeholder = stringResource(id = R.string.name),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             singleLine = true,
             onValueChange = {
                 onNameChanged(it)
-                name = it
             }
         )
         UpdateProfileEditField(
             modifier = Modifier.fillMaxWidth(),
-            value = phone.orEmpty(),
+            value = user?.phone.orEmpty(),
             placeholder = stringResource(id = R.string.phone_number),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
             singleLine = true,
             onValueChange = {
                 onPhoneChanged(it)
-                phone = it
             }
         )
         UpdateProfileEditField(
             modifier = Modifier.fillMaxWidth(),
-            value = email.orEmpty(),
+            value = user?.email.orEmpty(),
             placeholder = stringResource(id = R.string.email),
             singleLine = true,
             onValueChange = {
                 onEmailChanged(it)
-                email = it
-            }
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            isError = isInvalidEmail,
+            supportingText = {
+                if (isInvalidEmail) {
+                    Row {
+                        Text("Invalid email")
+                    }
+                } else {
+                    Unit
+                }
+            },
         )
         UpdateProfileEditField(
             modifier = Modifier.fillMaxWidth(),
-            value = address.orEmpty(),
+            value = user?.address.orEmpty(),
             placeholder = stringResource(id = R.string.address),
             maxLines = 3,
             onValueChange = {
                 onAddressChanged(it)
-                address = it
             }
         )
     }
@@ -98,6 +98,7 @@ private fun UpdateProfileScreenContentFilledPreview() {
 @Composable
 private fun UpdateProfileScreenContentEmptyPreview() {
     UpdateProfileScreenContent(
-        user = DemoUser.copy(name = "", email = "", phone = "", address = "")
+        user = DemoUser.copy(name = "", email = "", phone = "", address = ""),
+        isInvalidEmail = true,
     )
 }

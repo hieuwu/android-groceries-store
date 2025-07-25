@@ -25,6 +25,8 @@ fun UpdateProfileEditField(
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     placeholder: String? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    isError: Boolean = false,
+    supportingText: @Composable() (() -> Unit)? = null,
 ) {
     MaterialTheme(
         colorScheme = MaterialTheme.colorScheme.copy(
@@ -46,7 +48,9 @@ fun UpdateProfileEditField(
                         color = colorResource(id = R.color.light_gray)
                     )
                 }
-            }
+            },
+            isError = isError,
+            supportingText = supportingText,
         )
     }
 }

@@ -20,13 +20,13 @@ data class UserDto(
     @SerialName("phone")
     val phone: String?,
 
-    @SerialName("isOrderCreatedNotiEnabled")
+    @SerialName("isordercreatednotienabled")
     val isOrderCreatedNotiEnabled: Boolean,
 
-    @SerialName("isPromotionNotiEnabled")
+    @SerialName("ispromotionnotienabled")
     val isPromotionNotiEnabled: Boolean,
 
-    @SerialName("isDataRefreshedNotiEnabled")
+    @SerialName("isdatarefreshednotienabled")
     val isDataRefreshedNotiEnabled: Boolean,
 
 )
