@@ -62,14 +62,14 @@ fun SignUpScreen(
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
         viewModel.showSignUpSuccessMessage.collect {
-            snackbarHostState.showSnackbar("Sign in successfully!")
+            snackbarHostState.showSnackbar("Sign up successfully!")
             onSignUpSuccess()
         }
     }
 
     LaunchedEffect(Unit) {
         viewModel.showSignUpErrorMessage.collect {
-            snackbarHostState.showSnackbar("Sign in failed :( Please try again!")
+            snackbarHostState.showSnackbar("Sign up failed :( Please try again!")
         }
     }
 
