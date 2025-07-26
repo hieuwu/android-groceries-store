@@ -66,11 +66,11 @@ class UpdateProfileViewModel(
     }
 
     fun updateUserProfile() {
-        val userProfile = uiState.value.user
-        if (!validateEmail(userProfile?.email.orEmpty())) {
+        val userProfile = uiState.value.user ?: return
+        if (!validateEmail(userProfile.email.orEmpty())) {
             return
         }
-        val id = userProfile!!.id
+        val id = userProfile.id
         _uiState.update { it.copy(isLoading = true) }
         try {
             viewModelScope.launch(Dispatchers.IO) {
