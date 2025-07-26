@@ -52,9 +52,7 @@ fun UpdateProfileScreen(
             Dialog(
                 onDismissRequest = {},
             ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
-                )
+                CircularProgressIndicator()
             }
         }
     }
