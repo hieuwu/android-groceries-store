@@ -18,6 +18,7 @@ import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -26,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -38,6 +40,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
@@ -48,21 +52,24 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier,
-                 viewModel: SignUpViewModel = koinViewModel()) {
-
+fun SignUpScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SignUpViewModel = koinViewModel(),
+    onSignUpSuccess: () -> Unit,
+) {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
-
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
         viewModel.showSignUpSuccessMessage.collect {
-            snackbarHostState.showSnackbar("Sign in successfully!")
+            snackbarHostState.showSnackbar("Sign up successfully!")
+            onSignUpSuccess()
         }
     }
 
     LaunchedEffect(Unit) {
         viewModel.showSignUpErrorMessage.collect {
-            snackbarHostState.showSnackbar("Sign in failed :( Please try again!")
+            snackbarHostState.showSnackbar("Sign up failed :( Please try again!")
         }
     }
 
@@ -158,6 +165,14 @@ fun SignUpScreen(modifier: Modifier = Modifier,
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.colorPrimary)),
                 ) {
                     Text("Sign up")
+                }
+            }
+
+            if (isLoading) {
+                Dialog(
+                    onDismissRequest = {},
+                ) {
+                    CircularProgressIndicator()
                 }
             }
         }

@@ -1,35 +1,24 @@
 package com.hieuwu.groceriesstore.presentation.updateprofile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Patterns.EMAIL_ADDRESS
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
-
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class UpdateProfileViewModel(
     private val updateProfileUseCase: UpdateProfileUseCase,
     private val getProfileUseCase: GetProfileUseCase,
 ) : ViewModel() {
-    private val _user: MutableStateFlow<UserModel?> = MutableStateFlow(null)
-    val user: MutableStateFlow<UserModel?>
-        get() = _user
 
-    var name: String? = null
-
-    var email: String? = null
-
-    var phoneNumber: String? = null
-
-    var address: String? = null
-
-    private val _isDoneUpdate = MutableLiveData<Boolean>(null)
-    val isDoneUpdate: LiveData<Boolean?>
-        get() = _isDoneUpdate
+    private val _uiState = MutableStateFlow(UpdateProfileUiState())
+    val uiState: StateFlow<UpdateProfileUiState> = _uiState.asStateFlow()
 
     init {
         getCurrentUser()
@@ -37,37 +26,79 @@ class UpdateProfileViewModel(
 
     private fun getCurrentUser() {
         viewModelScope.launch {
-            getProfileUseCase(GetProfileUseCase.Input()).result.collect {
-                setUserProperties(it)
-                _user.value = it
+            getProfileUseCase(GetProfileUseCase.Input()).result.collect { profile ->
+                _uiState.update { it.copy(user = profile) }
             }
         }
     }
 
-    private fun setUserProperties(user: UserModel?) {
-        name = user?.name
-        phoneNumber = user?.phone
-        email = user?.email
-        address = user?.address
+    fun updateName(name: String) {
+        _uiState.update {
+            it.copy(
+                user = it.user?.copy(name = name)
+            )
+        }
+    }
+
+    fun updatePhone(phone: String) {
+        _uiState.update {
+            it.copy(
+                user = it.user?.copy(phone = phone)
+            )
+        }
+    }
+
+    fun updateEmail(email: String) {
+        _uiState.update {
+            it.copy(
+                user = it.user?.copy(email = email),
+                isInvalidEmail = false,
+            )
+        }
+    }
+
+    fun updateAddress(address: String) {
+        _uiState.update {
+            it.copy(
+                user = it.user?.copy(address = address)
+            )
+        }
     }
 
     fun updateUserProfile() {
-        val id = _user.value!!.id
+        val userProfile = uiState.value.user ?: return
+        if (!validateEmail(userProfile.email.orEmpty())) {
+            return
+        }
+        val id = userProfile.id
+        _uiState.update { it.copy(isLoading = true) }
         try {
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 updateProfileUseCase(
                     UpdateProfileUseCase.Input(
                         userId = id,
-                        name = name!!,
-                        email = email!!,
-                        phone = phoneNumber!!,
-                        address = address!!
+                        name = userProfile.name!!,
+                        email = userProfile.email!!,
+                        phone = userProfile.phone,
+                        address = userProfile.address,
                     )
                 )
+                _uiState.update { it.copy(isUpdateSuccess = true, isLoading = false) }
             }
-            _isDoneUpdate.value = true
         } catch (e: Exception) {
-            _isDoneUpdate.value = false
+            _uiState.update { it.copy(isUpdateSuccess = false, isLoading = false) }
         }
+    }
+
+    private fun validateEmail(email: String): Boolean {
+        val isEmailValid = EMAIL_ADDRESS.matcher(email).matches()
+        if (!isEmailValid) {
+            _uiState.update { it.copy(isInvalidEmail = true) }
+        }
+        return isEmailValid
+    }
+
+    fun onShowMessage() {
+        _uiState.update { it.copy(isUpdateSuccess = null) }
     }
 }

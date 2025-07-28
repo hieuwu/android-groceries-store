@@ -14,7 +14,11 @@ class SignInUseCaseImpl (
         return withContext(ioDispatcher) {
             try {
                 val res = userRepository.authenticate(input.email, input.password)
-                SignInUseCase.Output(res)
+                if (res) {
+                    SignInUseCase.Output.Success
+                } else {
+                    SignInUseCase.Output.Error
+                }
             } catch (e: Exception) {
                 Timber.d(e.message)
                 SignInUseCase.Output.AccountNotExistedError

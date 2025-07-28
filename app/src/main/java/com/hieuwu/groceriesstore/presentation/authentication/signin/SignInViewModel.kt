@@ -4,11 +4,14 @@ import android.util.Patterns.EMAIL_ADDRESS
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.usecases.SignInUseCase
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SignInViewModel(
@@ -21,11 +24,17 @@ class SignInViewModel(
     private val _showAccountNotExistedError = MutableSharedFlow<Unit>()
     val showAccountNotExistedError: SharedFlow<Unit> = _showAccountNotExistedError
 
+    private val _generalError = MutableSharedFlow<Unit>()
+    val generalError: SharedFlow<Unit> = _generalError
+
     private val _email = MutableStateFlow("")
     val email: StateFlow<String> = _email
 
     private val _password = MutableStateFlow("")
     val password: StateFlow<String> = _password
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     fun onEmailChange(newEmail: String) {
         _email.value = newEmail
@@ -44,7 +53,8 @@ class SignInViewModel(
     }
 
     fun signIn() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.update { true }
             when (signInUseCase(
                 SignInUseCase.Input(
                     email = _email.value,
@@ -52,17 +62,18 @@ class SignInViewModel(
                 )
             )) {
                 is SignInUseCase.Output.Error -> {
-                    //TODO Handle show general error
+                    _generalError.emit(Unit)
                 }
 
                 is SignInUseCase.Output.AccountNotExistedError -> {
                     _showAccountNotExistedError.emit(Unit)
                 }
 
-                else -> {
+                is SignInUseCase.Output.Success -> {
                     _isSignUpSuccessful.emit(Unit)
                 }
             }
+            _isLoading.update { false }
         }
     }
 }

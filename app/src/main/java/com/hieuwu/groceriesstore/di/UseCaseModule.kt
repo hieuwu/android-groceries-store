@@ -19,6 +19,7 @@ import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SubmitOrderUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UpdateCartItemUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UpdateProfileUseCase
+import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
 import com.hieuwu.groceriesstore.domain.usecases.impl.AddMealToPlanUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.AddToCartUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.CreateNewOrderUseCaseImpl
@@ -38,6 +39,7 @@ import com.hieuwu.groceriesstore.domain.usecases.impl.SignOutUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.SubmitOrderUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateCartItemUseCaseImpl
 import com.hieuwu.groceriesstore.domain.usecases.impl.UpdateProfileUseCaseImpl
+import com.hieuwu.groceriesstore.domain.usecases.impl.UserSettingsUseCaseImpl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -79,6 +81,13 @@ val usecaseModule = module {
     single<GetProfileUseCase> {
         GetProfileUseCaseImpl(
             userRepository = get(),
+        )
+    }
+
+    single<UserSettingsUseCase> {
+        UserSettingsUseCaseImpl(
+            userRepository = get(),
+            ioDispatcher = get(named(DispatchersName.IO))
         )
     }
 

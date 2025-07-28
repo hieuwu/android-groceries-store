@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.UserSettingsUseCase
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -62,7 +63,7 @@ class NotificationSettingsViewModel(
 
     fun updateNotificationSettings() {
         Timber.d("promo: $isPromotionNotiEnabled, ord: $isOrderCreatedNotiEnabled, db: $isDatabaseRefreshedNotiEnabled")
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             userSettingsUseCase(
                 UserSettingsUseCase.Input(
                     user.value?.id!!,

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.domain.models.UserModel
 import com.hieuwu.groceriesstore.domain.usecases.GetProfileUseCase
 import com.hieuwu.groceriesstore.domain.usecases.SignOutUseCase
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -23,7 +24,7 @@ class AccountViewModel(
     }
 
     private fun getCurrentUser() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             getProfileUseCase(GetProfileUseCase.Input()).result.collect {
                 _user.value = it
             }
@@ -31,7 +32,7 @@ class AccountViewModel(
     }
 
     fun signOut() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             signOutUseCase(SignOutUseCase.Input())
         }
     }

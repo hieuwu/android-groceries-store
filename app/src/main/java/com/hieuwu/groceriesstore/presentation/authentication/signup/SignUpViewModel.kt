@@ -4,11 +4,14 @@ import android.util.Patterns.EMAIL_ADDRESS
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hieuwu.groceriesstore.data.repository.UserRepository
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SignUpViewModel (private val userRepository: UserRepository) :
@@ -28,6 +31,9 @@ class SignUpViewModel (private val userRepository: UserRepository) :
 
     private val _showSignUpErrorMessage = MutableSharedFlow<Unit>()
     val showSignUpErrorMessage: SharedFlow<Unit> = _showSignUpErrorMessage
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     fun onEmailChange(text: String) {
         _email.value = text
@@ -54,13 +60,15 @@ class SignUpViewModel (private val userRepository: UserRepository) :
     }
 
     fun createAccount() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.update { true }
             val result = userRepository.createAccount(_email.value, _password.value, _name.value)
             if (result) {
                 _showSignUpSuccessMessage.emit(Unit)
             } else {
                 _showSignUpErrorMessage.emit(Unit)
             }
+            _isLoading.update { false }
         }
     }
 }

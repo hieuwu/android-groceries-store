@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 
 class SignUpFragment : Fragment() {
 
@@ -20,6 +21,9 @@ class SignUpFragment : Fragment() {
             setContent {
                 SignUpScreen(
                     modifier = Modifier.fillMaxSize(),
+                    onSignUpSuccess = {
+                        findNavController().navigateUp()
+                    },
                 )
             }
         }
