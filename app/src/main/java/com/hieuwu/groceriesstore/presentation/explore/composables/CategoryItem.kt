@@ -18,12 +18,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.hieuwu.groceriesstore.domain.models.CategoryModel
 
 @OptIn(
-    ExperimentalGlideComposeApi::class,
     ExperimentalMaterialApi::class
 )
 @Composable
@@ -48,7 +46,7 @@ fun CategoryItem(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            GlideImage(
+            AsyncImage(
                 model = category.image,
                 contentDescription = category.name,
                 contentScale = ContentScale.Crop,

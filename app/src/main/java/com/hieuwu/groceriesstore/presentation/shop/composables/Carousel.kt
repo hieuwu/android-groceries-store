@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -33,12 +34,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.hieuwu.groceriesstore.R
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalGlideComposeApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Carousel(modifier: Modifier = Modifier) {
     Column(
@@ -46,7 +46,7 @@ fun Carousel(modifier: Modifier = Modifier) {
             .fillMaxWidth()
     ) {
         val sectionItemListState = rememberLazyListState()
-        val currentVisibleIndex = remember { mutableStateOf(0) }
+        val currentVisibleIndex = remember { mutableIntStateOf(0) }
         val coroutineScope = rememberCoroutineScope()
         Box(
             modifier = Modifier
@@ -62,7 +62,7 @@ fun Carousel(modifier: Modifier = Modifier) {
                 state = sectionItemListState,
             ) {
                 items(bannerImages) { image ->
-                    GlideImage(
+                    AsyncImage(
                         contentScale = ContentScale.Crop,
                         model = image,
                         contentDescription = null,
@@ -141,8 +141,9 @@ fun Carousel(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.Center,
         ) {
             itemsIndexed(bannerImages) { curentIndex, image ->
-                val currentlyVisibleIndex = (sectionItemListState.layoutInfo.visibleItemsInfo.firstOrNull()?.index ?: 0)
-                IndicatorDot(isSelected = currentlyVisibleIndex== curentIndex)
+                val currentlyVisibleIndex =
+                    (sectionItemListState.layoutInfo.visibleItemsInfo.firstOrNull()?.index ?: 0)
+                IndicatorDot(isSelected = currentlyVisibleIndex == curentIndex)
             }
         }
     }

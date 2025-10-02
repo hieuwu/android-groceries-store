@@ -24,12 +24,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.models.LineItemModel
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun CartItem(
     modifier: Modifier = Modifier,
@@ -45,7 +43,7 @@ fun CartItem(
         elevation = 2.dp,
     ) {
         Row(modifier = modifier.fillMaxWidth()) {
-            GlideImage(
+            AsyncImage(
                 contentScale = ContentScale.Crop,
                 model = lineItem.image,
                 contentDescription = null,

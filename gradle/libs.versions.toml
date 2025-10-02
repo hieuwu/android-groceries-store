@@ -3,6 +3,7 @@ accompanistThemeadapterMaterialVersion = "0.28.0"
 appCompatVersion = "1.7.0"
 buildGradleVersion = "8.9.3"
 cardViewVersion = "1.0.0"
+coilComposeVersion = "3.3.0"
 constraintLayoutVersion = "2.2.1"
 coordinatorLayoutVersion = "1.3.0"
 coreTestingVersion = "2.2.0"
@@ -10,8 +11,6 @@ coreVersion = "1.16.0"
 firebaseBomVersion = "33.14.0"
 fireStoreVersion = "25.1.4"
 firebaseVersion = "24.1.1"
-glideVersion = "4.13.2"
-glideComposeVersion = "1.0.0-beta01"
 googleServicesVersion = "4.4.2"
 gsonVersion = "2.11.0"
 jUnitVersion = "4.13.2"
@@ -60,6 +59,8 @@ androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref =
 androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreviewVersion" }
 androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "workVersion" }
 cardview = { module = "androidx.cardview:cardview", version.ref = "cardViewVersion" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilComposeVersion" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilComposeVersion" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayoutVersion" }
 coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorLayoutVersion" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
@@ -68,9 +69,6 @@ firebase-database = { module = "com.google.firebase:firebase-database-ktx" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "fireStoreVersion" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseVersion" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
-glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glideVersion" }
-glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glideComposeVersion" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
 junit = { module = "junit:junit", version.ref = "jUnitVersion" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlinVersion" }

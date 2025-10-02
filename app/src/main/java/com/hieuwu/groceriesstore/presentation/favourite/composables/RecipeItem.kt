@@ -12,11 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.hieuwu.groceriesstore.domain.models.RecipeModel
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun RecipeItem(
     modifier: Modifier = Modifier,
@@ -29,13 +27,15 @@ fun RecipeItem(
             .padding(8.dp)
     ) {
         Column(
-            modifier = modifier.fillMaxSize().padding(16.dp)
+            modifier = modifier
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
-            GlideImage(
+            AsyncImage(
                 contentScale = ContentScale.Crop,
                 model = recipe.image,
                 contentDescription = null,
-                modifier = modifier.weight(1f)
+                modifier = modifier.weight(weight = 1f)
             )
             Text(
                 modifier = modifier.padding(vertical = 6.dp),

@@ -89,8 +89,10 @@ dependencies {
     implementation libs.bundles.room
     kapt libs.room.compiler
 
-    implementation libs.glide
-    kapt 'com.github.bumptech.glide:compiler:4.13.2'
+    // Coil An image loading library
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
     implementation libs.lottie
     implementation libs.lottie.compose
 
@@ -99,7 +101,6 @@ dependencies {
     implementation libs.moshi
     implementation libs.kotlin.coroutines.play.services
     implementation(libs.kotlinx.immutable)
-    implementation(libs.glide.compose)
 
     implementation platform(libs.firebase.bom)
     implementation libs.bundles.firebase
@@ -133,7 +134,6 @@ dependencies {
     implementation ("io.insert-koin:koin-androidx-compose:3.5.5")
 
     implementation libs.accompanist.themeadapter.material
-    implementation libs.glide.compose
     implementation libs.androidx.material3
     testImplementation libs.mockito.core
 

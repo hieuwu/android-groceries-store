@@ -33,14 +33,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.hieuwu.groceriesstore.R
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ProductDetailScreen(
     modifier: Modifier = Modifier,
@@ -75,7 +72,7 @@ fun ProductDetailScreen(
                 .padding(paddingValues)
                 .padding(horizontal = 20.dp)
         ) {
-            GlideImage(
+            AsyncImage(
                 contentScale = ContentScale.Crop,
                 model = product?.image,
                 contentDescription = null,

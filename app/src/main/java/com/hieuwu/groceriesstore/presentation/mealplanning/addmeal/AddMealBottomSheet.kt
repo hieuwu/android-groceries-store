@@ -43,14 +43,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.presentation.authentication.composables.IconTextInput
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.MealAddingState
 import com.hieuwu.groceriesstore.presentation.mealplanning.overview.composable.IngredientChip
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun AddMealBottomSheet(
     modifier: Modifier = Modifier,
@@ -102,7 +100,7 @@ fun AddMealBottomSheet(
                             },
                     )
                 } else {
-                    GlideImage(
+                    AsyncImage(
                         contentScale = ContentScale.Crop,
                         model = mealAddState.value.imageUri.value,
                         contentDescription = null,

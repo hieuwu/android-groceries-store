@@ -26,12 +26,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil3.compose.AsyncImage
 import com.hieuwu.groceriesstore.R
 import com.hieuwu.groceriesstore.domain.models.ProductModel
 
-@OptIn(ExperimentalGlideComposeApi::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProductItem(
     modifier: Modifier = Modifier,
@@ -50,7 +49,7 @@ fun ProductItem(
                 .fillMaxWidth()
                 .padding(4.dp),
         ) {
-            GlideImage(
+            AsyncImage(
                 contentScale = ContentScale.Crop,
                 model = product.image,
                 contentDescription = null,
