@@ -1,7 +1,7 @@
 [versions]
 accompanistThemeadapterMaterialVersion = "0.28.0"
 appCompatVersion = "1.7.0"
-buildGradleVersion = "8.9.3"
+buildGradleVersion = "8.13.0"
 cardViewVersion = "1.0.0"
 coilComposeVersion = "3.3.0"
 constraintLayoutVersion = "2.2.1"
