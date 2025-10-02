@@ -14,7 +14,7 @@ android {
     compileSdk 35
     defaultConfig {
         applicationId "com.hieuwu.groceriesstore"
-        minSdkVersion 29
+        minSdkVersion 30
         targetSdkVersion 35
         versionCode 5
         versionName "1.0"
